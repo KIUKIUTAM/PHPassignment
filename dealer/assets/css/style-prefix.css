@@ -1269,19 +1269,7 @@ footer {
   }
 
 
-
-  /**
-   * #BANNER
-   */
-
-  .slider-item {
-    aspect-ratio: 4 / 2;
-  }
-
-  .banner-content {
-    background: none;
-  }
-
+s
 
 
   /**
@@ -1315,27 +1303,6 @@ footer {
   .product-featured .countdown {
     gap: 20px;
   }
-
-
-
-  /**
-   * #CTA
-   */
-
-  .cta-container {
-    aspect-ratio: 6 / 5;
-  }
-
-
-
-  /**
-   * #BLOG
-   */
-
-  .blog-container {
-    gap: 30px;
-  }
-
   .blog-card {
     min-width: -webkit-calc(50% - 15px);
     min-width: calc(50% - 15px);

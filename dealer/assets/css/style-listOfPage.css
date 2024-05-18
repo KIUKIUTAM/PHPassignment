@@ -1,0 +1,8 @@
+#menu-title-current{
+    color:var(--salmon-pink);
+}
+
+
+.showcase:hover{
+    border-color:var(--eerie-black);
+}

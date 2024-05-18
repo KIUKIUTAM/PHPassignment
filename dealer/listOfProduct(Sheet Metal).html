@@ -19,7 +19,7 @@
     - custom css link
   -->
     <link rel="stylesheet" href="./assets/css/style-prefix.css" />
-
+    <link rel="stylesheet" href="./assets/css/style-listOfPage.css" />
     <!--
     - google font link
   -->
@@ -154,6 +154,7 @@
           <ion-icon name="grid-outline"></ion-icon>
         </button>
       </div>
+
     </header>
 
     <!--
@@ -171,86 +172,86 @@
           - SIDEBAR
         -->
 
-        <div class="sidebar has-scrollbar" data-mobile-menu>
-          <div class="sidebar-category">
-            <div class="sidebar-top">
-              <h2 class="sidebar-title">Category</h2>
+          <div class="sidebar has-scrollbar" data-mobile-menu>
+            <div class="sidebar-category">
+              <div class="sidebar-top">
+                <h2 class="sidebar-title">Category</h2>
 
-              <button class="sidebar-close-btn" data-mobile-menu-close-btn>
-                <ion-icon name="close-outline"></ion-icon>
-              </button>
+                <button class="sidebar-close-btn" data-mobile-menu-close-btn>
+                  <ion-icon name="close-outline"></ion-icon>
+                </button>
+              </div>
+
+              <ul class="sidebar-menu-category-list">
+                <li class="sidebar-menu-category">
+                  <button class="sidebar-accordion-menu" data-accordion-btn>
+                    <div class="menu-title-flex">
+                      <a href="./listOfProduct(Sheet Metal).html">
+                        <p class="menu-title" id="menu-title-current">Sheet Metal</p>
+                      </a>
+                      
+                    </div>
+
+                    <div>
+                      <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                      <ion-icon
+                        name="remove-outline"
+                        class="remove-icon"
+                      ></ion-icon>
+                    </div>
+                  </button>
+                </li>
+                <li class="sidebar-menu-category">
+                  <button class="sidebar-accordion-menu" data-accordion-btn>
+                    <div class="menu-title-flex">
+                      <a href="./listOfProduct(Major Assermblies).html">
+                      <p class="menu-title">Major Asssemblies</p></a>
+                    </div>
+
+                    <div>
+                      <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                      <ion-icon
+                        name="remove-outline"
+                        class="remove-icon"
+                      ></ion-icon>
+                    </div>
+                  </button>
+                </li>
+                <li class="sidebar-menu-category">
+                  <button class="sidebar-accordion-menu" data-accordion-btn>
+                    <div class="menu-title-flex">
+                      <a href="./listOfProduct(light components).html">
+                      <p class="menu-title">Light Components</p></a>
+                    </div>
+
+                    <div>
+                      <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                      <ion-icon
+                        name="remove-outline"
+                        class="remove-icon"
+                      ></ion-icon>
+                    </div>
+                  </button>
+                </li>
+                <li class="sidebar-menu-category">
+                  <button class="sidebar-accordion-menu" data-accordion-btn>
+                    <div class="menu-title-flex">
+                      <a href="./listOfProduct(Accessories).html">
+                      <p class="menu-title">Accessories</p></a>
+                    </div>
+
+                    <div>
+                      <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                      <ion-icon
+                        name="remove-outline"
+                        class="remove-icon"
+                      ></ion-icon>
+                    </div>
+                  </button>
+                </li>
+              </ul>
             </div>
-
-            <ul class="sidebar-menu-category-list">
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <a href="./listOfProduct(Sheet Metal).html">
-                      <p class="menu-title" id="menu-title-current">Sheet Metal</p>
-                    </a>
-                    
-                  </div>
-
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon
-                      name="remove-outline"
-                      class="remove-icon"
-                    ></ion-icon>
-                  </div>
-                </button>
-              </li>
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <a href="./listOfProduct(Major Assermblies).html">
-                    <p class="menu-title">Major Asssemblies</p></a>
-                  </div>
-
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon
-                      name="remove-outline"
-                      class="remove-icon"
-                    ></ion-icon>
-                  </div>
-                </button>
-              </li>
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <a href="./listOfProduct(light components).html">
-                    <p class="menu-title">Light Components</p></a>
-                  </div>
-
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon
-                      name="remove-outline"
-                      class="remove-icon"
-                    ></ion-icon>
-                  </div>
-                </button>
-              </li>
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <a href="./listOfProduct(Accessories).html">
-                    <p class="menu-title">Accessories</p></a>
-                  </div>
-
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon
-                      name="remove-outline"
-                      class="remove-icon"
-                    ></ion-icon>
-                  </div>
-                </button>
-              </li>
-            </ul>
           </div>
-        </div>
 
           <div class="product-box">
             <!--
@@ -259,7 +260,7 @@
 
             <div class="product-minimal">
               <div class="product-showcase">
-                <h2 class="title">New Arrivals</h2>
+                <h2 class="title">Sheet Metal</h2>
 
                 <div class="showcase-wrapper has-scrollbar">
                   <div class="showcase-container">
@@ -267,6 +268,7 @@
                       <a href="#" class="showcase-img-box">
                         <img
                           src="./assets/images/100005.jpg"
+                          
                           width="70"
                           class="showcase-img"
                         />
@@ -289,6 +291,7 @@
                       <a href="#" class="showcase-img-box">
                         <img
                           src="./assets/images/100002.jpg"
+                          
                           width="70"
                           class="showcase-img"
                         />
@@ -312,6 +315,7 @@
                       <a href="#" class="showcase-img-box">
                         <img
                           src="./assets/images/100003.jpg"
+                          
                           width="70"
                           class="showcase-img"
                         />
@@ -334,6 +338,7 @@
                       <a href="#" class="showcase-img-box">
                         <img
                           src="./assets/images/100004.jpg"
+                          
                           width="70"
                           class="showcase-img"
                         />
@@ -356,110 +361,7 @@
                 </div>
               </div>
 
-              <div class="product-showcase">
-                <h2 class="title">popular</h2>
-
-                <div class="showcase-wrapper has-scrollbar">
-                  <div class="showcase-container">
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          src="./assets/imageS/200001.jpg"
-                          width="70"
-                          class="showcase-img"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">Asssemblies No.1</h4>
-                        </a>
-
-                        <a href="#" class="showcase-category"
-                          >Major Asssemblies</a
-                        >
-
-                        <div class="price-box">
-                          <p class="price">$45.00</p>
-                          <del>$12.00</del>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          src="./assets/images/200002.jpg"
-                          width="70"
-                          class="showcase-img"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">Asssemblies No.2</h4>
-                        </a>
-
-                        <a href="#" class="showcase-category"
-                          >Major Asssemblies</a
-                        >
-
-                        <div class="price-box">
-                          <p class="price">$45.00</p>
-                          <del>$12.00</del>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          src="./assets/images/200003.jpg"
-                          width="70"
-                          class="showcase-img"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">Asssemblies No.3</h4>
-                        </a>
-
-                        <a href="#" class="showcase-category"
-                          >Major Asssemblies</a
-                        >
-
-                        <div class="price-box">
-                          <p class="price">$45.00</p>
-                          <del>$12.00</del>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          src="./assets/images/200004.jpg"
-                          width="70"
-                          class="showcase-img"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">Asssemblies No.4</h4>
-                        </a>
-
-                        <a href="#" class="showcase-category"
-                          >Major Asssemblies</a
-                        >
-
-                        <div class="price-box">
-                          <p class="price">$45.00</p>
-                          <del>$12.00</del>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
             </div>
           </div>
         </div>

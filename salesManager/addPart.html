@@ -19,7 +19,7 @@
     - custom css link
   -->
     <link rel="stylesheet" href="./assets/css/style-prefix.css" />
-    <link rel="stylesheet" href="./assets/css/style-listOfPage.css" />
+    <link rel="stylesheet" href="./assets/css/style-addPart.css" />
     <!--
     - google font link
   -->
@@ -158,7 +158,6 @@
           <ion-icon name="grid-outline"></ion-icon>
         </button>
       </div>
-
     </header>
 
     <!--
@@ -170,222 +169,65 @@
       - PRODUCT
     -->
 
-      <div class="product-container">
+      <div class="productDetail-container">
         <div class="container">
-          <!--
-          - SIDEBAR
-        -->
-
-        <div class="sidebar has-scrollbar" data-mobile-menu>
-          <div class="sidebar-category">
-            <div class="sidebar-top">
-              <h2 class="sidebar-title">Category</h2>
-
-              <button class="sidebar-close-btn" data-mobile-menu-close-btn>
-                <ion-icon name="close-outline"></ion-icon>
-              </button>
-            </div>
-
-            <ul class="sidebar-menu-category-list">
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <a href="./listOfProduct(Sheet Metal).html">
-                      <p class="menu-title">Sheet Metal</p>
-                    </a>
-                    
-                  </div>
-
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon
-                      name="remove-outline"
-                      class="remove-icon"
-                    ></ion-icon>
-                  </div>
-                </button>
-              </li>
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <a href="./listOfProduct(Major Assermblies).html">
-                    <p class="menu-title">Major Asssemblies</p></a>
-                  </div>
-
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon
-                      name="remove-outline"
-                      class="remove-icon"
-                    ></ion-icon>
-                  </div>
-                </button>
-              </li>
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <a href="./listOfProduct(light components).html">
-                    <p class="menu-title"  id="menu-title-current">Light Components</p></a>
-                  </div>
-
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon
-                      name="remove-outline"
-                      class="remove-icon"
-                    ></ion-icon>
-                  </div>
-                </button>
-              </li>
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <a href="./listOfProduct(Accessories).html">
-                    <p class="menu-title">Accessories</p></a>
-                  </div>
-
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon
-                      name="remove-outline"
-                      class="remove-icon"
-                    ></ion-icon>
-                  </div>
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
-
           <div class="product-box">
-            <!--
-            - PRODUCT MINIMAL
-          -->
-
-            <div class="product-minimal">
-              <div id="id_confrmdiv">Are you sure you want to delete this part?<br>
-                <button id="id_truebtn">Yes</button>
-                <button id="id_falsebtn">No</button>
-              </div>
-              <div class="product-showcase">
-                <h2 class="title">Light Components</h2>
-
-                <div class="showcase-wrapper has-scrollbar">
-                  <div class="showcase-container">
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          src="./assets/imageS/300001.jpg"
-                          
-                          width="70"
-                          class="showcase-img"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">Light Components No.1</h4>
-                        </a>
-
-                        <a href="#" class="showcase-category"
-                          >Light Components</a
-                        >
-
-                        <div class="price-box">
-                          <p class="price">$45.00</p>
-                          <del>$12.00</del>
-                        <button class="button">Generate Report</button>
-                        <button class="button" onclick="doSomething()">Delete</button>
-                        <button class="button">Edit</button>
-                      </div>
-                    </div>
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          src="./assets/images/300002.jpg"
-                          
-                          width="70"
-                          class="showcase-img"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">Asssemblies No.2</h4>
-                        </a>
-
-                        <a href="#" class="showcase-category"
-                          >Light Components</a
-                        >
-
-                        <div class="price-box">
-                          <p class="price">$45.00</p>
-                          <del>$12.00</del>
-                        <button class="button">Generate Report</button>
-                        <button class="button" onclick="doSomething()">Delete</button>
-                        <button class="button">Edit</button>
-                      </div>
-                    </div>
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          src="./assets/images/300003.jpg"
-                          
-                          width="70"
-                          class="showcase-img"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">Light Components No.3</h4>
-                        </a>
-
-                        <a href="#" class="showcase-category"
-                          >Light Components</a
-                        >
-
-                        <div class="price-box">
-                          <p class="price">$45.00</p>
-                          <del>$12.00</del>
-                        <button class="button">Generate Report</button>
-                        <button class="button" onclick="doSomething()">Delete</button>
-                        <button class="button">Edit</button>
-                      </div>
-                    </div>
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          src="./assets/images/300004.jpg"
-                          
-                          width="70"
-                          class="showcase-img"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">Light Components No.4</h4>
-                        </a>
-
-                        <a href="#" class="showcase-category"
-                          >Light Components</a
-                        >
-
-                        <div class="price-box">
-                          <p class="price">$45.00</p>
-                          <del>$12.00</del>
-                        <button class="button">Generate Report</button>
-                        <button class="button" onclick="doSomething()">Delete</button>
-                        <button class="button">Edit</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="product">
               
+              <div class="product-content">
+                <form class="product-content-form" action="#" method="post" enctype="multipart/form-data">
+                  <h4 class="product-title">Add New Spare Part</h4>
 
-              
+                  <label>
+                    Part Number:
+                    <input type="text" name="part_number" required>
+                  </label>
+
+                  <label>
+                    Part Category:<br>
+                    <select name="part_category" required>
+                      <option value="">Select...</option>
+                      <option value="sheet_metal">Sheet Metal</option>
+                      <option value="major_assemblies">Major Asssemblies</option>
+                      <option value="light_components">Light Components</option>
+                      <option value="accessories">Access</option>
+                    </select>
+                  </label>
+                  <br>
+                  <label>
+                    Part Name:
+                    <input type="text" name="part_name" required>
+                  </label>
+
+                  <label>
+                    Part Image:
+                    <input type="file" name="part_image" required id="part_image_input">
+                    <img id="part_image_preview">
+                  </label>
+                 
+                  <label>
+                    Part Description:
+                    <textarea name="part_description" required></textarea>
+                  </label>
+
+                  <label>
+                    Part Weight (kg):
+                    <input type="number" name="part_weight" required>
+                  </label>
+
+                  <label>
+                    Quantity:
+                    <input type="number" name="part_quantity" required>
+                  </label>
+
+                  <label>
+                    Price (HKD):
+                    <input type="number" name="part_price" required>
+                  </label>
+
+                  <button type="submit" class="product-content-button">Add</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -552,6 +394,7 @@
     - custom js link
   -->
     <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/addPart.js"></script>
 
     <!--
     - ionicon link

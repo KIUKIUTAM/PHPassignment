@@ -1,3 +1,16 @@
+textarea {
+    width: 100%;
+}
+
+#part_image_preview{
+    width: 250px;; 
+    height:auto; 
+    margin-top:10px; 
+    border-radius:5px; 
+    border:1px solid lightgray; 
+    display:none;
+}
+
 .product {
     margin: 10px;
     

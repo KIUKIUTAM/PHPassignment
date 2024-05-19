@@ -1,0 +1,21 @@
+.shoppingCart-title{
+    font-family: 'Courier New', Courier, monospace;
+    font-size:36px;
+    text-align: center;
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-weight: bolds;
+    margin-bottom: 20px;
+}
+
+.left{
+    
+    align-items: end;
+}
+.showcase-content i{
+    float: right;
+}
+.CheckoutList{
+    float: right;
+    
+}

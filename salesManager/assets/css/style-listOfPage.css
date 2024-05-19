@@ -1,0 +1,64 @@
+#menu-title-current{
+    color:var(--salmon-pink);
+}
+
+
+.showcase:hover{
+    border-color:var(--eerie-black);
+}
+
+.edit , .delete, .report{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    float: right;
+}
+
+.edit-btn, .delete-btn, .report-btn{
+    border: 1px;
+    background: none;
+    font-size: 20px;
+    color: var(--eerie-black);
+    cursor: pointer;
+}
+
+.edit-btn:hover, .delete-btn:hover, .report-btn:hover{
+    color: var(--salmon-pink);
+}
+
+#id_confrmdiv
+{
+    display: none;
+    background-color: #eee;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    position: fixed;
+    width: 300px;
+    left: 50%;
+    margin-left: -150px;
+    padding: 6px 8px 8px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#id_confrmdiv button {
+    background-color: #ccc;
+    display: inline-block;
+    border-radius: 3px;
+    border: 1px solid #aaa;
+    padding: 2px;
+    text-align: center;
+    width: 80px;
+    cursor: pointer;
+}
+
+#id_confrmdiv .button:hover
+{
+    background-color: #ddd;
+}
+
+#confirmBox .message
+{
+    text-align: left;
+    margin-bottom: 8px;
+}

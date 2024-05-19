@@ -1,5 +1,18 @@
 'use strict';
 
+const imageInput = document.getElementById('part_image_input');
+const imagePreview = document.getElementById('part_image_preview');
+imageInput.addEventListener('change', function(){
+    if (this.files && this.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            imagePreview.style.display = 'block';
+            imagePreview.src = e.target.result;
+        };
+        reader.readAsDataURL(this.files[0]);
+    }
+});
+
 // modal variables
 const modal = document.querySelector('[data-modal]');
 const modalCloseBtn = document.querySelector('[data-modal-close]');
@@ -100,4 +113,12 @@ function doSomething(){
       document.getElementById('id_confrmdiv').style.display="none";
       return false;
   };
+}
+
+function displayEditForm() {
+  document.getElementById('editDiv').style.display = "block";
+}
+
+function hideEditForm() {
+  document.getElementById('editDiv').style.display = "none";
 }

@@ -267,6 +267,23 @@
                 <button id="id_truebtn">Yes</button>
                 <button id="id_falsebtn">No</button>
               </div>
+              <div id="editDiv">
+                <form id="editForm">
+                  <h2 class="title">Edit Product</h2>
+                  <label for="part_description">Description</label>
+                  <textarea id="part_description" name="part_description" rows="4"></textarea>
+                  <label for="part_image">Image</label>
+                  <input type="file" id="part_image_input" name="part_image" accept=".jpg, .jpeg, .png, .gif">
+                  <img id="part_image_preview"/>
+                  <label for="price">Price</label>
+                  <input type="number" id="price" name="price">
+                  <label for="quantity">Quantity</label>
+                  <input type="number" id="quantity" name="quantity">
+                  <br>
+                  <input type="submit" id="submit" value="Edit">
+                  <input type="reset" id="cancel" onclick="hideEditForm()" value="Cancel">
+                </form>
+              </div>
               <div class="product-showcase">
                 <h2 class="title">Sheet Metal</h2>
 
@@ -287,7 +304,50 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
+
+                        <div class="price-box">
+                          <p class="price">$45.00</p>
+                          <del>$12.00</del>
+                        </div>
+
+                        <button class="button">Generate Report</button>
+                        <button class="button" onclick="doSomething()">Delete</button>
+                        <button class="button" onclick="displayEditForm()">Edit</button>
+                        
+                      
+                      </div>
+                    </div>
+                    <div class="showcase">
+                      <a href="#" class="showcase-img-box">
+                        <img
+                          src="./assets/images/100005.jpg"
+                          
+                          width="70"
+                          class="showcase-img"
+                        />
+                      </a>
+
+                      <div class="showcase-content">
+                        <a href="#">
+                          <h4 class="showcase-title">Sheet Metal No.1</h4>
+                        </a>
+
+                        
+                        
+                        <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -313,7 +373,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -339,7 +405,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -365,7 +437,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -391,7 +469,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -417,7 +501,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -443,7 +533,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -469,33 +565,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
 
-                        <div class="price-box">
-                          <p class="price">$45.00</p>
-                          <del>$12.00</del>
-                        </div>
-                        <button class="button">Generate Report</button>
-                        <button class="button" onclick="doSomething()">Delete</button>
-                        <button class="button">Edit</button>
-                      </div>
-                    </div>
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          src="./assets/images/100005.jpg"
-                          
-                          width="70"
-                          class="showcase-img"
-                        />
-                      </a>
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
 
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">Sheet Metal No.1</h4>
-                        </a>
-
-                        <a href="#" class="showcase-category">Sheet Metal</a>
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -520,7 +596,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -545,7 +627,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -570,7 +658,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -595,7 +689,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -620,7 +720,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -645,7 +751,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -670,7 +782,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -695,7 +813,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -720,7 +844,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -745,7 +875,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -770,7 +906,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -795,7 +937,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -820,7 +968,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -845,7 +999,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -870,7 +1030,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -895,7 +1061,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -920,7 +1092,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -945,7 +1123,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -970,7 +1154,13 @@
                           <h4 class="showcase-title">Sheet Metal No.1</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -996,7 +1186,13 @@
                           <h4 class="showcase-title">Sheet Metal No.2</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -1023,7 +1219,13 @@
                           <h4 class="showcase-title">Sheet Metal No.3</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>
@@ -1049,7 +1251,13 @@
                           <h4 class="showcase-title">Sheet Metal No.4</h4>
                         </a>
 
+                        
                         <a href="#" class="showcase-category">Sheet Metal</a>
+
+                        <p class="showcase-category">Description:</p>
+                        <p class="showcase-category">This is a sheet metal part. It is good for making car bodies and other metal products.</p>
+
+                        <p class="showcase-category">Quantity: 20 pieces left</p>
 
                         <div class="price-box">
                           <p class="price">$45.00</p>

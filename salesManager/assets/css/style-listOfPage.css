@@ -66,3 +66,30 @@
     text-align: left;
     margin-bottom: 8px;
 }
+
+.product-minimal > #editDiv{
+    display: none;
+    background-color: #eee;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    position: fixed;
+    width: 300px;
+    left: 50%;
+    margin-left: -150px;
+    padding: 6px 8px 8px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#editDiv #part_description {
+    width: 100%;
+}
+
+#part_image_preview{
+    width: 250px;
+    height: 250px;; 
+    margin-top:10px; 
+    border-radius:5px; 
+    border:1px solid lightgray; 
+    display:none;
+}

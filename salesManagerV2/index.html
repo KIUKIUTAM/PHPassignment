@@ -73,7 +73,7 @@
                 </li>
 
 
-                <li class="nav-item dropdown has-arrow flag-nav">
+                <!-- <li class="nav-item dropdown has-arrow flag-nav">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0);"
                         role="button">
                         <img src="assets/img/flags/us1.png" alt="" height="20">
@@ -92,9 +92,9 @@
                             <img src="assets/img/flags/de.png" alt="" height="16"> German
                         </a>
                     </div>
-                </li>
+                </li> -->
 
-
+<!-- 
                 <li class="nav-item dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle nav-link" data-bs-toggle="dropdown">
                         <img src="assets/img/icons/notification-bing.svg" alt="img"> <span
@@ -194,7 +194,7 @@
                             <a href="activities.html">View all Notifications</a>
                         </div>
                     </div>
-                </li>
+                </li> -->
 
                 <li class="nav-item dropdown has-arrow main-drop">
                     <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
@@ -409,7 +409,7 @@
                     <div class="col-lg-5 col-sm-12 col-12 d-flex">
                         <div class="card flex-fill">
                             <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                                <h4 class="card-title mb-0">Recently Added Products</h4>
+                                <h4 class="card-title mb-0">Recently Added Parts</h4>
                                 <div class="dropdown">
                                     <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false"
                                         class="dropset">
@@ -417,10 +417,10 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <li>
-                                            <a href="productlist.html" class="dropdown-item">Product List</a>
+                                            <a href="productlist.html" class="dropdown-item">Spare Parts List</a>
                                         </li>
                                         <li>
-                                            <a href="addproduct.html" class="dropdown-item">Product Add</a>
+                                            <a href="addproduct.html" class="dropdown-item">Add Spare Part</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -430,51 +430,56 @@
                                     <table class="table datatable ">
                                         <thead>
                                             <tr>
-                                                <th>Sno</th>
-                                                <th>Products</th>
+                                                <th>No.</th>
+                                                <th>Name</th>
                                                 <th>Price</th>
+                                                <th>Quantity</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>1</td>
+                                                <td>100005</td>
                                                 <td class="productimgname">
                                                     <a href="productlist.html" class="product-img">
-                                                        <img src="assets/img/product/product22.jpg" alt="product">
+                                                        <img src="assets/img/product/100005.jpg" alt="product">
                                                     </a>
-                                                    <a href="productlist.html">Apple Earpods</a>
+                                                    <a href="productlist.html">Sheet Metal 100005</a>
                                                 </td>
                                                 <td>$891.2</td>
+                                                <td>999</td>
                                             </tr>
                                             <tr>
-                                                <td>2</td>
+                                                <td>200005</td>
                                                 <td class="productimgname">
                                                     <a href="productlist.html" class="product-img">
-                                                        <img src="assets/img/product/product23.jpg" alt="product">
+                                                        <img src="assets/img/product/200005.jpg" alt="product">
                                                     </a>
-                                                    <a href="productlist.html">iPhone 11</a>
+                                                    <a href="productlist.html">Major Assemblies 200005</a>
                                                 </td>
                                                 <td>$668.51</td>
+                                                <td>999</td>
                                             </tr>
                                             <tr>
-                                                <td>3</td>
+                                                <td>300005</td>
                                                 <td class="productimgname">
                                                     <a href="productlist.html" class="product-img">
-                                                        <img src="assets/img/product/product24.jpg" alt="product">
+                                                        <img src="assets/img/product/300005.jpg" alt="product">
                                                     </a>
-                                                    <a href="productlist.html">samsung</a>
+                                                    <a href="productlist.html">Light Components 300005</a>
                                                 </td>
                                                 <td>$522.29</td>
+                                                <td>999</td>
                                             </tr>
                                             <tr>
-                                                <td>4</td>
+                                                <td>400005</td>
                                                 <td class="productimgname">
                                                     <a href="productlist.html" class="product-img">
-                                                        <img src="assets/img/product/product6.jpg" alt="product">
+                                                        <img src="assets/img/product/400005.jpg" alt="product">
                                                     </a>
-                                                    <a href="productlist.html">Macbook Pro</a>
+                                                    <a href="productlist.html">Accessories 400005</a>
                                                 </td>
                                                 <td>$291.01</td>
+                                                <td>999</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -485,18 +490,18 @@
                 </div>
                 <div class="card mb-0">
                     <div class="card-body">
-                        <h4 class="card-title">Expired Products</h4>
+                        <h4 class="card-title">Danger Level Parts</h4>
                         <div class="table-responsive dataview">
                             <table class="table datatable ">
                                 <thead>
                                     <tr>
-                                        <th>SNo</th>
-                                        <th>Product Code</th>
-                                        <th>Product Name</th>
-                                        <th>Brand Name</th>
-                                        <th>Category Name</th>
-                                        <th>Expiry Date</th>
-                                    </tr>
+                                        <th>No.</th>
+                                        <th>Category</th>
+                                        <th>Name</th>
+                                        <th>Weight</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                    </tr>   
                                 </thead>
                                 <tbody>
                                     <tr>

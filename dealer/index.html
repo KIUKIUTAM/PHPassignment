@@ -14,11 +14,17 @@
       href="./assets/images/200005.jpg"
       type="image/x-icon"
     />
+    <!-- <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    /> -->
+    <link rel="stylesheet" href="./assets/css/style-prefix.css" />
 
     <!--
     - custom css link
   -->
-    <link rel="stylesheet" href="./assets/css/style-prefix.css" />
 
     <!--
     - google font link
@@ -41,7 +47,7 @@
     <header>
       <div class="header-main">
         <div class="container">
-          <a href="#" class="header-logo"> SLMS </a>
+          <a href="./index.html" class="menu-title">SLMS</a>
 
           <div class="header-search-container">
             <input
@@ -58,7 +64,9 @@
 
           <div class="header-user-actions">
             <button class="action-btn">
-              <ion-icon name="person-outline"></ion-icon>
+              <a href="./infromation.html"
+                ><ion-icon name="person-outline"></ion-icon
+              ></a>
             </button>
 
             <button class="action-btn">
@@ -91,7 +99,9 @@
                   </li>
 
                   <li class="panel-list-item">
-                    <a href=".\listOfProduct(Sheet Metal).html">Sheet Metal-abc</a>
+                    <a href=".\listOfProduct(Sheet Metal).html"
+                      >Sheet Metal-abc</a
+                    >
                   </li>
                 </ul>
 
@@ -101,7 +111,9 @@
                   </li>
 
                   <li class="panel-list-item">
-                    <a href="./listOfProduct(Major Assermblies).html">Major Asssemblies-abc</a>
+                    <a href="./listOfProduct(Major Assermblies).html"
+                      >Major Asssemblies-abc</a
+                    >
                   </li>
                 </ul>
 
@@ -111,7 +123,9 @@
                   </li>
 
                   <li class="panel-list-item">
-                    <a href="./listOfProduct(light components).html">Light Components-abc</a>
+                    <a href="./listOfProduct(light components).html"
+                      >Light Components-abc</a
+                    >
                   </li>
                 </ul>
 
@@ -120,7 +134,9 @@
                     <a href="#">Accessories</a>
                   </li>
                   <li class="panel-list-item">
-                    <a href="./listOfProduct(Accessories).html">Accessories-abc</a>
+                    <a href="./listOfProduct(Accessories).html"
+                      >Accessories-abc</a
+                    >
                   </li>
                 </ul>
               </div>
@@ -171,92 +187,145 @@
           - SIDEBAR
         -->
 
-        <div class="sidebar has-scrollbar" data-mobile-menu>
-          <div class="sidebar-category">
-            <div class="sidebar-top">
-              <h2 class="sidebar-title">Category</h2>
+          <div class="sidebar has-scrollbar" data-mobile-menu>
+            <div class="sidebar-category">
+              <div class="sidebar-top">
+                <h2 class="sidebar-title">Category</h2>
 
-              <button class="sidebar-close-btn" data-mobile-menu-close-btn>
-                <ion-icon name="close-outline"></ion-icon>
-              </button>
+                <button class="sidebar-close-btn" data-mobile-menu-close-btn>
+                  <ion-icon name="close-outline"></ion-icon>
+                </button>
+              </div>
+
+              <ul class="sidebar-menu-category-list">
+                <li class="sidebar-menu-category">
+                  <button class="sidebar-accordion-menu" data-accordion-btn>
+                    <div class="menu-title-flex">
+                      <a href="./listOfProduct(Sheet Metal).html">
+                        <p class="menu-title" id="menu-title-current">
+                          Sheet Metal
+                        </p>
+                      </a>
+                    </div>
+
+                    <div>
+                      <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                      <ion-icon
+                        name="remove-outline"
+                        class="remove-icon"
+                      ></ion-icon>
+                    </div>
+                  </button>
+                </li>
+                <li class="sidebar-menu-category">
+                  <button class="sidebar-accordion-menu" data-accordion-btn>
+                    <div class="menu-title-flex">
+                      <a href="./listOfProduct(Major Assermblies).html">
+                        <p class="menu-title">Major Asssemblies</p></a
+                      >
+                    </div>
+
+                    <div>
+                      <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                      <ion-icon
+                        name="remove-outline"
+                        class="remove-icon"
+                      ></ion-icon>
+                    </div>
+                  </button>
+                </li>
+                <li class="sidebar-menu-category">
+                  <button class="sidebar-accordion-menu" data-accordion-btn>
+                    <div class="menu-title-flex">
+                      <a href="./listOfProduct(light components).html">
+                        <p class="menu-title">Light Components</p></a
+                      >
+                    </div>
+
+                    <div>
+                      <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                      <ion-icon
+                        name="remove-outline"
+                        class="remove-icon"
+                      ></ion-icon>
+                    </div>
+                  </button>
+                </li>
+                <li class="sidebar-menu-category">
+                  <button class="sidebar-accordion-menu" data-accordion-btn>
+                    <div class="menu-title-flex">
+                      <a href="./listOfProduct(Accessories).html">
+                        <p class="menu-title">Accessories</p></a
+                      >
+                    </div>
+
+                    <div>
+                      <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                      <ion-icon
+                        name="remove-outline"
+                        class="remove-icon"
+                      ></ion-icon>
+                    </div>
+                  </button>
+                </li>
+              </ul>
             </div>
-
-            <ul class="sidebar-menu-category-list">
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <a href="./listOfProduct(Sheet Metal).html">
-                      <p class="menu-title" id="menu-title-current">Sheet Metal</p>
-                    </a>
-                    
-                  </div>
-
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon
-                      name="remove-outline"
-                      class="remove-icon"
-                    ></ion-icon>
-                  </div>
-                </button>
-              </li>
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <a href="./listOfProduct(Major Assermblies).html">
-                    <p class="menu-title">Major Asssemblies</p></a>
-                  </div>
-
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon
-                      name="remove-outline"
-                      class="remove-icon"
-                    ></ion-icon>
-                  </div>
-                </button>
-              </li>
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <a href="./listOfProduct(light components).html">
-                    <p class="menu-title">Light Components</p></a>
-                  </div>
-
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon
-                      name="remove-outline"
-                      class="remove-icon"
-                    ></ion-icon>
-                  </div>
-                </button>
-              </li>
-              <li class="sidebar-menu-category">
-                <button class="sidebar-accordion-menu" data-accordion-btn>
-                  <div class="menu-title-flex">
-                    <a href="./listOfProduct(Accessories).html">
-                    <p class="menu-title">Accessories</p></a>
-                  </div>
-
-                  <div>
-                    <ion-icon name="add-outline" class="add-icon"></ion-icon>
-                    <ion-icon
-                      name="remove-outline"
-                      class="remove-icon"
-                    ></ion-icon>
-                  </div>
-                </button>
-              </li>
-            </ul>
           </div>
-        </div>
 
           <div class="product-box">
             <!--
             - PRODUCT MINIMAL
           -->
 
+            <!-- <div id="carouselExampleFade" class="carousel slide carousel-fade">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="./assets/images/184337.jpg"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="./assets/images/100002.jpg"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="./assets/images/100003.jpg"
+                    class="d-block w-100"
+                    alt="..."
+                  />
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExampleFade"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExampleFade"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div> -->
             <div class="product-minimal">
               <div class="product-showcase">
                 <h2 class="title">New Arrivals</h2>
@@ -637,6 +706,11 @@
     <script
       nomodule
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
     ></script>
   </body>
 </html>

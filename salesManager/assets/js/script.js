@@ -100,7 +100,7 @@ for (let i = 0; i < accordionBtn.length; i++) {
 
 }
 
-function doSomething(){
+function confirmDelete(){
   document.getElementById('id_confrmdiv').style.display="block"; //this is the replace of this line
 
   document.getElementById('id_truebtn').onclick = function(){

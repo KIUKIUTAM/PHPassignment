@@ -19,3 +19,23 @@
     float: right;
     
 }
+.checkbox{
+    width: 20px;
+}
+
+.showcase-container{
+
+}
+
+.red{
+    color:crimson;
+}
+
+.zoom:hover{
+    transform: scale(1.5);
+}
+
+.d-flex{
+    width: 100vw;
+    justify-content: center;
+}

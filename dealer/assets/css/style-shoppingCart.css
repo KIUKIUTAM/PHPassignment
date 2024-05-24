@@ -1,6 +1,6 @@
-.shoppingCart-title{
+.shoppingCart-title {
     font-family: 'Courier New', Courier, monospace;
-    font-size:36px;
+    font-size: 36px;
     text-align: center;
     text-decoration: underline;
     text-transform: uppercase;
@@ -8,34 +8,35 @@
     margin-bottom: 20px;
 }
 
-.left{
-    
+.left {
+
     align-items: end;
 }
-.showcase-content i{
+
+.showcase-content i {
     float: right;
 }
-.CheckoutList{
+
+.CheckoutList {
     float: right;
-    
+
 }
-.checkbox{
+
+.checkbox {
     width: 20px;
 }
 
-.showcase-container{
+.showcase-container {}
 
+.red {
+    color: crimson;
 }
 
-.red{
-    color:crimson;
-}
-
-.zoom:hover{
+.zoom:hover {
     transform: scale(1.5);
 }
 
-.d-flex{
+.d-flex {
     width: 100vw;
     justify-content: center;
 }

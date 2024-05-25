@@ -1039,7 +1039,6 @@ footer {
 
 @media (min-width: 480px) {
 
-
   /**
    * #CUSTOM PROPERTY
    */
@@ -1137,9 +1136,7 @@ footer {
   /**
    * #PRODUCT 
    */
-   .product-container{
-    margin-bottom: 10vh;
-   }
+
   .product-grid {
     -ms-grid-columns: 1fr 30px 1fr;
     grid-template-columns: 1fr 1fr;
@@ -1276,14 +1273,19 @@ s
   /**
    * #PRODUCT
    */
-   .product-container{
-    margin-bottom: 20vh;
-   }
+
   .product-minimal .showcase-container {
-    min-width: 100%;
+    min-width: 50%;
   }
 
+  .product-featured .showcase-img {
+    max-width: 450px;
+    margin: auto;
+  }
 
+  .product-featured .countdown {
+    gap: 20px;
+  }
   .blog-card {
     min-width: -webkit-calc(50% - 15px);
     min-width: calc(50% - 15px);
@@ -1428,9 +1430,7 @@ s
   /**
    * #PRODUCT 
    */
-   .product-container{
-    margin-bottom: 30vh;
-   }
+
   .product-minimal {
     display: -webkit-box;
     display: -webkit-flex;
@@ -1447,21 +1447,17 @@ s
   }
 
   .product-minimal .product-showcase {
-    min-width: -webkit-calc(33.33% - 14px);
-    min-width: calc(33.33% - 14px);
-    width: -webkit-calc(33.33% - 14px);
-    width: calc(33.33% - 14px);
-    -webkit-box-flex: 1;
-    -webkit-flex-grow: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
+    min-width: -webkit-calc(50% - 10px);
+    min-width: calc(50% - 10px);
+    width: -webkit-calc(50% - 10px);
+    width: calc(50% - 10px);
   }
 
   .product-minimal .showcase-container {
     min-width: 100%;
   }
 
-  .c .showcase {
+  .product-featured .showcase {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -1477,6 +1473,17 @@ s
     gap: 20px;
   }
 
+  .product-featured .showcase-img {
+    max-width: -webkit-fit-content;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+  }
+
+  .product-featured .showcase-content {
+    margin-top: 0;
+    min-width: -webkit-calc(100% - 345px);
+    min-width: calc(100% - 345px);
+  }
 
 
 
@@ -1818,10 +1825,17 @@ s
   }
 
 
+
+
+
+
+
   /**
    * #PRODUCT 
    */
-
+   .product-container{
+    margin-bottom: 30vh;
+   }
   .product-container .container {
     position: relative;
     display: -webkit-box;
@@ -1895,7 +1909,9 @@ s
     padding: 2px;
   }
 
-
+  .product-featured .countdown-content {
+    padding: 5px 10px;
+  }
 
 
   /**
@@ -1971,7 +1987,14 @@ s
    * #PRODUCT
    */
 
+  .product-featured .showcase>div {
+    min-width: -webkit-calc(50% - 10px);
+    min-width: calc(50% - 10px);
+  }
 
+  .product-featured .display-number {
+    --fs-5: 1.125rem;
+  }
 
 
 
@@ -2042,4 +2065,3 @@ s
   }
 
 }
-

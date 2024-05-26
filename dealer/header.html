@@ -1,0 +1,115 @@
+<div class="header-main">
+  <div class="container">
+    <a href="./homepage.html" class="menu-title">SLMS</a>
+
+    <div class="header-search-container">
+      <input
+        type="search"
+        name="search"
+        class="search-field"
+        placeholder="Enter your product name..."
+      />
+
+      <button class="search-btn" onclick="location.href='./Search.html'">
+        <ion-icon name="search-outline"></ion-icon>
+      </button>
+    </div>
+
+    <div class="header-user-actions">
+      <button class="action-btn">
+        <a href="./infromation.html"
+          ><ion-icon name="person-outline"></ion-icon
+        ></a>
+      </button>
+
+
+
+      <button class="action-btn">
+        <a href="./shoppingCart.html"><ion-icon name="bag-handle-outline"></ion-icon></a>
+        <span class="count">0</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<nav class="desktop-navigation-menu">
+  <div class="container">
+    <ul class="desktop-menu-category-list">
+      <li class="menu-category">
+        <a href="./homepage.html" class="menu-title">Home</a>
+      </li>
+
+      <li class="menu-category">
+        <a href="#" class="menu-title">Categories</a>
+
+        <div class="dropdown-panel">
+          <ul class="dropdown-panel-list">
+            <li class="menu-title">
+              <a href="#">Sheet Metal</a>
+            </li>
+
+            <li class="panel-list-item">
+              <a href=".\listOfProduct(Sheet Metal).html"
+                >Sheet Metal-abc</a
+              >
+            </li>
+          </ul>
+
+          <ul class="dropdown-panel-list">
+            <li class="menu-title">
+              <a href="#">Major Asssemblies</a>
+            </li>
+
+            <li class="panel-list-item">
+              <a href="./listOfProduct(Major Assermblies).html"
+                >Major Asssemblies-abc</a
+              >
+            </li>
+          </ul>
+
+          <ul class="dropdown-panel-list">
+            <li class="menu-title">
+              <a href="#">Light Components</a>
+            </li>
+
+            <li class="panel-list-item">
+              <a href="./listOfProduct(light components).html"
+                >Light Components-abc</a
+              >
+            </li>
+          </ul>
+
+          <ul class="dropdown-panel-list">
+            <li class="menu-title">
+              <a href="#">Accessories</a>
+            </li>
+            <li class="panel-list-item">
+              <a href="./listOfProduct(Accessories).html"
+                >Accessories-abc</a
+              >
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="mobile-bottom-navigation">
+  <button class="action-btn" data-mobile-menu-open-btn>
+    <ion-icon name="menu-outline"></ion-icon>
+  </button>
+
+  <button class="action-btn" onclick="location.href='./shoppingCart.html'">
+    <ion-icon name="bag-handle-outline" ></ion-icon>
+    <span class="count">0</span>
+  </button>
+
+  <button class="action-btn" onclick="location.href='./homepage.html'">
+    <ion-icon name="home-outline"></ion-icon>
+  </button>
+
+  <button class="action-btn" data-mobile-menu-open-btn>
+    <ion-icon name="grid-outline"></ion-icon>
+  </button>
+</div>

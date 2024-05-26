@@ -143,22 +143,6 @@
       </nav>
 
       <div class="mobile-bottom-navigation">
-        <button class="action-btn" data-mobile-menu-open-btn>
-          <ion-icon name="menu-outline"></ion-icon>
-        </button>
-
-        <button class="action-btn">
-          <ion-icon name="bag-handle-outline"></ion-icon>
-          <span class="count">0</span>
-        </button>
-
-        <button class="action-btn">
-          <ion-icon name="home-outline"></ion-icon>
-        </button>
-
-        <button class="action-btn" data-mobile-menu-open-btn>
-          <ion-icon name="grid-outline"></ion-icon>
-        </button>
       </div>
     </header>
 
@@ -653,5 +637,12 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+    <script>
+      $(function(){
+          $(".mobile-bottom-navigation").load("./mobile-bottom-navigation.html");
+          $(".footerpage").load("footer.html");
+      });
+  </script>
   </body>
 </html>

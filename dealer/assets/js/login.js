@@ -31,7 +31,7 @@ function login() {
     var pass = document.getElementById("inputPass").value;
     if (pass == localStorage.getItem(user)) {
         alert("Logged In");
-        window.location.href = "homePage.html";
+        window.location.href = "homepage.html";
         // return false;
     } else {
         alert("wrong user/pass");
@@ -61,13 +61,18 @@ btn2.onclick = function () {
 //keyup and Verify if the registered password matches the requested password.
 let timer, timeoutVal = 500; // time it takes to wait for user to stop typing in ms
 const kick = document.getElementById('check');
-const typer = document.querySelector(".register-passRepeat");
+const typer1 = document.querySelector(".reg-username");
+const typer2 = document.querySelector(".register-pass");
+const typer3 = document.querySelector(".register-passRepeat");
 const registerbtn = document.querySelector(".register-submit-btn");
 registerbtn.disabled = true;
 
-
-typer.addEventListener('keypress', handleKeyPress);
-typer.addEventListener('keyup', handleKeyUp);
+typer1.addEventListener('keypress', handleKeyPress);
+typer1.addEventListener('keyup', handleKeyUp);
+typer2.addEventListener('keypress', handleKeyPress);
+typer2.addEventListener('keyup', handleKeyUp);
+typer3.addEventListener('keypress', handleKeyPress);
+typer3.addEventListener('keyup', handleKeyUp);
 function handleKeyPress(e) {
     window.clearTimeout(timer);
     kick.style.color = 'unset';
@@ -76,9 +81,10 @@ function handleKeyPress(e) {
 function handleKeyUp(e) {
     window.clearTimeout(timer); // prevent errant multiple timeouts from being generated
     timer = window.setTimeout(() => {
+        let username = document.querySelector(".reg-username").value;
         let passrepeat1 = document.querySelector(".register-pass").value;
         let passrepeat2 = document.querySelector(".register-passRepeat").value;
-        if (passrepeat1 == passrepeat2 && passrepeat2.match(RGEX)) {
+        if (passrepeat1 == passrepeat2 && passrepeat2.match(RGEX)&&username !="") {
             kick.style.color = 'green';
             registerbtn.disabled = false;
         } else {
@@ -91,16 +97,20 @@ function handleKeyUp(e) {
 
 
 //save the password to the local storage
-registerbtn.onclick = function () {
-    alert("Register");
-    let regusername = document.querySelector(".reg-username").value;
-    let regPass = document.querySelector(".register-pass").value;
-    localStorage.setItem(regusername, regPass);
-    sidebar1.classList.toggle('active');
-    sidebar2.classList.toggle('active');
+
+function registerAC() {
+    if(registerbtn.disabled==false){
+        alert("Register");
+        let regusername = document.querySelector(".reg-username").value;
+        let regPass = document.querySelector(".register-pass").value;
+        localStorage.setItem(regusername, regPass);
+        sidebar1.classList.toggle('active');
+        sidebar2.classList.toggle('active');
+    }else{
+            alert("The password is not illegal!");
+        }
+
 }
-
-
 
 
 //alert the massage to user
@@ -108,3 +118,10 @@ const forgot = document.querySelector('.forgot');
 forgot.onclick = function () {
     alert("How about buy some fish oil?");
 }
+
+
+function onEnter(e){
+    if(e.keyCode == 13){
+       registerAC();
+    }
+  }

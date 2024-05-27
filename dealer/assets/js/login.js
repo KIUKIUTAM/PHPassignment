@@ -31,7 +31,7 @@ function login() {
     var pass = document.getElementById("inputPass").value;
     if (pass == localStorage.getItem(user)) {
         alert("Logged In");
-        window.location.href = "homepage.html";
+        window.location.href = "./dealer/homepage.html";
         // return false;
     } else {
         alert("wrong user/pass");

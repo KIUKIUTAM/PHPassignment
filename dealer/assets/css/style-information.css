@@ -12,7 +12,7 @@
 }
 
 .modal-content-costum{
-    display: inherit;
+    display: inherit !important; 
     background-color: white;
     border-radius: 12px;
     justify-content: center;
@@ -21,6 +21,11 @@
 
 .margin-bottom10{
     margin-bottom: 10px;
+}
+
+.modal-body{
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
 }
 
 

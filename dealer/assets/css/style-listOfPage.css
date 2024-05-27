@@ -1,4 +1,10 @@
 .showcase:hover{
     border-color:var(--eerie-black);
 }
+ion-icon{
+    color: var(--eerie-black);
+}
 
+ion-icon:hover{
+    color: var(--sonic-silver);
+}

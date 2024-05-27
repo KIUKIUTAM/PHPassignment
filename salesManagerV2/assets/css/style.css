@@ -655,7 +655,7 @@ button:focus {
 }
 
 a {
-    color: #ff9f43;
+    color: #ff8f9c;
     cursor: pointer;
     text-decoration: none;
     -webkit-transition: all .2s ease;
@@ -1302,7 +1302,7 @@ div#global-loader,
 
 .btn-submit {
     min-width: 120px;
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff;
     font-size: 14px;
     font-weight: 700;
@@ -1350,8 +1350,8 @@ div#global-loader,
 
 .btn-primary {
     color: #fff;
-    background-color: #ff9f43 !important;
-    border-color: #ff9f43 !important
+    background-color: #ff8f9c !important;
+    border-color: #ff8f9c !important
 }
 
 .avatar {
@@ -1739,7 +1739,7 @@ div#global-loader,
 .fc-state-down,
 .fc-state-active,
 .fc-state-disabled {
-    background-color: #ff9f43 !important;
+    background-color: #ff8f9c !important;
     color: #fff !important;
     text-shadow: none !important
 }
@@ -1953,7 +1953,7 @@ div#global-loader,
     left: 6px;
     width: 5px;
     height: 10px;
-    border: solid #ff9f43;
+    border: solid #ff8f9c;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
@@ -1961,7 +1961,7 @@ div#global-loader,
 }
 
 .inputcheck input:checked~.checkmark {
-    border: 1px solid #ff9f43
+    border: 1px solid #ff8f9c
 }
 
 .animation-tada {
@@ -1979,7 +1979,7 @@ div#global-loader,
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #ff9f43
+    background: #ff8f9c
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -2010,16 +2010,16 @@ a:hover {
 
 .form-control:focus {
     box-shadow: none;
-    border-color: #ff9f43
+    border-color: #ff8f9c
 }
 
 .form-group input[type=text]:focus {
-    border-color: #ff9f43;
+    border-color: #ff8f9c;
     background: #fff
 }
 
 .dropdown-menu {
-    padding: 0
+    padding: 0;
 }
 
 .dropdown-menu .dropdown-item {
@@ -2030,7 +2030,7 @@ a:hover {
 }
 
 .input-group .scanner-set {
-    background: #ff9f43;
+    background: #ff8f9c;
     border-radius: 5px !important;
     width: 40px;
     color: #fff;
@@ -2039,7 +2039,7 @@ a:hover {
 }
 
 .input-group .scanner-set:hover {
-    background: #1b2850
+    background: #ff8f9c
 }
 
 .input-group {
@@ -2104,7 +2104,7 @@ a:hover {
 }
 
 .form-group .btn-filters {
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff;
     width: 40px;
     height: 40px;
@@ -2112,7 +2112,7 @@ a:hover {
 }
 
 .form-group .btn-filters:hover {
-    background: #1b2850
+    background: #ff8f9c
 }
 
 .form-group textarea {
@@ -2130,7 +2130,7 @@ a:hover {
 .dropdown-item:active {
     color: #fff;
     text-decoration: none;
-    background-color: #ff9f43
+    background-color: #ff8f9c
 }
 
 .section-header {
@@ -2143,7 +2143,7 @@ a:hover {
 }
 
 .section-header .line {
-    background-color: #ff9f43;
+    background-color: #ff8f9c;
     height: 2px;
     margin: 0;
     width: 60px
@@ -2237,8 +2237,8 @@ a:hover {
 }
 
 .comp-section .nav-tabs.nav-tabs-solid a.active {
-    background-color: #ff9f43;
-    border-color: #ff9f43;
+    background-color: #ff8f9c;
+    border-color: #ff8f9c;
     color: #fff
 }
 
@@ -2253,7 +2253,7 @@ a:hover {
 .comp-section .nav-tabs .nav-tabs-bottom li a.active {
     border-bottom-width: 2px;
     border-color: transparent;
-    border-bottom-color: #ff9f43;
+    border-bottom-color: #ff8f9c;
     background-color: transparent;
     transition: none 0s ease 0s
 }
@@ -2360,13 +2360,13 @@ body[data-theme=dark] .table tbody tr td a {
 }
 
 .btn-outline-primary {
-    color: #ff9f43;
-    border-color: #ff9f43
+    color: #ff8f9c;
+    border-color: #ff8f9c
 }
 
 .btn-outline-primary:hover {
-    border-color: #ff9f43;
-    background: #ff9f43;
+    border-color: #ff8f9c;
+    background: #ff8f9c;
     color: #fff
 }
 
@@ -2406,7 +2406,7 @@ body[data-theme=dark] .table tbody tr td a {
 }
 
 .ribbon.ribbon-primary {
-    background: #ff9f43
+    background: #ff8f9c
 }
 
 .ribbon.ribbon-secondary {
@@ -2477,7 +2477,7 @@ body[data-theme=dark] .table tbody tr td a {
 .irs--flat .irs-handle>i:first-child,
 .irs--flat .irs-handle.state_hover>i:first-child,
 .irs--flat .irs-handle:hover>i:first-child {
-    background-color: #ff9f43
+    background-color: #ff8f9c
 }
 
 .alertify .ajs-commands {
@@ -2495,7 +2495,7 @@ body[data-theme=dark] .table tbody tr td a {
 }
 
 .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-ok {
-    color: #ff9f43
+    color: #ff8f9c
 }
 
 .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-primary {
@@ -2511,8 +2511,8 @@ body[data-theme=dark] .table tbody tr td a {
 }
 
 .alertify-notifier .ajs-message {
-    background-color: #ff9f43;
-    border-color: #ff9f43;
+    background-color: #ff8f9c;
+    border-color: #ff8f9c;
     color: #fff;
     text-shadow: none !important
 }
@@ -2528,8 +2528,8 @@ body[data-theme=dark] .table tbody tr td a {
 }
 
 .alertify-notifier .ajs-message.ajs-warning {
-    background-color: #ff9f43;
-    border-color: #ff9f43
+    background-color: #ff8f9c;
+    border-color: #ff8f9c
 }
 
 .alertify-notifier.ajs-right {
@@ -2577,7 +2577,7 @@ body[data-layout-mode=dark] .alertify .ajs-footer .ajs-buttons .ajs-button {
 }
 
 body[data-layout-mode=dark] .alertify .ajs-footer .ajs-buttons .ajs-button.ajs-ok {
-    color: #ff9f43
+    color: #ff8f9c
 }
 
 body[data-layout-mode=dark] .alertify .ajs-header {
@@ -2839,7 +2839,7 @@ body[data-layout-mode=dark] .alertify .ajs-content .ajs-input {
 }
 
 .timeline-badge.primary {
-    background-color: #ff9f43
+    background-color: #ff8f9c
 }
 
 .timeline-badge.success {
@@ -2875,16 +2875,16 @@ body[data-layout-mode=dark] .alertify .ajs-content .ajs-input {
 
 .cd-horizontal-timeline .events a {
     padding-bottom: 6px;
-    color: #ff9f43
+    color: #ff8f9c
 }
 
 .cd-horizontal-timeline .filling-line,
 .cd-horizontal-timeline .events a.selected::after {
-    background: #ff9f43
+    background: #ff8f9c
 }
 
 .cd-horizontal-timeline .events a.selected::after {
-    border-color: #ff9f43
+    border-color: #ff8f9c
 }
 
 .cd-horizontal-timeline .m-t-40 {
@@ -2898,13 +2898,13 @@ body[data-layout-mode=dark] .alertify .ajs-content .ajs-input {
 
 .cd-timeline-navigation a:hover,
 .cd-timeline-navigation a:focus {
-    border-color: #ff9f43
+    border-color: #ff8f9c
 }
 
 .cd-horizontal-timeline a,
 .cd-horizontal-timeline a:hover,
 .cd-horizontal-timeline a:focus {
-    color: #ff9f43
+    color: #ff8f9c
 }
 
 .cd-horizontal-timeline blockquote,
@@ -2991,7 +2991,7 @@ body[data-layout-mode=dark] .alertify .ajs-content .ajs-input {
     z-index: 1;
     height: 100%;
     width: 100%;
-    background-color: #ff9f43;
+    background-color: #ff8f9c;
     transform: scaleX(0);
     -webkit-transform: scaleX(0);
     -ms-transform: scaleX(0);
@@ -3036,8 +3036,8 @@ body[data-layout-mode=dark] .alertify .ajs-content .ajs-input {
 }
 
 .no-touch .cd-horizontal-timeline .events a:hover::after {
-    background-color: #ff9f43;
-    border-color: #ff9f43
+    background-color: #ff8f9c;
+    border-color: #ff8f9c
 }
 
 .cd-horizontal-timeline .events a.selected {
@@ -3045,12 +3045,12 @@ body[data-layout-mode=dark] .alertify .ajs-content .ajs-input {
 }
 
 .cd-horizontal-timeline .events a.selected::after {
-    background-color: #ff9f43;
-    border-color: #ff9f43
+    background-color: #ff8f9c;
+    border-color: #ff8f9c
 }
 
 .cd-horizontal-timeline .events a.older-event::after {
-    border-color: #ff9f43
+    border-color: #ff8f9c
 }
 
 .cd-timeline-navigation a {
@@ -3219,7 +3219,7 @@ body[data-layout-mode=dark] .alertify .ajs-content .ajs-input {
     font-size: 18px;
     border-radius: 50px;
     border: 1px solid #e6ebf1;
-    color: #ff9f43;
+    color: #ff8f9c;
     margin: 5px;
     -webkit-box-shadow: 0 2px 3px #d7c5ff;
     -moz-box-shadow: 0 2px 3px #d7c5ff;
@@ -3249,7 +3249,7 @@ body[data-layout-mode=dark] .alertify .ajs-content .ajs-input {
     font-size: 18px;
     border-radius: 50px;
     border: 1px solid #e6ebf1;
-    color: #ff9f43;
+    color: #ff8f9c;
     margin: 5px;
     -webkit-box-shadow: 0 2px 3px #d7c5ff;
     -moz-box-shadow: 0 2px 3px #d7c5ff;
@@ -3363,7 +3363,7 @@ body[data-layout-mode=dark] .alertify .ajs-content .ajs-input {
 }
 
 .error-page .main-wrapper .error-box h1 {
-    color: #ff9f43;
+    color: #ff8f9c;
     font-size: 10em
 }
 
@@ -3444,13 +3444,13 @@ table.dataTable>thead .sorting_desc_disabled:before {
 }
 
 .pagination li a:hover {
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff
 }
 
 .pagination li.active a.page-link {
-    background: #ff9f43;
-    border-color: #ff9f43;
+    background: #ff8f9c;
+    border-color: #ff8f9c;
     border-radius: 5px
 }
 
@@ -3464,7 +3464,7 @@ div.dataTables_wrapper div.dataTables_info {
 }
 
 .header {
-    background: #ff9f43;
+    background: #ff8f9c;
     background: #fff;
     border-bottom: 1px solid transparent;
     height: 60px;
@@ -3605,17 +3605,17 @@ div.dataTables_wrapper div.dataTables_info {
 }
 
 .header .page-title-box a {
-    color: #ff9f43;
+    color: #ff8f9c;
     font-size: 11px;
     font-weight: 700;
-    border: 1px solid #ff9f43;
+    border: 1px solid #ff8f9c;
     margin: 0;
     padding: 5px;
     border-radius: 5px
 }
 
 .header .page-title-box a:hover {
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff
 }
 
@@ -3626,7 +3626,7 @@ div.dataTables_wrapper div.dataTables_info {
 
 @media(max-width:991px) {
     .header .mobile_btn {
-        color: #ff9f43;
+        color: #ff8f9c;
         font-size: 24px;
         height: 60px;
         line-height: 60px;
@@ -3798,7 +3798,7 @@ div.dataTables_wrapper div.dataTables_info {
 }
 
 .header .mobile-user-menu a {
-    color: #ff9f43;
+    color: #ff8f9c;
     padding: 0
 }
 
@@ -3950,7 +3950,7 @@ div.dataTables_wrapper div.dataTables_info {
     position: absolute;
     top: 5px;
     right: 10px;
-    background: #ff9f43;
+    background: #ff8f9c;
     border-radius: 50px;
     color: #fff
 }
@@ -4004,7 +4004,7 @@ div.dataTables_wrapper div.dataTables_info {
 
 @media(max-width:991px) {
     .header-pos #mobile_btn {
-        color: #ff9f43;
+        color: #ff8f9c;
         font-size: 24px;
         height: 60px;
         line-height: 60px;
@@ -4122,7 +4122,7 @@ div.dataTables_wrapper div.dataTables_info {
 }
 
 .header-split .header-menu ul li a:hover {
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff
 }
 
@@ -4169,7 +4169,7 @@ div.dataTables_wrapper div.dataTables_info {
 }
 
 .bar-icon span {
-    background-color: #ff9f43;
+    background-color: #ff8f9c;
     display: block;
     float: left;
     height: 3px;
@@ -4279,7 +4279,7 @@ hr {
     position: absolute;
     top: 6px;
     right: 3px;
-    background: #ff9f43;
+    background: #ff8f9c;
     width: 20px;
     height: 20px
 }
@@ -4336,7 +4336,7 @@ hr {
 }
 
 .searchinputs .search-addon span {
-    background: #ff9f43;
+    background: #ff8f9c;
     width: 27px;
     height: 27px;
     z-index: 9;
@@ -4358,7 +4358,7 @@ div#global-loader {
 div#global-loader .whirly-loader:not(:required) {
     animation: whirly-loader 1.25s linear infinite;
     background: 0 0;
-    box-shadow: 0 26px 0 6px #ff9f43, .90971px 26.05079px 0 5.93333px #ff9f43, 1.82297px 26.06967px 0 5.86667px #ff9f43, 2.73865px 26.05647px 0 5.8px #ff9f43, 3.65561px 26.01104px 0 5.73333px #ff9f43, 4.57274px 25.93327px 0 5.66667px #ff9f43, 5.48887px 25.8231px 0 5.6px #ff9f43, 6.40287px 25.68049px 0 5.53333px #ff9f43, 7.31358px 25.50548px 0 5.46667px #ff9f43, 8.21985px 25.2981px 0 5.4px #ff9f43, 9.12054px 25.05847px 0 5.33333px #ff9f43, 10.01448px 24.78672px 0 5.26667px #ff9f43, 10.90054px 24.48302px 0 5.2px #ff9f43, 11.77757px 24.1476px 0 5.13333px #ff9f43, 12.64443px 23.78072px 0 5.06667px #ff9f43, 13.5px 23.38269px 0 5px #ff9f43, 14.34315px 22.95384px 0 4.93333px #ff9f43, 15.17277px 22.49455px 0 4.86667px #ff9f43, 15.98776px 22.00526px 0 4.8px #ff9f43, 16.78704px 21.48643px 0 4.73333px #ff9f43, 17.56953px 20.93855px 0 4.66667px #ff9f43, 18.33418px 20.36217px 0 4.6px #ff9f43, 19.07995px 19.75787px 0 4.53333px #ff9f43, 19.80582px 19.12626px 0 4.46667px #ff9f43, 20.5108px 18.468px 0 4.4px #ff9f43, 21.1939px 17.78379px 0 4.33333px #ff9f43, 21.85416px 17.07434px 0 4.26667px #ff9f43, 22.49067px 16.34043px 0 4.2px #ff9f43, 23.10251px 15.58284px 0 4.13333px #ff9f43, 23.68881px 14.80241px 0 4.06667px #ff9f43, 24.24871px 14px 0 4px #ff9f43, 24.7814px 13.1765px 0 3.93333px #ff9f43, 25.28607px 12.33284px 0 3.86667px #ff9f43, 25.76198px 11.46997px 0 3.8px #ff9f43, 26.2084px 10.58888px 0 3.73333px #ff9f43, 26.62462px 9.69057px 0 3.66667px #ff9f43, 27.01001px 8.77608px 0 3.6px #ff9f43, 27.36392px 7.84648px 0 3.53333px #ff9f43, 27.68577px 6.90284px 0 3.46667px #ff9f43, 27.97502px 5.94627px 0 3.4px #ff9f43, 28.23116px 4.97791px 0 3.33333px #ff9f43, 28.4537px 3.99891px 0 3.26667px #ff9f43, 28.64223px 3.01042px 0 3.2px #ff9f43, 28.79635px 2.01364px 0 3.13333px #ff9f43, 28.91571px 1.00976px 0 3.06667px #ff9f43, 29px 0 0 3px #ff9f43, 29.04896px -1.01441px 0 2.93333px #ff9f43, 29.06237px -2.03224px 0 2.86667px #ff9f43, 29.04004px -3.05223px 0 2.8px #ff9f43, 28.98185px -4.07313px 0 2.73333px #ff9f43, 28.88769px -5.09368px 0 2.66667px #ff9f43, 28.75754px -6.1126px 0 2.6px #ff9f43, 28.59138px -7.12863px 0 2.53333px #ff9f43, 28.38926px -8.14049px 0 2.46667px #ff9f43, 28.15127px -9.1469px 0 2.4px #ff9f43, 27.87755px -10.1466px 0 2.33333px #ff9f43, 27.56827px -11.1383px 0 2.26667px #ff9f43, 27.22365px -12.12075px 0 2.2px #ff9f43, 26.84398px -13.09268px 0 2.13333px #ff9f43, 26.42956px -14.05285px 0 2.06667px #ff9f43, 25.98076px -15px 0 2px #ff9f43, 25.49798px -15.93291px 0 1.93333px #ff9f43, 24.98167px -16.85035px 0 1.86667px #ff9f43, 24.43231px -17.75111px 0 1.8px #ff9f43, 23.85046px -18.63402px 0 1.73333px #ff9f43, 23.23668px -19.49789px 0 1.66667px #ff9f43, 22.5916px -20.34157px 0 1.6px #ff9f43, 21.91589px -21.16393px 0 1.53333px #ff9f43, 21.21024px -21.96384px 0 1.46667px #ff9f43, 20.4754px -22.74023px 0 1.4px #ff9f43, 19.71215px -23.49203px 0 1.33333px #ff9f43, 18.92133px -24.2182px 0 1.26667px #ff9f43, 18.10379px -24.91772px 0 1.2px #ff9f43, 17.26042px -25.58963px 0 1.13333px #ff9f43, 16.39217px -26.23295px 0 1.06667px #ff9f43, 15.5px -26.84679px 0 1px #ff9f43, 14.58492px -27.43024px 0 .93333px #ff9f43, 13.64796px -27.98245px 0 .86667px #ff9f43, 12.69018px -28.50262px 0 .8px #ff9f43, 11.7127px -28.98995px 0 .73333px #ff9f43, 10.71663px -29.4437px 0 .66667px #ff9f43, 9.70313px -29.86317px 0 .6px #ff9f43, 8.67339px -30.2477px 0 .53333px #ff9f43, 7.6286px -30.59666px 0 .46667px #ff9f43, 6.57001px -30.90946px 0 .4px #ff9f43, 5.49886px -31.18558px 0 .33333px #ff9f43, 4.41643px -31.42451px 0 .26667px #ff9f43, 3.32401px -31.6258px 0 .2px #ff9f43, 2.22291px -31.78904px 0 .13333px #ff9f43, 1.11446px -31.91388px 0 .06667px #ff9f43, 0 -32px 0 0 #ff9f43, -1.11911px -32.04713px 0 -.06667px #ff9f43, -2.24151px -32.05506px 0 -.13333px #ff9f43, -3.36582px -32.02361px 0 -.2px #ff9f43, -4.49065px -31.95265px 0 -.26667px #ff9f43, -5.61462px -31.84212px 0 -.33333px #ff9f43, -6.73634px -31.69198px 0 -.4px #ff9f43, -7.8544px -31.50227px 0 -.46667px #ff9f43, -8.9674px -31.27305px 0 -.53333px #ff9f43, -10.07395px -31.00444px 0 -.6px #ff9f43, -11.17266px -30.69663px 0 -.66667px #ff9f43, -12.26212px -30.34982px 0 -.73333px #ff9f43, -13.34096px -29.96429px 0 -.8px #ff9f43, -14.4078px -29.54036px 0 -.86667px #ff9f43, -15.46126px -29.07841px 0 -.93333px #ff9f43, -16.5px -28.57884px 0 -1px #ff9f43, -17.52266px -28.04212px 0 -1.06667px #ff9f43, -18.52792px -27.46878px 0 -1.13333px #ff9f43, -19.51447px -26.85936px 0 -1.2px #ff9f43, -20.48101px -26.21449px 0 -1.26667px #ff9f43, -21.42625px -25.53481px 0 -1.33333px #ff9f43, -22.34896px -24.82104px 0 -1.4px #ff9f43, -23.2479px -24.07391px 0 -1.46667px #ff9f43, -24.12186px -23.29421px 0 -1.53333px #ff9f43, -24.96967px -22.48279px 0 -1.6px #ff9f43, -25.79016px -21.64052px 0 -1.66667px #ff9f43, -26.58223px -20.76831px 0 -1.73333px #ff9f43, -27.34477px -19.86714px 0 -1.8px #ff9f43, -28.07674px -18.938px 0 -1.86667px #ff9f43, -28.7771px -17.98193px 0 -1.93333px #ff9f43, -29.44486px -17px 0 -2px #ff9f43, -30.07908px -15.99333px 0 -2.06667px #ff9f43, -30.67884px -14.96307px 0 -2.13333px #ff9f43, -31.24325px -13.91039px 0 -2.2px #ff9f43, -31.7715px -12.83652px 0 -2.26667px #ff9f43, -32.26278px -11.74269px 0 -2.33333px #ff9f43, -32.71634px -10.63018px 0 -2.4px #ff9f43, -33.13149px -9.5003px 0 -2.46667px #ff9f43, -33.50755px -8.35437px 0 -2.53333px #ff9f43, -33.84391px -7.19374px 0 -2.6px #ff9f43, -34.14px -6.0198px 0 -2.66667px #ff9f43, -34.39531px -4.83395px 0 -2.73333px #ff9f43, -34.60936px -3.63759px 0 -2.8px #ff9f43, -34.78173px -2.43218px 0 -2.86667px #ff9f43, -34.91205px -1.21916px 0 -2.93333px #ff9f43, -35px 0 0 -3px #ff9f43, -35.04531px 1.22381px 0 -3.06667px #ff9f43, -35.04775px 2.45078px 0 -3.13333px #ff9f43, -35.00717px 3.6794px 0 -3.2px #ff9f43, -34.92345px 4.90817px 0 -3.26667px #ff9f43, -34.79654px 6.13557px 0 -3.33333px #ff9f43, -34.62643px 7.36007px 0 -3.4px #ff9f43, -34.41316px 8.58016px 0 -3.46667px #ff9f43, -34.15683px 9.79431px 0 -3.53333px #ff9f43, -33.85761px 11.001px 0 -3.6px #ff9f43, -33.5157px 12.19872px 0 -3.66667px #ff9f43, -33.13137px 13.38594px 0 -3.73333px #ff9f43, -32.70493px 14.56117px 0 -3.8px #ff9f43, -32.23675px 15.72291px 0 -3.86667px #ff9f43, -31.72725px 16.86968px 0 -3.93333px #ff9f43, -31.17691px 18px 0 -4px #ff9f43, -30.58627px 19.11242px 0 -4.06667px #ff9f43, -29.95589px 20.2055px 0 -4.13333px #ff9f43, -29.28642px 21.27783px 0 -4.2px #ff9f43, -28.57852px 22.32799px 0 -4.26667px #ff9f43, -27.83295px 23.35462px 0 -4.33333px #ff9f43, -27.05047px 24.35635px 0 -4.4px #ff9f43, -26.23192px 25.33188px 0 -4.46667px #ff9f43, -25.37819px 26.27988px 0 -4.53333px #ff9f43, -24.49018px 27.1991px 0 -4.6px #ff9f43, -23.56888px 28.0883px 0 -4.66667px #ff9f43, -22.6153px 28.94626px 0 -4.73333px #ff9f43, -21.6305px 29.77183px 0 -4.8px #ff9f43, -20.61558px 30.56385px 0 -4.86667px #ff9f43, -19.57168px 31.32124px 0 -4.93333px #ff9f43, -18.5px 32.04294px 0 -5px #ff9f43, -17.40175px 32.72792px 0 -5.06667px #ff9f43, -16.27818px 33.37522px 0 -5.13333px #ff9f43, -15.1306px 33.98389px 0 -5.2px #ff9f43, -13.96034px 34.55305px 0 -5.26667px #ff9f43, -12.76875px 35.08186px 0 -5.33333px #ff9f43, -11.55724px 35.56951px 0 -5.4px #ff9f43, -10.32721px 36.01527px 0 -5.46667px #ff9f43, -9.08014px 36.41843px 0 -5.53333px #ff9f43, -7.81748px 36.77835px 0 -5.6px #ff9f43, -6.54075px 37.09443px 0 -5.66667px #ff9f43, -5.25147px 37.36612px 0 -5.73333px #ff9f43, -3.95118px 37.59293px 0 -5.8px #ff9f43, -2.64145px 37.77443px 0 -5.86667px #ff9f43, -1.32385px 37.91023px 0 -5.93333px #ff9f43;
+    box-shadow: 0 26px 0 6px #ff8f9c, .90971px 26.05079px 0 5.93333px #ff8f9c, 1.82297px 26.06967px 0 5.86667px #ff8f9c, 2.73865px 26.05647px 0 5.8px #ff8f9c, 3.65561px 26.01104px 0 5.73333px #ff8f9c, 4.57274px 25.93327px 0 5.66667px #ff8f9c, 5.48887px 25.8231px 0 5.6px #ff8f9c, 6.40287px 25.68049px 0 5.53333px #ff8f9c, 7.31358px 25.50548px 0 5.46667px #ff8f9c, 8.21985px 25.2981px 0 5.4px #ff8f9c, 9.12054px 25.05847px 0 5.33333px #ff8f9c, 10.01448px 24.78672px 0 5.26667px #ff8f9c, 10.90054px 24.48302px 0 5.2px #ff8f9c, 11.77757px 24.1476px 0 5.13333px #ff8f9c, 12.64443px 23.78072px 0 5.06667px #ff8f9c, 13.5px 23.38269px 0 5px #ff8f9c, 14.34315px 22.95384px 0 4.93333px #ff8f9c, 15.17277px 22.49455px 0 4.86667px #ff8f9c, 15.98776px 22.00526px 0 4.8px #ff8f9c, 16.78704px 21.48643px 0 4.73333px #ff8f9c, 17.56953px 20.93855px 0 4.66667px #ff8f9c, 18.33418px 20.36217px 0 4.6px #ff8f9c, 19.07995px 19.75787px 0 4.53333px #ff8f9c, 19.80582px 19.12626px 0 4.46667px #ff8f9c, 20.5108px 18.468px 0 4.4px #ff8f9c, 21.1939px 17.78379px 0 4.33333px #ff8f9c, 21.85416px 17.07434px 0 4.26667px #ff8f9c, 22.49067px 16.34043px 0 4.2px #ff8f9c, 23.10251px 15.58284px 0 4.13333px #ff8f9c, 23.68881px 14.80241px 0 4.06667px #ff8f9c, 24.24871px 14px 0 4px #ff8f9c, 24.7814px 13.1765px 0 3.93333px #ff8f9c, 25.28607px 12.33284px 0 3.86667px #ff8f9c, 25.76198px 11.46997px 0 3.8px #ff8f9c, 26.2084px 10.58888px 0 3.73333px #ff8f9c, 26.62462px 9.69057px 0 3.66667px #ff8f9c, 27.01001px 8.77608px 0 3.6px #ff8f9c, 27.36392px 7.84648px 0 3.53333px #ff8f9c, 27.68577px 6.90284px 0 3.46667px #ff8f9c, 27.97502px 5.94627px 0 3.4px #ff8f9c, 28.23116px 4.97791px 0 3.33333px #ff8f9c, 28.4537px 3.99891px 0 3.26667px #ff8f9c, 28.64223px 3.01042px 0 3.2px #ff8f9c, 28.79635px 2.01364px 0 3.13333px #ff8f9c, 28.91571px 1.00976px 0 3.06667px #ff8f9c, 29px 0 0 3px #ff8f9c, 29.04896px -1.01441px 0 2.93333px #ff8f9c, 29.06237px -2.03224px 0 2.86667px #ff8f9c, 29.04004px -3.05223px 0 2.8px #ff8f9c, 28.98185px -4.07313px 0 2.73333px #ff8f9c, 28.88769px -5.09368px 0 2.66667px #ff8f9c, 28.75754px -6.1126px 0 2.6px #ff8f9c, 28.59138px -7.12863px 0 2.53333px #ff8f9c, 28.38926px -8.14049px 0 2.46667px #ff8f9c, 28.15127px -9.1469px 0 2.4px #ff8f9c, 27.87755px -10.1466px 0 2.33333px #ff8f9c, 27.56827px -11.1383px 0 2.26667px #ff8f9c, 27.22365px -12.12075px 0 2.2px #ff8f9c, 26.84398px -13.09268px 0 2.13333px #ff8f9c, 26.42956px -14.05285px 0 2.06667px #ff8f9c, 25.98076px -15px 0 2px #ff8f9c, 25.49798px -15.93291px 0 1.93333px #ff8f9c, 24.98167px -16.85035px 0 1.86667px #ff8f9c, 24.43231px -17.75111px 0 1.8px #ff8f9c, 23.85046px -18.63402px 0 1.73333px #ff8f9c, 23.23668px -19.49789px 0 1.66667px #ff8f9c, 22.5916px -20.34157px 0 1.6px #ff8f9c, 21.91589px -21.16393px 0 1.53333px #ff8f9c, 21.21024px -21.96384px 0 1.46667px #ff8f9c, 20.4754px -22.74023px 0 1.4px #ff8f9c, 19.71215px -23.49203px 0 1.33333px #ff8f9c, 18.92133px -24.2182px 0 1.26667px #ff8f9c, 18.10379px -24.91772px 0 1.2px #ff8f9c, 17.26042px -25.58963px 0 1.13333px #ff8f9c, 16.39217px -26.23295px 0 1.06667px #ff8f9c, 15.5px -26.84679px 0 1px #ff8f9c, 14.58492px -27.43024px 0 .93333px #ff8f9c, 13.64796px -27.98245px 0 .86667px #ff8f9c, 12.69018px -28.50262px 0 .8px #ff8f9c, 11.7127px -28.98995px 0 .73333px #ff8f9c, 10.71663px -29.4437px 0 .66667px #ff8f9c, 9.70313px -29.86317px 0 .6px #ff8f9c, 8.67339px -30.2477px 0 .53333px #ff8f9c, 7.6286px -30.59666px 0 .46667px #ff8f9c, 6.57001px -30.90946px 0 .4px #ff8f9c, 5.49886px -31.18558px 0 .33333px #ff8f9c, 4.41643px -31.42451px 0 .26667px #ff8f9c, 3.32401px -31.6258px 0 .2px #ff8f9c, 2.22291px -31.78904px 0 .13333px #ff8f9c, 1.11446px -31.91388px 0 .06667px #ff8f9c, 0 -32px 0 0 #ff8f9c, -1.11911px -32.04713px 0 -.06667px #ff8f9c, -2.24151px -32.05506px 0 -.13333px #ff8f9c, -3.36582px -32.02361px 0 -.2px #ff8f9c, -4.49065px -31.95265px 0 -.26667px #ff8f9c, -5.61462px -31.84212px 0 -.33333px #ff8f9c, -6.73634px -31.69198px 0 -.4px #ff8f9c, -7.8544px -31.50227px 0 -.46667px #ff8f9c, -8.9674px -31.27305px 0 -.53333px #ff8f9c, -10.07395px -31.00444px 0 -.6px #ff8f9c, -11.17266px -30.69663px 0 -.66667px #ff8f9c, -12.26212px -30.34982px 0 -.73333px #ff8f9c, -13.34096px -29.96429px 0 -.8px #ff8f9c, -14.4078px -29.54036px 0 -.86667px #ff8f9c, -15.46126px -29.07841px 0 -.93333px #ff8f9c, -16.5px -28.57884px 0 -1px #ff8f9c, -17.52266px -28.04212px 0 -1.06667px #ff8f9c, -18.52792px -27.46878px 0 -1.13333px #ff8f9c, -19.51447px -26.85936px 0 -1.2px #ff8f9c, -20.48101px -26.21449px 0 -1.26667px #ff8f9c, -21.42625px -25.53481px 0 -1.33333px #ff8f9c, -22.34896px -24.82104px 0 -1.4px #ff8f9c, -23.2479px -24.07391px 0 -1.46667px #ff8f9c, -24.12186px -23.29421px 0 -1.53333px #ff8f9c, -24.96967px -22.48279px 0 -1.6px #ff8f9c, -25.79016px -21.64052px 0 -1.66667px #ff8f9c, -26.58223px -20.76831px 0 -1.73333px #ff8f9c, -27.34477px -19.86714px 0 -1.8px #ff8f9c, -28.07674px -18.938px 0 -1.86667px #ff8f9c, -28.7771px -17.98193px 0 -1.93333px #ff8f9c, -29.44486px -17px 0 -2px #ff8f9c, -30.07908px -15.99333px 0 -2.06667px #ff8f9c, -30.67884px -14.96307px 0 -2.13333px #ff8f9c, -31.24325px -13.91039px 0 -2.2px #ff8f9c, -31.7715px -12.83652px 0 -2.26667px #ff8f9c, -32.26278px -11.74269px 0 -2.33333px #ff8f9c, -32.71634px -10.63018px 0 -2.4px #ff8f9c, -33.13149px -9.5003px 0 -2.46667px #ff8f9c, -33.50755px -8.35437px 0 -2.53333px #ff8f9c, -33.84391px -7.19374px 0 -2.6px #ff8f9c, -34.14px -6.0198px 0 -2.66667px #ff8f9c, -34.39531px -4.83395px 0 -2.73333px #ff8f9c, -34.60936px -3.63759px 0 -2.8px #ff8f9c, -34.78173px -2.43218px 0 -2.86667px #ff8f9c, -34.91205px -1.21916px 0 -2.93333px #ff8f9c, -35px 0 0 -3px #ff8f9c, -35.04531px 1.22381px 0 -3.06667px #ff8f9c, -35.04775px 2.45078px 0 -3.13333px #ff8f9c, -35.00717px 3.6794px 0 -3.2px #ff8f9c, -34.92345px 4.90817px 0 -3.26667px #ff8f9c, -34.79654px 6.13557px 0 -3.33333px #ff8f9c, -34.62643px 7.36007px 0 -3.4px #ff8f9c, -34.41316px 8.58016px 0 -3.46667px #ff8f9c, -34.15683px 9.79431px 0 -3.53333px #ff8f9c, -33.85761px 11.001px 0 -3.6px #ff8f9c, -33.5157px 12.19872px 0 -3.66667px #ff8f9c, -33.13137px 13.38594px 0 -3.73333px #ff8f9c, -32.70493px 14.56117px 0 -3.8px #ff8f9c, -32.23675px 15.72291px 0 -3.86667px #ff8f9c, -31.72725px 16.86968px 0 -3.93333px #ff8f9c, -31.17691px 18px 0 -4px #ff8f9c, -30.58627px 19.11242px 0 -4.06667px #ff8f9c, -29.95589px 20.2055px 0 -4.13333px #ff8f9c, -29.28642px 21.27783px 0 -4.2px #ff8f9c, -28.57852px 22.32799px 0 -4.26667px #ff8f9c, -27.83295px 23.35462px 0 -4.33333px #ff8f9c, -27.05047px 24.35635px 0 -4.4px #ff8f9c, -26.23192px 25.33188px 0 -4.46667px #ff8f9c, -25.37819px 26.27988px 0 -4.53333px #ff8f9c, -24.49018px 27.1991px 0 -4.6px #ff8f9c, -23.56888px 28.0883px 0 -4.66667px #ff8f9c, -22.6153px 28.94626px 0 -4.73333px #ff8f9c, -21.6305px 29.77183px 0 -4.8px #ff8f9c, -20.61558px 30.56385px 0 -4.86667px #ff8f9c, -19.57168px 31.32124px 0 -4.93333px #ff8f9c, -18.5px 32.04294px 0 -5px #ff8f9c, -17.40175px 32.72792px 0 -5.06667px #ff8f9c, -16.27818px 33.37522px 0 -5.13333px #ff8f9c, -15.1306px 33.98389px 0 -5.2px #ff8f9c, -13.96034px 34.55305px 0 -5.26667px #ff8f9c, -12.76875px 35.08186px 0 -5.33333px #ff8f9c, -11.55724px 35.56951px 0 -5.4px #ff8f9c, -10.32721px 36.01527px 0 -5.46667px #ff8f9c, -9.08014px 36.41843px 0 -5.53333px #ff8f9c, -7.81748px 36.77835px 0 -5.6px #ff8f9c, -6.54075px 37.09443px 0 -5.66667px #ff8f9c, -5.25147px 37.36612px 0 -5.73333px #ff8f9c, -3.95118px 37.59293px 0 -5.8px #ff8f9c, -2.64145px 37.77443px 0 -5.86667px #ff8f9c, -1.32385px 37.91023px 0 -5.93333px #ff8f9c;
     display: inline-block;
     height: 8px;
     overflow: hidden;
@@ -4452,13 +4452,13 @@ div#global-loader .whirly-loader:not(:required) {
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff
 }
 
 .select2-container--focus .select2-selection--single {
     background: #fff !important;
-    border-color: #ff9f43
+    border-color: #ff8f9c
 }
 
 span.select2-container.select2-container--default.select2-container--open {
@@ -4537,7 +4537,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .sidebar .sidebar-menu>ul>li>a:hover {
-    background: #1b2850;
+    background: #ff8f9c;
     color: #fff;
     border-radius: 5px
 }
@@ -4551,7 +4551,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .sidebar .sidebar-menu>ul>li>a.active {
-    background: #1b2850;
+    background: #ff8f9c;
     color: #fff;
     border-radius: 5px
 }
@@ -4602,7 +4602,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .sidebar .sidebar-menu>ul>li.active a {
-    background: #1b2850;
+    background: #ff8f9c;
     border-radius: 5px
 }
 
@@ -4651,12 +4651,12 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .sidebar .sidebar-menu>ul>li.submenu ul li a:hover {
-    color: #ff9f43
+    color: #ff8f9c
 }
 
 .sidebar .sidebar-menu>ul>li.submenu ul li a:hover:after {
-    background: #ff9f43;
-    border: 1px solid #ff9f43
+    background: #ff8f9c;
+    border: 1px solid #ff8f9c
 }
 
 .sidebar .nav-link {
@@ -4666,7 +4666,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .sidebar .nav-link.active {
-    color: #ff9f43;
+    color: #ff8f9c;
     background: 0 0;
     position: relative
 }
@@ -4674,7 +4674,7 @@ span.select2-container.select2-container--default.select2-container--open {
 .sidebar .nav-link.active:after {
     content: "";
     border-width: 10px;
-    border-color: transparent #ff9f43 transparent transparent;
+    border-color: transparent #ff8f9c transparent transparent;
     border-style: solid;
     position: absolute;
     top: 36px;
@@ -4733,7 +4733,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .sidebar .sidebar-right ul li.active a {
-    background: linear-gradient(46.62deg, #FF9F43 0%, #423B93 93.64%);
+    background: linear-gradient(46.62deg, #ff8f9c 0%, #423B93 93.64%);
     color: #fff
 }
 
@@ -4744,7 +4744,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .sidebar .sidebar-right ul li a.active {
-    color: #ff9f43
+    color: #ff8f9c
 }
 
 .sidebar .sidebar-right .menu-arrow {
@@ -4806,7 +4806,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .sidebar .sidemenu a:hover {
-    background: linear-gradient(46.62deg, #FF9F43 0%, #423B93 93.64%);
+    background: linear-gradient(46.62deg, #ff8f9c 0%, #423B93 93.64%);
     color: #fff
 }
 
@@ -4828,7 +4828,7 @@ span.select2-container.select2-container--default.select2-container--open {
     width: 6px;
     height: 6px;
     background-color: #fff;
-    border: 2px solid #092c4c;
+    border: 2px solid #000000;
     border-radius: 20px;
     position: absolute;
     top: 6px;
@@ -4903,7 +4903,7 @@ span.select2-container.select2-container--default.select2-container--open {
         content: "";
         width: 18px;
         height: 18px;
-        border: 2px solid #092c4c;
+        border: 2px solid #000000;
         border-radius: 20px
     }
 }
@@ -4984,8 +4984,8 @@ span.select2-container.select2-container--default.select2-container--open {
 
 .tabs-set .nav-tabs .nav-link.active {
     border: 0;
-    border-bottom: 2px solid #ff9f43;
-    background: #ff9f43;
+    border-bottom: 2px solid #ff8f9c;
+    background: #ff8f9c;
     color: #fff
 }
 
@@ -5015,7 +5015,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .tabs-sets .nav-tabs .nav-link.active {
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff
 }
 
@@ -5283,7 +5283,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .table tbody tr td a:hover {
-    color: #ff9f43
+    color: #ff8f9c
 }
 
 .table tbody tr td .product-imgs {
@@ -5291,7 +5291,7 @@ span.select2-container.select2-container--default.select2-container--open {
     height: 40px;
     background: #ffebd8;
     font-size: 14px;
-    color: #ff9f43 !important;
+    color: #ff8f9c !important;
     font-weight: 500;
     display: flex;
     align-items: center;
@@ -5436,8 +5436,8 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .modal .modal-footer .btn-print {
-    border: 1px solid #ff9f43;
-    color: #ff9f43
+    border: 1px solid #ff8f9c;
+    color: #ff8f9c
 }
 
 .modal .modal-footer .btn-print img {
@@ -5445,7 +5445,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .modal .modal-footer .btn-print:hover {
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff
 }
 
@@ -5583,7 +5583,7 @@ span.select2-container.select2-container--default.select2-container--open {
     height: 45px;
     min-width: 45px;
     width: 45px;
-    border: 1.5px solid #ff9f43
+    border: 1.5px solid #ff8f9c
 }
 
 .chat-cont-right .user_info {
@@ -5733,7 +5733,7 @@ span.select2-container.select2-container--default.select2-container--open {
     right: auto;
     left: 8px;
     transform: translate(-50%, -50%);
-    background: #ff9f43;
+    background: #ff8f9c;
     content: "";
     height: 4px;
     width: 4px
@@ -5760,8 +5760,8 @@ span.select2-container.select2-container--default.select2-container--open {
 
 .chat-cont-right ul.list-unstyled .media.received .media-body::before {
     border-bottom: 6px solid transparent;
-    border-right: 6px solid #ff9f43;
-    border-top: 6px solid #ff9f43;
+    border-right: 6px solid #ff8f9c;
+    border-top: 6px solid #ff8f9c;
     border-left: 6px solid transparent;
     content: "";
     height: 0;
@@ -5776,7 +5776,7 @@ span.select2-container.select2-container--default.select2-container--open {
     margin: 0;
     padding: 10px 15px;
     border-radius: 10px;
-    background-color: #ff9f43;
+    background-color: #ff8f9c;
     display: table;
     position: relative
 }
@@ -6018,18 +6018,18 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .page-header .btn-filter {
-    background: #ff9f43;
+    background: #ff8f9c;
     width: 34px;
     height: 34px;
     padding: 0
 }
 
 .page-header .btn-filter:hover {
-    background: linear-gradient(46.62deg, #FF9F43 0%, #423B93 93.64%)
+    background: linear-gradient(46.62deg, #ff8f9c 0%, #423B93 93.64%)
 }
 
 .page-header .btn-added {
-    background: #ff9f43;
+    background: #ff8f9c;
     padding: 7px 15px;
     color: #fff;
     font-weight: 700;
@@ -6047,7 +6047,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .page-header .btn-added:hover {
-    background: #1b2850
+    background: #ff8f9c
 }
 
 .table-top {
@@ -6065,7 +6065,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .search-set .btn-filter {
-    background: #ff9f43;
+    background: #ff8f9c;
     width: 34px;
     height: 34px;
     padding: 0;
@@ -6077,7 +6077,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .search-set .btn-filter:hover {
-    background: #1b2850
+    background: #ff8f9c
 }
 
 .search-set .btn-filter.setclose {
@@ -6159,7 +6159,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .checkboxs input:checked~.checkmarks {
-    background-color: #ff9f43
+    background-color: #ff8f9c
 }
 
 .checkboxs input:checked~.checkmarks:after {
@@ -6341,7 +6341,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .dash-count {
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff;
     min-height: 98px;
     width: 100%;
@@ -6591,14 +6591,14 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .login-wrapper .login-content .form-login input:focus {
-    border: 1px solid #ff9f43
+    border: 1px solid #ff8f9c
 }
 
 .login-wrapper .login-content .form-login .btn-login {
     width: 100%;
     font-weight: 700;
-    background: #ff9f43;
-    border-color: #ff9f43;
+    background: #ff8f9c;
+    border-color: #ff8f9c;
     padding: 12px;
     -webkit-transition: all .5s ease;
     -ms-transition: all .5s ease;
@@ -6609,7 +6609,7 @@ span.select2-container.select2-container--default.select2-container--open {
 
 .login-wrapper .login-content .form-login .btn-login:hover {
     box-shadow: 0 50px #fff inset !important;
-    color: #ff9f43
+    color: #ff8f9c
 }
 
 .login-wrapper .login-content .form-login .alreadyuser {
@@ -6623,7 +6623,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .login-wrapper .login-content .form-login .alreadyuser h4 a {
-    color: #ff9f43;
+    color: #ff8f9c;
     font-weight: 600
 }
 
@@ -6704,7 +6704,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .login-wrapper .login-content .toggle-password:hover {
-    color: #ff9f43
+    color: #ff8f9c
 }
 
 .login-wrapper .login-content .toggle-passwords {
@@ -6723,7 +6723,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .login-wrapper .login-content .toggle-passwords:hover {
-    color: #ff9f43
+    color: #ff8f9c
 }
 
 .login-wrapper .login-content .pass-group {
@@ -6772,7 +6772,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .login-wrapper .login-content .form-sociallink ul li a:hover {
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff
 }
 
@@ -6799,7 +6799,7 @@ span.select2-container.select2-container--default.select2-container--open {
     content: "";
     height: 2px;
     width: 100%;
-    background: #ff9f43;
+    background: #ff8f9c;
     transform: scale(0);
     -webkit-transform: scale(0);
     -ms-transform: scale(0);
@@ -6818,7 +6818,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .hover-a:hover {
-    color: #ff9f43 !important
+    color: #ff8f9c !important
 }
 
 .product-list ul {
@@ -7132,7 +7132,7 @@ span.select2-container.select2-container--default.select2-container--open {
 .add-icon a {
     width: 40px;
     height: 40px;
-    background: #ff9f43;
+    background: #ff8f9c;
     border-radius: 5px
 }
 
@@ -7147,7 +7147,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .add-icon a:hover {
-    background: #1b2850
+    background: #ff8f9c
 }
 
 .cal-icon {
@@ -7314,7 +7314,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .product-view:hover {
-    border: 1px solid #ff9f43
+    border: 1px solid #ff8f9c
 }
 
 .product-view .product-viewimg {
@@ -7576,7 +7576,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .productimg .productlinkset h5 {
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff;
     font-size: 12px;
     border-radius: 5px;
@@ -7665,7 +7665,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .tab-set ul li.active a {
-    background: #ff9f43
+    background: #ff8f9c
 }
 
 #delete .modal-body .btn {
@@ -7803,7 +7803,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .btn-pos ul li a.btn-recent {
-    background: #ff9f43
+    background: #ff8f9c
 }
 
 .calculator-set .calculatortotal {
@@ -7812,7 +7812,7 @@ span.select2-container.select2-container--default.select2-container--open {
 
 .calculator-set .calculatortotal h4 {
     width: 100%;
-    background: #ff9f43;
+    background: #ff8f9c;
     text-align: center;
     color: #fff;
     font-size: 36px;
@@ -7855,7 +7855,7 @@ span.select2-container.select2-container--default.select2-container--open {
 
 .hold-order h2 {
     padding: 0 0 30px;
-    color: #ff9f43;
+    color: #ff8f9c;
     font-size: 36px;
     font-weight: 700
 }
@@ -7875,7 +7875,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .btn-set h4 {
-    background: #ff9f43;
+    background: #ff8f9c;
     text-align: center;
     color: #fff;
     border-radius: 5px;
@@ -7902,10 +7902,10 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .header-menuset ul li a {
-    border: 1px solid #ff9f43;
+    border: 1px solid #ff8f9c;
     width: 95%;
     text-align: center;
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff;
     padding: 10px
 }
@@ -7922,10 +7922,10 @@ span.select2-container.select2-container--default.select2-container--open {
 .invoice-load-btn .btn {
     font-weight: 700;
     font-size: 16px;
-    color: #ff9f43;
+    color: #ff8f9c;
     min-width: 150px;
     background: #fff;
-    border: 2px solid #ff9f43;
+    border: 2px solid #ff8f9c;
     display: inline-flex;
     border-radius: 6px;
     padding: 12px 15px
@@ -7938,13 +7938,13 @@ span.select2-container.select2-container--default.select2-container--open {
     margin-right: 8px;
     vertical-align: 0;
     border: 3px solid #fc88037d;
-    border-right-color: #ff9f43;
+    border-right-color: #ff8f9c;
     animation: .75s linear infinite spinner-border;
     border-radius: 50%
 }
 
 .invoice-load-btn .btn:hover {
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff
 }
 
@@ -8010,7 +8010,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .btn-scanner-set:hover {
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff
 }
 
@@ -8170,7 +8170,7 @@ span.select2-container.select2-container--default.select2-container--open {
 
 .productset .productsetimg h6 {
     position: absolute;
-    background: #ff9f43;
+    background: #ff8f9c;
     color: #fff;
     font-size: 10px;
     padding: 5px;
@@ -8255,7 +8255,7 @@ span.select2-container.select2-container--default.select2-container--open {
 
 .profile-set .profile-head {
     height: 109px;
-    background: linear-gradient(90deg, #EA5455 0%, #FF9F43 100%);
+    background: linear-gradient(90deg, #EA5455 0%, #ff8f9c 100%);
     border-radius: 0 10px 0 0
 }
 
@@ -8303,7 +8303,7 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .profile-set .profile-top .profileupload a {
-    background: #ff9f43;
+    background: #ff8f9c;
     width: 34px;
     height: 34px;
     z-index: 1;

@@ -7,3 +7,20 @@
     font-weight: bolds;
     margin-bottom: 20px;
 }
+.Details{
+    min-width: 50vw;
+}
+
+.modal-content-costum{
+    display: inherit;
+    background-color: white;
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+.margin-bottom10{
+    margin-bottom: 10px;
+}
+
+

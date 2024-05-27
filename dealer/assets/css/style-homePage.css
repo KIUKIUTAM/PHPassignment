@@ -2043,3 +2043,6 @@ s
 
 }
 
+.showcase:hover{
+  border-color:var(--eerie-black);
+}

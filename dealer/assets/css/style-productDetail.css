@@ -1,4 +1,5 @@
 .product {
+  user-select: none; 
     display: grid;
     grid-row: 1;
     grid-column: 2;

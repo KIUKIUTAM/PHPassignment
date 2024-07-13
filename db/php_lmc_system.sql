@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS `dealer` (
   `password` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `dealerName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `contactName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `contactNumber` integer(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `faxNumber` mediumint COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `contactNumber` INT COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `faxNumber` INT COLLATE utf8mb4_general_ci DEFAULT NULL,
   `deliveryAddress` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`dealerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `salesManager` (
   `password` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `managerName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `contactName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `contactNumber` mediumint COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `contactNumber` INT COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`salesManagerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -82,7 +82,7 @@ TRUNCATE TABLE `salesManager`;
 --
 
 INSERT INTO `salesManager` (`managerEmail`,  `password`, `managerName`, `contactName`, `contactNumber`) VALUES
-('john.doe@lmc.com' ,'123', 'john.doe', 'john.doe', 'john.doe');
+('john.doe@lmc.com' ,'123', 'john.doe', 'john.doe', 12345678);
 
 -- --------------------------------------------------------
 

@@ -3,11 +3,11 @@ require_once ('../db/connet.php');
 ?>
 
 
-<?php
-echo '
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,11 +16,7 @@ echo '
     <!--
     - favicon
   -->
-    <link
-      rel="shortcut icon"
-      href="./assets/images/200005.jpg"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="" type="image/x-icon" />
     <!-- <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -38,15 +34,11 @@ echo '
   -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-';
-echo'
-  <body>
-    <div class="overlay" data-overlay></div>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
     <header>
     </header>
 
@@ -55,29 +47,30 @@ echo'
   -->
 
     <main>
-      <!--
+        <!--
       - PRODUCT
     -->
 
-      <div class="product-container">
-        <div class="container">
-          <!--
+        <div class="product-container">
+            <div class="container">
+                <!--
           - SIDEBAR
         -->
-          <nav class="sidebar">
-          </nav>
-          
-          <div class="product-box">
-            <!--
+                <nav class="sidebar">
+                </nav>
+
+                <div class="product-box">
+                    <!--
             - PRODUCT MINIMAL
           -->
 
-            <div class="product-minimal">
-              <div class="product-showcase">
-                <h2 class="title">New Arrivals</h2>
+                    <div class="product-minimal">
+                        <div class="product-showcase">
+                            <h2 class="title">New Arrivals</h2>
 
-                <div class="showcase-wrapper has-scrollbar">
-                  <div class="showcase-container" >';
+                            <div class="showcase-wrapper has-scrollbar">
+                                <div class="showcase-container">
+                                    <?php
                   $sql = "SELECT * FROM sparePart ORDER BY RAND() LIMIT 4";
                   $result = $conn->query($sql);
                   if($result->num_rows > 0){
@@ -216,11 +209,7 @@ echo'
       
     </footer>
     <script>
-    saveInitialArray();
-    function saveInitialArray() {
-            let MyCartItem = [];
-            sessionStorage.setItem("MyCart", JSON.stringify(MyCartItem));
-        }
+
     </script>
     <script>
     function ProductDetail(sparePartNum) {

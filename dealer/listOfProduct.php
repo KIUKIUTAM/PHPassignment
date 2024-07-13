@@ -1,9 +1,9 @@
 <?php
 require_once ('../db/connet.php');
-?>
-<?php
 $category = $_GET["Category"];
-echo '
+//echo $category;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +17,7 @@ echo '
   -->
     <link
       rel="shortcut icon"
-      href="./assets/images/200005.jpg"
+      href=""
       type="image/x-icon"
     />
 
@@ -35,40 +35,47 @@ echo '
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-';
+    <?php
+
     switch($category){
-      case "Sheet_Metal":echo'<style>
+      case "Sheet_Metal":
+        $categoryTitle = "Sheet Metal";
+        echo'<style>
       .Sheet-Metal{
         color:var(--salmon-pink) !important;
       }
       </style>';
       break;
-      case "Major_Assemblies":echo'<style>
+      case "Major_Assemblies":
+        $categoryTitle = "Major Assemblies";
+        echo'<style>
       .Major-Asssemblies{
         color:var(--salmon-pink) !important;
       }
       </style>';
       break;
-      case "Light_Components":echo'<style>
+      case "Light_Components":
+        $categoryTitle = "Light Components";
+        echo'<style>
       .Light-Components{
         color:var(--salmon-pink) !important;
       }
       </style>';
       break;
-      case "Accessories":echo'<style>
+      case "Accessories":
+        $categoryTitle = "Accessories";
+        echo'<style>
       .Accessories{
         color:var(--salmon-pink) !important;
       }
         </style>';
         break;
     }
-    echo'
-    
+?>
   </head>
 
   <body>
    
-    <div class="overlay" data-overlay></div>
 
     <!--
     - HEADER
@@ -99,10 +106,12 @@ echo '
 
             <div class="product-minimal">
               <div class="product-showcase">
-                <h2 class="title">Accessories</h2>
-
+                <?php
+                echo'<h2 class="title">'.$categoryTitle.'</h2>';
+                ?>
                 <div class="showcase-wrapper has-scrollbar">
-                  <div class="showcase-container">';
+                  <div class="showcase-container">
+                    <?php
                   $categoryID=0;
                   switch($category){
                     case "Sheet_Metal":$categoryID= 1;
@@ -169,7 +178,7 @@ echo '
                     }
                   }
                   
-                  echo'
+                  ?>
                   </div>
                 </div>
               </div>

@@ -118,7 +118,7 @@ echo '
                   </div>
                 </div>
                 <div class="col d-none d-xxl-block">
-                  <img src="./assets/images/100002.jpg" class="rounded mx-auto d-block" alt="...">
+                  <img src="" class="rounded mx-auto d-block" alt="...">
                 </div>
               </div>
             </div>

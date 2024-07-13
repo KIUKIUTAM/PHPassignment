@@ -1025,7 +1025,42 @@ footer {
 }
 
 
+.modal {
+  display: none; /* 隱藏彈出式視窗 */
+  position: fixed; /* 固定定位 */
+  z-index: 1; /* 置於頂層 */
+  left: 0;
+  top: 0;
+  width: 100%; /* 全寬 */
+  height: 100%; /* 全高 */
+  overflow: auto; /* 啟用滾動條 */
+  background-color: rgb(0,0,0); /* 背景色 */
+  background-color: rgba(0,0,0,0.4); /* 黑色背景，略帶透明 */
+}
 
+/* 彈出式視窗的內容框 */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% 從上方和自動水平居中 */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* 寬度 */
+}
+
+/* 關閉按鈕的樣式 */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
 
 
 /*-----------------------------------*\

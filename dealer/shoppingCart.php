@@ -1,5 +1,8 @@
 <?php
-echo '
+require_once ('../db/connet.php');
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,6 +60,34 @@ echo '
 
               <div class="showcase-wrapper has-scrollbar">
                 <div class="showcase-container">
+                  <?php
+                  session_start();
+
+                  // Check if the session variable exists
+                  if (isset($_SESSION['cart'])) {
+                      $retrievedArray = $_SESSION['cart'];
+                      $IDStr = "";
+                      // Display the retrieved 2D array
+                      foreach ($retrievedArray as $row) {
+                       // echo $row["spareID"];
+                        //echo $row["spareQty"];
+                        $IDStr .= $row["spareID"] . ",";
+                      }
+                      $sql = "SELECT * FROM sparePart Where sparePartNum IN (" . substr($IDStr, 0, -1) . ")";
+                      $result = $conn->query($sql);
+                      if($result->num_rows > 0){
+                      while($row = $result->fetch_assoc()) {
+                        echo $row["sparePartNum"];
+
+
+
+                      }}
+                  } else {
+                      echo "No 2D array found in session.";
+                  }
+
+
+                  ?>
                   <div class="showcase">
                     <input type="checkbox" class="checkbox">
                     <a href="#" class="showcase-img-box">
@@ -192,5 +223,3 @@ echo '
 </body>
 
 </html>
-';
-?>

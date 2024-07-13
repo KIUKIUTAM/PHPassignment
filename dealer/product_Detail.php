@@ -102,8 +102,8 @@ if ($result->num_rows > 0) {
   echo '
     <div class="product-content">
     <label id="bold" >Spare ID:  </label><span class="product-title" id="sparePartNum">' . $row["sparePartNum"] . '</span><br>
-    <label id="bold" >Spare Name:  </label><span class="product-title">' . $row["sparePartName"] . '</span><br>
-    <label id="bold" >Weight:  </label><span class="product-title">' . $row["weight"] . 'Kg </span><br>
+    <label id="bold" >Spare Name:  </label><span class="product-title" id="sparePartName">' . $row["sparePartName"] . '</span><br>
+    <label id="bold" >Weight:  </label><span class="product-title" id="weight">' . $row["weight"] . 'Kg </span><br>
     <label id="bold" >Stock Status:  </label><span class="product-title" id="stockItemStatus">' . $stockItemStatus . '</span><br>
     <br>
     <label id="bold" >Description:</label>
@@ -113,12 +113,12 @@ if ($result->num_rows > 0) {
   if ($row["discountPrice"] == null) {
     $price = $row["price"];
     echo '<div class="price-box">
-                  <p class="price">$' . $price . '</p>';
+                  <p class="price" id="price">$' . $price . '</p>';
   } else {
     $price = $row["discountPrice"];
     $delPrice = $row["price"];
-    echo '<div class="price-box">
-                  <p class="price">$' . $price . '</p>
+    echo '<div class="price-box" >
+                  <p class="price" id="price">$' . $price . '</p>
                   <del>$' . $delPrice . '</del>';
   }
   echo '</div>
@@ -171,11 +171,13 @@ function quantityIncrement() {
 function addToCart() {
     const url = "../dealer/addtocart.php";
     const spareID = document.getElementById("sparePartNum").innerText;
+    const 
     const spareQty = document.getElementById("quantityNumber").value;
 
     const data = {
         spareID: spareID,
         spareQty: parseInt(spareQty, 10)
+
     };
 
     fetch(url, {

@@ -13,7 +13,7 @@ if (isset($_POST['userEmailForLogin'])) {
     }
 
     // Use prepared statements to prevent SQL injection
-    $stmt = $conn->prepare("SELECT * FROM dealer WHERE dealerEmail = ?");
+    $stmt = $conn->prepare("SELECT dealerEmail,password,dealerName,deliveryAddress FROM dealer WHERE dealerEmail = ?");
     $stmt->bind_param("s", $dealerEmail);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -25,7 +25,7 @@ if (isset($_POST['userEmailForLogin'])) {
         // Verify the password
         if (password_verify($password, $row['password'])) {
             $_SESSION['dealer'] = $row['dealerEmail'];
-            if (empty($row['dealerName']) || empty($row['contactName']) || empty($row['deliveryAddress'])) {
+            if (empty($row['dealerName']) || empty($row['deliveryAddress'])) {
                 echo "<script>alert('Please complete your profile first'); location.replace('./information.php');</script>";
             } else {
                 echo "<script>location.replace('./homepage.php');</script>";

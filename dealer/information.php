@@ -89,8 +89,8 @@ if (isset($_SESSION['dealer'])) {
     -->
         <!-- informations-->
         <div class="productDetail-container">
-            <div class="container" style="margin-bottom: 30vh;">
-                <div class="d-flex justify-content-between">
+            <div class="container" style=" margin-bottom: 30vh; width: 2000px;">
+                <div class="d-lg-flex justify-content-between">
                     <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist"
                         aria-orientation="vertical">
                         <button class="nav-link active" id="v-pills-information-tab" data-bs-toggle="pill"
@@ -253,7 +253,7 @@ if (isset($_SESSION['dealer'])) {
                                     <tr>
                                         <th scope="col">Order ID</th>
                                         <th scope="col">Date & Time</th>
-                                        <th scope="col">Delivery Address</th>
+                                        <th scope="col">Order Status</th>
                                         <th scope="col">Delivery Date</th>
                                         <th scope="col">Details</th>
                                         <th scope="col">Cancel Order</th>
@@ -262,7 +262,7 @@ if (isset($_SESSION['dealer'])) {
                                 <tbody>
 
                                     <?php
-                                      $stmt = $conn->prepare("SELECT orderID, orderDateTime, deliveryAddress, deliveryDate FROM `orders` WHERE dealerID = ?");
+                                      $stmt = $conn->prepare("SELECT * FROM `orders` WHERE dealerID = ?");
                                       $stmt->bind_param("s", $dealerID);
                                       $stmt->execute();
                                       $result = $stmt->get_result();
@@ -270,14 +270,38 @@ if (isset($_SESSION['dealer'])) {
                                       if ($result->num_rows > 0) {
                                           while ($row = $result->fetch_assoc()) {
                                               $deliveryDate = $row['deliveryDate'] == null ? "Not yet delivered" : $row['deliveryDate'];
+                                              $OrderStatus = "";
+                                                switch ($row['orderStatus']) {
+                                                    case 1:
+                                                        $OrderStatus = "Wait for approval";
+                                                        break;
+                                                    case 2:
+                                                        $OrderStatus = "Wait for delivery";
+                                                        break;
+                                                    case 3:
+                                                        $OrderStatus = "Delivered";
+                                                        break;
+                                                    case 4:
+                                                        $OrderStatus = "Cancelled";
+                                                        break;
+                                                }
                                      ?><tr>
                                        <th scope="row"><?php echo sprintf('%06d', $row['orderID']);?></th>
                                        <td><?php echo $row['orderDateTime'] ?></td>
-                                       <td><?php echo $row['deliveryAddress'] ?></td>
+                                       <td><?php echo $OrderStatus ?></td>
                                        <td><?php echo $deliveryDate ?></td>
-                                       <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
-                                           data-bs-target="#Modal-Detail" onclick="location.href = './information?spareID=<?php echo $row['orderID']?>'">Details</button></td>
-                                       <td><button type="button" class="btn btn-outline-danger" onclick="cancelOrder(this)">Cancel</button></td>
+                                       <td>
+                                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                           data-bs-target="#Modal-Detail" onclick="uploadOrderDetail(<?php echo $row['orderID'];?>,'<?php echo $row['orderDateTime'] ?>','<?php echo $row['deliveryAddress'] ?>','<?php echo $deliveryDate ?>','<?php echo $row['orderPrice'] ?>')">Details</button></td>
+                                            <?php if ($row['requestCancelStatus']) { ?>
+                                                <td>
+                                                    <button type="button" class="btn btn-outline-danger" disabled>Wait For approval</button>
+                                                </td>
+                                            <?php } else { ?>
+                                                <td>
+                                                    <button type="button" class="btn btn-outline-danger" onclick="cancelOrder('<?php echo $row['orderID']; ?>')">Cancel Order</button>
+                                                </td>
+                                            <?php } ?>
                                      </tr>
                                       <?php
                                           }
@@ -285,6 +309,7 @@ if (isset($_SESSION['dealer'])) {
                                      ?>
                                 </tbody>
                             </table>
+
                             <div class="modal fade" id="Modal-Detail" tabindex="-1" role=""
                                 aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
@@ -342,49 +367,23 @@ if (isset($_SESSION['dealer'])) {
                                                         </tr>
                                                     </thead>
                                                     <tbody id="OrderItemList">
-                                                        <tr>
-                                                            <th scope="row">1</th>
-                                                            <td>100003</td>
-                                                            <td>carcar</td>
-                                                            <td>3</td>
-                                                            <td>$100</td>
-                                                        </tr>
                                                     </tbody>
                                                 </table>
-                                                <h5>Total Order Amount:$<span id="Detail-totalPrice">0</span></h5>
+                                                <h5>Total Order Amount: $<span id="Detail-totalPrice">0</span></h5>
 
                                             </form>
 
 
                                         </div>
-                                        <div class="modal-footer">
+                                        <div class="modal-footer no-print">
                                             <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-success">Print the Order</button>
+                                                data-bs-dismiss="modal" >Close</button>
+                                            <button type="button" class="btn btn-success"  onclick="printTheOrderDetail()">Print the Order</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="modal fade" id="Modal-Cancel" tabindex="-1" aria-labelledby="ModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="ModalLabel">Cancel Order</h1>
-
-                                        </div>
-                                        <div class="modal-body">
-                                            Do you confirm your request cancel this Order?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-danger">Request Cancel</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                         </div>
 
@@ -403,8 +402,84 @@ if (isset($_SESSION['dealer'])) {
     <footer>
     </footer>
     <script>
-    function updateOrderDetail(orderID){
+    function uploadOrderDetail(orderID,orderDateTime,deliveryAddress,deliveryDate,orderPrice) {
+        document.getElementById("OrderDetail-OrderID").placeholder  = orderID.toString().padStart(6, '0');
+        document.getElementById("OrderDetail-orderDateTime").placeholder  = orderDateTime;
+        document.getElementById("OrderDetail-deliveryAddress").placeholder  = deliveryAddress;
+        document.getElementById("OrderDetail-deliveryDate").placeholder  = deliveryDate;
+        document.getElementById("Detail-totalPrice").innerText = orderPrice;
+        const url = "./orderDetail.php";
+        const data = {
+            orderID: orderID
+        };
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => response.json())
+        .then(responseData => {
+            if (responseData.status === 'success') {
+                const orderLine = responseData.orderLine;
 
+                const orderItemList = document.getElementById("OrderItemList");
+                orderItemList.innerHTML = "";
+
+                orderLine.forEach((item, index) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <th scope="row">${index + 1}</th>
+                        <td>${item.sparePartNum}</td>
+                        <td>${item.sparePartName}</td>
+                        <td>${item.orderQty}</td>
+                        <td>$${item.price}</td>
+                    `;
+                    orderItemList.appendChild(tr);
+                });
+            } else {
+                console.error('Error:', responseData.message);
+            }
+        }).catch(error => {
+            console.error('Fetch error:', error);
+        });
+    }
+
+
+    function printTheOrderDetail(){
+        var printContents = document.getElementById('Modal-Detail').innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        window.location.reload();
+        
+    }
+    function cancelOrder(orderID){
+        if(!confirm("Are you sure you want to cancel this order?")){
+            return;
+        };
+        const url = "./cancelOrder.php";
+        const data = {
+            orderID: orderID
+        };
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then(response => response.json())
+        .then(responseData => {
+            if (responseData.status === 'success') {
+                alert("Order has been cancelled");
+                window.location.reload();
+            } else {
+                console.error('Error:', responseData.message);
+            }
+        }).catch(error => {
+            console.error('Fetch error:', error);
+        });
     }
     </script>
     <!--

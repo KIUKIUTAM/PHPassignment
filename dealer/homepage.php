@@ -51,29 +51,17 @@ require_once ('../db/connet.php');
       - PRODUCT
     -->
         <div class="product-container">
-        <div class="container">
-        
-
-          </div>
-            <div class="container">
-                <!--
-          - SIDEBAR
-        -->
-                <nav class="sidebar">
-                </nav>
-
+              <div class="container">
+<!--- SIDEBAR-->
+                <nav class="sidebar"></nav>
                 <div class="product-box">
-                    <!--
-            - PRODUCT MINIMAL
-          -->
-
-                    <div class="product-minimal">
-                        <div class="product-showcase">
-                            <h2 class="title">New Arrivals</h2>
-
-                            <div class="showcase-wrapper has-scrollbar">
-                                <div class="showcase-container">
-                                    <?php
+<!--- PRODUCT MINIMAL-->
+                  <div class="product-minimal">
+                  <div class="product-showcase">
+                  <h2 class="title">New Arrivals</h2>
+                  <div class="showcase-wrapper has-scrollbar">
+                  <div class="showcase-container">
+                  <?php
                   $sql = "SELECT * FROM sparePart ORDER BY RAND() LIMIT 4";
                   $result = $conn->query($sql);
                   if($result->num_rows > 0){

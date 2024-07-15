@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2024 年 07 月 07 日 07:12
+-- 產生時間： 2024 年 07 月 15 日 16:45
 -- 伺服器版本： 8.0.37
 -- PHP 版本： 8.2.18
 
@@ -32,15 +32,14 @@ USE `php_lmc_system`;
 DROP TABLE IF EXISTS `dealer`;
 CREATE TABLE IF NOT EXISTS `dealer` (
   `dealerID` mediumint NOT NULL AUTO_INCREMENT,
-  `dealerEmail` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
-  `dealerName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `contactName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `contactNumber` INT COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `faxNumber` INT COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `deliveryAddress` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `dealerEmail` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `dealerName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `contactNumber` bigint DEFAULT NULL,
+  `faxNumber` bigint DEFAULT NULL,
+  `deliveryAddress` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`dealerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- 資料表新增資料前，先清除舊資料 `dealer`
@@ -51,123 +50,13 @@ TRUNCATE TABLE `dealer`;
 -- 傾印資料表的資料 `dealer`
 --
 
-INSERT INTO `dealer` ( `dealerEmail`,`password`, `dealerName`, `contactName`, `contactNumber`, `faxNumber`, `deliveryAddress`) VALUES
-('abcmotors@gmail.com', 'A1234567', 'ABC_Motors','Ken Lau',  '22345678',  NULL, '123 Main Street, Hong Kong');
-
-
--- --------------------------------------------------------
-
---
--- 資料表結構 `salesManager`
---
-
-DROP TABLE IF EXISTS `salesManager`;
-CREATE TABLE IF NOT EXISTS `salesManager` (
-  `salesManagerID` mediumint NOT NULL AUTO_INCREMENT,
-  `managerEmail` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `password` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `managerName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `contactName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `contactNumber` INT COLLATE utf8mb4_general_ci DEFAULT NULL,
-  PRIMARY KEY (`salesManagerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 資料表新增資料前，先清除舊資料 `salesManager`
---
-
-TRUNCATE TABLE `salesManager`;
---
--- 傾印資料表的資料 `salesManager`
---
-
-INSERT INTO `salesManager` (`managerEmail`,  `password`, `managerName`, `contactName`, `contactNumber`) VALUES
-('john.doe@lmc.com' ,'123', 'john.doe', 'john.doe', 12345678);
+INSERT INTO `dealer` (`dealerID`, `dealerEmail`, `password`, `dealerName`, `contactNumber`, `faxNumber`, `deliveryAddress`) VALUES
+(1, 'abcmotors@gmail.com', 'Aa1234567', 'ABC_Motors', 22345678, NULL, '123 Main Street, Hong Kong'),
+(4, '230501558V2@vtc.com', '$2y$10$wIeevM3gG3lZ6hVYeJz/YexBl9fQ4.sttn9y/O0IHSMLh6F9vu2Jm', NULL, NULL, NULL, NULL),
+(6, '230501558@vtc.com', '$2y$10$4awZTibwTPs1VUHtKQcS3.s84AlQI6BxF0FTm0b8Pc.DynBcxI9sq', 'q', 85212345678, 88612345678, 'HOWARD FACTORY');
 
 -- --------------------------------------------------------
 
---
--- 資料表結構 `orders`
---
-
-DROP TABLE IF EXISTS `orders`;
-CREATE TABLE IF NOT EXISTS `orders` (
-  `orderID` mediumint NOT NULL AUTO_INCREMENT,
-  `dealerID` mediumint NOT NULL,
-  `orderStatus` tinyint NOT NULL DEFAULT '0',
-  `deliveryAddress` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `orderDateTime` timestamp NOT NULL,
-  `deliveryDate` date DEFAULT NULL,
-  `orderPrice` float DEFAULT '0',
-  PRIMARY KEY (`orderID`),
-  KEY `dealer` (`dealerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 資料表新增資料前，先清除舊資料 `orders`
---
-
-TRUNCATE TABLE `orders`;
---
--- 傾印資料表的資料 `orders`
---
-
-INSERT INTO `orders` ( `dealerID`, `orderStatus`, `deliveryAddress`, `orderDateTime`, `deliveryDate`,`orderPrice`) VALUES
-( 1, 1, '123 Main Street, Hong Kong','20240708000000','20240709', 0);
-
-
-
-
--- --------------------------------------------------------
-
---
--- 資料表結構 `sparePart`
---
-
-DROP TABLE IF EXISTS `sparePart`;
-CREATE TABLE IF NOT EXISTS `sparePart` (
-  `sparePartNum` mediumint NOT NULL,
-  `sparePartName` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  `sparePartDescription` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `stockItemQty` smallint NOT NULL,
-  `weight` float NOT NULL,
-  `price` float NOT NULL,
-  `discountPrice` float NULL DEFAULT NULL,
-  `sparePartImage` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  PRIMARY KEY (`sparePartNum`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 資料表新增資料前，先清除舊資料 `sparePart`
---
-
-TRUNCATE TABLE `sparePart`;
---
--- 傾印資料表的資料 `sparePart`
---
-
-INSERT INTO `sparePart` (`sparePartNum`, `sparePartName`,`sparePartDescription`, `stockItemQty`, `weight`, `price`,`discountPrice`, `sparePartImage`) VALUES
-(100002, 'Galvanized Steel Sheet','A durable galvanized steel sheet suitable for various industrial applications.', 1000, 10, 25,12, '../asserts/img/100002.jpg'),
-(100003, 'Aluminum Alloy Sheet','High-strength aluminum alloy sheet with excellent corrosion resistance.', 1000, 11, 32.49,30, '../asserts/img/100003.jpg'),
-(100004, 'Cold Rolled Steel Sheet','Precision cold rolled steel sheet, ideal for precision components.', 1000, 13, 45.99,44, '../asserts/img/100004.jpg'),
-(100005, 'Copper Sheet','Premium-grade copper sheet with high thermal and electrical conductivity.', 1000, 13, 38.99,NULL, '../asserts/img/100005.jpg'),
-(200001, 'Gearbox Assembly','Robust gearbox assembly designed for high-torque applications.', 1000, 12.5, 325.99,200.4, '../asserts/img/200001.jpg'),
-(200002, 'Hydraulic Pump Assembly','Efficient hydraulic pump assembly for fluid power systems.', 1000, 8.2, 415.49,399.2, '../asserts/img/200002.jpg'),
-(200003, 'Engine Block Assembly 1','High-quality engine block assembly, providing exceptional performance.', 1000, 14, 675.99,499.00, '../asserts/img/200003.jpg'),
-(200004, 'Engine Block Assembly 2','Durable engine block assembly engineered for longevity.', 1000, 15, 300,NULL, '../asserts/img/200004.jpg'),
-(200005, 'Engine Block Assembly 3','Precision-engineered engine block assembly for high-performance vehicles.', 1000, 16, 400,NULL, '../asserts/img/200005.jpg'),
-(300001, 'Aluminum Castings','Versatile aluminum castings known for their lightweight and strength.', 1000, 55, 12.99,NULL, '../asserts/img/300001.jpg'),
-(300002, 'Plastic Injection Moldings','High-precision plastic injection moldings for complex shapes and designs.', 1000, 44, 8.49,NULL, '../asserts/img/300002.jpg'),
-(300003, 'Machined Brass Components 1','Custom machined brass components for specialized industrial use.', 1000, 33, 15.99,15.98, '../asserts/img/300003.jpg'),
-(300004, 'Machined Brass Components 2','Precision-crafted brass components designed for durability and consistency.', 1000, 22, 229,228, '../asserts/img/300004.jpg'),
-(300005, 'Machined Brass Components 3','High-grade machined brass components for demanding applications.', 1000, 11, 1249,NULL, '../asserts/img/300005.jpg'),
-(400001, 'Rubber Gaskets','Sealing rubber gaskets designed for leak-proof connections.', 1000, 55, 33123,NULL, '../asserts/img/400001.jpg'),
-(400002, 'Plastic Hoses','Flexible plastic hoses resistant to wear and varying temperatures.', 1000, 44, 4123,NULL, '../asserts/img/400002.jpg'),
-(400003, 'Adhesive Tapes 1','Strong adhesive tapes for secure bonding in various applications.', 1000, 33, 644,NULL, '../asserts/img/400003.jpg'),
-(400004, 'Adhesive Tapes 2','Durable adhesive tapes designed for heavy-duty adhesion.', 1000, 32, 333,NULL, '../asserts/img/400004.jpg'),
-(400005, 'Adhesive Tapes 3','Multipurpose adhesive tapes suitable for a range of industrial uses.', 1000, 31, 22,NULL, '../asserts/img/400005.jpg');
-
--- --------------------------------------------------------
 --
 -- 資料表結構 `orderline`
 --
@@ -181,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `orderline` (
   PRIMARY KEY (`orderLineID`),
   KEY `orders` (`orderID`),
   KEY `sparePart` (`sparePartNum`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- 資料表新增資料前，先清除舊資料 `orderline`
@@ -194,9 +83,131 @@ TRUNCATE TABLE `orderline`;
 
 INSERT INTO `orderline` (`orderLineID`, `orderID`, `sparePartNum`, `orderQty`) VALUES
 (1, 1, 100002, 5),
-(2, 1, 100003, 3);
+(2, 1, 100003, 3),
+(7, 6, 200001, 81),
+(8, 7, 300002, 5),
+(9, 8, 200001, 7),
+(10, 8, 300005, 7),
+(11, 9, 100004, 8),
+(12, 10, 400003, 4);
 
 -- --------------------------------------------------------
+
+--
+-- 資料表結構 `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE IF NOT EXISTS `orders` (
+  `orderID` mediumint NOT NULL AUTO_INCREMENT,
+  `dealerID` mediumint NOT NULL,
+  `orderStatus` tinyint NOT NULL DEFAULT '0',
+  `deliveryAddress` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `orderDateTime` timestamp NOT NULL,
+  `deliveryDate` date DEFAULT NULL,
+  `orderPrice` float DEFAULT '0',
+  `requestCancelStatus` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`orderID`),
+  KEY `dealer` (`dealerID`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 資料表新增資料前，先清除舊資料 `orders`
+--
+
+TRUNCATE TABLE `orders`;
+--
+-- 傾印資料表的資料 `orders`
+--
+
+INSERT INTO `orders` (`orderID`, `dealerID`, `orderStatus`, `deliveryAddress`, `orderDateTime`, `deliveryDate`, `orderPrice`) VALUES
+(1, 1, 1, '123 Main Street, Hong Kong', '2024-07-08 00:00:00', '2024-07-09', 0),
+(6, 6, 1, 'HOWARD FACTORY BUILDING HOWARD FACTORY BUILDING, 66 TSUN YIP STREET KOWLOON KWUN TONG ', '2024-07-15 09:01:25', NULL, 26405.2),
+(7, 6, 1, 'HOWARD FACTORY BUILDING HOWARD FACTORY BUILDING, 66 TSUN YIP STREET KOWLOON KWUN TONG ', '2024-07-15 09:09:18', NULL, 42.45),
+(8, 6, 1, 'HOWARD FACTORY BUILDING HOWARD FACTORY BUILDING, 66 TSUN YIP STREET KOWLOON KWUN TONG ', '2024-07-15 09:10:23', NULL, 11024.9),
+(9, 6, 1, 'HOWARD FACTORY BUILDING HOWARD FACTORY BUILDING, 66 TSUN YIP STREET KOWLOON KWUN TONG ', '2024-07-15 09:17:03', NULL, 367.92),
+(10, 6, 1, 'HOWARD FACTORY', '2024-07-15 11:31:09', NULL, 2576);
+
+-- --------------------------------------------------------
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `salesmanager`
+--
+
+DROP TABLE IF EXISTS `salesmanager`;
+CREATE TABLE IF NOT EXISTS `salesmanager` (
+  `salesManagerID` mediumint NOT NULL AUTO_INCREMENT,
+  `managerEmail` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `managerName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `contactName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `contactNumber` int DEFAULT NULL,
+  PRIMARY KEY (`salesManagerID`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 資料表新增資料前，先清除舊資料 `salesmanager`
+--
+
+TRUNCATE TABLE `salesmanager`;
+--
+-- 傾印資料表的資料 `salesmanager`
+--
+
+INSERT INTO `salesmanager` (`salesManagerID`, `managerEmail`, `password`, `managerName`, `contactName`, `contactNumber`) VALUES
+(1, 'john.doe@lmc.com', '123', 'john.doe', 'john.doe', 12345678);
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `sparepart`
+--
+
+DROP TABLE IF EXISTS `sparepart`;
+CREATE TABLE IF NOT EXISTS `sparepart` (
+  `sparePartNum` mediumint NOT NULL,
+  `sparePartName` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `sparePartDescription` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `stockItemQty` smallint NOT NULL,
+  `weight` float NOT NULL,
+  `price` float NOT NULL,
+  `discountPrice` float DEFAULT NULL,
+  `sparePartImage` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`sparePartNum`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 資料表新增資料前，先清除舊資料 `sparepart`
+--
+
+TRUNCATE TABLE `sparepart`;
+--
+-- 傾印資料表的資料 `sparepart`
+--
+
+INSERT INTO `sparepart` (`sparePartNum`, `sparePartName`, `sparePartDescription`, `stockItemQty`, `weight`, `price`, `discountPrice`, `sparePartImage`) VALUES
+(100002, 'Galvanized Steel Sheet', 'A durable galvanized steel sheet suitable for various industrial applications.', 10, 10, 25, 12, '../asserts/img/100002.jpg'),
+(100003, 'Aluminum Alloy Sheet', 'High-strength aluminum alloy sheet with excellent corrosion resistance.', 1000, 11, 32.49, 30, '../asserts/img/100003.jpg'),
+(100004, 'Cold Rolled Steel Sheet', 'Precision cold rolled steel sheet, ideal for precision components.', 1000, 13, 45.99, 44, '../asserts/img/100004.jpg'),
+(100005, 'Copper Sheet', 'Premium-grade copper sheet with high thermal and electrical conductivity.', 1000, 13, 38.99, NULL, '../asserts/img/100005.jpg'),
+(200001, 'Gearbox Assembly', 'Robust gearbox assembly designed for high-torque applications.', 1000, 12.5, 325.99, 200.4, '../asserts/img/200001.jpg'),
+(200002, 'Hydraulic Pump Assembly', 'Efficient hydraulic pump assembly for fluid power systems.', 1000, 8.2, 415.49, 399.2, '../asserts/img/200002.jpg'),
+(200003, 'Engine Block Assembly 1', 'High-quality engine block assembly, providing exceptional performance.', 1000, 14, 675.99, 499, '../asserts/img/200003.jpg'),
+(200004, 'Engine Block Assembly 2', 'Durable engine block assembly engineered for longevity.', 1000, 15, 300, NULL, '../asserts/img/200004.jpg'),
+(200005, 'Engine Block Assembly 3', 'Precision-engineered engine block assembly for high-performance vehicles.', 1000, 16, 400, NULL, '../asserts/img/200005.jpg'),
+(300001, 'Aluminum Castings', 'Versatile aluminum castings known for their lightweight and strength.', 1000, 55, 12.99, NULL, '../asserts/img/300001.jpg'),
+(300002, 'Plastic Injection Moldings', 'High-precision plastic injection moldings for complex shapes and designs.', 1000, 44, 8.49, NULL, '../asserts/img/300002.jpg'),
+(300003, 'Machined Brass Components 1', 'Custom machined brass components for specialized industrial use.', 1000, 33, 15.99, 15.98, '../asserts/img/300003.jpg'),
+(300004, 'Machined Brass Components 2', 'Precision-crafted brass components designed for durability and consistency.', 1000, 22, 229, 228, '../asserts/img/300004.jpg'),
+(300005, 'Machined Brass Components 3', 'High-grade machined brass components for demanding applications.', 1000, 11, 1249, NULL, '../asserts/img/300005.jpg'),
+(400001, 'Rubber Gaskets', 'Sealing rubber gaskets designed for leak-proof connections.', 1000, 55, 33123, NULL, '../asserts/img/400001.jpg'),
+(400002, 'Plastic Hoses', 'Flexible plastic hoses resistant to wear and varying temperatures.', 1000, 44, 4123, NULL, '../asserts/img/400002.jpg'),
+(400003, 'Adhesive Tapes 1', 'Strong adhesive tapes for secure bonding in various applications.', 1000, 33, 644, NULL, '../asserts/img/400003.jpg'),
+(400004, 'Adhesive Tapes 2', 'Durable adhesive tapes designed for heavy-duty adhesion.', 1000, 32, 333, NULL, '../asserts/img/400004.jpg'),
+(400005, 'Adhesive Tapes 3', 'Multipurpose adhesive tapes suitable for a range of industrial uses.', 1000, 31, 22, NULL, '../asserts/img/400005.jpg');
+
 --
 -- 已傾印資料表的限制式
 --
@@ -206,7 +217,7 @@ INSERT INTO `orderline` (`orderLineID`, `orderID`, `sparePartNum`, `orderQty`) V
 --
 ALTER TABLE `orderline`
   ADD CONSTRAINT `orderline_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `orders` (`orderID`),
-  ADD CONSTRAINT `orderline_ibfk_2` FOREIGN KEY (`sparePartNum`) REFERENCES `sparePart` (`sparePartNum`);
+  ADD CONSTRAINT `orderline_ibfk_2` FOREIGN KEY (`sparePartNum`) REFERENCES `sparepart` (`sparePartNum`);
 
 --
 -- 資料表的限制式 `orders`

@@ -55,26 +55,26 @@ require_once('../db/connet.php');
         <div class="productDetail-container">
             <?php
       $sparePartNum = $_GET["sparePartNum"];
-$sql = "SELECT * FROM sparePart WHERE sparePartNum = " . $sparePartNum;
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-  $row = $result->fetch_assoc();
-  $categoryName = "";
-  switch (substr($row["sparePartNum"], 0, 1)) {
-    case "1":
-      $categoryName = "Sheet Metal";
-      break;
-    case "2":
-      $categoryName = "Major Assemblies";
-      break;
-    case "3":
-      $categoryName = "Light Components";
-      break;
-    case "4":
-      $categoryName = "Accessories";
-      break;
-  };
-  echo '<div class="container">
+      $sql = "SELECT * FROM sparePart WHERE sparePartNum = " . $sparePartNum;
+      $result = $conn->query($sql);
+      if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $categoryName = "";
+        switch (substr($row["sparePartNum"], 0, 1)) {
+          case "1":
+            $categoryName = "Sheet Metal";
+            break;
+          case "2":
+            $categoryName = "Major Assemblies";
+            break;
+          case "3":
+            $categoryName = "Light Components";
+            break;
+          case "4":
+            $categoryName = "Accessories";
+            break;
+        };
+        echo '<div class="container">
           <div class="product-box">
             <div class="product">
               <a href="#" class="product-img-box">

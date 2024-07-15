@@ -89,3 +89,18 @@
     text-align: center;
   }
 
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+    }
+    .noBreak {
+      break-inside: avoid;
+    }
+    .no-print, .no-print * {
+      display: none !important;
+    }
+    @page {
+      size: A2; 
+      margin: 1in; 
+    }
+  }

@@ -5,21 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="shortcut icon" href="./asserts/img/catHead.jpg" type="image/x-icon" />
     <link rel="stylesheet" href="./dealer/assets/css/login.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
 
 <body>
-    <div class="wrapper-login active" >
-        <from name="login" class="login-from">
+    <div class="wrapper-login active">
+        <form name="login" class="login-from" method="POST" action="./dealer/login.php">
             <h1>Dealer Login</h1>
             <div class="input-box">
-                <input class="inputUser" id="inputUser" type="text" placeholder="Username" required>
+                <input class="inputUser" id="inputUser" name="userEmail" type="text" placeholder="Username" required>
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
                 <input class="inputPass" id="inputPass" type="password" placeholder="Password"
+                    name="password"
                     pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})"
                     title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                     required>
@@ -27,9 +29,9 @@
             </div>
             <div class="remember-forgot">
                 <label><input type="checkbox"> Remember me</label>
-                <a class="forgot" href="https://www.mannings.com.hk/health/cardiovascular-health/fish-oil/c/feomega-3?lang=zh_TW" target="_blank">Forgot password?</a>
+                <a class="forgot" href="" target="_blank" onclick="location.replace('./dealer/homepage.php')">Forgot password?</a>
             </div>
-            <input type="submit" class="login-btn" id="login-btn" value="Login" >
+            <input type="submit"  name="submit" class="login-btn" id="login-btn" value="submit">
             <div class="register-link">
                 <p>
                     Don't have an account? <a id="loginSwap-btn">Register</a>
@@ -37,25 +39,35 @@
             </div>
             <div class="SuperUser-link">
                 <p>
-                    Switch to Manager Login? <a id="loginSwap-btn" href="./ManagerLogin.html">Clink Here</a>
+                    Switch to Manager Login? <a id="loginSwap-btn" href="./ManagerLogin.php">Click Here</a>
                 </p>
             </div>
-
-        </from>
+        </form>
     </div>
     <div class="wrapper-register">
 
-        <from action="" onkeypress="onEnter(event)">
+        <form action="./dealer/register.php" method="post">
             <h1>Register Now</h1>
             <div class="close-btn">
                 <i class='bx bx-x' id="close-btn"></i>
             </div>
             <div class="input-box">
-                <input class="reg-username" etype="text" placeholder="Username" required>
+                <input class="reg-username" 
+                name="userEmail"
+                etype="text" 
+                placeholder="Your email" 
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                title="Please enter a valid email address."
+                required>
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
-                <input class="register-pass" type="password" placeholder="Password" required>
+                <input class="register-pass" type="password" 
+                name="password"
+                placeholder="Password" 
+                pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})" 
+                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                required>
                 <i class='bx bxs-lock-alt'></i>
             </div>
             <div class="input-box">
@@ -64,10 +76,10 @@
             </div>
 
 
-            <input  type="submit" class="register-submit-btn" value="Register" onclick="registerAC()">
+            <input  type="submit" class="register-submit-btn" value="Register">
 
 
-        </from>
+        </form>
     </div>
 </body>
 <script src="./dealer/assets/js/login.js"></script>

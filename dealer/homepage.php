@@ -16,7 +16,7 @@ require_once ('../db/connet.php');
     <!--
     - favicon
   -->
-    <link rel="shortcut icon" href="" type="image/x-icon" />
+    <link rel="shortcut icon" href="../asserts/img/catHead.jpg" type="image/x-icon" />
     <!-- <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -24,7 +24,7 @@ require_once ('../db/connet.php');
       crossorigin="anonymous"
     /> -->
     <link rel="stylesheet" href="./assets/css/style-homePage.css" />
-
+    
     <!--
     - custom css link
   -->
@@ -45,13 +45,16 @@ require_once ('../db/connet.php');
     <!--
     - MAIN
   -->
-
+  
     <main>
         <!--
       - PRODUCT
     -->
-
         <div class="product-container">
+        <div class="container">
+        
+
+          </div>
             <div class="container">
                 <!--
           - SIDEBAR
@@ -207,20 +210,19 @@ require_once ('../db/connet.php');
 
     <footer>
       
-    </footer>
-    <script>
-
-    </script>
+    </footer>';
+    
+?>
     <script>
     function ProductDetail(sparePartNum) {
     window.location.href = ("./product_Detail?sparePartNum="+sparePartNum);
     } 
-  </script>
+    </script>
     <!--
     - custom js link
   -->
     <script src="./assets/js/script.js"></script>
-
+    
     <!--
     - ionicon link
   -->

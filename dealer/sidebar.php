@@ -21,13 +21,6 @@ echo '
               </a>
             </div>
 
-            <div>
-              <ion-icon name="add-outline" class="add-icon"></ion-icon>
-              <ion-icon
-                name="remove-outline"
-                class="remove-icon"
-              ></ion-icon>
-            </div>
           </button>
         </li>
         <li class="sidebar-menu-category">
@@ -38,13 +31,6 @@ echo '
               >
             </div>
 
-            <div>
-              <ion-icon name="add-outline" class="add-icon"></ion-icon>
-              <ion-icon
-                name="remove-outline"
-                class="remove-icon"
-              ></ion-icon>
-            </div>
           </button>
         </li>
         <li class="sidebar-menu-category">
@@ -55,13 +41,6 @@ echo '
               >
             </div>
 
-            <div>
-              <ion-icon name="add-outline" class="add-icon"></ion-icon>
-              <ion-icon
-                name="remove-outline"
-                class="remove-icon"
-              ></ion-icon>
-            </div>
           </button>
         </li>
         <li class="sidebar-menu-category">
@@ -72,13 +51,6 @@ echo '
               >
             </div>
 
-            <div>
-              <ion-icon name="add-outline" class="add-icon"></ion-icon>
-              <ion-icon
-                name="remove-outline"
-                class="remove-icon"
-              ></ion-icon>
-            </div>
           </button>
         </li>
       </ul>

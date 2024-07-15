@@ -7,37 +7,37 @@
 //(?=.*[A-Z]) ensures that at least one uppercase letter is present.
 //.{8,} ensures that the password is at least 8 characters long.
 //if not match disable the login button
-document.querySelector(".inputPass").addEventListener('input', validate);
-document.querySelector(".login-btn").disabled = true;
-var RGEX = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})/;
-function validate() {
-    var inputPass = document.getElementById("inputPass").value;
+// document.querySelector(".inputPass").addEventListener('input', validate);
+// document.querySelector(".login-btn").disabled = true;
 
-    if (!inputPass.match(RGEX)) {
-        document.querySelector(".login-btn").disabled = true;
+// function validate() {
+//     var inputPass = document.getElementById("inputPass").value;
 
-    } else {
-        document.querySelector(".login-btn").disabled = false;
-        document.querySelector(".inputPass").style.border = null;
-    }
-}
+//     if (!inputPass.match(RGEX)) {
+//         document.querySelector(".login-btn").disabled = true;
+
+//     } else {
+//         document.querySelector(".login-btn").disabled = false;
+//         document.querySelector(".inputPass").style.border = null;
+//     }
+// }
 
 
 
 //login function check the user and password matching 
-document.querySelector(".login-btn").addEventListener('click', login);
-function login() {
-    var user = document.getElementById("inputUser").value;
-    var pass = document.getElementById("inputPass").value;
-    if (pass == localStorage.getItem(user)) {
-        alert("Logged In");
-        window.location.href = "./dealer/homepage.html";
-        // return false;
-    } else {
-        alert("wrong user/pass");
-        return false;
-    }
-}
+// document.querySelector(".login-btn").addEventListener('click', login);
+// function login() {
+//     var user = document.getElementById("inputUser").value;
+//     var pass = document.getElementById("inputPass").value;
+//     if (pass == localStorage.getItem(user)) {
+//         alert("Logged In");
+//         window.location.href = "./dealer/homepage.html";
+//         // return false;
+//     } else {
+//         alert("wrong user/pass");
+//         return false;
+//     }
+// }
 
 
 //swap between the login page and register page
@@ -77,7 +77,7 @@ function handleKeyPress(e) {
     window.clearTimeout(timer);
     kick.style.color = 'unset';
 }
-
+var RGEX = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})/;
 function handleKeyUp(e) {
     window.clearTimeout(timer); // prevent errant multiple timeouts from being generated
     timer = window.setTimeout(() => {
@@ -98,30 +98,22 @@ function handleKeyUp(e) {
 
 //save the password to the local storage
 
-function registerAC() {
-    if(registerbtn.disabled==false){
-        alert("Register");
-        let regusername = document.querySelector(".reg-username").value;
-        let regPass = document.querySelector(".register-pass").value;
-        localStorage.setItem(regusername, regPass);
-        sidebar1.classList.toggle('active');
-        sidebar2.classList.toggle('active');
-    }else{
-            alert("The password is not illegal!");
-        }
+// function registerAC() {
+//     if(registerbtn.disabled==false){
+//         alert("Register");
+//         let regusername = document.querySelector(".reg-username").value;
+//         let regPass = document.querySelector(".register-pass").value;
+//         localStorage.setItem(regusername, regPass);
+//         sidebar1.classList.toggle('active');
+//         sidebar2.classList.toggle('active');
+//     }else{
+//             alert("The password is not illegal!");
+//         }
 
-}
+// }
 
-
-//alert the massage to user
-const forgot = document.querySelector('.forgot');
-forgot.onclick = function () {
-    alert("How about buy some fish oil?");
-}
-
-
-function onEnter(e){
-    if(e.keyCode == 13){
-       registerAC();
-    }
-  }
+// function onEnter(e){
+//     if(e.keyCode == 13){
+//        registerAC();
+//     }
+//   }

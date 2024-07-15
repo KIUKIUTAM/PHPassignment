@@ -10,7 +10,7 @@
 
 </head>
 
-<body>
+<body style="background: url('./asserts/img/managerBackground.jpg');">
     <div class="wrapper-login active" >
         <from name="login" class="login-from">
             <h1>Manager Login</h1>
@@ -37,7 +37,7 @@
             </div>
             <div class="SuperUser-link">
                 <p>
-                    Switch to Dealer Login? <a id="loginSwap-btn" href="./index.html">Clink Here</a>
+                    Switch to Dealer Login? <a id="loginSwap-btn" href="./index.php">Clink Here</a>
                 </p>
             </div>
 

@@ -11,11 +11,7 @@ echo '
     <!--
     - favicon
   -->
-    <link
-      rel="shortcut icon"
-      href="./assets/images/200005.jpg"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="../asserts/img/catHead.jpg" type="image/x-icon" />
 
     <!--
     - custom css link

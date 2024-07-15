@@ -15,11 +15,7 @@ $category = $_GET["Category"];
     <!--
     - favicon
   -->
-    <link
-      rel="shortcut icon"
-      href=""
-      type="image/x-icon"
-    />
+  <link rel="shortcut icon" href="../asserts/img/catHead.jpg" type="image/x-icon" />
 
     <!--
     - custom css link

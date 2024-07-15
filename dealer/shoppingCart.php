@@ -115,7 +115,7 @@ require_once ('../db/connet.php');
                           <div class="price-box">
                             <p class="price">$<?php echo$row["price"]?></p>
                           </div>
-                          <div class="quantity">
+                          <div class="quantity" id="quantityForitemNum">
                             <button onclick="quantityDecrement(<?php echo $index?>,<?php echo $row['sparePartNum']; ?>)">
                                 <svg fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
                                     <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M20 12L4 12"></path>
@@ -176,6 +176,7 @@ require_once ('../db/connet.php');
   <script>
 function CreateOrder() {
     let list = document.getElementById('showPrice');
+    let TotalPrice = document.getElementById('TotalPrice').textContent;
     if (list) {
         const childList = list.getElementsByTagName('li');
         let arr = new Array(childList.length);
@@ -186,11 +187,43 @@ function CreateOrder() {
             arr[i][1] = childList[i].querySelector('#spareQty').textContent.substring(5);
         }
 
-        alert(JSON.stringify(arr));
-    } else {
+        if(arr.length == 0){
+          alert("Please select the item to make order");
+          return;
+        }
+        const   data = {
+          order: arr,
+          TotalPrice: TotalPrice
+        };
+
+        fetch("./createOrder.php", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(responseData => {
+            if (responseData.status === 'success') {
+                alert('Order created successfully');
+                location.reload();
+            } else {
+                console.error('Error:', responseData.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+      } else {
         console.error('Element with ID "showPrice" not found.');
     }
-}
+  }
   
   function quantityDecrement(index,sparePartNum) {
     var quantityInput = document.getElementById('quantityNumber' + index);
@@ -204,9 +237,6 @@ function CreateOrder() {
         quantityInput.value--;
     }
     const checkbox = document.getElementById('SelectedItem'+index);
-    if (checkbox.checked) {
-      checkbox.checked = false;
-    }
   }
 
 function quantityIncrement(index,max) {
@@ -217,9 +247,6 @@ function quantityIncrement(index,max) {
       alert("The quantity is more than the stock quantity");
     }
     const checkbox = document.getElementById('SelectedItem'+index);
-    if (checkbox.checked) {
-      checkbox.checked = false;
-    }
 }
 
 function removeFromSession(sparePartNum) {
@@ -251,9 +278,20 @@ function removeFromSession(sparePartNum) {
 function handleCheckboxChange(checkbox,spareName,spareID,numID,price) {
     const spareQty = document.getElementById(numID).value;
     let TotalPrice = document.getElementById('TotalPrice').textContent;
+    var showcase = checkbox.closest('.showcase');
+    if (showcase) {
+        var quantityElement = showcase.querySelector('#quantityForitemNum');
+        if (quantityElement) {
+            var buttons = quantityElement.getElementsByTagName('button');
+            Array.prototype.forEach.call(buttons, function(button) {
+                button.disabled = checkbox.checked;
+            });
+        }
+    }
     if (checkbox.checked) {
       addItem(spareName,spareID,spareQty,price);
       TotalPrice = parseFloat(TotalPrice) + (price * spareQty);
+
     } else {
       removeItem(('item-' + spareName.replace(/\s+/g, '-').toLowerCase()));
       TotalPrice = parseFloat(TotalPrice) - (price * spareQty);

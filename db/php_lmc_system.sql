@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS `dealer`;
 CREATE TABLE IF NOT EXISTS `dealer` (
   `dealerID` mediumint NOT NULL AUTO_INCREMENT,
   `dealerEmail` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(150) COLLATE utf8mb4_general_ci NOT NULL,
   `dealerName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `contactName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `contactNumber` INT COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -65,7 +65,7 @@ DROP TABLE IF EXISTS `salesManager`;
 CREATE TABLE IF NOT EXISTS `salesManager` (
   `salesManagerID` mediumint NOT NULL AUTO_INCREMENT,
   `managerEmail` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `password` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `password` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `managerName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `contactName` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `contactNumber` INT COLLATE utf8mb4_general_ci DEFAULT NULL,

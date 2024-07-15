@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(isset($_SESSION['dealer'])){
+        header("Location: ./dealer/homepage.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,12 +23,12 @@
         <form name="login" class="login-from" method="POST" action="./dealer/login.php">
             <h1>Dealer Login</h1>
             <div class="input-box">
-                <input class="inputUser" id="inputUser" name="userEmail" type="text" placeholder="Username" required>
+                <input class="inputUser" id="inputUser" name="userEmailForLogin" type="text" placeholder="Email" required>
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
                 <input class="inputPass" id="inputPass" type="password" placeholder="Password"
-                    name="password"
+                    name="passwordForLogin"
                     pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})"
                     title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                     required>
@@ -53,17 +60,17 @@
             </div>
             <div class="input-box">
                 <input class="reg-username" 
-                name="userEmail"
-                etype="text" 
-                placeholder="Your email" 
-                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
-                title="Please enter a valid email address."
-                required>
+                       name="userEmailForRegister"
+                       type="text" 
+                       placeholder="Your email" 
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" 
+                       title="Please enter a valid email address."
+                       required>
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
                 <input class="register-pass" type="password" 
-                name="password"
+                name="passwordForRegister"
                 placeholder="Password" 
                 pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})" 
                 title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"

@@ -1,6 +1,6 @@
 <?php
 require_once ('../db/connet.php');
-
+session_start();
 ?>
 <style>
   #loginOut:hover{
@@ -8,10 +8,11 @@ require_once ('../db/connet.php');
 
   }
 </style>
+<a href="" class="menu-title"><span>Dealer Email: <?php if(isset($_SESSION['dealer'])){echo$_SESSION['dealer'];}?></span></a> 
 <div class="header-main">
   <div class="container">
     <a href="./homepage.php" class="menu-title"><img src="../asserts/img/catHead.jpg" width="70"  class="showcase-img"/><h4 style="font-size: 1.4em;">SLMS</h4></a>
-
+    
     <div class="header-search-container">
       <input
         type="search"
@@ -24,10 +25,10 @@ require_once ('../db/connet.php');
         <ion-icon name="search-outline"></ion-icon>
       </button>
     </div>
-
+    
     <div class="header-user-actions">
       <button class="action-btn" >
-        <a href="./infromation.php"
+        <a href="./information.php"
           ><ion-icon name="person-outline" ></ion-icon
         ></a>
       </button>
@@ -109,8 +110,13 @@ require_once ('../db/connet.php');
 </nav>
 
 <div class="mobile-bottom-navigation">
-  <button class="action-btn" data-mobile-menu-open-btn>
-    <ion-icon name="menu-outline"></ion-icon>
+  <button class="action-btn" onclick="location.href='./homepage.php'">
+    <ion-icon name="home-outline"></ion-icon>
+  </button>
+  <button class="action-btn" >
+    <a href="./information.php"
+      ><ion-icon name="person-outline" ></ion-icon
+    ></a>
   </button>
 
   <button class="action-btn" onclick="location.href='./shoppingCart.php'">
@@ -118,9 +124,7 @@ require_once ('../db/connet.php');
     <span class="count" id="shoppingCartCount2">0</span>
   </button>
 
-  <button class="action-btn" onclick="location.href='./homepage.php'">
-    <ion-icon name="home-outline"></ion-icon>
-  </button>
+  
 
   <button class="action-btn" data-mobile-menu-open-btn onclick="loginOut()" id="loginOut">
   <ion-icon name="log-in-outline"></ion-icon>

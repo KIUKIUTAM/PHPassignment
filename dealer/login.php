@@ -1,13 +1,11 @@
 <?php
-require_once ('../db/connet.php');
-?>
-
-<?php
+require_once('../db/connet.php');
 session_start(); // Start the session at the beginning of the script
-if (isset($_POST['userEmail'])) {
+
+if (isset($_POST['userEmailForLogin'])) {
     // Fetch the form data
-    $dealerEmail = $_POST['UserEmail'];
-    $password = $_POST['password'];
+    $dealerEmail = $_POST['userEmailForLogin'];
+    $password = $_POST['passwordForLogin'];
 
     // Check the connection
     if ($conn->connect_error) {
@@ -15,21 +13,29 @@ if (isset($_POST['userEmail'])) {
     }
 
     // Use prepared statements to prevent SQL injection
-    $stmt = $conn->prepare("SELECT * FROM dealer WHERE dealerEmail = ? AND password = ?");
-    $stmt->bind_param("ss", $dealerEmail, $password);
+    $stmt = $conn->prepare("SELECT * FROM dealer WHERE dealerEmail = ?");
+    $stmt->bind_param("s", $dealerEmail);
     $stmt->execute();
     $result = $stmt->get_result();
 
     // Check if any rows are returned
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $_SESSION['dealer'] = $row['dealerEmail'];
-        header("Location: ./homepage.php");
-        exit(); // Ensure no further code is executed after redirect
+
+        // Verify the password
+        if (password_verify($password, $row['password'])) {
+            $_SESSION['dealer'] = $row['dealerEmail'];
+            if (empty($row['dealerName']) || empty($row['contactName']) || empty($row['deliveryAddress'])) {
+                echo "<script>alert('Please complete your profile first'); location.replace('./information.php');</script>";
+            } else {
+                echo "<script>location.replace('./homepage.php');</script>";
+                exit();
+            }
+        } else {
+            echo "<script>alert('Invalid LoginEmail or password'); location.replace('../index.php');</script>";
+        }
     } else {
-        echo "<script>alert('Invalid LoginEmail or password');
-          location.replace('../index.php');</script>";
-       
+        echo "<script>alert('Invalid LoginEmail or password'); location.replace('../index.php');</script>";
     }
 
     // Close the statement and connection

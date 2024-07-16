@@ -12,7 +12,7 @@ session_start();
 <span>Dealer Email: <?php if(isset($_SESSION['dealer'])){echo$_SESSION['dealer'];}?></span>
 <div class="header-main">
   <div class="container">
-    <a href="./homepage.php" class="menu-title"><img src="../asserts/img/catHead.jpg" width="70"  class="showcase-img"/><h4 style="font-size: 1.4em;">SLMS</h4></a>
+    <a href="./homepage.php" class="menu-title"><img src="../assets/img/catHead.jpg" width="70"  class="showcase-img"/><h4 style="font-size: 1.4em;">SLMS</h4></a>
     
     <div class="header-search-container">
       <input

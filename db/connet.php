@@ -2,7 +2,7 @@
     $hostname = "localhost";
     $username = "root";
     $password = "";
-    $database = "php_lmc_system";
+    $database = "projectdb";
     
     $conn = mysqli_connect($hostname,$username,$password,$database);
 

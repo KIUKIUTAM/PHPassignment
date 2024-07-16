@@ -14,11 +14,11 @@ $category = $_GET["Category"];
 
     <!--- favicon-->
 
-    <link rel="shortcut icon" href="../asserts/img/catHead.jpg" type="image/x-icon" />
+    <link rel="shortcut icon" href="../assets/img/catHead.jpg" type="image/x-icon" />
 
     <!--- custom css link-->
 
-    <link rel="stylesheet" href="./asserts/css/style-prefix.css" />
+    <link rel="stylesheet" href="./assets/css/style-prefix.css" />
     <!--- google font link-->
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -192,7 +192,7 @@ $category = $_GET["Category"];
     </script>
 
     <!--- custom js link-->
-    <script src="./asserts/js/script.js"></script>
+    <script src="./assets/js/script.js"></script>
 
     <!--- ionicon link-->
     <script

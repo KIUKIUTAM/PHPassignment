@@ -15,14 +15,15 @@ require_once ('../db/connet.php');
   <!--
     - favicon
   -->
-  <link rel="shortcut icon" href="../asserts/img/catHead.jpg" type="image/x-icon" />
+  <link rel="shortcut icon" href="../assets/img/catHead.jpg" type="image/x-icon" />
   <!--
     - custom css link
   -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="./asserts/css/style-prefix.css" />
-  <link rel="stylesheet" href="./asserts/css/style-shoppingCart.css" />
+  <link rel="stylesheet" href="./assets/css/style-prefix.css" />
+  <link rel="stylesheet" href="./assets/css/style-shoppingCart.css" />
+  <link rel="stylesheet" href="./assets/css/toast.css"/>
   <!--
     - google font link
   -->
@@ -95,7 +96,7 @@ require_once ('../db/connet.php');
                             }
                             ?>
                         <div class="showcase">
-                        <input type="checkbox" class="checkbox" id="SelectedItem<?php echo $index?>" onchange="handleCheckboxChange(this,'<?php echo $row['sparePartName']; ?>',<?php echo $row['sparePartNum']; ?>,'quantityNumber<?php echo $index?>',<?php echo $row['price'] ?>)">
+                        <input type="checkbox" class="checkbox" id="SelectedItem<?php echo $index?>" onchange="handleCheckboxChange(this,'<?php echo $row['sparePartName']; ?>',<?php echo $row['sparePartNum']; ?>,<?php echo $row['weight'];?>,'quantityNumber<?php echo $index?>',<?php echo $row['price'] ?>)">
                         
                         <a href="#" class="showcase-img-box">
                           <img src="<?php echo $row['sparePartImage']; ?>" width="70" class="showcase-img" />
@@ -153,6 +154,65 @@ require_once ('../db/connet.php');
           </ul>
           <ul class="list-group">
             <li class="list-group-item list-group-total">
+              <span>Item total (USD) : $</span>
+              <strong id="TotalPrice">0</strong>
+            </li>
+          </ul>
+
+          <div class="checkbox-wrapper-16">
+            <label class="checkbox-wrapper">
+              <input class="checkbox-input" type="radio" name="deliveryMode" onchange="calDeliveryCost(1)">
+              <span class="checkbox-tile">
+                <span class="checkbox-icon">
+                <i class='bx bx-package'></i>
+                </span>
+                <span class="checkbox-label">Weight Mode</span>
+              </span>
+            </label>
+            <label class="checkbox-wrapper" style="margin-left: 30px;">
+              <input class="checkbox-input" type="radio" name="deliveryMode" onchange="calDeliveryCost(2)">
+              <span class="checkbox-tile">
+                <span class="checkbox-icon">
+                <i class='bx bxl-docker' ></i>
+                </span>
+                <span class="checkbox-label">Quantity Mode</span>
+              </span>
+            </label>
+          </div>
+
+
+
+
+          <div class="accordion" id="accordionExample" style="margin-top: 30px;">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                Delivery Description
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                <h5 class="accordion-title">Weight Mode:</h5>
+                <strong>Initial cost (first 1 kg):</strong><br>
+                <span>$300</span><br>
+                <strong>Additional cost per kg:</strong><br>
+                <span>(from 2nd kg): $50</span><br>
+                <strong>Maximum weight:</strong><br>
+                <span> 70 kg per package</span>
+                <br><br>
+                <h5 class="accordion-title">Quantity Mode:</h5>
+                <strong>Initial cost (first unit):</strong><br>
+                <span>$300</span><br>
+                <strong>Additional cost per unit:</strong><br>
+                <span>(from 2nd kg): $60</span><br>
+                <strong>Max quantity:</strong><br>
+                <span>30 units/package</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ul class="list-group" style="margin-top: 30px;">
+            <li class="list-group-item list-group-total">
               <span>Total (USD) : $</span>
               <strong id="TotalPrice">0</strong>
             </li>
@@ -173,6 +233,62 @@ require_once ('../db/connet.php');
 
   <footer>
   </footer>
+
+
+  <script>
+        function calDeliveryCost(mode) {
+          TotalPrice= document.getElementById('TotalPrice').textContent;
+          let list = document.getElementById('showPrice');
+          let arr = [];
+          if (list) {
+            const childList = list.getElementsByTagName('li');
+            let totalWeight = 0;
+            let totalQuantity = 0;
+            for (let i = 0; i < childList.length; i++) {
+              totalWeight += childList[i].querySelector('#spareQty').textContent.substring(5);
+              totalQuantity += childList[i].querySelector('#spareWeight').textContent.substring(12);
+            }
+          }
+          alert(totalWeight);
+          alert(totalQuantity);
+          if(mode==1){
+            var shippingMethod = 'Weight';
+            var value =totalWeight;
+          }else{
+            var shippingMethod = 'Quantity';
+            var value =totalQuantity;
+          }
+          const   data = {
+            order: arr,
+            shippingMethod: shippingMethod
+          };
+        const url = `http://127.0.0.1:8080/ship_cost_api/${shippingMethod}/${value}`;
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === 'accepted') {
+                    const shippingCost = data.cost;
+                    const subtotalPrice = formData.get('subtotal_price');
+                    const totalPrice = parseFloat(subtotalPrice) + parseFloat(shippingCost);
+
+                    //set the shipping cost and totalprice to hidden tag
+                    document.getElementById('hidden-shipping-cost').value = shippingCost;
+                    document.getElementById('hidden-total-price').value = totalPrice;
+
+                    //update shipping cost and total price
+                    document.getElementById('shipping-cost').textContent = `$${shippingCost}`;
+                    document.getElementById('total-price').textContent = `$${totalPrice}`;
+
+                    // able the create order button
+                    document.getElementById('create-order-btn').disabled = false;
+                } else {
+                    alert(data.reason);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script>
   <script>
 function CreateOrder() {
     let list = document.getElementById('showPrice');
@@ -275,7 +391,7 @@ function removeFromSession(sparePartNum) {
   }
     
 }
-function handleCheckboxChange(checkbox,spareName,spareID,numID,price) {
+function handleCheckboxChange(checkbox,spareName,spareID,spareWeight,numID,price) {
     const spareQty = document.getElementById(numID).value;
     let TotalPrice = document.getElementById('TotalPrice').textContent;
     var showcase = checkbox.closest('.showcase');
@@ -289,7 +405,7 @@ function handleCheckboxChange(checkbox,spareName,spareID,numID,price) {
         }
     }
     if (checkbox.checked) {
-      addItem(spareName,spareID,spareQty,price);
+      addItem(spareName,spareID,spareWeight,spareQty,price);
       TotalPrice = parseFloat(TotalPrice) + (price * spareQty);
 
     } else {
@@ -298,7 +414,7 @@ function handleCheckboxChange(checkbox,spareName,spareID,numID,price) {
     }
     document.getElementById('TotalPrice').textContent = TotalPrice.toFixed(2);
 }
-function addItem(spareName,spareID, spareQty, price) {
+function addItem(spareName,spareID,spareWeight, spareQty, price) {
     const list = document.getElementById('showPrice');
 
     const li = document.createElement('li');
@@ -320,6 +436,11 @@ function addItem(spareName,spareID, spareQty, price) {
     h6_2.id = 'spareName';
     h6_2.textContent = spareName;
 
+    const weight = document.createElement('small');
+    weight.className = 'text-body-secondary';
+    weight.id = 'spareWeight';
+    weight.textContent = 'Weight(Kg): ' + spareWeight ;
+    const dr = document.createElement('br');
     const small = document.createElement('small');
     small.className = 'text-body-secondary';
     small.id = 'spareQty';
@@ -327,6 +448,8 @@ function addItem(spareName,spareID, spareQty, price) {
 
     div.appendChild(h6_1);
     div.appendChild(h6_2);
+    div.appendChild(weight);
+    div.appendChild(dr);
     div.appendChild(small);
     li.appendChild(span);
     li.appendChild(div);
@@ -368,9 +491,7 @@ function addToCart() {
             });
             fetchCartCount();
     }
-  </script>
-  
-  <script>
+
     function fetchCartCount() {
         fetch("cart_count.php", {
             method: 'POST',
@@ -390,20 +511,23 @@ function addToCart() {
         })
         .catch(error => console.error('Fetch error:', error));
     }
-    // 每5秒执行一次fetchCartCount函数
     setInterval(fetchCartCount, 5000);
   </script>
   <script>
     function showToast(message) {
-        const toast = document.createElement('div');
-
-
-}
+      toastNotif({
+				text: 'Lorem Ipsum is simply dummy text of the printing',
+				color: '#5bc83f',
+				timeout: 5000,
+				icon: 'valid'
+			});
+    }
     </script>
   <!--
     - custom js link
   -->
-  <script src="./asserts/js/script.js"></script>
+  <script src="./assets/js/toast.js"></script>
+  <script src="./assets/js/script.js"></script>
 
   <!--
     - ionicon link

@@ -16,14 +16,14 @@ require_once ('../db/connet.php');
     <!--
     - favicon
   -->
-    <link rel="shortcut icon" href="../asserts/img/catHead.jpg" type="image/x-icon" />
+    <link rel="shortcut icon" href="../assets/img/catHead.jpg" type="image/x-icon" />
     <!-- <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     /> -->
-    <link rel="stylesheet" href="./asserts/css/style-prefix.css"/>
+    <link rel="stylesheet" href="./assets/css/style-prefix.css"/>
     
     <!--
     - custom css link
@@ -209,7 +209,7 @@ require_once ('../db/connet.php');
     <!--
     - custom js link
   -->
-    <script src="./asserts/js/script.js"></script>
+    <script src="./assets/js/script.js"></script>
     
     <!--
     - ionicon link

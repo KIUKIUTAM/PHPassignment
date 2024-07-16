@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
 	containerNotifications.id = "toasts";
 	
 	let link = document.createElement("link");
-	link.href = "./toast.css";
+	link.href = "../css/toast.css";
 	link.setAttribute("rel", "stylesheet");
 	
 	document.body.appendChild(containerNotifications);
@@ -36,7 +36,7 @@ const toastNotif = (setting) => {
 		toast.classList.add('toast-hide')
 		setTimeout(() => {
 			toast.remove()
-		}, 300)
+		}, 200)
 	}, setting.timeout);
 }
 

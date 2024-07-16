@@ -10,7 +10,7 @@
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+80:00";
+SET time_zone = "+08:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -215,25 +215,25 @@ TRUNCATE TABLE `sparepart`;
 --
 
 INSERT INTO `sparepart` (`sparePartNum`, `sparePartName`, `sparePartDescription`, `stockItemQty`, `weight`, `price`, `discountPrice`, `sparePartImage`) VALUES
-(100002, 'Galvanized Steel Sheet', 'A durable galvanized steel sheet suitable for various industrial applications.', 10, 10, 25, 12, '../asserts/img/100002.jpg'),
-(100003, 'Aluminum Alloy Sheet', 'High-strength aluminum alloy sheet with excellent corrosion resistance.', 1000, 11, 32.49, 30, '../asserts/img/100003.jpg'),
-(100004, 'Cold Rolled Steel Sheet', 'Precision cold rolled steel sheet, ideal for precision components.', 1000, 13, 45.99, 44, '../asserts/img/100004.jpg'),
-(100005, 'Copper Sheet', 'Premium-grade copper sheet with high thermal and electrical conductivity.', 1000, 13, 38.99, NULL, '../asserts/img/100005.jpg'),
-(200001, 'Gearbox Assembly', 'Robust gearbox assembly designed for high-torque applications.', 1000, 12.5, 325.99, 200.4, '../asserts/img/200001.jpg'),
-(200002, 'Hydraulic Pump Assembly', 'Efficient hydraulic pump assembly for fluid power systems.', 1000, 8.2, 415.49, 399.2, '../asserts/img/200002.jpg'),
-(200003, 'Engine Block Assembly 1', 'High-quality engine block assembly, providing exceptional performance.', 1000, 14, 675.99, 499, '../asserts/img/200003.jpg'),
-(200004, 'Engine Block Assembly 2', 'Durable engine block assembly engineered for longevity.', 1000, 15, 300, NULL, '../asserts/img/200004.jpg'),
-(200005, 'Engine Block Assembly 3', 'Precision-engineered engine block assembly for high-performance vehicles.', 1000, 16, 400, NULL, '../asserts/img/200005.jpg'),
-(300001, 'Aluminum Castings', 'Versatile aluminum castings known for their lightweight and strength.', 1000, 55, 12.99, NULL, '../asserts/img/300001.jpg'),
-(300002, 'Plastic Injection Moldings', 'High-precision plastic injection moldings for complex shapes and designs.', 1000, 44, 8.49, NULL, '../asserts/img/300002.jpg'),
-(300003, 'Machined Brass Components 1', 'Custom machined brass components for specialized industrial use.', 1000, 33, 15.99, 15.98, '../asserts/img/300003.jpg'),
-(300004, 'Machined Brass Components 2', 'Precision-crafted brass components designed for durability and consistency.', 1000, 22, 229, 228, '../asserts/img/300004.jpg'),
-(300005, 'Machined Brass Components 3', 'High-grade machined brass components for demanding applications.', 1000, 11, 1249, NULL, '../asserts/img/300005.jpg'),
-(400001, 'Rubber Gaskets', 'Sealing rubber gaskets designed for leak-proof connections.', 1000, 55, 33123, NULL, '../asserts/img/400001.jpg'),
-(400002, 'Plastic Hoses', 'Flexible plastic hoses resistant to wear and varying temperatures.', 1000, 44, 4123, NULL, '../asserts/img/400002.jpg'),
-(400003, 'Adhesive Tapes 1', 'Strong adhesive tapes for secure bonding in various applications.', 1000, 33, 644, NULL, '../asserts/img/400003.jpg'),
-(400004, 'Adhesive Tapes 2', 'Durable adhesive tapes designed for heavy-duty adhesion.', 1000, 32, 333, NULL, '../asserts/img/400004.jpg'),
-(400005, 'Adhesive Tapes 3', 'Multipurpose adhesive tapes suitable for a range of industrial uses.', 1000, 31, 22, NULL, '../asserts/img/400005.jpg');
+(100002, 'Galvanized Steel Sheet', 'A durable galvanized steel sheet suitable for various industrial applications.', 10, 10, 25, 12, '../assets/img/100002.jpg'),
+(100003, 'Aluminum Alloy Sheet', 'High-strength aluminum alloy sheet with excellent corrosion resistance.', 1000, 11, 32.49, 30, '../assets/img/100003.jpg'),
+(100004, 'Cold Rolled Steel Sheet', 'Precision cold rolled steel sheet, ideal for precision components.', 1000, 13, 45.99, 44, '../assets/img/100004.jpg'),
+(100005, 'Copper Sheet', 'Premium-grade copper sheet with high thermal and electrical conductivity.', 1000, 13, 38.99, NULL, '../assets/img/100005.jpg'),
+(200001, 'Gearbox Assembly', 'Robust gearbox assembly designed for high-torque applications.', 1000, 12.5, 325.99, 200.4, '../assets/img/200001.jpg'),
+(200002, 'Hydraulic Pump Assembly', 'Efficient hydraulic pump assembly for fluid power systems.', 1000, 8.2, 415.49, 399.2, '../assets/img/200002.jpg'),
+(200003, 'Engine Block Assembly 1', 'High-quality engine block assembly, providing exceptional performance.', 1000, 14, 675.99, 499, '../assets/img/200003.jpg'),
+(200004, 'Engine Block Assembly 2', 'Durable engine block assembly engineered for longevity.', 1000, 15, 300, NULL, '../assets/img/200004.jpg'),
+(200005, 'Engine Block Assembly 3', 'Precision-engineered engine block assembly for high-performance vehicles.', 1000, 16, 400, NULL, '../assets/img/200005.jpg'),
+(300001, 'Aluminum Castings', 'Versatile aluminum castings known for their lightweight and strength.', 1000, 55, 12.99, NULL, '../assets/img/300001.jpg'),
+(300002, 'Plastic Injection Moldings', 'High-precision plastic injection moldings for complex shapes and designs.', 1000, 44, 8.49, NULL, '../assets/img/300002.jpg'),
+(300003, 'Machined Brass Components 1', 'Custom machined brass components for specialized industrial use.', 1000, 33, 15.99, 15.98, '../assets/img/300003.jpg'),
+(300004, 'Machined Brass Components 2', 'Precision-crafted brass components designed for durability and consistency.', 1000, 22, 229, 228, '../assets/img/300004.jpg'),
+(300005, 'Machined Brass Components 3', 'High-grade machined brass components for demanding applications.', 1000, 11, 1249, NULL, '../assets/img/300005.jpg'),
+(400001, 'Rubber Gaskets', 'Sealing rubber gaskets designed for leak-proof connections.', 1000, 55, 33123, NULL, '../assets/img/400001.jpg'),
+(400002, 'Plastic Hoses', 'Flexible plastic hoses resistant to wear and varying temperatures.', 1000, 44, 4123, NULL, '../assets/img/400002.jpg'),
+(400003, 'Adhesive Tapes 1', 'Strong adhesive tapes for secure bonding in various applications.', 1000, 33, 644, NULL, '../assets/img/400003.jpg'),
+(400004, 'Adhesive Tapes 2', 'Durable adhesive tapes designed for heavy-duty adhesion.', 1000, 32, 333, NULL, '../assets/img/400004.jpg'),
+(400005, 'Adhesive Tapes 3', 'Multipurpose adhesive tapes suitable for a range of industrial uses.', 1000, 31, 22, NULL, '../assets/img/400005.jpg');
 
 --
 -- 已傾印資料表的限制式

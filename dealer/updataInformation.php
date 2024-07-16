@@ -5,8 +5,8 @@ if (isset($_POST['submit'])) {
   
     $name = trim($_POST['nameForUpdata']);
     $email = trim($_POST['inputEmailForUpdata']);
-    $phone = trim($_POST['areaCodeForUpdata']) . trim($_POST['contactNumberForUpdata']);
-    $faxNumber = trim($_POST['faxAreaCodeForUpdata']) . trim($_POST['faxNumberForUpdata']);
+    $phone = trim($_POST['areaCodeForUpdata']) .'-'. trim($_POST['contactNumberForUpdata']);
+    $faxNumber = trim($_POST['faxAreaCodeForUpdata']) .'-'. trim($_POST['faxNumberForUpdata']);
     $address = trim($_POST['deliveryAddressForUpdata']);
     $password = trim($_POST['passwordForUpdata']);
 

@@ -12,19 +12,15 @@ $category = $_GET["Category"];
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SLMS - eCommerce Website</title>
 
-    <!--
-    - favicon
-  -->
-  <link rel="shortcut icon" href="../asserts/img/catHead.jpg" type="image/x-icon" />
+    <!--- favicon-->
 
-    <!--
-    - custom css link
-  -->
+    <link rel="shortcut icon" href="../asserts/img/catHead.jpg" type="image/x-icon" />
+
+    <!--- custom css link-->
+
     <link rel="stylesheet" href="./assets/css/style-prefix.css" />
-    <link rel="stylesheet" href="./assets/css/style-listOfPage.css" />
-    <!--
-    - google font link
-  -->
+    <!--- google font link-->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -147,14 +143,9 @@ $category = $_GET["Category"];
                             class="showcase-img"
                           />
                         </a>
-  
                         <div class="showcase-content">
-                          <a href="#">
-                            <h4 class="showcase-title">'.$row["sparePartName"].'</h4>
-                          </a>
-  
-                          <a href='.$category.' class="showcase-category">'.$categoryName.'</a>
-                        ';
+                          <a href="#"><h4 class="showcase-title">'.$row["sparePartName"].'</h4></a>
+                          <a href='.$category.' class="showcase-category">'.$categoryName.'</a>';
                         if($row["discountPrice"]==null){
                           $price = $row["price"];
                           echo'<div class="price-box">
@@ -198,16 +189,12 @@ $category = $_GET["Category"];
     function ProductDetail(sparePartNum) {
     window.location.href = ("./product_Detail?sparePartNum="+sparePartNum);
     } 
-  </script>
+    </script>
 
-    <!--
-    - custom js link
-  -->
+    <!--- custom js link-->
     <script src="./assets/js/script.js"></script>
 
-    <!--
-    - ionicon link
-  -->
+    <!--- ionicon link-->
     <script
       type="module"
       src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"

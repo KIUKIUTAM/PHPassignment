@@ -1,5 +1,6 @@
 <?php
-echo '
+require_once('../db/connet.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -53,6 +54,7 @@ echo '
           <!--
           - SIDEBAR
         -->
+          <nav class="sidebar"></nav>
           <div class="product-box">
             <!--
             - PRODUCT MINIMAL
@@ -64,108 +66,65 @@ echo '
 
                 <div class="showcase-wrapper has-scrollbar">
                   <div class="showcase-container">
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          src="./assets/imageS/400001.jpg"
-                          
-                          width="70"
-                          class="showcase-img"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">Accessories No.1</h4>
+                  <?php
+                  $sql = "SELECT * FROM sparePart WHERE sparePartName LIKE '%".$_GET["search"]."%'";
+                  $result = $conn->query($sql);
+                  if($result->num_rows > 0){
+                    while($row = $result->fetch_assoc()) {
+                      $category ="";
+                      $categoryName="";
+                      switch(substr($row["sparePartNum"],0,1)){
+                        case "1":$category="./listOfProduct?Category=Sheet_Metal";
+                                $categoryName="Sheet Metal";
+                        break;
+                        case "2":$category="./listOfProduct?Category=Major_Assemblies";
+                                $categoryName="Major Assemblies";
+                        break;
+                        case "3":$category="./listOfProduct?Category=Light_Components";
+                                $categoryName="Light Components";
+                        break;
+                        case "4":$category="./listOfProduct?Category=Accessories";
+                                $categoryName="Accessories";
+                        break;
+                      };
+                        echo ' <div class="showcase" onclick="ProductDetail('.$row["sparePartNum"].')">
+                        <a href="#" class="showcase-img-box">
+                          <img
+                            src="'.$row["sparePartImage"].'"
+                            width="70"
+                            class="showcase-img"
+                          />
                         </a>
-
-                        <a href="#" class="showcase-category"
-                          >Accessories</a
-                        >
-
-                        <div class="price-box">
-                          <p class="price">$45.00</p>
-                          <del>$12.00</del>
+  
+                        <div class="showcase-content">
+                          <a href="#">
+                            <h4 class="showcase-title">'.$row["sparePartName"].'</h4>
+                          </a>
+  
+                          <a href='.$category.' class="showcase-category">'.$categoryName.'</a>
+                        ';
+                        if($row["discountPrice"]==null){
+                          $price = $row["price"];
+                          echo'<div class="price-box">
+                          <p class="price">$'.$price.'</p>
+                        ';
+                        }else{
+                          $price = $row["discountPrice"];
+                          $delPrice= $row["price"];
+                          echo'<div class="price-box">
+                          <p class="price">$'.$price.'</p>
+                          <del>$'.$delPrice.'</del>
+                        ';
+                        }
+                        echo'</div>
                         </div>
-                      </div>
-                    </div>
-                    
-                    
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          src="./assets/images/400002.jpg"
-                          
-                          width="70"
-                          class="showcase-img"
-                        />
-                      </a>
+                      </div>';
+                    }
+                  }else{
+                    echo '<p>No Result Found</p>';
 
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">Asssemblies No.2</h4>
-                        </a>
 
-                        <a href="#" class="showcase-category"
-                          >Accessories</a
-                        >
-
-                        <div class="price-box">
-                          <p class="price">$45.00</p>
-                          <del>$12.00</del>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          src="./assets/images/400003.jpg"
-                          
-                          width="70"
-                          class="showcase-img"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">Accessories No.3</h4>
-                        </a>
-
-                        <a href="#" class="showcase-category"
-                          >Accessories</a
-                        >
-
-                        <div class="price-box">
-                          <p class="price">$45.00</p>
-                          <del>$12.00</del>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="showcase">
-                      <a href="#" class="showcase-img-box">
-                        <img
-                          src="./assets/images/400004.jpg"
-                          
-                          width="70"
-                          class="showcase-img"
-                        />
-                      </a>
-
-                      <div class="showcase-content">
-                        <a href="#">
-                          <h4 class="showcase-title">Accessories No.4</h4>
-                        </a>
-
-                        <a href="#" class="showcase-category"
-                          >Accessories</a
-                        >
-
-                        <div class="price-box">
-                          <p class="price">$45.00</p>
-                          <del>$12.00</del>
-                        </div>
-                      </div>
-                    </div>
+                  }?>
                   </div>
                 </div>
               </div>
@@ -207,11 +166,8 @@ echo '
       $(function(){
           $("header").load("./header.php");
           $("footer").load("./footer.php");
-
+          $(".sidebar").load("./sidebar.php");
       });
     </script>
   </body>
 </html>
-
-';
-?>

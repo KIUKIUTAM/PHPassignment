@@ -23,8 +23,7 @@
         <form name="login" class="login-from" method="POST" action="./dealer/login.php">
             <h1>Dealer Login</h1>
             <div class="input-box">
-                <input class="inputUser" id="inputUser" name="userEmailForLogin" type="text" placeholder="Email" required>
-                <i class='bx bxs-user'></i>
+            <input class="inputUser" id="inputUser" name="userEmailForLogin" type="text" placeholder="Email" value="<?php if(isset($_COOKIE['username'])) echo htmlspecialchars($_COOKIE['username']); ?>" required>                <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
                 <input class="inputPass" id="inputPass" type="password" placeholder="Password"
@@ -35,10 +34,10 @@
                 <i class='bx bxs-lock-alt'></i>
             </div>
             <div class="remember-forgot">
-                <label><input type="checkbox"> Remember me</label>
-                <a class="forgot" href="" target="_blank" onclick="location.replace('./dealer/homepage.php')">Forgot password?</a>
+                <label><input type="checkbox" id="RememberMe"> Remember me</label>
+                <a class="forgot"  >Forgot password?</a>
             </div>
-            <input type="submit"  name="submit" class="login-btn" id="login-btn" value="submit">
+            <input type="submit"  name="submit" class="login-btn" id="login-btn" value="submit" onclick="checkRemember()">
             <div class="register-link">
                 <p>
                     Don't have an account? <a id="loginSwap-btn">Register</a>
@@ -89,5 +88,35 @@
         </form>
     </div>
 </body>
+<script>
+   function checkRemember() {
+    var rememberMe = document.getElementById("RememberMe");
+    var userName = document.getElementById("inputUser").value;
+
+    if (rememberMe.checked) {
+        var data = {
+            userName: userName
+        };
+
+        fetch("./dealer/setRememberCookie.php", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(responseData => {
+            if (responseData.status === 'success') {
+                console.log('Cookies set successfully');
+            } else {
+                console.error('Error:', responseData.message);
+            }
+        })
+        .catch(error => console.error('Fetch error:', error));
+    }
+}
+
+</script>
 <script src="./dealer/assets/js/login.js"></script>
 </html>

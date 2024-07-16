@@ -53,3 +53,15 @@ function handleKeyUp(e) {
         }
     }, timeoutVal);
 }
+
+
+const forgot = document.querySelector('.forgot');
+forgot.onclick = function () {
+    if(confirm("How about buy some fish oil?")){
+        var url = "https://www.mannings.com.hk/health/cardiovascular-health/fish-oil/c/feomega-3?lang=zh_TW";
+            
+            window.open(url, '_blank');
+    }else{
+        alert("You are not a fish oil lover");
+    }
+}

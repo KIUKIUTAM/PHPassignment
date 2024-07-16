@@ -21,7 +21,7 @@ session_start();
         placeholder="Enter your product name..."
       />
 
-      <button class="search-btn" onclick="location.href='./Search.php'">
+      <button class="search-btn" onclick="search()">
         <ion-icon name="search-outline"></ion-icon>
       </button>
     </div>
@@ -131,6 +131,14 @@ session_start();
   </button>
 </div>
 <script>
+  function search(){
+    var search = document.querySelector('.search-field').value;
+    if(search == ''){
+      alert('Please enter a product name');
+    }else{
+      location.href='./search.php?search='+search;
+    }
+  };
     function fetchCartCount() {
         fetch("cart_count.php", {
             method: 'POST',

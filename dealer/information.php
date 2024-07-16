@@ -6,7 +6,9 @@ session_start();
 <?php
 $dealer_name = "";
 $dealer_email = "";
+$contact_areaCode = "";
 $dealer_contact = "";
+$fax_areaCode = "";
 $dealer_fax = "";
 $dealer_address = "";
 
@@ -26,15 +28,25 @@ if (isset($_SESSION['dealer'])) {
           else{$dealer_name = $row['dealerName'];}
 
         if($row['contactNumber'] == null){$dealer_contact = "Not Set";}
-          else{$dealer_contact = $row['contactNumber'];}
+          else{
+            $partForContact = explode('-', $row['contactNumber']);
+            if (count($partForContact) === 2) {
+                $contact_areaCode = $partForContact[0];
+                $dealer_contact = $partForContact[1];
+            }}
 
         if($row['faxNumber'] == null){$dealer_fax = "Not Set";}
-          else{$dealer_fax = $row['faxNumber'];}
+          else{$partForFax = explode('-', $row['faxNumber']);
+            if (count($partForFax) === 2) {
+                $fax_areaCode = $partForFax[0];
+                $dealer_fax = $partForFax[1];
+            }}
         
         if($row['deliveryAddress'] == null){$dealer_address = "Not Set";}
         else{$dealer_address = $row['deliveryAddress'];}
     }
     $stmt->close();
+    
 }
 ?>
 <!DOCTYPE html>
@@ -129,7 +141,7 @@ if (isset($_SESSION['dealer'])) {
                                         <label class="form-label">Contact Number</label>
                                         <div class="input-group">
                                             <select class="form-select" id="inputGroupSelect01" disabled>
-                                                <option selected>+852</option>
+                                                <option selected>+<?php echo $contact_areaCode?></option>
                                             </select>
                                             <input type="number" class="form-control w-75 p-2" id="basic-url"
                                                 aria-describedby="basic-addon3 basic-addon4"
@@ -140,7 +152,7 @@ if (isset($_SESSION['dealer'])) {
                                         <label for="basic-url" class="form-label">Fax Number</label>
                                         <div class="input-group">
                                             <select class="form-select" id="inputGroupSelect01" disabled>
-                                                <option selected>+852</option>
+                                                <option selected>+<?php echo $fax_areaCode ?></option>
                                             </select>
                                             <input type="number" class="form-control w-75 p-2" id="basic-url"
                                                 aria-describedby="basic-addon3 basic-addon4"
@@ -170,12 +182,12 @@ if (isset($_SESSION['dealer'])) {
                                 <div>
                                     <div class="mb-3">
                                         <label class="form-label">Name</label>
-                                        <input type="text" class="form-control" name="nameForUpdata"
+                                        <input type="text" class="form-control" name="nameForUpdata" pattern="^[A-Za-z\s]{1,}$" title="Only letters and space allowed"
                                             id="nameForUpdata" />
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                        <input type="email" class="form-control" id="inputEmailForUpdata"
+                                        <input type="email" class="form-control" id="inputEmailForUpdata" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address"
                                             name="inputEmailForUpdata" aria-describedby="emailHelp" />
                                         <div id="emailHelp" class="form-text">
                                             We'll never share your email with anyone else.
@@ -183,7 +195,7 @@ if (isset($_SESSION['dealer'])) {
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="passwordForUpdata"
+                                        <input type="password" class="form-control" id="passwordForUpdata" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                                             name="passwordForUpdata" />
                                     </div>
                                     <div class="mb-3">
@@ -196,8 +208,8 @@ if (isset($_SESSION['dealer'])) {
                                                 <option value="86">+86</option>
                                                 <option value="853">+853</option>
                                             </select>
-                                            <input type="number" class="form-control w-75 p-2"
-                                                id="contactNumberForUpdata" name="contactNumberForUpdata"
+                                            <input type="text" class="form-control w-75 p-2"
+                                                id="contactNumberForUpdata" name="contactNumberForUpdata" pattern="^[0-9]{8,}$" title="Please enter a valid fax number with at least 8 digits"
                                                 aria-describedby="basic-addon3 basic-addon4" />
                                         </div>
                                     </div>
@@ -211,9 +223,9 @@ if (isset($_SESSION['dealer'])) {
                                                 <option value="86">+86</option>
                                                 <option value="853">+853</option>
                                             </select>
-                                            <input type="text" class="form-control w-75 p-2" id="faxNumberForUpdata"
-                                                name="faxNumberForUpdata"
-                                                aria-describedby="basic-addon3 basic-addon4" />
+                                            <input type="text" class="form-control w-75 p-2" id="faxNumberForUpdate" name="faxNumberForUpdate"
+                                                   pattern="^[0-9]{8,}$" title="Please enter a valid fax number with at least 8 digits"
+                                                   aria-describedby="basic-addon3 basic-addon4">
                                         </div>
                                     </div>
                                     <div class="mb-3">

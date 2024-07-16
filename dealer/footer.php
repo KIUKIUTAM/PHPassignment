@@ -1,5 +1,4 @@
-<?php
-echo '
+
 <div class="footer-nav">
     <div class="container">
       <ul class="footer-nav-list">
@@ -32,15 +31,6 @@ echo '
         <li class="footer-nav-item">
           <h2 class="nav-title">Our Company</h2>
         </li>
-
-        <li class="footer-nav-item">
-          <a href="#" class="footer-nav-link">Delivery</a>
-        </li>
-
-        <li class="footer-nav-item">
-          <a href="#" class="footer-nav-link">Legal Notice</a>
-        </li>
-
         <li class="footer-nav-item">
           <a href="#" class="footer-nav-link">Terms and conditions</a>
         </li>
@@ -58,15 +48,6 @@ echo '
         <li class="footer-nav-item">
           <h2 class="nav-title">Services</h2>
         </li>
-
-        <li class="footer-nav-item">
-          <a href="#" class="footer-nav-link">Prices drop</a>
-        </li>
-
-        <li class="footer-nav-item">
-          <a href="#" class="footer-nav-link">New products</a>
-        </li>
-
         <li class="footer-nav-item">
           <a href="#" class="footer-nav-link">Best sales</a>
         </li>
@@ -149,5 +130,3 @@ echo '
       </ul>
     </div>
   </div>
-';
-?>

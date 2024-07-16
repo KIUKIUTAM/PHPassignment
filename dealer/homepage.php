@@ -23,7 +23,7 @@ require_once ('../db/connet.php');
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     /> -->
-    <link rel="stylesheet" href="./assets/css/style-homePage.css" />
+    <link rel="stylesheet" href="./asserts/css/style-prefix.css"/>
     
     <!--
     - custom css link
@@ -209,7 +209,7 @@ require_once ('../db/connet.php');
     <!--
     - custom js link
   -->
-    <script src="./assets/js/script.js"></script>
+    <script src="./asserts/js/script.js"></script>
     
     <!--
     - ionicon link
@@ -237,6 +237,3 @@ require_once ('../db/connet.php');
     </script>
   </body>
 </html>
-
-';
-?>

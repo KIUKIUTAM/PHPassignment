@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="./dealer/assets/css/login.css">
+    <link rel="stylesheet" href="./dealer/asserts/css/login.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
@@ -70,5 +70,5 @@
         </from>
     </div>
 </body>
-<script src="./dealer/assets/js/Managerlogin.js"></script>
+<script src="./dealer/asserts/js/Managerlogin.js"></script>
 </html>

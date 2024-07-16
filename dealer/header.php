@@ -8,7 +8,8 @@ session_start();
 
   }
 </style>
-<a href="" class="menu-title"><span>Dealer Email: <?php if(isset($_SESSION['dealer'])){echo$_SESSION['dealer'];}?></span></a> 
+
+<span>Dealer Email: <?php if(isset($_SESSION['dealer'])){echo$_SESSION['dealer'];}?></span>
 <div class="header-main">
   <div class="container">
     <a href="./homepage.php" class="menu-title"><img src="../asserts/img/catHead.jpg" width="70"  class="showcase-img"/><h4 style="font-size: 1.4em;">SLMS</h4></a>

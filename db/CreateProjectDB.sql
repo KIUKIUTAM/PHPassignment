@@ -3,13 +3,14 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2024 年 07 月 15 日 16:45
+-- 產生時間： 2024 年 07 月 16 日 14:49
 -- 伺服器版本： 8.0.37
 -- PHP 版本： 8.2.18
 
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = "+80:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -18,10 +19,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- 資料庫： `php_lmc_system`
+-- 資料庫： `projectdb`
 --
-CREATE DATABASE IF NOT EXISTS `php_lmc_system` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `php_lmc_system`;
+CREATE DATABASE IF NOT EXISTS `projectdb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `projectdb`;
 
 -- --------------------------------------------------------
 
@@ -35,8 +36,8 @@ CREATE TABLE IF NOT EXISTS `dealer` (
   `dealerEmail` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `password` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `dealerName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `contactNumber` bigint DEFAULT NULL,
-  `faxNumber` bigint DEFAULT NULL,
+  `contactNumber` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `faxNumber` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `deliveryAddress` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`dealerID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -51,9 +52,9 @@ TRUNCATE TABLE `dealer`;
 --
 
 INSERT INTO `dealer` (`dealerID`, `dealerEmail`, `password`, `dealerName`, `contactNumber`, `faxNumber`, `deliveryAddress`) VALUES
-(1, 'abcmotors@gmail.com', 'Aa1234567', 'ABC_Motors', 22345678, NULL, '123 Main Street, Hong Kong'),
+(1, 'abcmotors@gmail.com', 'Aa1234567', 'ABC_Motors', '22345678', NULL, '123 Main Street, Hong Kong'),
 (4, '230501558V2@vtc.com', '$2y$10$wIeevM3gG3lZ6hVYeJz/YexBl9fQ4.sttn9y/O0IHSMLh6F9vu2Jm', NULL, NULL, NULL, NULL),
-(6, '230501558@vtc.com', '$2y$10$4awZTibwTPs1VUHtKQcS3.s84AlQI6BxF0FTm0b8Pc.DynBcxI9sq', 'q', 85212345678, 88612345678, 'HOWARD FACTORY');
+(6, '230501558@vtc.com', '$2y$10$4awZTibwTPs1VUHtKQcS3.s84AlQI6BxF0FTm0b8Pc.DynBcxI9sq', 'Vincent', '852-123123123', '886-12345678', 'HOWARD FACTORY');
 
 -- --------------------------------------------------------
 
@@ -70,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `orderline` (
   PRIMARY KEY (`orderLineID`),
   KEY `orders` (`orderID`),
   KEY `sparePart` (`sparePartNum`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- 資料表新增資料前，先清除舊資料 `orderline`
@@ -89,7 +90,30 @@ INSERT INTO `orderline` (`orderLineID`, `orderID`, `sparePartNum`, `orderQty`) V
 (9, 8, 200001, 7),
 (10, 8, 300005, 7),
 (11, 9, 100004, 8),
-(12, 10, 400003, 4);
+(12, 10, 400003, 4),
+(13, 11, 300004, 5),
+(14, 12, 200002, 135),
+(15, 12, 200004, 28),
+(16, 12, 400001, 12),
+(17, 13, 100002, 1),
+(18, 13, 100003, 1),
+(19, 13, 100004, 1),
+(20, 13, 100005, 2),
+(21, 13, 200001, 1),
+(22, 13, 200002, 1),
+(23, 13, 200003, 1),
+(24, 13, 200004, 1),
+(25, 13, 200005, 1),
+(26, 13, 300001, 1),
+(27, 13, 300002, 1),
+(28, 13, 300003, 1),
+(29, 13, 300004, 1),
+(30, 13, 300005, 1),
+(31, 13, 400001, 4),
+(32, 13, 400002, 2),
+(33, 13, 400003, 2),
+(34, 13, 400004, 1),
+(35, 13, 400005, 2);
 
 -- --------------------------------------------------------
 
@@ -106,10 +130,12 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `orderDateTime` timestamp NOT NULL,
   `deliveryDate` date DEFAULT NULL,
   `orderPrice` float DEFAULT '0',
+  `salesManagerID` mediumint DEFAULT NULL,
   `requestCancelStatus` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`orderID`),
-  KEY `dealer` (`dealerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  KEY `dealer` (`dealerID`),
+  KEY `salesManager` (`salesManagerID`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- 資料表新增資料前，先清除舊資料 `orders`
@@ -120,15 +146,16 @@ TRUNCATE TABLE `orders`;
 -- 傾印資料表的資料 `orders`
 --
 
-INSERT INTO `orders` (`orderID`, `dealerID`, `orderStatus`, `deliveryAddress`, `orderDateTime`, `deliveryDate`, `orderPrice`) VALUES
-(1, 1, 1, '123 Main Street, Hong Kong', '2024-07-08 00:00:00', '2024-07-09', 0),
-(6, 6, 1, 'HOWARD FACTORY BUILDING HOWARD FACTORY BUILDING, 66 TSUN YIP STREET KOWLOON KWUN TONG ', '2024-07-15 09:01:25', NULL, 26405.2),
-(7, 6, 1, 'HOWARD FACTORY BUILDING HOWARD FACTORY BUILDING, 66 TSUN YIP STREET KOWLOON KWUN TONG ', '2024-07-15 09:09:18', NULL, 42.45),
-(8, 6, 1, 'HOWARD FACTORY BUILDING HOWARD FACTORY BUILDING, 66 TSUN YIP STREET KOWLOON KWUN TONG ', '2024-07-15 09:10:23', NULL, 11024.9),
-(9, 6, 1, 'HOWARD FACTORY BUILDING HOWARD FACTORY BUILDING, 66 TSUN YIP STREET KOWLOON KWUN TONG ', '2024-07-15 09:17:03', NULL, 367.92),
-(10, 6, 1, 'HOWARD FACTORY', '2024-07-15 11:31:09', NULL, 2576);
-
--- --------------------------------------------------------
+INSERT INTO `orders` (`orderID`, `dealerID`, `orderStatus`, `deliveryAddress`, `orderDateTime`, `deliveryDate`, `orderPrice`, `salesManagerID`, `requestCancelStatus`) VALUES
+(1, 1, 1, '123 Main Street, Hong Kong', '2024-07-08 00:00:00', '2024-07-09', 0, NULL, 0),
+(6, 6, 1, 'HOWARD FACTORY BUILDING HOWARD FACTORY BUILDING, 66 TSUN YIP STREET KOWLOON KWUN TONG ', '2024-07-15 09:01:25', NULL, 26405.2, NULL, 1),
+(7, 6, 1, 'HOWARD FACTORY BUILDING HOWARD FACTORY BUILDING, 66 TSUN YIP STREET KOWLOON KWUN TONG ', '2024-07-15 09:09:18', NULL, 42.45, NULL, 1),
+(8, 6, 1, 'HOWARD FACTORY BUILDING HOWARD FACTORY BUILDING, 66 TSUN YIP STREET KOWLOON KWUN TONG ', '2024-07-15 09:10:23', NULL, 11024.9, NULL, 0),
+(9, 6, 1, 'HOWARD FACTORY BUILDING HOWARD FACTORY BUILDING, 66 TSUN YIP STREET KOWLOON KWUN TONG ', '2024-07-15 09:17:03', NULL, 367.92, NULL, 1),
+(10, 6, 1, 'HOWARD FACTORY', '2024-07-15 11:31:09', NULL, 2576, NULL, 1),
+(11, 6, 1, 'HOWARD FACTORY', '2024-07-15 17:20:48', NULL, 1145, NULL, 0),
+(12, 6, 1, 'HOWARD FACTORY', '2024-07-15 17:21:24', NULL, 461967, NULL, 0),
+(13, 6, 1, 'HOWARD FACTORY', '2024-07-16 02:41:08', NULL, 146217, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -224,6 +251,7 @@ ALTER TABLE `orderline`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`dealerID`) REFERENCES `dealer` (`dealerID`);
+SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

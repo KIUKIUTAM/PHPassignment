@@ -22,8 +22,8 @@ require_once('../db/connet.php');
     <!--
     - custom css link
   -->
-    <link rel="stylesheet" href="./assets/css/style-prefix.css" />
-    <link rel="stylesheet" href="assets\css\style-productDetail.css" />
+    <link rel="stylesheet" href="./asserts/css/style-prefix.css" />
+    <link rel="stylesheet" href="asserts\css\style-productDetail.css" />
     <!--
     - google font link
   -->
@@ -162,7 +162,7 @@ require_once('../db/connet.php');
         }
     }
     </script>
-    <script type="text/javascript" src="./assets/js/toast.js"></script>
+    <script type="text/javascript" src="./asserts/js/toast.js"></script>
     <script>
     function addToCart() {
         const url = "../dealer/addtocart.php";
@@ -207,7 +207,7 @@ require_once('../db/connet.php');
     <!--
     - custom js link
   -->
-    <script src="./assets/js/script.js"></script>
+    <script src="./asserts/js/script.js"></script>
 
     <!--
     - ionicon link

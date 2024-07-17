@@ -109,13 +109,13 @@ require_once('../db/connet.php');
                   if ($row["discountPrice"] == null) {
                     $price = $row["price"];
                     echo '<div class="price-box">
-                                  <p class="price" id="price">$' . $price . '</p>';
+                    <p class="price" id="price">$' . $price . '</p>';
                   } else {
                     $price = $row["discountPrice"];
                     $delPrice = $row["price"];
                     echo '<div class="price-box" >
-                                  <p class="price" id="price">$' . $price . '</p>
-                                  <del>$' . $delPrice . '</del>';
+                    <p class="price" id="price">$' . $price . '</p>
+                    <del>$' . $delPrice . '</del>';
                   }
                   echo '</div>
                   <div class="quantity">
@@ -166,6 +166,9 @@ require_once('../db/connet.php');
 
     <script>
     function addToCart() {
+      if(document.getElementById("stockItemStatus").innerText == "Out of Stock"){
+        alert("Out of Stock\nNot allow to add to cart");
+        return;}
         const url = "../dealer/addtocart.php";
         const spareID = document.getElementById("sparePartNum").innerText;
         const spareQty = document.getElementById("quantityNumber").value;
@@ -199,7 +202,7 @@ require_once('../db/connet.php');
         toastNotif({
 				text: message,
 				color: '#5bc83f',
-				timeout: 5000,
+				timeout: 500,
 				icon: 'valid'
 			});
     }

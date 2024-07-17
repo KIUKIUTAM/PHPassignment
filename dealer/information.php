@@ -182,12 +182,15 @@ if (isset($_SESSION['dealer'])) {
                                 <div>
                                     <div class="mb-3">
                                         <label class="form-label">Name</label>
-                                        <input type="text" class="form-control" name="nameForUpdate" pattern="^[A-Za-z\s]{1,}$" title="Only letters and space allowed"
+                                        <input type="text" class="form-control" name="nameForUpdate"
+                                            pattern="^[A-Za-z\s]{1,}$" title="Only letters and space allowed"
                                             id="nameForUpdate" />
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="passwordForUpdate" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                        <input type="password" class="form-control" id="passwordForUpdate"
+                                            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
+                                            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                                             name="passwordForUpdate" />
                                     </div>
                                     <div class="mb-3">
@@ -200,8 +203,9 @@ if (isset($_SESSION['dealer'])) {
                                                 <option value="86">+86</option>
                                                 <option value="853">+853</option>
                                             </select>
-                                            <input type="text" class="form-control w-75 p-2"
-                                                id="contactNumberForUpdate" name="contactNumberForUpdate" pattern="^[0-9]{8,}$" title="Please enter a valid fax number with at least 8 digits"
+                                            <input type="text" class="form-control w-75 p-2" id="contactNumberForUpdate"
+                                                name="contactNumberForUpdate" pattern="^[0-9]{8,}$"
+                                                title="Please enter a valid fax number with at least 8 digits"
                                                 aria-describedby="basic-addon3 basic-addon4" />
                                         </div>
                                     </div>
@@ -215,9 +219,10 @@ if (isset($_SESSION['dealer'])) {
                                                 <option value="86">+86</option>
                                                 <option value="853">+853</option>
                                             </select>
-                                            <input type="text" class="form-control w-75 p-2" id="faxNumberForUpdate" name="faxNumberForUpdate"
-                                                   pattern="^[0-9]{8,}$" title="Please enter a valid fax number with at least 8 digits"
-                                                   aria-describedby="basic-addon3 basic-addon4">
+                                            <input type="text" class="form-control w-75 p-2" id="faxNumberForUpdate"
+                                                name="faxNumberForUpdate" pattern="^[0-9]{8,}$"
+                                                title="Please enter a valid fax number with at least 8 digits"
+                                                aria-describedby="basic-addon3 basic-addon4">
                                         </div>
                                     </div>
                                     <div class="mb-3">
@@ -249,7 +254,7 @@ if (isset($_SESSION['dealer'])) {
 
 
                         <!-- Order View-->
-  
+
                         <div class="tab-pane fade" id="v-pills-Order" role="tabpanel"
                             aria-labelledby="v-pills-messages-tab">
                             <table class="table table-striped table-hover">
@@ -290,24 +295,29 @@ if (isset($_SESSION['dealer'])) {
                                                         break;
                                                 }
                                      ?><tr>
-                                       <th scope="row"><?php echo sprintf('%06d', $row['orderID']);?></th>
-                                       <td><?php echo $row['orderDateTime'] ?></td>
-                                       <td><?php echo $OrderStatus ?></td>
-                                       <td><?php echo $deliveryDate ?></td>
-                                       <td>
-                                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
-                                           data-bs-target="#Modal-Detail" onclick="uploadOrderDetail(<?php echo $row['orderID'];?>,'<?php echo $row['orderDateTime'] ?>','<?php echo $row['deliveryAddress'] ?>','<?php echo $deliveryDate ?>','<?php echo $row['orderPrice'] ?>')">Details</button></td>
-                                            <?php if ($row['requestCancelStatus']) { ?>
-                                                <td>
-                                                    <button type="button" class="btn btn-outline-danger" disabled>Wait For approval</button>
-                                                </td>
-                                            <?php } else { ?>
-                                                <td>
-                                                    <button type="button" class="btn btn-outline-danger" onclick="cancelOrder('<?php echo $row['orderID']; ?>')">Cancel Order</button>
-                                                </td>
-                                            <?php } ?>
-                                     </tr>
-                                      <?php
+                                        <th scope="row"><?php echo sprintf('%06d', $row['orderID']);?></th>
+                                        <td><?php echo $row['orderDateTime'] ?></td>
+                                        <td><?php echo $OrderStatus ?></td>
+                                        <td><?php echo $deliveryDate ?></td>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                                data-bs-target="#Modal-Detail"
+                                                onclick="uploadOrderDetail(<?php echo $row['orderID'];?>,'<?php echo $row['orderDateTime'] ?>','<?php echo $row['deliveryAddress'] ?>','<?php echo $deliveryDate ?>','<?php echo $row['orderPrice'] ?>')">Details</button>
+                                        </td>
+                                        <?php if ($row['requestCancelStatus']) { ?>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-danger" disabled>Wait For
+                                                approval</button>
+                                        </td>
+                                        <?php } else { ?>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-danger"
+                                                onclick="cancelOrder('<?php echo $row['orderID']; ?>')">Cancel
+                                                Order</button>
+                                        </td>
+                                        <?php } ?>
+                                    </tr>
+                                    <?php
                                           }
                                          }
                                      ?>
@@ -336,8 +346,8 @@ if (isset($_SESSION['dealer'])) {
                                                     <label for="inputOrderDate" class="col-sm-3 col-form-label">Order
                                                         Date & Time:</label>
                                                     <div class="col-sm-8">
-                                                        <input type="datetime" class="form-control" id="OrderDetail-orderDateTime"
-                                                            placeholder="" disabled>
+                                                        <input type="datetime" class="form-control"
+                                                            id="OrderDetail-orderDateTime" placeholder="" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row margin-bottom10">
@@ -345,17 +355,15 @@ if (isset($_SESSION['dealer'])) {
                                                         class="col-sm-3 col-form-label">Delivery Address:</label>
                                                     <div class="col-sm-8">
                                                         <input type="datetime" class="form-control"
-                                                            id="OrderDetail-deliveryAddress"
-                                                            placeholder=""
-                                                            disabled>
+                                                            id="OrderDetail-deliveryAddress" placeholder="" disabled>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row margin-bottom10">
                                                     <label for="inputDeliveryAddress"
                                                         class="col-sm-3 col-form-label">Delivery Date:</label>
                                                     <div class="col-sm-8">
-                                                        <input type="datetime" class="form-control" id="OrderDetail-deliveryDate"
-                                                            placeholder="" disabled>
+                                                        <input type="datetime" class="form-control"
+                                                            id="OrderDetail-deliveryDate" placeholder="" disabled>
                                                     </div>
                                                 </div>
                                                 <h5 style="margin-top: 50px; margin-bottom: 20px;">Order item:</h5>
@@ -381,8 +389,9 @@ if (isset($_SESSION['dealer'])) {
                                         </div>
                                         <div class="modal-footer no-print">
                                             <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal" >Close</button>
-                                            <button type="button" class="btn btn-success"  onclick="printTheOrderDetail()">Print the Order</button>
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-success"
+                                                onclick="printTheOrderDetail()">Print the Order</button>
                                         </div>
                                     </div>
                                 </div>
@@ -406,61 +415,62 @@ if (isset($_SESSION['dealer'])) {
     <footer>
     </footer>
     <script>
-    function uploadOrderDetail(orderID,orderDateTime,deliveryAddress,deliveryDate,orderPrice) {
-        document.getElementById("OrderDetail-OrderID").placeholder  = orderID.toString().padStart(6, '0');
-        document.getElementById("OrderDetail-orderDateTime").placeholder  = orderDateTime;
-        document.getElementById("OrderDetail-deliveryAddress").placeholder  = deliveryAddress;
-        document.getElementById("OrderDetail-deliveryDate").placeholder  = deliveryDate;
+    function uploadOrderDetail(orderID, orderDateTime, deliveryAddress, deliveryDate, orderPrice) {
+        document.getElementById("OrderDetail-OrderID").placeholder = orderID.toString().padStart(6, '0');
+        document.getElementById("OrderDetail-orderDateTime").placeholder = orderDateTime;
+        document.getElementById("OrderDetail-deliveryAddress").placeholder = deliveryAddress;
+        document.getElementById("OrderDetail-deliveryDate").placeholder = deliveryDate;
         document.getElementById("Detail-totalPrice").innerText = orderPrice;
         const url = "./orderDetail.php";
         const data = {
             orderID: orderID
         };
         fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then(response => response.json())
-        .then(responseData => {
-            if (responseData.status === 'success') {
-                const orderLine = responseData.orderLine;
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(response => response.json())
+            .then(responseData => {
+                if (responseData.status === 'success') {
+                    const orderLine = responseData.orderLine;
 
-                const orderItemList = document.getElementById("OrderItemList");
-                orderItemList.innerHTML = "";
+                    const orderItemList = document.getElementById("OrderItemList");
+                    orderItemList.innerHTML = "";
 
-                orderLine.forEach((item, index) => {
-                    const tr = document.createElement("tr");
-                    tr.innerHTML = `
+                    orderLine.forEach((item, index) => {
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
                         <th scope="row">${index + 1}</th>
                         <td>${item.sparePartNum}</td>
                         <td>${item.sparePartName}</td>
                         <td>${item.orderQty}</td>
                         <td>$${item.price}</td>
                     `;
-                    orderItemList.appendChild(tr);
-                });
-            } else {
-                console.error('Error:', responseData.message);
-            }
-        }).catch(error => {
-            console.error('Fetch error:', error);
-        });
+                        orderItemList.appendChild(tr);
+                    });
+                } else {
+                    console.error('Error:', responseData.message);
+                }
+            }).catch(error => {
+                console.error('Fetch error:', error);
+            });
     }
 
 
-    function printTheOrderDetail(){
+    function printTheOrderDetail() {
         var printContents = document.getElementById('Modal-Detail').innerHTML;
         var originalContents = document.body.innerHTML;
         document.body.innerHTML = printContents;
         window.print();
         document.body.innerHTML = originalContents;
         window.location.reload();
-        
+
     }
-    function cancelOrder(orderID){
-        if(!confirm("Are you sure you want to cancel this order?")){
+
+    function cancelOrder(orderID) {
+        if (!confirm("Are you sure you want to cancel this order?")) {
             return;
         };
         const url = "./cancelOrder.php";
@@ -468,22 +478,22 @@ if (isset($_SESSION['dealer'])) {
             orderID: orderID
         };
         fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then(response => response.json())
-        .then(responseData => {
-            if (responseData.status === 'success') {
-                alert("Order has been cancelled");
-                window.location.reload();
-            } else {
-                console.error('Error:', responseData.message);
-            }
-        }).catch(error => {
-            console.error('Fetch error:', error);
-        });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(response => response.json())
+            .then(responseData => {
+                if (responseData.status === 'success') {
+                    alert("Order has been cancelled");
+                    window.location.reload();
+                } else {
+                    console.error('Error:', responseData.message);
+                }
+            }).catch(error => {
+                console.error('Fetch error:', error);
+            });
     }
     </script>
     <!--

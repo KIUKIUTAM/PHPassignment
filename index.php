@@ -37,7 +37,7 @@
                 <label><input type="checkbox" id="RememberMe"> Remember me</label>
                 <a class="forgot"  >Forgot password?</a>
             </div>
-            <input type="submit"  name="submit" class="login-btn" id="login-btn" value="submit" onclick="checkRemember()">
+            <input type="submit"  name="submit" class="login-btn" id="login-btn" value="Login" onclick="checkRemember()">
             <div class="register-link">
                 <p>
                     Don't have an account? <a id="loginSwap-btn">Register</a>

@@ -6,7 +6,8 @@ $category = $_GET["Category"];
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,10 +23,8 @@ $category = $_GET["Category"];
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
     <?php
 
     switch($category){
@@ -63,10 +62,10 @@ $category = $_GET["Category"];
         break;
     }
 ?>
-  </head>
+</head>
 
-  <body>
-   
+<body>
+
 
     <!--
     - HEADER
@@ -79,30 +78,30 @@ $category = $_GET["Category"];
   -->
 
     <main>
-      <!--
+        <!--
       - PRODUCT
     -->
 
-      <div class="product-container">
-        <div class="container">
-          <!--
+        <div class="product-container">
+            <div class="container">
+                <!--
           - SIDEBAR
         -->
-        <nav class="sidebar">
-        </nav>
-          <div class="product-box">
-            <!--
+                <nav class="sidebar">
+                </nav>
+                <div class="product-box">
+                    <!--
             - PRODUCT MINIMAL
           -->
 
-            <div class="product-minimal">
-              <div class="product-showcase">
-                <?php
+                    <div class="product-minimal">
+                        <div class="product-showcase">
+                            <?php
                 echo'<h2 class="title">'.$categoryTitle.'</h2>';
                 ?>
-                <div class="showcase-wrapper has-scrollbar">
-                  <div class="showcase-container">
-                    <?php
+                            <div class="showcase-wrapper has-scrollbar">
+                                <div class="showcase-container">
+                                    <?php
                   $categoryID=0;
                   switch($category){
                     case "Sheet_Metal":$categoryID= 1;
@@ -165,16 +164,16 @@ $category = $_GET["Category"];
                   }
                   
                   ?>
-                  </div>
-                </div>
-              </div>
-              
+                                </div>
+                            </div>
+                        </div>
 
-              
+
+
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </main>
 
     <!--
@@ -182,35 +181,30 @@ $category = $_GET["Category"];
   -->
 
     <footer>
-  
+
     </footer>
     <script>
     function ProductDetail(sparePartNum) {
-    window.location.href = ("./product_Detail?sparePartNum="+sparePartNum);
-    } 
+        window.location.href = ("./product_Detail?sparePartNum=" + sparePartNum);
+    }
     </script>
 
     <!--- custom js link-->
     <script src="./assets/js/script.js"></script>
 
     <!--- ionicon link-->
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script>
-      $(function(){
-          $("header").load("./header.php");
-          $("footer").load("./footer.php");
-          $(".sidebar").load("./sidebar.php");
-      });
+    $(function() {
+        $("header").load("./header.php");
+        $("footer").load("./footer.php");
+        $(".sidebar").load("./sidebar.php");
+    });
     </script>
-  </body>
+</body>
+
 </html>
 
 ';

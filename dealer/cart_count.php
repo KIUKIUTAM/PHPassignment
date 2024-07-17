@@ -10,7 +10,7 @@ if (isset($_SESSION['cart'])) {
 }
 header('Content-Type: application/json');
 $response = [
-    'cart_count' => $total_rows,
+    'cart_count' => $total_rows
 ];
 
 echo json_encode($response);

@@ -53,8 +53,7 @@
 }
 
 
-/*-----------------------------------*  #RESET
-*-----------------------------------*/
+/*#RESET*/
 
 *,
 *::before,
@@ -99,7 +98,6 @@ span {
 
 html {
   font-family: "Poppins", sans-serif;
-  -ms-scroll-chaining: none;
   overscroll-behavior: contain;
 }
 
@@ -133,16 +131,8 @@ body {
   background: var(--white);
 }
 
+/*#HEADER*/
 
-
-
-/*-----------------------------------*  #MAIN
-*-----------------------------------*/
-
-
-
-/*-----------------------------------*  #HEADER
-*-----------------------------------*/
 
 .header-top,
 .header-user-actions,
@@ -185,7 +175,6 @@ body {
   position: absolute;
   top: 50%;
   right: 2px;
-  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   color: var(--onyx);
   font-size: 18px;
@@ -405,8 +394,7 @@ body {
 
 
 
-/*-----------------------------------*  #SIDEBAR
-*-----------------------------------*/
+/*#SIDEBAR*/
 
 .sidebar {
   background: var(--white);
@@ -438,13 +426,8 @@ body {
 }
 
 .sidebar-top {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -ms-flex-align: center;
   align-items: center;
   margin-bottom: 10px;
 }
@@ -469,23 +452,14 @@ body {
 
 .sidebar-accordion-menu {
   width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-  -ms-flex-align: center;
   align-items: center;
   padding: 7px 0;
 }
 
 .sidebar .menu-title-flex {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -ms-flex-align: center;
   align-items: center;
   gap: 10px;
 }
@@ -507,7 +481,6 @@ body {
   max-height: 0;
   overflow: hidden;
   visibility: hidden;
-  -o-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
 }
 
@@ -517,46 +490,10 @@ body {
   visibility: visible;
 }
 
-.sidebar-submenu-title {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -ms-flex-align: center;
-  align-items: center;
-  color: var(--sonic-silver);
-  font-size: var(--fs-7);
-  padding: 2px 0;
-}
 
-.sidebar-submenu-title:hover {
-  color: var(--eerie-black);
-}
 
-.sidebar .product-name {
-  text-transform: capitalize;
-}
 
-.sidebar-accordion-menu.active .add-icon,
-.sidebar-accordion-menu .remove-icon {
-  display: none;
-}
 
-.sidebar-accordion-menu .add-icon,
-.sidebar-accordion-menu.active .remove-icon {
-  display: block;
-}
-
-.sidebar .showcase-heading {
-  font-size: var(--fs-5);
-  font-weight: var(--weight-600);
-  color: var(--onyx);
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 15px;
-}
 
 .sidebar .showcase {
   display: -webkit-box;

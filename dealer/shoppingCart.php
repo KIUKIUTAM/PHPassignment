@@ -23,7 +23,6 @@ require_once ('../db/connet.php');
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="./assets/css/style-prefix.css" />
   <link rel="stylesheet" href="./assets/css/style-shoppingCart.css" />
-  <link rel="stylesheet" href="./assets/css/toast.css"/>
   <!--
     - google font link
   -->
@@ -155,13 +154,13 @@ require_once ('../db/connet.php');
           <ul class="list-group">
             <li class="list-group-item list-group-total">
               <span>Item total (USD) : $</span>
-              <strong id="TotalPrice">0</strong>
+              <strong id="ItemtotalPrice">0</strong>
             </li>
           </ul>
 
           <div class="checkbox-wrapper-16">
             <label class="checkbox-wrapper">
-              <input class="checkbox-input" type="radio" name="deliveryMode" onchange="calDeliveryCost(1)">
+              <input class="checkbox-input" type="radio" value="weight" name="deliveryMode" onchange="calDeliveryCost(this)">
               <span class="checkbox-tile">
                 <span class="checkbox-icon">
                 <i class='bx bx-package'></i>
@@ -170,7 +169,7 @@ require_once ('../db/connet.php');
               </span>
             </label>
             <label class="checkbox-wrapper" style="margin-left: 30px;">
-              <input class="checkbox-input" type="radio" name="deliveryMode" onchange="calDeliveryCost(2)">
+              <input class="checkbox-input" type="radio" value="quantity"name="deliveryMode" onchange="calDeliveryCost(this)">
               <span class="checkbox-tile">
                 <span class="checkbox-icon">
                 <i class='bx bxl-docker' ></i>
@@ -211,7 +210,12 @@ require_once ('../db/connet.php');
               </div>
             </div>
           </div>
+          
           <ul class="list-group" style="margin-top: 30px;">
+          <li class="list-group-item list-group-total">
+              <span>Delivery Cost (USD) : $</span>
+              <strong id="DeliveryCost">0</strong>
+            </li>
             <li class="list-group-item list-group-total">
               <span>Total (USD) : $</span>
               <strong id="TotalPrice">0</strong>
@@ -236,60 +240,49 @@ require_once ('../db/connet.php');
 
 
   <script>
-        function calDeliveryCost(mode) {
-          TotalPrice= document.getElementById('TotalPrice').textContent;
+        function calDeliveryCost(radioButton) {
+          let totalWeight = 0;
+          let totalQuantity = 0;
+          if(radioButton.checked==false){
+            return;
+          }
+          ItemtotalPrice= document.getElementById('ItemtotalPrice').textContent;
           let list = document.getElementById('showPrice');
           let arr = [];
+          
+          document.getElementById('DeliveryCost').textContent=0;
+          document.getElementById('TotalPrice').textContent=0;
           if (list) {
             const childList = list.getElementsByTagName('li');
-            let totalWeight = 0;
-            let totalQuantity = 0;
             for (let i = 0; i < childList.length; i++) {
-              totalWeight += childList[i].querySelector('#spareQty').textContent.substring(5);
-              totalQuantity += childList[i].querySelector('#spareWeight').textContent.substring(12);
+              totalWeight += (childList[i].querySelector('#spareQty').textContent.substring(5)*childList[i].querySelector('#spareWeight').textContent.substring(12));
+              totalQuantity += (childList[i].querySelector('#spareQty').textContent.substring(5)*1);
             }
           }
-          alert(totalWeight);
-          alert(totalQuantity);
-          if(mode==1){
-            var shippingMethod = 'Weight';
+
+          if(radioButton.value=="weight"){
+            var shippingMethod = 'weight';
             var value =totalWeight;
           }else{
-            var shippingMethod = 'Quantity';
+            var shippingMethod = 'quantity';
             var value =totalQuantity;
           }
-          const   data = {
-            order: arr,
-            shippingMethod: shippingMethod
-          };
+          
         const url = `http://127.0.0.1:8080/ship_cost_api/${shippingMethod}/${value}`;
 
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 if (data.result === 'accepted') {
-                    const shippingCost = data.cost;
-                    const subtotalPrice = formData.get('subtotal_price');
-                    const totalPrice = parseFloat(subtotalPrice) + parseFloat(shippingCost);
-
-                    //set the shipping cost and totalprice to hidden tag
-                    document.getElementById('hidden-shipping-cost').value = shippingCost;
-                    document.getElementById('hidden-total-price').value = totalPrice;
-
-                    //update shipping cost and total price
-                    document.getElementById('shipping-cost').textContent = `$${shippingCost}`;
-                    document.getElementById('total-price').textContent = `$${totalPrice}`;
-
-                    // able the create order button
-                    document.getElementById('create-order-btn').disabled = false;
+                  document.getElementById('DeliveryCost').textContent = data.cost;
+                  document.getElementById('TotalPrice').textContent = parseFloat(ItemtotalPrice) + parseFloat(data.cost);
                 } else {
                     alert(data.reason);
+                    radioButton.checked=false;
                 }
             })
             .catch(error => console.error('Error:', error));
     }
-</script>
-  <script>
 function CreateOrder() {
     let list = document.getElementById('showPrice');
     let TotalPrice = document.getElementById('TotalPrice').textContent;
@@ -305,6 +298,10 @@ function CreateOrder() {
 
         if(arr.length == 0){
           alert("Please select the item to make order");
+          return;
+        }
+        if(TotalPrice == 0){
+          alert("Please select the delivery mode to make order");
           return;
         }
         const   data = {
@@ -327,7 +324,7 @@ function CreateOrder() {
         })
         .then(responseData => {
             if (responseData.status === 'success') {
-                alert('Order created successfully');
+                alert('Order created successfully\n OrderID:'+responseData.orderID+'Total Price:'+TotalPrice);
                 location.reload();
             } else {
                 console.error('Error:', responseData.message);
@@ -392,8 +389,9 @@ function removeFromSession(sparePartNum) {
     
 }
 function handleCheckboxChange(checkbox,spareName,spareID,spareWeight,numID,price) {
+    let radioButton = document.querySelector('input[name="deliveryMode"]:checked');
     const spareQty = document.getElementById(numID).value;
-    let TotalPrice = document.getElementById('TotalPrice').textContent;
+    let TotalPrice = document.getElementById('ItemtotalPrice').textContent;
     var showcase = checkbox.closest('.showcase');
     if (showcase) {
         var quantityElement = showcase.querySelector('#quantityForitemNum');
@@ -407,12 +405,12 @@ function handleCheckboxChange(checkbox,spareName,spareID,spareWeight,numID,price
     if (checkbox.checked) {
       addItem(spareName,spareID,spareWeight,spareQty,price);
       TotalPrice = parseFloat(TotalPrice) + (price * spareQty);
-
     } else {
       removeItem(('item-' + spareName.replace(/\s+/g, '-').toLowerCase()));
       TotalPrice = parseFloat(TotalPrice) - (price * spareQty);
     }
-    document.getElementById('TotalPrice').textContent = TotalPrice.toFixed(2);
+    document.getElementById('ItemtotalPrice').textContent = TotalPrice.toFixed(2);
+    calDeliveryCost(radioButton);
 }
 function addItem(spareName,spareID,spareWeight, spareQty, price) {
     const list = document.getElementById('showPrice');
@@ -482,7 +480,7 @@ function addToCart() {
             }).then(response => response.json())
             .then(responseData => {
                 if (responseData.status === 'success') {
-                    showToast(`Added ${spareQty} of item ${spareID} to cart`);
+                  
                 } else {
                     console.error('Error:', responseData.message);
                 }
@@ -513,20 +511,9 @@ function addToCart() {
     }
     setInterval(fetchCartCount, 5000);
   </script>
-  <script>
-    function showToast(message) {
-      toastNotif({
-				text: 'Lorem Ipsum is simply dummy text of the printing',
-				color: '#5bc83f',
-				timeout: 5000,
-				icon: 'valid'
-			});
-    }
-    </script>
   <!--
     - custom js link
   -->
-  <script src="./assets/js/toast.js"></script>
   <script src="./assets/js/script.js"></script>
 
   <!--

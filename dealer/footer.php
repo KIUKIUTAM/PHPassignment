@@ -18,13 +18,6 @@
           <a href="#" class="footer-nav-link">Best sales</a>
         </li>
 
-        <li class="footer-nav-item">
-          <a href="#" class="footer-nav-link">Contact us</a>
-        </li>
-
-        <li class="footer-nav-item">
-          <a href="#" class="footer-nav-link">Sitemap</a>
-        </li>
       </ul>
 
       <ul class="footer-nav-list">

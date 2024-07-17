@@ -13,7 +13,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
 let configIcons = {
 	valid: 'fa-circle-check',
 	error: 'fa-circle-xmark',
-    	warring: 'fa-circle-exclamation'
+    warring: 'fa-circle-exclamation'
 }
 
 const toastNotif = (setting) => {

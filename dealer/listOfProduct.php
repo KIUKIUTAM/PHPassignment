@@ -13,7 +13,6 @@ $category = $_GET["Category"];
     <title>SLMS - eCommerce Website</title>
 
     <!--- favicon-->
-
     <link rel="shortcut icon" href="../assets/img/catHead.jpg" type="image/x-icon" />
 
     <!--- custom css link-->
@@ -145,7 +144,7 @@ $category = $_GET["Category"];
                         </a>
                         <div class="showcase-content">
                           <a href="#"><h4 class="showcase-title">'.$row["sparePartName"].'</h4></a>
-                          <a href='.$category.' class="showcase-category">'.$categoryName.'</a>';
+                          <a class="showcase-category">'.$categoryName.'</a>';
                         if($row["discountPrice"]==null){
                           $price = $row["price"];
                           echo'<div class="price-box">

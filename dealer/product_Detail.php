@@ -23,7 +23,8 @@ require_once('../db/connet.php');
     - custom css link
   -->
     <link rel="stylesheet" href="./assets/css/style-prefix.css" />
-    <link rel="stylesheet" href="assets\css\style-productDetail.css" />
+    <link rel="stylesheet" href="./assets/css/style-productDetail.css" />
+    <link rel="stylesheet" href="./assets/css/toast.css" />
     <!--
     - google font link
   -->
@@ -162,7 +163,7 @@ require_once('../db/connet.php');
         }
     }
     </script>
-    <script type="text/javascript" src="./assets/js/toast.js"></script>
+
     <script>
     function addToCart() {
         const url = "../dealer/addtocart.php";
@@ -195,7 +196,6 @@ require_once('../db/connet.php');
     }
 
     function showToast(message) {
-        // Implement your toast notification logic here
         toastNotif({
 				text: message,
 				color: '#5bc83f',
@@ -208,7 +208,7 @@ require_once('../db/connet.php');
     - custom js link
   -->
     <script src="./assets/js/script.js"></script>
-
+    <script type="text/javascript" src="./assets/js/toast.js"></script>
     <!--
     - ionicon link
   -->

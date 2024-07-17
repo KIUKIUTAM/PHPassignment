@@ -177,47 +177,39 @@ if (isset($_SESSION['dealer'])) {
 
                         <div class="tab-pane fade" id="v-pills-update" role="tabpanel"
                             aria-labelledby="v-pills-update-tab">
-                            <form action="./updataInformation.php" method="POST">
+                            <form action="./UpdateInformation.php" method="POST">
                                 <div class="information-title">Information Update</div>
                                 <div>
                                     <div class="mb-3">
                                         <label class="form-label">Name</label>
-                                        <input type="text" class="form-control" name="nameForUpdata" pattern="^[A-Za-z\s]{1,}$" title="Only letters and space allowed"
-                                            id="nameForUpdata" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                        <input type="email" class="form-control" id="inputEmailForUpdata" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address"
-                                            name="inputEmailForUpdata" aria-describedby="emailHelp" />
-                                        <div id="emailHelp" class="form-text">
-                                            We'll never share your email with anyone else.
-                                        </div>
+                                        <input type="text" class="form-control" name="nameForUpdate" pattern="^[A-Za-z\s]{1,}$" title="Only letters and space allowed"
+                                            id="nameForUpdate" />
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="passwordForUpdata" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-                                            name="passwordForUpdata" />
+                                        <input type="password" class="form-control" id="passwordForUpdate" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                            name="passwordForUpdate" />
                                     </div>
                                     <div class="mb-3">
                                         <label for="basic-url" class="form-label">Contact Number</label>
                                         <div class="input-group">
 
-                                            <select class="form-select" id="areaCodeForUpdata" name="areaCodeForUpdata">
+                                            <select class="form-select" id="areaCodeForUpdate" name="areaCodeForUpdate">
                                                 <option value="852" selected>+852</option>
                                                 <option value="886">+886</option>
                                                 <option value="86">+86</option>
                                                 <option value="853">+853</option>
                                             </select>
                                             <input type="text" class="form-control w-75 p-2"
-                                                id="contactNumberForUpdata" name="contactNumberForUpdata" pattern="^[0-9]{8,}$" title="Please enter a valid fax number with at least 8 digits"
+                                                id="contactNumberForUpdate" name="contactNumberForUpdate" pattern="^[0-9]{8,}$" title="Please enter a valid fax number with at least 8 digits"
                                                 aria-describedby="basic-addon3 basic-addon4" />
                                         </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="basic-url" class="form-label">Fax Number</label>
                                         <div class="input-group">
-                                            <select class="form-select" id="faxAreaCodeForUpdata"
-                                                name="faxAreaCodeForUpdata">
+                                            <select class="form-select" id="faxAreaCodeForUpdate"
+                                                name="faxAreaCodeForUpdate">
                                                 <option value="852" selected>+852</option>
                                                 <option value="886">+886</option>
                                                 <option value="86">+86</option>
@@ -231,8 +223,8 @@ if (isset($_SESSION['dealer'])) {
                                     <div class="mb-3">
                                         <label for="basic-url" class="form-label">Delivery Address</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" id="deliveryAddressForUpdata"
-                                                name="deliveryAddressForUpdata"
+                                            <input type="text" class="form-control" id="deliveryAddressForUpdate"
+                                                name="deliveryAddressForUpdate"
                                                 aria-describedby="basic-addon3 basic-addon4" />
                                         </div>
                                     </div>

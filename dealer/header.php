@@ -31,7 +31,11 @@ session_start();
                     <ion-icon name="person-outline"></ion-icon>
                 </a>
             </button>
-
+            <button class="action-btn">
+                <a href="./OrderView.php">
+                    <ion-icon name="file-tray-full-outline"></ion-icon>
+                </a>
+            </button>
 
 
             <button class="action-btn">
@@ -113,7 +117,11 @@ session_start();
             <ion-icon name="person-outline"></ion-icon>
         </a>
     </button>
-
+    <button class="action-btn">
+        <a href="./OrderView.php">
+                    <ion-icon name="file-tray-full-outline"></ion-icon>
+        </a>
+    </button>
     <button class="action-btn" onclick="location.href='./shoppingCart.php'">
         <ion-icon name="bag-handle-outline"></ion-icon>
         <span class="count" id="shoppingCartCount2">0</span>

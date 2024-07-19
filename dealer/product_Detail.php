@@ -228,3 +228,10 @@ require_once('../db/connet.php');
 </body>
 
 </html>
+
+
+<?php
+
+$conn->close();
+
+?>

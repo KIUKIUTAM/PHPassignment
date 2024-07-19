@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="./dealer/assets/css/login.css">
+    <link rel="shortcut icon" href="./assets/img/catHead.jpg" type="image/x-icon" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
@@ -27,7 +28,7 @@
             </div>
             <div class="remember-forgot">
                 <label><input type="checkbox"> Remember me</label>
-                <a class="forgot" href="https://www.mannings.com.hk/health/cardiovascular-health/fish-oil/c/feomega-3?lang=zh_TW" target="_blank">Forgot password?</a>
+                <a class="forgot" href="./salesManagerV2/dashboard.php" target="_blank">Forgot password?</a>
             </div>
             <input type="submit" class="login-btn" id="login-btn" value="Login" >
             <div class="register-link">

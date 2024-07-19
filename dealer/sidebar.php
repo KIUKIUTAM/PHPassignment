@@ -2,6 +2,8 @@
 echo '
 <div class="sidebar has-scrollbar" data-mobile-menu>
     <div class="sidebar-category">
+
+
       <div class="sidebar-top">
         <h2 class="sidebar-title">Category</h2>
 
@@ -9,7 +11,18 @@ echo '
           <ion-icon name="close-outline"></ion-icon>
         </button>
       </div>
+        <li class="sidebar-menu-category">
+          <button class="sidebar-accordion-menu" data-accordion-btn>
+            <div class="menu-title-flex">
+              <a href="./listOfProduct?Category=ALL">
+                <p class="menu-title ALL">
+                  Show All
+                </p>
+              </a>
+            </div>
 
+          </button>
+        </li>
       <ul class="sidebar-menu-category-list">
         <li class="sidebar-menu-category">
           <button class="sidebar-accordion-menu" data-accordion-btn>

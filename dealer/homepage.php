@@ -85,7 +85,7 @@ require_once ('../db/connet.php');
                             class="showcase-img"
                           />
                         </a>
-  
+                        
                         <div class="showcase-content">
                           <a href="#">
                             <h4 class="showcase-title">'.$row["sparePartName"].'</h4>
@@ -196,35 +196,36 @@ require_once ('../db/connet.php');
     </footer>';
     
 ?>
-                                    <script>
-                                    function ProductDetail(sparePartNum) {
-                                        window.location.href = ("./product_Detail?sparePartNum=" + sparePartNum);
-                                    }
-                                    </script>
-                                    <!--
+<script>
+function ProductDetail(sparePartNum) {
+      window.location.href = ("./product_Detail?sparePartNum=" + sparePartNum);
+
+ }
+</script>
+<!--
     - custom js link
   -->
-                                    <script src="./assets/js/script.js"></script>
-
-                                    <!--
-    - ionicon link
-  -->
-                                    <script type="module"
-                                        src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-                                    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js">
-                                    </script>
-                                    <script
-                                        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-                                        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-                                        crossorigin="anonymous"></script>
-                                    <script src="https://code.jquery.com/jquery-latest.js"></script>
-                                    <script>
-                                    $(function() {
-                                        $("header").load("./header.php");
-                                        $("footer").load("./footer.php");
-                                        $(".sidebar").load("./sidebar.php");
-                                    });
-                                    </script>
+  <script src="./assets/js/script.js"></script>
+  <!--- ionicon link-->
+  <script type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js">
+  </script>
+  <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-latest.js"></script>
+  <script>
+  $(function() {
+      $("header").load("./header.php");
+      $("footer").load("./footer.php");
+      $(".sidebar").load("./sidebar.php");
+  });
+  </script>
 </body>
 
 </html>
+<?php
+$conn->close();
+?>

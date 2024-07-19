@@ -3,7 +3,8 @@ require_once('../db/connet.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,13 +25,11 @@ require_once('../db/connet.php');
   -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+</head>
 
-  <body>
+<body>
     <div class="overlay" data-overlay></div>
 
     <!--
@@ -45,28 +44,28 @@ require_once('../db/connet.php');
   -->
 
     <main>
-      <!--
+        <!--
       - PRODUCT
     -->
 
-      <div class="product-container">
-        <div class="container">
-          <!--
+        <div class="product-container">
+            <div class="container">
+                <!--
           - SIDEBAR
         -->
-          <nav class="sidebar"></nav>
-          <div class="product-box">
-            <!--
+                <nav class="sidebar"></nav>
+                <div class="product-box">
+                    <!--
             - PRODUCT MINIMAL
           -->
 
-            <div class="product-minimal">
-              <div class="product-showcase">
-                <h2 class="title">Search:</h2>
+                    <div class="product-minimal">
+                        <div class="product-showcase">
+                            <h2 class="title">Search:</h2>
 
-                <div class="showcase-wrapper has-scrollbar">
-                  <div class="showcase-container">
-                  <?php
+                            <div class="showcase-wrapper has-scrollbar">
+                                <div class="showcase-container">
+                                    <?php
                   $sql = "SELECT * FROM sparePart WHERE sparePartName LIKE '%".$_GET["search"]."%'";
                   $result = $conn->query($sql);
                   if($result->num_rows > 0){
@@ -125,16 +124,16 @@ require_once('../db/connet.php');
 
 
                   }?>
-                  </div>
-                </div>
-              </div>
-              
+                                </div>
+                            </div>
+                        </div>
 
-              
+
+
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </main>
 
     <!--
@@ -142,7 +141,7 @@ require_once('../db/connet.php');
   -->
 
     <footer>
-  
+
     </footer>
 
     <!--
@@ -153,21 +152,16 @@ require_once('../db/connet.php');
     <!--
     - ionicon link
   -->
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script>
-      $(function(){
-          $("header").load("./header.php");
-          $("footer").load("./footer.php");
-          $(".sidebar").load("./sidebar.php");
-      });
+    $(function() {
+        $("header").load("./header.php");
+        $("footer").load("./footer.php");
+        $(".sidebar").load("./sidebar.php");
+    });
     </script>
-  </body>
+</body>
+
 </html>

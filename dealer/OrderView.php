@@ -88,7 +88,7 @@ if (isset($_SESSION['dealer'])) {
 </head>
 
 <body>
-    <div class="overlay" data-overlay></div>
+
 
     <!--
     - HEADER
@@ -133,12 +133,31 @@ if (isset($_SESSION['dealer'])) {
                                     </ul>
                                 </li>
                             </ul>
-
                             <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"  id="SearchItem">
-                                <button class="btn btn-outline-success"  ><a id="SortingSearch"href="#" onclick="Search()">Search</a></button>
+                                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="SearchItem">
+                                <button class="btn btn-outline-success"><a id="SortingSearch" href="#" onclick="Search()">Search</a></button>
                             </form>
                         </div>
+
+                    </div>
+                </nav>
+                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                    <div class="container-fluid">
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <div class="input-group">
+                                    <span class="input-group-text">Order Create Date:</span>
+                                    <input type="datetime-local" aria-label="First name" class="form-control" id="startDateTime">
+                                    <input type="datetime-local" aria-label="Last name" class="form-control" id="endDateTime">
+                                    <button class="btn btn-outline-success form-control"><a href="#" id="datePicker" onclick="searchDate()">Search</a>
+
+                                    </button>
+                                </div>
+                            </ul>
+
+                        </div>
+
                     </div>
                 </nav>
                 <table class="table table-striped table-hover">
@@ -155,10 +174,6 @@ if (isset($_SESSION['dealer'])) {
                     <tbody>
                         <?php
                         $orderStatus = "";
-                        $phone = "";
-                        $faxNumber = "";
-                        $address = "";
-                        $password = "";
                         $sql = "SELECT * FROM `orders` WHERE dealerID = ?";
                         $condition = [];
                         $params = [$dealerID];
@@ -166,51 +181,78 @@ if (isset($_SESSION['dealer'])) {
                         if (isset($_GET['orderStatus'])) {
                             switch ($_GET['orderStatus']) {
                                 case 'WaitForApproval':
-                                    $OrderStatus = 1;
+                                    $orderStatus = 1;
                                     break;
                                 case 'WaitForDelivery':
-                                    $OrderStatus = 2;
+                                    $orderStatus = 2;
                                     break;
                                 case 'Delivered':
-                                    $OrderStatus = 3;
+                                    $orderStatus = 3;
                                     break;
                                 case 'Cancelled':
-                                    $OrderStatus = 4;
+                                    $orderStatus = 4;
                                     break;
                                 default:
-                                    $OrderStatus = null;
+                                    $orderStatus = null;
                             }
 
-                            if ($OrderStatus !== null) {
+                            if ($orderStatus !== null) {
                                 $condition[] = "orderStatus = ?";
-                                $params[] = $OrderStatus;
+                                $params[] = $orderStatus;
                             }
                         }
+
                         if (isset($_GET['searchItem']) && $_GET['searchItem'] !== null) {
                             $condition[] = "orderID = ?";
                             $params[] = $_GET['searchItem'];
                         }
+
+                        if (isset($_GET['startDateTime']) && !empty($_GET['startDateTime']) && isset($_GET['endDateTime']) && !empty($_GET['endDateTime'])) {
+                            // Validate the datetime format (assuming 'Y-m-d\TH:i' format for datetime-local input)
+                            $startDateTime = DateTime::createFromFormat('Y-m-d\TH:i', $_GET['startDateTime']);
+                            $endDateTime = DateTime::createFromFormat('Y-m-d\TH:i', $_GET['endDateTime']);
+
+
+                            if ($startDateTime && $endDateTime && $endDateTime > $startDateTime) {
+                                $condition[] = "orderDateTime BETWEEN ? AND ?";
+                                $params[] = $startDateTime->format('Y-m-d H:i:s');
+                                $params[] = $endDateTime->format('Y-m-d H:i:s');
+                            }
+                        }
+
                         if (!empty($condition)) {
                             $sql .= " AND " . implode(" AND ", $condition);
                         }
 
-                        if (isset($_GET['orderByOrder'])&&$_GET['orderByOrder'] != "") {
+                        if (isset($_GET['orderByOrder']) && $_GET['orderByOrder'] != "") {
                             if ($_GET['orderByOrder'] == 'ASC') {
                                 $sql .= " ORDER BY orderID ASC";
                             } else {
                                 $sql .= " ORDER BY orderID DESC";
                             }
+                        } else {
+                            $sql .= " ORDER BY orderID DESC";
                         }
-               
+
+
                         $stmt = $conn->prepare($sql);
 
-                     
-                        $stmt->bind_param(str_repeat('i', count($params)), ...$params);
+                        // Determine the types for bind_param
+                        $types = '';
+                        foreach ($params as $param) {
+                            if (is_int($param)) {
+                                $types .= 'i';
+                            } elseif (is_float($param)) {
+                                $types .= 'd';
+                            } else {
+                                $types .= 's';
+                            }
+                        }
 
-                     
+                        $stmt->bind_param($types, ...$params);
+
                         $stmt->execute();
 
-                      
                         $result = $stmt->get_result();
 
 
@@ -337,10 +379,36 @@ if (isset($_SESSION['dealer'])) {
         var urlForOrderBY = new URL(currentUrl);
 
 
+        //date time picker
+        function searchDate() {
+
+            var startDateTime = document.getElementById('startDateTime').value;
+            var endDateTime = document.getElementById('endDateTime').value;
+
+
+            if (!startDateTime || !endDateTime) {
+                alert('Choose the start and end date time.');
+                return;
+            }
+
+
+            var start = new Date(startDateTime);
+            var end = new Date(endDateTime);
+
+
+            if (end <= start) {
+                alert('the end date time must be later than the start date time.');
+                return;
+            }
+            urlForOrderBY.searchParams.set('startDateTime', startDateTime);
+            urlForOrderBY.searchParams.set('endDateTime', endDateTime);
+            document.getElementById('datePicker').href = urlForOrderBY.toString();
+
+        }
 
         // Order By
         function orderBy(AorD) {
-            switch(AorD){
+            switch (AorD) {
                 case 0:
                     urlForOrderBY.searchParams.set('orderByOrder', 'ASC');
                     document.getElementById('SortingOrderASC').href = urlForOrderBY.toString();
@@ -349,7 +417,7 @@ if (isset($_SESSION['dealer'])) {
                     urlForOrderBY.searchParams.set('orderByOrder', 'DESC');
                     document.getElementById('SortingOrderDESC').href = urlForOrderBY.toString();
                     break;
-                }
+            }
         }
 
         // Order Status
@@ -375,24 +443,23 @@ if (isset($_SESSION['dealer'])) {
 
         }
 
-        function Search(){
-            
+        function Search() {
+
             var searchItem = document.getElementById("SearchItem").value.trim();
-            if(searchItem == ""){
+            if (searchItem == "") {
                 alert("Please enter the order ID");
                 return;
             }
             urlForOrderBY.searchParams.set('searchItem', searchItem);
-            urlForOrderBY.searchParams.set('_', new Date().getTime());
-            document.getElementById('SortingSearch').href = urlForOrderBY.toString();   
+            document.getElementById('SortingSearch').href = urlForOrderBY.toString();
         }
 
 
 
-        
-        
-        
-   
+
+
+
+
 
 
 
@@ -405,7 +472,7 @@ if (isset($_SESSION['dealer'])) {
             document.getElementById("OrderDetail-deliveryAddress").placeholder = deliveryAddress;
             document.getElementById("OrderDetail-deliveryDate").placeholder = deliveryDate;
             document.getElementById("Detail-totalPrice").innerText = orderPrice;
-            const url = "./orderDetail.php";
+            const url = "./assets/subphp/orderDetail.php";
             const data = {
                 orderID: orderID
             };
@@ -454,14 +521,14 @@ if (isset($_SESSION['dealer'])) {
         }
 
         function cancelOrder(orderID, requestCancelStatus) {
-            if (requestCancelStatus==1) {
+            if (requestCancelStatus == 1) {
                 alert("This order has been requested to cancel, please wait for approval");
                 return;
             }
             if (!confirm("Are you sure you want to cancel this order?")) {
                 return;
             };
-            const url = "./cancelOrder.php";
+            const url = "./assets/subphp/cancelOrder.php";
             const data = {
                 orderID: orderID
             };
@@ -485,8 +552,8 @@ if (isset($_SESSION['dealer'])) {
                 }).catch(error => {
                     console.error('Fetch error:', error);
                 });
-                location.reload();
-        }   
+            location.reload();
+        }
     </script>
     <!--
     - custom js link
@@ -502,8 +569,8 @@ if (isset($_SESSION['dealer'])) {
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script>
         $(function() {
-            $("header").load("./header.php");
-            $("footer").load("./footer.php");
+            $("header").load("./assets/subphp/header.php");
+            $("footer").load("./assets/subphp/footer.php");
         });
     </script>
 </body>

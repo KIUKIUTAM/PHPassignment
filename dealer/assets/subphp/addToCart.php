@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 $data = file_get_contents('php://input');
@@ -41,4 +41,3 @@ if (isset($_SESSION['cart'])) {
 }
 
 echo json_encode(['status' => 'success', 'message' => 'Item added to cart']);
-?>

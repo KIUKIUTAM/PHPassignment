@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<php lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -22,10 +22,10 @@
         <div class="header">
 
             <div class="header-left active">
-                <a href="dashboard.html" class="logo">
+                <a href="dashboard.php" class="logo">
                     <img src="assets/img/SLMS_Logo.png" alt="">
                 </a>
-                <a href="dashboard.html" class="logo-small">
+                <a href="dashboard.php" class="logo-small">
                     <img src="assets/img/SLMS_Logo.png" alt="">
                 </a>
                 <a id="toggle_btn" href="javascript:void(0);">
@@ -48,19 +48,19 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li>
-                            <a href="dashboard.html"><img src="assets/img/icons/dashboard.svg" alt="img"><span>
+                            <a href="dashboard.php"><img src="assets/img/icons/dashboard.svg" alt="img"><span>
                                     Dashboard</span> </a>
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"><img src="assets/img/icons/product.svg" alt="img"><span>
                                     Spare Parts</span> <span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="partsList.html">Spare Parts List</a></li>
-                                <li><a href="addPart.html">Add Spare Part</a></li>
+                                <li><a href="partsList.php">Spare Parts List</a></li>
+                                <li><a href="addPart.php">Add Spare Part</a></li>
                             </ul>
                         </li>
                         <li  class="active">
-                            <a href="orderList.html"><img src="assets/img/icons/sales1.svg" alt="img"><span> Orders</span> </a>
+                            <a href="orderList.php"><img src="assets/img/icons/sales1.svg" alt="img"><span> Orders</span> </a>
                         </li>
                     </ul>
                 </div>
@@ -285,4 +285,4 @@
     <script src="assets/js/script.js"></script>
 </body>
 
-</html>
+</php>

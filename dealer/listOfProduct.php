@@ -218,9 +218,9 @@ $category = $_GET["Category"];
   <script src="https://code.jquery.com/jquery-latest.js"></script>
   <script>
     $(function() {
-      $("header").load("./header.php");
-      $("footer").load("./footer.php");
-      $(".sidebar").load("./sidebar.php");
+      $("header").load("./assets/subphp/header.php");
+      $("footer").load("./assets/subphp/footer.php");
+      $(".sidebar").load("./assets/subphp/sidebar.php");
     });
   </script>
 </body>

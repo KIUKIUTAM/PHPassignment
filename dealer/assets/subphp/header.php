@@ -1,5 +1,5 @@
 <?php
-require_once ('../db/connet.php');
+require_once('../../../db/connet.php');
 session_start();
 ?>
 <style>
@@ -144,7 +144,7 @@ function search() {
 };
 
 function fetchCartCount() {
-    fetch("cart_count.php", {
+    fetch("./assets/subphp/cart_count.php", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -166,7 +166,7 @@ function fetchCartCount() {
 fetchCartCount();
 
 function loginOut() {
-    fetch('./logout.php')
+    fetch('./assets/subphp/logout.php')
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {

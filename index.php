@@ -20,7 +20,7 @@
 
 <body>
     <div class="wrapper-login active">
-        <form name="login" class="login-from" method="POST" action="./dealer/login.php">
+        <form name="login" class="login-from" method="POST" action="./dealer/assets/subphp/login.php">
             <h1>Dealer Login</h1>
             <div class="input-box">
             <input class="inputUser" id="inputUser" name="userEmailForLogin" type="text" placeholder="Email" value="<?php if(isset($_COOKIE['username'])) echo htmlspecialchars($_COOKIE['username']); ?>" required>                <i class='bx bxs-user'></i>
@@ -52,7 +52,7 @@
     </div>
     <div class="wrapper-register">
 
-        <form action="./dealer/register.php" method="post">
+        <form action="./dealer/assets/subphp/register.php" method="post">
             <h1>Register Now</h1>
             <div class="close-btn">
                 <i class='bx bx-x' id="close-btn"></i>
@@ -98,7 +98,7 @@
             userName: userName
         };
 
-        fetch("./dealer/setRememberCookie.php", {
+        fetch("./dealer/assets/subphp/setRememberCookie.php", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

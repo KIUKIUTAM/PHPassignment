@@ -1,6 +1,5 @@
 <?php
-require_once('../db/connet.php');
-
+require_once('../../../db/connet.php');
 // Check if the connection was successful
 if ($conn->connect_error) {
     die(json_encode(['status' => 'error', 'message' => 'Connection failed: ' . $conn->connect_error]));

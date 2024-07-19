@@ -9,52 +9,51 @@ require_once('../db/connet.php');
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SLMS - eCommerce Website</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SLMS - eCommerce Website</title>
 
-    <!--
+  <!--
     - favicon
   -->
   <link rel="shortcut icon" href="../assets/img/catHead.jpg" type="image/x-icon" />
 
-    <!--
+  <!--
     - custom css link
   -->
-    <link rel="stylesheet" href="./assets/css/style-prefix.css" />
-    <link rel="stylesheet" href="./assets/css/style-productDetail.css" />
-    <link rel="stylesheet" href="./assets/css/toast.css" />
-    <!--
+  <link rel="stylesheet" href="./assets/css/style-prefix.css" />
+  <link rel="stylesheet" href="./assets/css/style-productDetail.css" />
+  <link rel="stylesheet" href="./assets/css/toast.css" />
+  <!--
     - google font link
   -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 </head>
 
 <body>
 
-    <!--
+  <!--
     - HEADER
   -->
 
-    <header>
+  <header>
 
-    </header>
+  </header>
 
-    <!--
+  <!--
     - MAIN
   -->
 
-    <main>
-        <!--
+  <main>
+    <!--
       - PRODUCT
     -->
 
-        <div class="productDetail-container">
-            <?php
+    <div class="productDetail-container">
+      <?php
       $sparePartNum = $_GET["sparePartNum"];
       $sql = "SELECT * FROM sparePart WHERE sparePartNum = " . $sparePartNum;
       $result = $conn->query($sql);
@@ -86,16 +85,16 @@ require_once('../db/connet.php');
                   class="product-img"
                 />
               </a>';
-                  if ($row["stockItemQty"] >= 100) {
-                    $stockItemStatus = "In Stock";
-                    echo '<style>#stockItemStatus{color:green;}
+        if ($row["stockItemQty"] >= 100) {
+          $stockItemStatus = "In Stock";
+          echo '<style>#stockItemStatus{color:green;}
                       </style>';
-                  } else {
-                    $stockItemStatus = "Out of Stock";
-                    echo '<style>#stockItemStatus{color:red;}
+        } else {
+          $stockItemStatus = "Out of Stock";
+          echo '<style>#stockItemStatus{color:red;}
                     </style>';
-                  };
-                  echo '
+        };
+        echo '
                     <div class="product-content">
                     <label id="bold" >Spare ID:  </label><span class="product-title" id="sparePartNum">' . $row["sparePartNum"] . '</span><br>
                     <label id="bold" >Spare Name:  </label><span class="product-title" id="sparePartName">' . $row["sparePartName"] . '</span><br>
@@ -106,18 +105,18 @@ require_once('../db/connet.php');
                     <p class="product-description">
                       ' . $row["sparePartDescription"] . '
                     <br><br><div class="price-box">';
-                  if ($row["discountPrice"] == null) {
-                    $price = $row["price"];
-                    echo '<div class="price-box">
+        if ($row["discountPrice"] == null) {
+          $price = $row["price"];
+          echo '<div class="price-box">
                     <p class="price" id="price">$' . $price . '</p>';
-                  } else {
-                    $price = $row["discountPrice"];
-                    $delPrice = $row["price"];
-                    echo '<div class="price-box" >
+        } else {
+          $price = $row["discountPrice"];
+          $delPrice = $row["price"];
+          echo '<div class="price-box" >
                     <p class="price" id="price">$' . $price . '</p>
                     <del>$' . $delPrice . '</del>';
-                  }
-                  echo '</div>
+        }
+        echo '</div>
                   <div class="quantity">
                     <button onclick="quantityDecrement()">
                       <svg fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
@@ -136,95 +135,96 @@ require_once('../db/connet.php');
             </div>  
           </div>
         </div>';
-}
-?>
-        </div>
-    </main>
+      }
+      ?>
+    </div>
+  </main>
 
-    <!--
+  <!--
     - FOOTER
   -->
 
-    <footer>
+  <footer>
 
-    </footer>
-    <script>
+  </footer>
+  <script>
     function quantityDecrement() {
-        let num = parseInt(document.getElementById("quantityNumber").value, 10);
-        if (!isNaN(num) && num > 0) {
-            document.getElementById("quantityNumber").value = num - 1;
-        }
+      let num = parseInt(document.getElementById("quantityNumber").value, 10);
+      if (!isNaN(num) && num > 0) {
+        document.getElementById("quantityNumber").value = num - 1;
+      }
     }
 
     function quantityIncrement() {
-        let num = parseInt(document.getElementById("quantityNumber").value, 10);
-        if (!isNaN(num)) {
-            document.getElementById("quantityNumber").value = num + 1;
-        }
+      let num = parseInt(document.getElementById("quantityNumber").value, 10);
+      if (!isNaN(num)) {
+        document.getElementById("quantityNumber").value = num + 1;
+      }
     }
-    </script>
+  </script>
 
-    <script>
+  <script>
     function addToCart() {
-      if(document.getElementById("stockItemStatus").innerText == "Out of Stock"){
+      if (document.getElementById("stockItemStatus").innerText == "Out of Stock") {
         alert("Out of Stock\nNot allow to add to cart");
-        return;}
-        const url = "../dealer/addtocart.php";
-        const spareID = document.getElementById("sparePartNum").innerText;
-        const spareQty = document.getElementById("quantityNumber").value;
-        const spareName = document.getElementById("sparePartName").innerText;
-        const data = {
-            spareID: spareID,
-            spareQty: parseInt(spareQty, 10)
+        return;
+      }
+      const url = "./assets/subphp/addtocart.php";
+      const spareID = document.getElementById("sparePartNum").innerText;
+      const spareQty = document.getElementById("quantityNumber").value;
+      const spareName = document.getElementById("sparePartName").innerText;
+      const data = {
+        spareID: spareID,
+        spareQty: parseInt(spareQty, 10)
 
-        };
+      };
 
-        fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }).then(response => response.json())
-            .then(responseData => {
-                if (responseData.status === 'success') {
-                    showToast(`Added ${spareQty} of [${spareName}]`);
-                } else {
-                    console.error('Error:', responseData.message);
-                }
-            }).catch(error => {
-                console.error('Error:', error);
-            });
-            fetchCartCount();
+      fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }).then(response => response.json())
+        .then(responseData => {
+          if (responseData.status === 'success') {
+            showToast(`Added ${spareQty} of [${spareName}]`);
+          } else {
+            console.error('Error:', responseData.message);
+          }
+        }).catch(error => {
+          console.error('Error:', error);
+        });
+      fetchCartCount();
     }
 
     function showToast(message) {
-        toastNotif({
-				text: message,
-				color: '#5bc83f',
-				timeout: 500,
-				icon: 'valid'
-			});
+      toastNotif({
+        text: message,
+        color: '#5bc83f',
+        timeout: 500,
+        icon: 'valid'
+      });
     }
-    </script>
-    <!--
+  </script>
+  <!--
     - custom js link
   -->
-    <script src="./assets/js/script.js"></script>
-    <script type="text/javascript" src="./assets/js/toast.js"></script>
-    <!--
+  <script src="./assets/js/script.js"></script>
+  <script type="text/javascript" src="./assets/js/toast.js"></script>
+  <!--
     - ionicon link
   -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script src="https://code.jquery.com/jquery-latest.js"></script>
-    <script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="https://code.jquery.com/jquery-latest.js"></script>
+  <script>
     $(function() {
-        $("header").load("./header.php");
-        $("footer").load("./footer.php");
-        $(".sidebar").load("./sidebar.php");
+      $("header").load("./assets/subphp/header.php");
+      $("footer").load("./assets/subphp/footer.php");
+      $(".sidebar").load("./assets/subphp/sidebar.php");
     });
-    </script>
+  </script>
 </body>
 
 </html>

@@ -28,7 +28,7 @@
             </div>
             <div class="remember-forgot">
                 <label><input type="checkbox"> Remember me</label>
-                <a class="forgot" href="./salesManagerV2/dashboard.php" target="_blank">Forgot password?</a>
+                <a class="forgot" href="./salesManagerV2/homePage.php" target="_blank">Forgot password?</a>
             </div>
             <input type="submit" class="login-btn" id="login-btn" value="Login" >
             <div class="register-link">
@@ -71,5 +71,5 @@
         </from>
     </div>
 </body>
-<script src="./dealer/assets/js/Managerlogin.js"></script>
+<script src="./salesManagerV2/assets/js/Managerlogin.js"></script>
 </html>

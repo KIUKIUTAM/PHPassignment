@@ -1,5 +1,5 @@
 <?php
-require_once('../db/connet.php');
+require_once('../../../db/connet.php');
 
 $data = file_get_contents('php://input');
 $arrayData = json_decode($data, true);
@@ -26,4 +26,6 @@ if ($result->num_rows > 0) {
 } else {
     echo json_encode(['status' => 'fail', 'message' => 'No orderline found']);
 }
+$stmt->close();
+$conn->close();
 ?>

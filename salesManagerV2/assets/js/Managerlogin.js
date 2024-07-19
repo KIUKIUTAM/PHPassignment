@@ -112,14 +112,6 @@ function registerAC() {
 
 }
 
-
-//alert the massage to user
-const forgot = document.querySelector('.forgot');
-forgot.onclick = function () {
-    alert("How about buy some fish oil?");
-}
-
-
 function onEnter(e){
     if(e.keyCode == 13){
        registerAC();

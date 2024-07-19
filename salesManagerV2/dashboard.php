@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <title>SLMS - Admin Dashboard</title>
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/SLMS_Logo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./assets/img/SLMS_Logo.png">
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
-    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/animate.css">
+    <link rel="stylesheet" href="./assets/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="./assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="./assets/plugins/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
@@ -22,11 +22,11 @@
         <div class="header">
 
             <div class="header-left active">
-                <a href="dashboard.html" class="logo">
-                    <img src="assets/img/SLMS_Logo.png" alt="">
+                <a href="dashboard.php" class="logo">
+                    <img src="./assets/img/SLMS_Logo.png" alt="">
                 </a>
-                <a href="dashboard.html" class="logo-small">
-                    <img src="assets/img/SLMS_Logo.png" alt="">
+                <a href="dashboard.php" class="logo-small">
+                    <img src="./assets/img/SLMS_Logo.png" alt="">
                 </a>
                 <a id="toggle_btn" href="javascript:void(0);">
                 </a>
@@ -48,19 +48,19 @@
                 <div id="sidebar-menu" class="sidebar-menu">
                     <ul>
                         <li class="active">
-                            <a href="dashboard.html"><img src="assets/img/icons/dashboard.svg" alt="img"><span>
+                            <a href="dashboard.php"><img src="assets/img/icons/dashboard.svg" alt="img"><span>
                                     Dashboard</span> </a>
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"><img src="assets/img/icons/product.svg" alt="img"><span>
                                     Spare Parts</span> <span class="menu-arrow"></span></a>
                             <ul>
-                                <li><a href="partsList.html">Spare Parts List</a></li>
-                                <li><a href="addproduct.html">Add Spare Part</a></li>
+                                <li><a href="./partsList.php">Spare Parts List</a></li>
+                                <li><a href="./addproduct.php">Add Spare Part</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="orderList.html"><img src="assets/img/icons/sales1.svg" alt="img"><span> Orders</span> </a>
+                            <a href="orderList.php"><img src="assets/img/icons/sales1.svg" alt="img"><span> Orders</span> </a>
                         </li>
                     </ul>
                 </div>
@@ -81,10 +81,10 @@
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <li>
-                                            <a href="partsList.html" class="dropdown-item">Spare Parts List</a>
+                                            <a href="partsList.php" class="dropdown-item">Spare Parts List</a>
                                         </li>
                                         <li>
-                                            <a href="addproduct.html" class="dropdown-item">Add Spare Part</a>
+                                            <a href="addproduct.php" class="dropdown-item">Add Spare Part</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -104,10 +104,10 @@
                                             <tr>
                                                 <td>100005</td>
                                                 <td class="productimgname">
-                                                    <a href="partsList.html" class="product-img">
+                                                    <a href="partsList.php" class="product-img">
                                                         <img src="assets/img/product/100005.jpg" alt="product">
                                                     </a>
-                                                    <a href="partsList.html">Sheet Metal 100005</a>
+                                                    <a href="partsList.php">Sheet Metal 100005</a>
                                                 </td>
                                                 <td>$891.2</td>
                                                 <td>999</td>
@@ -115,10 +115,10 @@
                                             <tr>
                                                 <td>200005</td>
                                                 <td class="productimgname">
-                                                    <a href="partsList.html" class="product-img">
+                                                    <a href="partsList.php" class="product-img">
                                                         <img src="assets/img/product/200005.jpg" alt="product">
                                                     </a>
-                                                    <a href="partsList.html">Major Assemblies 200005</a>
+                                                    <a href="partsList.php">Major Assemblies 200005</a>
                                                 </td>
                                                 <td>$668.51</td>
                                                 <td>999</td>
@@ -126,10 +126,10 @@
                                             <tr>
                                                 <td>300005</td>
                                                 <td class="productimgname">
-                                                    <a href="partsList.html" class="product-img">
+                                                    <a href="partsList.php" class="product-img">
                                                         <img src="assets/img/product/300005.jpg" alt="product">
                                                     </a>
-                                                    <a href="partsList.html">Light Components 300005</a>
+                                                    <a href="partsList.php">Light Components 300005</a>
                                                 </td>
                                                 <td>$522.29</td>
                                                 <td>999</td>
@@ -137,10 +137,10 @@
                                             <tr>
                                                 <td>400005</td>
                                                 <td class="productimgname">
-                                                    <a href="partsList.html" class="product-img">
+                                                    <a href="partsList.php" class="product-img">
                                                         <img src="assets/img/product/400005.jpg" alt="product">
                                                     </a>
-                                                    <a href="partsList.html">Accessories 400005</a>
+                                                    <a href="partsList.php">Accessories 400005</a>
                                                 </td>
                                                 <td>$291.01</td>
                                                 <td>999</td>
@@ -220,10 +220,10 @@
                                         <td>100001</td>
                                         <td><a href="javascript:void(0);">Sheet Metal</a></td>
                                         <td class="productimgname">
-                                            <a class="product-img" href="partsList.html">
+                                            <a class="product-img" href="partsList.php">
                                                 <img src="assets/img/product/100001.jpg" alt="product">
                                             </a>
-                                            <a href="partsList.html">Sheet Metal 100001</a>
+                                            <a href="partsList.php">Sheet Metal 100001</a>
                                         </td>
                                         <td>2KG</td>
                                         <td>20</td>
@@ -233,10 +233,10 @@
                                         <td>200001</td>
                                         <td><a href="javascript:void(0);">Major Assemblies</a></td>
                                         <td class="productimgname">
-                                            <a class="product-img" href="partsList.html">
+                                            <a class="product-img" href="partsList.php">
                                                 <img src="assets/img/product/200001.jpg" alt="product">
                                             </a>
-                                            <a href="partsList.html">Major Assemblies 200001</a>
+                                            <a href="partsList.php">Major Assemblies 200001</a>
                                         </td>
                                         <td>1KG</td>
                                         <td>20</td>
@@ -246,10 +246,10 @@
                                         <td>300001</td>
                                         <td><a href="javascript:void(0);">Light Components</a></td>
                                         <td class="productimgname">
-                                            <a class="product-img" href="partsList.html">
+                                            <a class="product-img" href="partsList.php">
                                                 <img src="assets/img/product/300001.jpg" alt="product">
                                             </a>
-                                            <a href="partsList.html">Light Components 300001</a>
+                                            <a href="partsList.php">Light Components 300001</a>
                                         </td>
                                         <td>150G</td>
                                         <td>99</td>
@@ -259,10 +259,10 @@
                                         <td>400001</td>
                                         <td><a href="javascript:void(0);">Accessories</a></td>
                                         <td class="productimgname">
-                                            <a class="product-img" href="partsList.html">
+                                            <a class="product-img" href="partsList.php">
                                                 <img src="assets/img/product/400001.jpg" alt="product">
                                             </a>
-                                            <a href="partsList.html">Accessories 400001</a>
+                                            <a href="partsList.php">Accessories 400001</a>
                                         </td>
                                         <td>450G</td>
                                         <td>20</td>
@@ -278,21 +278,21 @@
     </div>
 
 
-    <script src="assets/js/jquery-3.6.0.min.js"></script>
+        <script src="assets/js/jquery-3.6.0.min.js"></script>
 
-    <script src="assets/js/feather.min.js"></script>
+        <script src="assets/js/feather.min.js"></script>
 
-    <script src="assets/js/jquery.slimscroll.min.js"></script>
+        <script src="assets/js/jquery.slimscroll.min.js"></script>
 
-    <script src="assets/js/jquery.dataTables.min.js"></script>
-    <script src="assets/js/dataTables.bootstrap4.min.js"></script>
+        <script src="assets/js/jquery.dataTables.min.js"></script>
+        <script src="assets/js/dataTables.bootstrap4.min.js"></script>
 
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/js/bootstrap.bundle.min.js"></script>
 
-    <script src="assets/plugins/apexchart/apexcharts.min.js"></script>
-    <script src="assets/plugins/apexchart/chart-data.js"></script>
+        <script src="assets/plugins/apexchart/apexcharts.min.js"></script>
+        <script src="assets/plugins/apexchart/chart-data.js"></script>
 
-    <script src="assets/js/script.js"></script>
+        <script src="assets/js/script.js"></script>
 </body>
 
 </html>

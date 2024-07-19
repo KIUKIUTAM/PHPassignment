@@ -1,5 +1,5 @@
 <?php
-require_once('../db/connet.php');
+require_once('../../../db/connet.php');
 session_start(); // Start the session at the beginning of the script
 
 if (isset($_POST['userEmailForLogin'])) {
@@ -26,16 +26,16 @@ if (isset($_POST['userEmailForLogin'])) {
         if (password_verify($password, $row['password'])) {
             $_SESSION['dealer'] = $row['dealerEmail'];
             if (empty($row['dealerName']) || empty($row['deliveryAddress'])) {
-                echo "<script>alert('Please complete your profile first'); location.replace('./information.php');</script>";
+                echo "<script>alert('Please complete your profile first'); location.replace('../../information.php');</script>";
             } else {
-                echo "<script>location.replace('./homepage.php');</script>";
+                echo "<script>location.replace('../../homepage.php');</script>";
                 exit();
             }
         } else {
-            echo "<script>alert('Invalid LoginEmail or password'); location.replace('../index.php');</script>";
+            echo "<script>alert('Invalid LoginEmail or password'); location.replace('../../../index.php');</script>";
         }
     } else {
-        echo "<script>alert('Invalid LoginEmail or password'); location.replace('../index.php');</script>";
+        echo "<script>alert('Invalid LoginEmail or password'); location.replace('../../../index.php');</script>";
     }
 
     // Close the statement and connection

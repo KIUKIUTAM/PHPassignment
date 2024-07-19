@@ -174,7 +174,7 @@ if (isset($_SESSION['dealer'])) {
 
                         <div class="tab-pane fade" id="v-pills-update" role="tabpanel"
                             aria-labelledby="v-pills-update-tab">
-                            <form action="./UpdateInformation.php" method="POST">
+                            <form action="./assets/subphp/UpdateInformation.php" method="POST">
                                 <div class="information-title">Information Update</div>
                                 <div>
                                     <div class="mb-3">
@@ -273,8 +273,8 @@ if (isset($_SESSION['dealer'])) {
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script>
     $(function() {
-        $("header").load("./header.php");
-        $("footer").load("./footer.php");
+        $("header").load("./assets/subphp/header.php");
+        $("footer").load("./assets/subphp/footer.php");
     });
     </script>
 </body>

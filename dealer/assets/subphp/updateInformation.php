@@ -1,5 +1,5 @@
 <?php
-require_once('../db/connet.php'); 
+require_once('../../../db/connet.php');
 session_start();
 if (isset($_POST['submit'])) {
   
@@ -36,12 +36,12 @@ if (isset($_POST['submit'])) {
         echo "<script>alert('SQL: " . $sql . "');</script>";
 
         if (mysqli_query($conn, $sql)) {
-            echo "<script>alert('Update Success!'); location.replace('./information.php');</script>";
+            echo "<script>alert('Update Success!'); location.replace('../../information.php');</script>";
         } else {
-            echo "<script>alert('Update Fail!'); location.replace('./information.php');</script>";
+            echo "<script>alert('Update Fail!'); location.replace('../../information.php');</script>";
         }
     } else {
-        echo "<script>alert('No fields to update!'); location.replace('./information.php');</script>";
+        echo "<script>alert('No fields to update!'); location.replace('../../information.php');</script>";
     }
 
     mysqli_close($conn);

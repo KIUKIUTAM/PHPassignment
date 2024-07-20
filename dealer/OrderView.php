@@ -4,55 +4,21 @@ session_start();
 ?>
 
 <?php
-$dealer_name = "";
-$dealer_email = "";
-$contact_areaCode = "";
-$dealer_contact = "";
-$fax_areaCode = "";
-$dealer_fax = "";
-$dealer_address = "";
-
+if (!isset($_SESSION['dealer'])) {
+    header("Location: ../login.php");
+    exit();
+}
 if (isset($_SESSION['dealer'])) {
     $dealer = $_SESSION['dealer'];
 
-    $stmt = $conn->prepare("SELECT dealerID,dealerName,dealerEmail, contactNumber, faxNumber, deliveryAddress FROM dealer WHERE dealerEmail = ?");
+    $stmt = $conn->prepare("SELECT dealerID FROM dealer WHERE dealerEmail = ?");
     $stmt->bind_param("s", $dealer);
     $stmt->execute();
     $result = $stmt->get_result();
     $dealerID = "";
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $dealer_email = $row['dealerEmail'];
         $dealerID = $row['dealerID'];
-        if ($row['dealerName'] != null) {
-            $dealer_name = $row['dealerName'];
-        }
-
-        if ($row['contactNumber'] != null) {
-            $dealer_contact = "Not Set";
-        } else {
-            $partForContact = explode('-', $row['contactNumber']);
-            if (count($partForContact) === 2) {
-                $contact_areaCode = $partForContact[0];
-                $dealer_contact = $partForContact[1];
-            }
-        }
-
-        if ($row['faxNumber'] == null) {
-            $dealer_fax = "Not Set";
-        } else {
-            $partForFax = explode('-', $row['faxNumber']);
-            if (count($partForFax) === 2) {
-                $fax_areaCode = $partForFax[0];
-                $dealer_fax = $partForFax[1];
-            }
-        }
-
-        if ($row['deliveryAddress'] == null) {
-            $dealer_address = "Not Set";
-        } else {
-            $dealer_address = $row['deliveryAddress'];
-        }
     }
     $stmt->close();
 }
@@ -84,6 +50,19 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
         .text-center {
             text-align: center;
         }
+
+
+        td.ColorGreen {
+            color: #198754 !important;
+        }
+
+        td.ColorLightRed {
+            color: #986F4D !important;
+        }
+
+        td.ColorRed {
+            color: #DC3545 !important;
+        }
     </style>
 </head>
 
@@ -112,10 +91,11 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                                                 Order Status
                                             </a>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" id="orderStatusWaitForApproval" href="#" onclick="orderStatus(0)">Wait for approval</a></li>
-                                                <li><a class="dropdown-item" id="orderStatusWaitForDelivery" href="#" onclick="orderStatus(1)">Wait for delivery</a></li>
-                                                <li><a class="dropdown-item" id="orderStatusDelivered" href="#" onclick="orderStatus(2)">Delivered</a></li>
-                                                <li><a class="dropdown-item" id="orderStatusCancelled" href="#" onclick="orderStatus(3)">Cancelled</a></li>
+                                                <li><a class="dropdown-item" id="orderStatusWaitForApproval" href="#" onclick="orderStatus(1)">Wait for approval</a></li>
+                                                <li><a class="dropdown-item" id="orderStatusWaitForDelivery" href="#" onclick="orderStatus(2)">Wait for delivery</a></li>
+                                                <li><a class="dropdown-item" id="orderStatusDelivered" href="#" onclick="orderStatus(3)">Delivered</a></li>
+                                                <li><a class="dropdown-item" id="orderStatusRequestCancelled" href="#" onclick="orderStatus(4)">Request Cancel</a></li>
+                                                <li><a class="dropdown-item" id="orderStatusCancelled" href="#" onclick="orderStatus(5)">Cancelled</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -236,8 +216,11 @@ if (isset($_GET['orderStatus'])) {
         case 'Delivered':
             $orderStatus = 3;
             break;
-        case 'Cancelled':
+        case 'RequestCancel':
             $orderStatus = 4;
+            break;
+        case 'Cancelled':
+            $orderStatus = 5;
             break;
         default:
             $orderStatus = null;
@@ -323,33 +306,34 @@ if ($result->num_rows > 0) {
 
     $dataSetJson = json_encode($dataSet);
     echo "<script>
-            $(document).ready(function() {
-                $('#OrderViewTable').DataTable({
-                    data: $dataSetJson,
-                     columns: [
-                    { title: 'Order ID', className: 'text-center' },
-                    { title: 'Order Date', className: 'text-center' },
-                    { title: 'Order Status', className: 'text-center' },
-                    { title: 'Delivery Date', className: 'text-center' },
-                    { title: 'Details', className: 'text-center' },
-                    { title: 'Cancel Order', className: 'text-center' }
-                ],
-                createdRow: function(row, data, dataIndex) {
-                if (data[3] === 'Wait for approval') {
-                    $(row).addClass('ColorGreen');
-                } else if (data[3] === 'Wait for delivery') {
-                    $(row).addClass('waiting');
-                } else if (data[3] === 'Delivered') {
-                    $(row).addClass('ColorGreen');
-                } else if (data[3] === 'Request Cancel') {
-                    $(row).addClass('waiting');
-                } else if (data[3] === 'Cancelled') {
-                    $(row).addClass('ColorRed');
+    $(document).ready(function() {
+        $('#OrderViewTable').DataTable({
+            data: $dataSetJson,
+            columns: [
+                { title: 'Order ID', className: 'text-center' },
+                { title: 'Order Date', className: 'text-center' },
+                { title: 'Order Status', className: 'text-center' },
+                { title: 'Delivery Date', className: 'text-center' },
+                { title: 'Details', className: 'text-center' },
+                { title: 'Cancel Order', className: 'text-center' }
+            ],
+            createdRow: function(row, data, dataIndex) {
+                var statusCell = $('td', row).eq(2);
+                if (data[2] === 'Wait for approval') {
+                    statusCell.addClass('ColorYellow');
+                } else if (data[2] === 'Wait for delivery') {
+                    statusCell.addClass('ColorYellow');
+                } else if (data[2] === 'Delivered') {
+                    statusCell.addClass('ColorGreen');
+                } else if (data[2] === 'Request Cancel') {
+                    statusCell.addClass('ColorLightRed');
+                } else if (data[2] === 'Cancelled') {
+                    statusCell.addClass('ColorRed');
                 }
             }
-                });
-            });
-        </script>";
+        });
+    });
+</script>";
 }
 
 ?>
@@ -391,19 +375,23 @@ if ($result->num_rows > 0) {
     // Order Status
     function orderStatus(orderStatus) {
         switch (orderStatus) {
-            case 0:
+            case 1:
                 urlForOrderBY.searchParams.set('orderStatus', 'WaitForApproval');
                 document.getElementById('orderStatusWaitForApproval').href = urlForOrderBY.toString();
                 break;
-            case 1:
+            case 2:
                 urlForOrderBY.searchParams.set('orderStatus', 'WaitForDelivery');
                 document.getElementById('orderStatusWaitForDelivery').href = urlForOrderBY.toString();
                 break;
-            case 2:
+            case 3:
                 urlForOrderBY.searchParams.set('orderStatus', 'Delivered');
                 document.getElementById('orderStatusDelivered').href = urlForOrderBY.toString();
                 break;
-            case 3:
+            case 4:
+                urlForOrderBY.searchParams.set('orderStatus', 'RequestCancel');
+                document.getElementById('orderStatusRequestCancelled').href = urlForOrderBY.toString();
+                break;
+            case 5:
                 urlForOrderBY.searchParams.set('orderStatus', 'Cancelled');
                 document.getElementById('orderStatusCancelled').href = urlForOrderBY.toString();
                 break;
@@ -501,9 +489,6 @@ if ($result->num_rows > 0) {
             cancelWay = 1;
         } else if (orderStatus == 1 && confirm("Are you sure you want to cancel this order?")) {
             cancelWay = 0;
-        } else {
-            alert("Sorry, you can't cancel this order");
-            return;
         }
         const url = "./assets/subphp/cancelOrder.php";
         const data = {
@@ -529,8 +514,11 @@ if ($result->num_rows > 0) {
             }).catch(error => {
                 console.error('Fetch error:', error);
             });
-        window.location.reload();
+            
+            window.location.reload();
     }
+        
+    
 </script>
 
 </html>

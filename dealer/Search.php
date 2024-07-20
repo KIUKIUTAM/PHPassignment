@@ -1,5 +1,10 @@
 <?php
 require_once('../db/connet.php');
+session_start();
+if(!isset($_SESSION['dealer'])){
+  header("Location: ../login.php");
+  exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

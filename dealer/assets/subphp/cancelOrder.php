@@ -17,7 +17,7 @@ if (!isset($arrayData['orderID']) || empty($arrayData['orderID'])) {
 }
 
 // Prepare the SQL statement
-if ($arrayData['orderStatus'] == 1) {
+if ($arrayData['cancelWay'] == 0) {
     $stmt = $conn->prepare("UPDATE orders SET orderStatus = 5 WHERE orderID = ?");//cancel directly
 } 
 else {

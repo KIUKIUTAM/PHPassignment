@@ -1,5 +1,10 @@
 <?php
 require_once('../db/connet.php');
+session_start();
+if(!isset($_SESSION['dealer'])){
+    header("Location: ../login.php");
+    exit();
+}
 ?>
 
 
@@ -57,7 +62,6 @@ require_once('../db/connet.php');
                             <div class="showcase-wrapper has-scrollbar">
                                 <div class="showcase-container">
                                     <?php
-                                    session_start();
                                     $index = 0;
                                     // Check if the session variable exists
                                     if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {

@@ -11,15 +11,16 @@ $stmt = $conn->prepare("SELECT s.sparePartName, o.sparePartNum, o.orderQty, s.pr
 $stmt->bind_param("s", $orderID);
 $stmt->execute();
 $result = $stmt->get_result();
-
+$index = 1;
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
  
         $orderLine[] = [
-            'sparePartName' => $row['sparePartName'],
-            'sparePartNum' => $row['sparePartNum'],
-            'orderQty' => $row['orderQty'],
-            'price' => $row['price']
+            $index++,
+            $row['sparePartNum'],
+            $row['sparePartName'],
+            $row['orderQty'],
+            $row['price']
         ];
     }
     echo json_encode(['status' => 'success', 'orderLine' => $orderLine]);

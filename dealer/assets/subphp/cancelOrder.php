@@ -17,7 +17,13 @@ if (!isset($arrayData['orderID']) || empty($arrayData['orderID'])) {
 }
 
 // Prepare the SQL statement
-$stmt = $conn->prepare("UPDATE orders SET requestCancelStatus = 1 WHERE orderID = ?");
+if ($arrayData['orderStatus'] == 1) {
+    $stmt = $conn->prepare("UPDATE orders SET orderStatus = 5 WHERE orderID = ?");//cancel directly
+} 
+else {
+    $stmt = $conn->prepare("UPDATE orders SET orderStatus = 4 WHERE orderID = ?"); // request for cancellation
+}
+
 if ($stmt === false) {
     die(json_encode(['status' => 'error', 'message' => 'Prepare statement failed: ' . $conn->error]));
 }
@@ -35,4 +41,3 @@ if ($stmt->execute()) {
 // Close the statement and connection
 $stmt->close();
 $conn->close();
-?>

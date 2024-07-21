@@ -1,5 +1,5 @@
 <?php
-require_once('../db/connet.php');
+require_once('../db/connect.php');
 session_start();
 ?>
 
@@ -199,144 +199,7 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
         $("footer").load("./assets/subphp/footer.php");
     });
 </script>
-<?php
-$orderStatus = "";
-$sql = "SELECT * FROM `orders` WHERE dealerID = ?";
-$condition = [];
-$params = [$dealerID];
 
-if (isset($_GET['orderStatus'])) {
-    switch ($_GET['orderStatus']) {
-        case 'WaitForApproval':
-            $orderStatus = 1;
-            break;
-        case 'WaitForDelivery':
-            $orderStatus = 2;
-            break;
-        case 'Delivered':
-            $orderStatus = 3;
-            break;
-        case 'RequestCancel':
-            $orderStatus = 4;
-            break;
-        case 'Cancelled':
-            $orderStatus = 5;
-            break;
-        default:
-            $orderStatus = null;
-    }
-
-    if ($orderStatus !== null) {
-        $condition[] = "orderStatus = ?";
-        $params[] = $orderStatus;
-    }
-}
-
-if (isset($_GET['startDateTime']) && !empty($_GET['startDateTime']) && isset($_GET['endDateTime']) && !empty($_GET['endDateTime'])) {
-    // Validate the datetime format (assuming 'Y-m-d\TH:i' format for datetime-local input)
-    $startDateTime = DateTime::createFromFormat('Y-m-d\TH:i', $_GET['startDateTime']);
-    $endDateTime = DateTime::createFromFormat('Y-m-d\TH:i', $_GET['endDateTime']);
-
-
-    if ($startDateTime && $endDateTime && $endDateTime > $startDateTime) {
-        $condition[] = "orderDateTime BETWEEN ? AND ?";
-        $params[] = $startDateTime->format('Y-m-d H:i:s');
-        $params[] = $endDateTime->format('Y-m-d H:i:s');
-    }
-}
-
-if (!empty($condition)) {
-    $sql .= " AND " . implode(" AND ", $condition);
-}
-
-
-
-$stmt = $conn->prepare($sql);
-
-// Determine the types for bind_param
-$types = '';
-foreach ($params as $param) {
-    if (is_int($param)) {
-        $types .= 'i';
-    } elseif (is_float($param)) {
-        $types .= 'd';
-    } else {
-        $types .= 's';
-    }
-}
-
-$stmt->bind_param($types, ...$params);
-
-$stmt->execute();
-
-$result = $stmt->get_result();
-
-
-if ($result->num_rows > 0) {
-    $dataSet = [];
-    while ($row = $result->fetch_assoc()) {
-        $deliveryDate = $row['deliveryDate'] == null ? "Not yet delivered" : $row['deliveryDate'];
-        $OrderStatus = "";
-        switch ($row['orderStatus']) {
-            case 1:
-                $OrderStatus = "Wait for approval";
-                break;
-            case 2:
-                $OrderStatus = "Wait for delivery";
-                break;
-            case 3:
-                $OrderStatus = "Delivered";
-                break;
-            case 4:
-                $OrderStatus = "Request Cancel";
-                break;
-            case 5:
-                $OrderStatus = "Cancelled";
-                break;
-        }
-        $dataSet[] = [
-            sprintf('%06d', $row['orderID']),
-            $row['orderDateTime'],
-            $OrderStatus,
-            $deliveryDate,
-            "<button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick='uploadOrderDetail(\"{$row['orderID']}\", \"{$row['orderDateTime']}\", \"{$row['deliveryAddress']}\", \"{$row['deliveryDate']}\", \"{$row['orderPrice']}\")'>Details</button>",
-            "<button type='button' class='btn btn-outline-danger' id='cancelButton{$row['orderID']}' onclick='cancelOrder(\"{$row['orderID']}\", \"{$row['orderStatus']}\")'>Cancel Order</button>"
-        ];
-    }
-
-    $dataSetJson = json_encode($dataSet);
-    echo "<script>
-    $(document).ready(function() {
-        $('#OrderViewTable').DataTable({
-            data: $dataSetJson,
-            columns: [
-                { title: 'Order ID', className: 'text-center' },
-                { title: 'Order Date', className: 'text-center' },
-                { title: 'Order Status', className: 'text-center' },
-                { title: 'Delivery Date', className: 'text-center' },
-                { title: 'Details', className: 'text-center' },
-                { title: 'Cancel Order', className: 'text-center' }
-            ],
-            createdRow: function(row, data, dataIndex) {
-                var statusCell = $('td', row).eq(2);
-                if (data[2] === 'Wait for approval') {
-                    statusCell.addClass('ColorYellow');
-                } else if (data[2] === 'Wait for delivery') {
-                    statusCell.addClass('ColorYellow');
-                } else if (data[2] === 'Delivered') {
-                    statusCell.addClass('ColorGreen');
-                } else if (data[2] === 'Request Cancel') {
-                    statusCell.addClass('ColorLightRed');
-                } else if (data[2] === 'Cancelled') {
-                    statusCell.addClass('ColorRed');
-                }
-            }
-        });
-    });
-</script>";
-}
-
-?>
 
 
 <script>
@@ -398,6 +261,92 @@ if ($result->num_rows > 0) {
         }
 
     }
+
+
+    function refreshOrderView() {
+        const url2 = "./assets/subphp/orderViewDataRefresh.php";
+        const data = {
+            dealer: "<?php echo $dealer; ?>",
+            orderStatus: "<?php echo $orderStatus; ?>",
+            startDateTime: "<?php echo $startDateTime; ?>",
+            endDateTime: "<?php echo $endDateTime; ?>"
+        };
+
+        fetch(url2, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                return response.json();
+            })
+            .then(responseData => {
+                if (responseData.status === 'success') {
+                    console.log(responseData.data);
+                    const orderData = responseData.data;
+                    if ($.fn.dataTable.isDataTable('#OrderViewTable')) {
+                        // Destroy the existing DataTable
+                        $('#OrderViewTable').DataTable().destroy();
+                    }
+                    // Initialize DataTable
+                    new DataTable('#OrderViewTable', {
+                        columns: [{
+                                title: 'Order ID',
+                                className: 'text-center'
+                            },
+                            {
+                                title: 'Order Date & Time',
+                                className: 'text-center'
+                            },
+                            {
+                                title: 'Delivery Address',
+                                className: 'text-center'
+                            },
+                            {
+                                title: 'Delivery Date',
+                                className: 'text-center'
+                            },
+                            {
+                                title: 'Total Price',
+                                className: 'text-center'
+                            },
+                            {
+                                title: 'Order Status',
+                                className: 'text-center'
+                            }
+                        ],
+                        data: orderData,
+                        createdRow: function(row, data, dataIndex) {
+                            var statusCell = $('td', row).eq(2);
+                            if (data[2] === 'Wait for approval') {
+                                statusCell.addClass('ColorYellow');
+                            } else if (data[2] === 'Wait for delivery') {
+                                statusCell.addClass('ColorYellow');
+                            } else if (data[2] === 'Delivered') {
+                                statusCell.addClass('ColorGreen');
+                            } else if (data[2] === 'Request Cancel') {
+                                statusCell.addClass('ColorLightRed');
+                            } else if (data[2] === 'Cancelled') {
+                                statusCell.addClass('ColorRed');
+                            }
+                        }
+                    });
+                } else {
+                    console.error('Error:', responseData.message);
+                }
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+    }
+    refreshOrderView();
+
+
 
     function uploadOrderDetail(orderID, orderDateTime, deliveryAddress, deliveryDate, orderPrice) {
         document.getElementById("OrderDetail-OrderID").placeholder = orderID.toString().padStart(6, '0');
@@ -514,11 +463,9 @@ if ($result->num_rows > 0) {
             }).catch(error => {
                 console.error('Fetch error:', error);
             });
-            
-            window.location.reload();
+
+        window.location.reload();
     }
-        
-    
 </script>
 
 </html>

@@ -1,5 +1,5 @@
 <?php
-require_once('../db/connet.php');
+require_once('../db/connect.php');
 $category = $_GET["Category"];
 //echo $category;
 session_start();

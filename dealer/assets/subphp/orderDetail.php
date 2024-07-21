@@ -1,5 +1,5 @@
 <?php
-require_once('../../../db/connet.php');
+require_once('../../../db/connect.php');
 
 $data = file_get_contents('php://input');
 $arrayData = json_decode($data, true);

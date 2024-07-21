@@ -1,5 +1,5 @@
 <?php
-require_once('../db/connet.php');
+require_once('../db/connect.php');
 session_start();
 if(!isset($_SESSION['dealer'])){
     header("Location: ../login.php");

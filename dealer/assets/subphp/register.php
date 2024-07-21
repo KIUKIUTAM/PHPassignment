@@ -1,5 +1,5 @@
 <?php
-require_once('../../../db/connet.php');
+require_once('../../../db/connect.php');
 
 $dealerEmail = $_POST['userEmailForRegister'];
 $password = $_POST['passwordForRegister'];

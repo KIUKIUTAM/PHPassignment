@@ -1,5 +1,5 @@
 <?php
-require_once('../../../db/connet.php');
+require_once('../../../db/connect.php');
 session_start(); // Start the session at the beginning of the script
 
 if (isset($_POST['userEmailForLogin'])) {

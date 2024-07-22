@@ -6,10 +6,6 @@ echo '
 
       <div class="sidebar-top">
         <h2 class="sidebar-title">Category</h2>
-
-        <button class="sidebar-close-btn" data-mobile-menu-close-btn>
-          <ion-icon name="close-outline"></ion-icon>
-        </button>
       </div>
         <li class="sidebar-menu-category">
           <button class="sidebar-accordion-menu" data-accordion-btn>

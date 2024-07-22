@@ -231,7 +231,6 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
             })
             .then(responseData => {
                 if (responseData.status === 'success') {
-                    console.log(responseData.data);
                     const orderData = responseData.data;
                     let table; // DataTable instance
 
@@ -433,6 +432,8 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
             cancelWay = 1;
         } else if (orderStatus == 1 && confirm("Are you sure you want to cancel this order?")) {
             cancelWay = 0;
+        }else{
+            return;
         }
         const url = "./assets/subphp/cancelOrder.php";
         const data = {
@@ -448,18 +449,14 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
             }).then(response => response.json())
             .then(responseData => {
                 if (responseData.status === 'success') {
-                    cancelButton = document.getElementById("cancelButton" + orderID);
-                    cancelButton.innerText = "Wait For approval";
-                    cancelButton.disabled = true;
                     (cancelWay == 0) ? alert("Order has been canceled"): alert("Please wait for approval ");
+                    refreshOrderView();
                 } else {
                     console.error('Error:', responseData.message);
                 }
             }).catch(error => {
                 console.error('Fetch error:', error);
             });
-
-        refreshOrderView();
     }
 </script>
 

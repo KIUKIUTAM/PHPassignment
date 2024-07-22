@@ -66,6 +66,7 @@ $managerID = $_SESSION['managerID']
                             <th>Order Status</th>
                             <th>Delivery Date</th>
                             <th>Detail</th>
+                            <th>Cancel Order</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -91,7 +92,7 @@ $managerID = $_SESSION['managerID']
                                 </select>
                             </th>
                             <th><button type="button" class="btn btn-primary" onclick="clearFilter()">Clear</button></th>
-                            
+                            <th></th>
                         </tr>
                     </tfoot>
 
@@ -151,7 +152,7 @@ $managerID = $_SESSION['managerID']
                                 </form>
                                 <button type="button" class="btn btn-success no-print" id="ApproveOrder">Approve</button>
                                 <button type="button" class="btn btn-danger no-print" id="RejectOrder">Reject</button>
-                                <span id="approveVaildate" class="no-print">Allow to approve</span>
+                                <span id="approveVaildate" class="">Allow to approve</span>
                             </div>
                             <div class="modal-footer no-print">
                                 <button type="button" class="btn btn-success" onclick="printTheOrderDetail()">Print the Order</button>
@@ -249,6 +250,10 @@ $managerID = $_SESSION['managerID']
                             },
                             {
                                 title: 'Detail',
+                                className: 'text-center'
+                            },
+                            {
+                                title: 'Cancel Order',
                                 className: 'text-center'
                             }
                         ],

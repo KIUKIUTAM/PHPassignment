@@ -1,0 +1,106 @@
+.information-title{
+    font-family: 'Courier New', Courier, monospace;
+    font-size:36px;
+    text-align: center;
+    text-decoration: underline;
+    text-transform: uppercase;
+    font-weight: bolds;
+    margin-bottom: 20px;
+}
+.Details{
+    min-width: 50vw;
+}
+
+.modal-content-costum{
+    display: inherit !important; 
+    background-color: white;
+    border-radius: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+.margin-bottom10{
+    margin-bottom: 10px;
+}
+
+.modal-body{
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}
+
+#submit-button{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: white;
+    background-color: #171717;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: .6rem;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  
+  #submit-button span:not(:nth-child(6)) {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 30px;
+    width: 30px;
+    background-color: #0c66ed;
+    border-radius: 50%;
+    transition: .6s ease;
+  }
+  
+  #submit-button span:nth-child(6) {
+    position: relative;
+  }
+  
+  #submit-button span:nth-child(1) {
+    transform: translate(-3.3em, -4em);
+  }
+  
+  #submit-button span:nth-child(2) {
+    transform: translate(-6em, 1.3em);
+  }
+  
+  #submit-button span:nth-child(3) {
+    transform: translate(-.2em, 1.8em);
+  }
+  
+  #submit-button span:nth-child(4) {
+    transform: translate(3.5em, 1.4em);
+  }
+  
+  #submit-button span:nth-child(5) {
+    transform: translate(3.5em, -3.8em);
+  }
+  
+  #submit-button:hover span:not(:nth-child(6)) {
+    transform: translate(-50%, -50%) scale(4);
+    transition: 1.5s ease;
+  }
+  th{
+    white-space: nowrap;
+    text-align: center;
+  }
+  td{
+    text-align: center;
+  }
+
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+    }
+    .noBreak {
+      break-inside: avoid;
+    }
+    .no-print, .no-print * {
+      display: none !important;
+    }
+    @page {
+      size: A2; 
+      margin: 1in; 
+    }
+  }

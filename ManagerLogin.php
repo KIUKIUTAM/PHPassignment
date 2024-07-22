@@ -1,75 +1,81 @@
+<?php
+    session_start();
+    if(isset($_SESSION['salesManager'])){
+        header("Location: ./salesManager/homepage.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="./dealer/assets/css/login.css">
+    <title>Manager Login</title>
     <link rel="shortcut icon" href="./assets/img/catHead.jpg" type="image/x-icon" />
+    <link rel="stylesheet" href="./salesManager/assets/css/login.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 </head>
 
 <body style="background: url('./assets/img/managerBackground.jpg');">
-    <div class="wrapper-login active" >
-        <from name="login" class="login-from">
-            <h1>Manager Login</h1>
+    <div class="wrapper-login active">
+        <form name="login" class="login-from" method="POST" action="./salesManager/assets/subphp/login.php">
+            <h1>salesManager Login</h1>
             <div class="input-box">
-                <input class="inputUser" id="inputUser" type="text" placeholder="Username" required>
-                <i class='bx bxs-user'></i>
+            <input class="inputUser" id="inputUser" name="userEmailForLogin" type="text" placeholder="Email" value="<?php if(isset($_COOKIE['username'])) echo htmlspecialchars($_COOKIE['username']); ?>" required>                <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
                 <input class="inputPass" id="inputPass" type="password" placeholder="Password"
+                    name="passwordForLogin"
                     pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,})"
                     title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                     required>
                 <i class='bx bxs-lock-alt'></i>
             </div>
             <div class="remember-forgot">
-                <label><input type="checkbox"> Remember me</label>
-                <a class="forgot" href="./salesManagerV2/homePage.php" target="_blank">Forgot password?</a>
+                <label><input type="checkbox" id="RememberMe"> Remember me</label>
+                <a class="forgot"  >Forgot password?</a>
             </div>
-            <input type="submit" class="login-btn" id="login-btn" value="Login" >
-            <div class="register-link">
-                <p>
-                    Don't have an account? <a id="loginSwap-btn">Register</a>
-                </p>
-            </div>
+            <input type="submit"  name="submit" class="login-btn" id="login-btn" value="Login" onclick="checkRemember()">
             <div class="SuperUser-link">
                 <p>
-                    Switch to Dealer Login? <a id="loginSwap-btn" href="./index.php">Clink Here</a>
+                    Switch to Manager Login? <a id="loginSwap-btn" href="./ManagerLogin.php">Click Here</a>
                 </p>
             </div>
-
-        </from>
+        </form>
     </div>
-    <div class="wrapper-register">
-
-        <from action="" onkeypress="onEnter(event)">
-            <h1>Register Now</h1>
-            <div class="close-btn">
-                <i class='bx bx-x' id="close-btn"></i>
-            </div>
-            <div class="input-box">
-                <input class="reg-username" etype="text" placeholder="Username" required>
-                <i class='bx bxs-user'></i>
-            </div>
-            <div class="input-box">
-                <input class="register-pass" type="password" placeholder="Password" required>
-                <i class='bx bxs-lock-alt'></i>
-            </div>
-            <div class="input-box">
-                <input class="register-passRepeat" type="password" placeholder="Repeat your password" required>
-                <i class='bx bx-check-double' id="check"></i>
-            </div>
-
-
-            <input  type="submit" class="register-submit-btn" value="Register" onclick="registerAC()">
-
-
-        </from>
-    </div>
+    
 </body>
-<script src="./salesManagerV2/assets/js/Managerlogin.js"></script>
+<script>
+   function checkRemember() {
+    var rememberMe = document.getElementById("RememberMe");
+    var userName = document.getElementById("inputUser").value;
+
+    if (rememberMe.checked) {
+        var data = {
+            userName: userName
+        };
+
+        fetch("./salesManager/assets/subphp/setRememberCookie.php", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(responseData => {
+            if (responseData.status === 'success') {
+                console.log('Cookies set successfully');
+            } else {
+                console.error('Error:', responseData.message);
+            }
+        })
+        .catch(error => console.error('Fetch error:', error));
+    }
+}
+
+</script>
+<script src="./salesManager/assets/js/login.js"></script>
 </html>

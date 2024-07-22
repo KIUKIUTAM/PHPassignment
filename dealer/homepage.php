@@ -1,7 +1,7 @@
 <?php
 require_once('../db/connect.php');
 session_start();
-if(!isset($_SESSION['dealer'])){
+if (!isset($_SESSION['dealer'])) {
   header("Location: ../login.php");
   exit();
 }
@@ -202,27 +202,27 @@ if(!isset($_SESSION['dealer'])){
       
     </footer>';
 
-                  ?>
-                  <script>
-                    function ProductDetail(sparePartNum) {
-                      window.location.href = ("./product_Detail?sparePartNum=" + sparePartNum);
-                    }
-                  </script>
-                  <!--- custom js link-->
-                  <script src="./assets/js/script.js"></script>
-                  <!--- ionicon link-->
-                  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-                  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js">
-                  </script>
-                  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-                  <script src="https://code.jquery.com/jquery-latest.js"></script>
-                  <script>
-                    $(function() {
-                      $("header").load("./assets/subphp/header.php");
-                      $("footer").load("./assets/subphp/footer.php");
-                      $(".sidebar").load("./assets/subphp/sidebar.php");
-                    });
-                  </script>
+   ?>
+   <script>
+     function ProductDetail(sparePartNum) {
+       window.location.href = ("./product_Detail?sparePartNum=" + sparePartNum);
+     }
+   </script>
+   <!--- custom js link-->
+   <script src="./assets/js/script.js"></script>
+   <!--- ionicon link-->
+   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js">
+   </script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+   <script src="https://code.jquery.com/jquery-latest.js"></script>
+   <script>
+     $(function() {
+       $("header").load("./assets/subphp/header.php");
+       $("footer").load("./assets/subphp/footer.php");
+       $(".sidebar").load("./assets/subphp/sidebar.php");
+     });
+   </script>
 </body>
 
 </html>

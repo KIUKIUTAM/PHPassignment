@@ -280,7 +280,8 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                             } else if (data[2] === 'Cancelled') {
                                 statusCell.addClass('ColorRed');
                             }
-                        }
+                        },
+                        order: [[0, "desc"]]
                     });
                     $("#minDate").datepicker({
                         dateFormat: 'yy-mm-dd'
@@ -391,7 +392,7 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                                 className: 'text-center'
                             },
                             {
-                                title: 'Price',
+                                title: 'Price(USD)',
                                 className: 'text-center'
                             }
                         ],

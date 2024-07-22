@@ -13,7 +13,7 @@ $sql = "
     FROM `orders` o
     JOIN `dealer` d ON o.dealerID = d.dealerID
     LEFT JOIN `salesmanager` s ON o.salesManagerID = s.salesManagerID
-    WHERE d.dealerEmail = '$dealerEmail' ORDER BY o.orderDateTime DESC;
+    WHERE d.dealerEmail = '$dealerEmail';
 ";
 $stmt = $conn->prepare($sql);
 

@@ -1446,30 +1446,26 @@ s
     transform: scaleX(1);
   }
 
-  .dropdown-panel {
+.dropdown-panel {
     position: absolute;
-    top: 100%;
-    left: 0;
+    top: 100%; 
+    left: 28%; 
+    transform: translate(0%, -50%); 
     background: var(--white);
-    width: 100%;
-    display: -ms-grid;
+    width: 50%;
     display: grid;
-    -ms-grid-columns: 1fr 30px 1fr 30px 1fr 30px 1fr;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     padding: 30px;
     border: 1px solid var(--cultured);
     box-shadow: 0 3px 5px hsla(0, 0%, 0%, 0.1);
     border-radius: var(--border-radius-md);
-    -ms-transform: translateY(50px);
-    transform: translateY(50px);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    -o-transition: var(--transition-timing);
     transition: var(--transition-timing);
     z-index: 5;
-  }
+}
 
   .desktop-menu-category-list .menu-category:hover>.dropdown-panel {
     -ms-transform: translateY(0);

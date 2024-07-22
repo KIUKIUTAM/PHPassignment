@@ -4,7 +4,7 @@ session_start(); // Start the session at the beginning of the script
 
 if (isset($_POST['userEmailForLogin'])) {
     // Fetch the form data
-    $dealerEmail = $_POST['userEmailForLogin'];
+    $managerEmail = $_POST['userEmailForLogin'];
     $password = $_POST['passwordForLogin'];
 
     // Check the connection
@@ -13,8 +13,8 @@ if (isset($_POST['userEmailForLogin'])) {
     }
 
     // Use prepared statements to prevent SQL injection
-    $stmt = $conn->prepare("SELECT dealerEmail,password,dealerName,deliveryAddress FROM dealer WHERE dealerEmail = ?");
-    $stmt->bind_param("s", $dealerEmail);
+    $stmt = $conn->prepare("SELECT salesManagerID,managerEmail,password FROM salesmanager WHERE managerEmail = ?");
+    $stmt->bind_param("s", $managerEmail);
     $stmt->execute();
     $result = $stmt->get_result();
 
@@ -24,13 +24,10 @@ if (isset($_POST['userEmailForLogin'])) {
 
         // Verify the password
         if (password_verify($password, $row['password'])) {
-            $_SESSION['dealer'] = $row['dealerEmail'];
-            if (empty($row['dealerName']) || empty($row['deliveryAddress'])) {
-                echo "<script>alert('Please complete your profile first'); location.replace('../../information.php');</script>";
-            } else {
-                echo "<script>location.replace('../../homepage.php');</script>";
-                exit();
-            }
+            $_SESSION['managerEmail'] = $row['managerEmail'];
+            $_SESSION['managerID'] = $row['salesManagerID'];
+            echo "<script>location.replace('../../homepage.php');</script>";
+            exit();
         } else {
             echo "<script>alert('Invalid LoginEmail or password'); location.replace('../../../index.php');</script>";
         }
@@ -42,4 +39,3 @@ if (isset($_POST['userEmailForLogin'])) {
     $stmt->close();
     $conn->close();
 }
-?>

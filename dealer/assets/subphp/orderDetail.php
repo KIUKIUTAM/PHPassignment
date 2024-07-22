@@ -20,7 +20,7 @@ if ($result->num_rows > 0) {
             $row['sparePartNum'],
             $row['sparePartName'],
             $row['orderQty'],
-            $row['price']
+            "$".$row['price']
         ];
     }
     echo json_encode(['status' => 'success', 'orderLine' => $orderLine]);

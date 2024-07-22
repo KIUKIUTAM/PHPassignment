@@ -1,27 +1,19 @@
 <?php
 require_once('../../../db/connect.php');
 session_start();
-if (isset($_SESSION['dealer'])) {
-    $dealerEmail = $_SESSION['dealer'];
-}
-
-
 
 $orderStatus = "";
 $sql = "
     SELECT * 
     FROM `orders` o
     JOIN `dealer` d ON o.dealerID = d.dealerID
-    LEFT JOIN `salesmanager` s ON o.salesManagerID = s.salesManagerID
-    WHERE d.dealerEmail = '$dealerEmail' ORDER BY o.orderDateTime DESC;
+    LEFT JOIN `salesmanager` s ON o.salesManagerID = s.salesManagerID;
 ";
 $stmt = $conn->prepare($sql);
-
 
 $stmt->execute();
 
 $result = $stmt->get_result();
-
 
 if ($result->num_rows > 0) {
     $dataSet = [];
@@ -44,6 +36,9 @@ if ($result->num_rows > 0) {
             case 5:
                 $OrderStatus = "Cancelled";
                 break;
+            case 6:
+                $OrderStatus = "Rejected";
+                break;
         }
 
 
@@ -54,11 +49,11 @@ if ($result->num_rows > 0) {
 
         $dataSet[] = [
             sprintf('%06d', $row['orderID']),
+            $row['dealerID'],
             $row['orderDateTime'],
             $OrderStatus,
             $deliveryDate,
-            "<button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick='uploadOrderDetail(\"{$row['orderID']}\", \"{$row['orderDateTime']}\", \"{$salesManagerName}\", \"{$salesManagerContact}\", \"{$row['deliveryAddress']}\", \"{$deliveryDate}\", \"{$row['orderPrice']}\")'>Details</button>",
-            "<button type='button' class='btn btn-outline-danger' id='cancelButton{$row['orderID']}' onclick='cancelOrder(\"{$row['orderID']}\", \"{$row['orderStatus']}\")'>Cancel Order</button>"
+            "<button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick='uploadOrderDetail(\"{$row['orderID']}\", \"{$row['orderDateTime']}\", \"{$row['orderStatus']}\", \"{$salesManagerName}\", \"{$salesManagerContact}\", \"{$row['deliveryAddress']}\", \"{$deliveryDate}\", \"{$row['orderPrice']}\")'>Details</button>"
         ];
     }
 

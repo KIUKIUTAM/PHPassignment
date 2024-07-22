@@ -3,7 +3,7 @@ require_once('../db/connect.php');
 $category = $_GET["Category"];
 //echo $category;
 session_start();
-if(!isset($_SESSION['dealer'])){
+if(!isset($_SESSION['managerEmail'])){
   header("Location: ../login.php");
   exit();
 }
@@ -20,12 +20,9 @@ if(!isset($_SESSION['dealer'])){
 
   <!--- favicon-->
   <link rel="shortcut icon" href="../assets/img/catHead.jpg" type="image/x-icon" />
-
   <!--- custom css link-->
-
   <link rel="stylesheet" href="./assets/css/style-prefix.css" />
   <!--- google font link-->
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -76,35 +73,16 @@ if(!isset($_SESSION['dealer'])){
 </head>
 
 <body>
-
-
-  <!--
-    - HEADER
-  -->
-
   <header></header>
-
-  <!--
-    - MAIN
-  -->
-
   <main>
-    <!--
-      - PRODUCT
-    -->
 
     <div class="product-container">
       <div class="container">
-        <!--
-          - SIDEBAR
-        -->
+
         <nav class="sidebar">
         </nav>
-        
+
         <div class="product-box">
-          <!--
-            - PRODUCT MINIMAL
-          -->
 
           <div class="product-minimal">
             <div class="product-showcase">
@@ -199,27 +177,17 @@ if(!isset($_SESSION['dealer'])){
                       </div>';
                     }
                   }
-
                   ?>
                 </div>
               </div>
             </div>
-
-
-
           </div>
         </div>
       </div>
     </div>
   </main>
 
-  <!--
-    - FOOTER
-  -->
-
-  <footer>
-
-  </footer>
+  <footer></footer>
   <script>
     function ProductDetail(sparePartNum) {
       window.location.href = ("./product_Detail?sparePartNum=" + sparePartNum);

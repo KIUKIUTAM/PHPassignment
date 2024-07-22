@@ -9,20 +9,17 @@ session_start();
 }
 </style>
 
-<span>Dealer Email: <?php if(isset($_SESSION['dealer'])){echo$_SESSION['dealer'];}?></span>
+<span>Manager Email: <?php if(isset($_SESSION['managerEmail'])){echo$_SESSION['managerEmail'];}?></span>
+
 <div class="header-main">
     <div class="container">
-        <a href="./homepage.php" class="menu-title"><img src="../assets/img/catHead.jpg" width="70"
+        <a href="./homepage.php" class="menu-title"><img src="../assets/img/catHead2.jpg" width="70"
                 class="showcase-img" />
             <h4 style="font-size: 1.4em;">SLMS</h4>
         </a>
 
         <div class="header-search-container">
-            <input type="search" name="search" class="search-field" placeholder="Enter your product name..." />
-
-            <button class="search-btn" onclick="search()">
-                <ion-icon name="search-outline"></ion-icon>
-            </button>
+            <h1>Manager Mode</h1>
         </div>
 
         <div class="header-user-actions">
@@ -36,14 +33,12 @@ session_start();
                     <ion-icon name="file-tray-full-outline"></ion-icon>
                 </a>
             </button>
-
-
             <button class="action-btn">
-                <a href="./shoppingCart.php">
-                    <ion-icon name="bag-handle-outline"></ion-icon>
+                <a href="./listOfProduct?Category=ALL">
+                <ion-icon name="cube-outline"></ion-icon>
                 </a>
-                <span class="count" id="shoppingCartCount1">0</span>
             </button>
+
             <button class="action-btn">
                 <a onclick="loginOut()" id="loginOut">
                     <ion-icon name="log-in-outline"></ion-icon>
@@ -59,47 +54,34 @@ session_start();
             <li class="menu-category">
                 <a href="./homepage.php" class="menu-title">Home</a>
             </li>
-
             <li class="menu-category">
-                <a href="#" class="menu-title">Categories</a>
-
+                <a href="#" class="menu-title">workBox</a>
                 <div class="dropdown-panel">
                     <ul class="dropdown-panel-list">
                         <li class="menu-title">
-                            <a href="#">Sheet Metal</a>
+                            <a href="#">SparePart</a>
                         </li>
-
                         <li class="panel-list-item">
-                            <a href="./listOfProduct?Category=Sheet_Metal">All</a>
+                            <a href="./listOfProduct?Category=ALL">Show All</a>
                         </li>
+                        <li class="panel-list-item">
+                            <a href="#">Add new</a>
+                        </li>
+                        <li class="panel-list-item">
+                            <a href="#">Edit spare</a>
+                        </li>
+               
                     </ul>
-
                     <ul class="dropdown-panel-list">
                         <li class="menu-title">
-                            <a href="#">Major Asssemblies</a>
+                            <a href="#">OrderView</a>
                         </li>
 
                         <li class="panel-list-item">
-                            <a href="./listOfProduct?Category=Major_Assemblies">All</a>
-                        </li>
-                    </ul>
-
-                    <ul class="dropdown-panel-list">
-                        <li class="menu-title">
-                            <a href="#">Light Components</a>
-                        </li>
-
-                        <li class="panel-list-item">
-                            <a href="./listOfProduct?Category=Light_Components">All</a>
-                        </li>
-                    </ul>
-
-                    <ul class="dropdown-panel-list">
-                        <li class="menu-title">
-                            <a href="#">Accessories</a>
+                            <a href="#">All</a>
                         </li>
                         <li class="panel-list-item">
-                            <a href="./listOfProduct?Category=Accessories">All</a>
+                            <a href="#">All</a>
                         </li>
                     </ul>
                 </div>
@@ -119,58 +101,28 @@ session_start();
     </button>
     <button class="action-btn">
         <a href="./OrderView.php">
-                    <ion-icon name="file-tray-full-outline"></ion-icon>
+            <ion-icon name="file-tray-full-outline"></ion-icon>
         </a>
     </button>
-    <button class="action-btn" onclick="location.href='./shoppingCart.php'">
-        <ion-icon name="bag-handle-outline"></ion-icon>
-        <span class="count" id="shoppingCartCount2">0</span>
+    <button class="action-btn">
+        <a href="./listOfProduct?Category=ALL">
+            <ion-icon name="cube-outline"></ion-icon>
+        </a>
     </button>
-
-
-
     <button class="action-btn" data-mobile-menu-open-btn onclick="loginOut()" id="loginOut">
         <ion-icon name="log-in-outline"></ion-icon>
     </button>
 </div>
+
+
 <script>
-function search() {
-    var search = document.querySelector('.search-field').value;
-    if (search == '') {
-        alert('Please enter a product name');
-    } else {
-        location.href = './search.php?search=' + search;
-    }
-};
-
-function fetchCartCount() {
-    fetch("./assets/subphp/cart_count.php", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({})
-        })
-        .then(response => response.json())
-        .then(responseData => {
-            if (responseData.cart_count !== undefined) {
-                document.getElementById("shoppingCartCount1").innerText = responseData.cart_count;
-                document.getElementById("shoppingCartCount2").innerText = responseData.cart_count;
-            } else {
-                console.error('Error:', responseData.message);
-            }
-        })
-        .catch(error => console.error('Fetch error:', error));
-}
-
-fetchCartCount();
 
 function loginOut() {
     fetch('./assets/subphp/logout.php')
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
-                location.replace('../index.php');
+                location.replace('../ManagerLogin.php');
             }
         })
         .catch(error => console.error('Error:', error));

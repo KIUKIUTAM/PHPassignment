@@ -1,32 +1,13 @@
 <?php
 require_once('../db/connect.php');
 session_start();
-?>
-
-<?php
-if (!isset($_SESSION['dealer'])) {
-    header("Location: ../login.php");
+if (!isset($_SESSION['managerEmail'])) {
+    header("Location: ../ManagerLogin.php");
     exit();
 }
-if (isset($_SESSION['dealer'])) {
-    $dealer = $_SESSION['dealer'];
-
-    $stmt = $conn->prepare("SELECT dealerID FROM dealer WHERE dealerEmail = ?");
-    $stmt->bind_param("s", $dealer);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $dealerID = "";
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $dealerID = $row['dealerID'];
-    }
-    $stmt->close();
-}
-if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
-    $startDateTime = $_GET['startDateTime'];
-    $endDateTime = $_GET['endDateTime'];
-}
+$managerID = $_SESSION['managerID']
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,13 +66,16 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                             <th>Order Status</th>
                             <th>Delivery Date</th>
                             <th>Detail</th>
-                            <th>Cancel Order</th>
                         </tr>
                     </thead>
                     <tbody>
                     </tbody>
                     <tfoot>
                         <tr>
+                            <th><span>Dealer ID:</span></th>
+                            <th>
+                                <input type="number" id="DealerIDSearch" placeholder="Enter dealer ID">
+                            </th>
                             <th>
                                 <span>Start Date:</span><br>
                                 <span>End Date:</span>
@@ -100,14 +84,14 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                                 <input type="text" id="minDate" placeholder="From Date">
                                 <input type="text" id="maxDate" placeholder="To Date">
                             </th>
-                            <th><span>Order Status:</span>
+                            <th>
+                                <span>Order Status:</span>
                                 <select id="statusFilter">
                                     <option value="">All</option>
                                 </select>
                             </th>
                             <th><button type="button" class="btn btn-primary" onclick="clearFilter()">Clear</button></th>
-                            <th></th>
-                            <th></th>
+                            
                         </tr>
                     </tfoot>
 
@@ -119,7 +103,6 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                                 <h1 class="modal-title fs-5" id="ModalLabel">Details</h1>
                             </div>
                             <div class="modal-body">
-                                <br>
                                 <form>
                                     <div class="form-group row margin-bottom10">
                                         <label for="inputOrderID" class="col-sm-3 col-form-label ">Order
@@ -166,12 +149,13 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                                     <h5>Total Order Amount: $<span id="Detail-totalPrice">0</span></h5>
 
                                 </form>
-
-
+                                <button type="button" class="btn btn-success no-print" id="ApproveOrder">Approve</button>
+                                <button type="button" class="btn btn-danger no-print" id="RejectOrder">Reject</button>
+                                <span id="approveVaildate" class="no-print">Allow to approve</span>
                             </div>
                             <div class="modal-footer no-print">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-success" onclick="printTheOrderDetail()">Print the Order</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
@@ -211,8 +195,9 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
 
 
 <script>
-
-
+    var validatequantity = false;
+    var orderLine = [];
+    var orderIDForClick = 0;
     function refreshOrderView() {
         const url = "./assets/subphp/orderViewDataRefresh.php";
         const data = {};
@@ -231,7 +216,7 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
             })
             .then(responseData => {
                 if (responseData.status === 'success') {
-                    console.log(responseData.data);
+
                     const orderData = responseData.data;
                     let table; // DataTable instance
 
@@ -244,6 +229,10 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                     table = $('#OrderViewTable').DataTable({
                         columns: [{
                                 title: 'Order ID',
+                                className: 'text-center'
+                            },
+                            {
+                                title: 'Dealer ID',
                                 className: 'text-center'
                             },
                             {
@@ -261,27 +250,26 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                             {
                                 title: 'Detail',
                                 className: 'text-center'
-                            },
-                            {
-                                title: 'Cancel Order',
-                                className: 'text-center'
                             }
                         ],
                         data: orderData,
                         createdRow: function(row, data, dataIndex) {
-                            var statusCell = $('td', row).eq(2);
-                            if (data[2] === 'Wait for approval') {
+                            var statusCell = $('td', row).eq(3);
+                            if (data[3] === 'Wait for delivery') {
                                 statusCell.addClass('ColorYellow');
-                            } else if (data[2] === 'Wait for delivery') {
-                                statusCell.addClass('ColorYellow');
-                            } else if (data[2] === 'Delivered') {
+                            } else if (data[3] === 'Delivered') {
                                 statusCell.addClass('ColorGreen');
-                            } else if (data[2] === 'Request Cancel') {
+                            } else if (data[3] === 'Request Cancel') {
                                 statusCell.addClass('ColorLightRed');
-                            } else if (data[2] === 'Cancelled') {
+                            } else if (data[3] === 'Cancelled') {
+                                statusCell.addClass('ColorRed');
+                            } else if (data[3] === 'Rejected') {
                                 statusCell.addClass('ColorRed');
                             }
-                        }
+                        },
+                        order: [
+                            [0, "desc"]
+                        ]
                     });
                     $("#minDate").datepicker({
                         dateFormat: 'yy-mm-dd'
@@ -300,7 +288,7 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                         function(settings, data, dataIndex) {
                             var min = $('#minDate').val();
                             var max = $('#maxDate').val();
-                            var date = new Date(data[1]);
+                            var date = new Date(data[2]);
 
                             if (
                                 (min === "" || new Date(min) <= date) &&
@@ -313,7 +301,7 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                     );
                     // Populate the status filter dropdown
                     const statusFilter = $('#statusFilter');
-                    const uniqueStatuses = [...new Set(orderData.map(item => item[2]))];
+                    const uniqueStatuses = [...new Set(orderData.map(item => item[3]))];
                     uniqueStatuses.forEach(status => {
                         statusFilter.append(new Option(status, status));
                     });
@@ -321,8 +309,17 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                     // Add event listener for status filter
                     statusFilter.on('change', function() {
                         const selectedStatus = $(this).val();
-                        table.column(2).search(selectedStatus).draw();
+                        table.column(3).search(selectedStatus).draw();
                     });
+
+                    // Add event listener for dealer ID search
+                    const dealerIDSearch = $('#DealerIDSearch');
+                    dealerIDSearch.on('input', function() {
+                        table.column(1).search(this.value).draw();
+                    });
+
+
+                    //clear all filter
                     window.clearFilter = function() {
                         $('#minDate').val('');
                         $('#maxDate').val('');
@@ -339,10 +336,48 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
     }
     refreshOrderView();
 
+    function closeModal() {
+        var modalElement = document.getElementById('Modal-Detail');
+        var modalInstance = bootstrap.Modal.getInstance(modalElement);
+        if (modalInstance) {
+            modalInstance.hide();
+        }
+    }
 
+    function handleApproveClick() {
+        approveOrder(orderIDForClick, 1);
+    }
 
-    function uploadOrderDetail(orderID, orderDateTime, managerName, managerContact, deliveryAddress, deliveryDate, orderPrice) {
+    function handleRejectClick() {
+        approveOrder(orderIDForClick, 2);
+    }
+
+    function uploadOrderDetail(orderID, orderDateTime, orderStatus, managerName, managerContact, deliveryAddress, deliveryDate, orderPrice) {
         document.getElementById("OrderDetail-OrderID").placeholder = orderID.toString().padStart(6, '0');
+        if (orderStatus == 1) {
+            orderIDForClick = orderID;
+            // Ensure the DOM is fully loaded before accessing the element
+            let approveButton = document.getElementById('ApproveOrder');
+            let rejectButton = document.getElementById('RejectOrder');
+
+
+            approveButton.removeEventListener('click', handleApproveClick);
+            rejectButton.removeEventListener('click', handleRejectClick);
+
+
+            approveButton.addEventListener('click', handleApproveClick);
+            rejectButton.addEventListener('click', handleRejectClick);
+
+
+            document.getElementById('ApproveOrder').style.display = 'inline';
+            document.getElementById('RejectOrder').style.display = 'inline';
+            document.getElementById('approveVaildate').style.display = 'inline';
+        } else {
+            document.getElementById('ApproveOrder').style.display = 'none';
+            document.getElementById('RejectOrder').style.display = 'none';
+            document.getElementById('approveVaildate').style.display = 'none';
+        }
+
         document.getElementById("OrderDetail-orderDateTime").placeholder = orderDateTime;
         document.getElementById("OrderDetail-SalesManagerName").placeholder = managerName;
         document.getElementById("OrderDetail-SalesManagerContact").placeholder = managerContact;
@@ -368,7 +403,7 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
             })
             .then(responseData => {
                 if (responseData.status === 'success') {
-                    const orderLine = responseData.orderLine;
+                    orderLine = responseData.orderLine;
 
                     if ($.fn.dataTable.isDataTable('#DataTableForOrderDetail')) {
                         // Destroy the existing DataTable
@@ -388,16 +423,21 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                                 className: 'text-center'
                             },
                             {
+                                title: 'inventory Quantity',
+                                className: 'text-center'
+                            },
+                            {
                                 title: 'Quantity',
                                 className: 'text-center'
                             },
                             {
-                                title: 'Price',
+                                title: 'Price(USD)',
                                 className: 'text-center'
                             }
                         ],
                         data: orderLine
                     });
+                    validatequantity = validateData(orderLine);
                 } else {
                     console.error('Error:', responseData.message);
                 }
@@ -407,6 +447,57 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
             });
     }
 
+    function validateData(data) {
+        for (var i = 0; i < data.length; i++) {
+            var inventoryQuantity = data[i][3]; // Assuming the 4th column is Inventory Quantity
+            var quantity = data[i][4]; // Assuming the 5th column is Quantity
+            if (inventoryQuantity < quantity) {
+                document.getElementById('approveVaildate').innerText = "Order can't be approved";
+                return false;
+            }
+        }
+        document.getElementById('approveVaildate').innerText = "Order can be approved";
+        return true;
+    }
+
+    function approveOrder(orderID, approveOrReject) { //1 for approve, 2 for reject
+        if (!validatequantity) {
+            alert("Order can't be approved due to insufficient inventory quantity");
+            return;
+        }
+        const url = "./assets/subphp/approveOrder.php";
+        const data = {
+            orderID: orderID,
+            approveOrReject: approveOrReject,
+            orderLine: orderLine,
+            salesManagerID: <?php echo $managerID; ?>
+        };
+
+        fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(responseData => {
+                if (responseData.status === 'success') {
+                    if (approveOrReject == 1) {
+                        alert("Order has been approved");
+                    } else {
+                        alert("Order has been rejected");
+                    }
+                    closeModal();
+                    refreshOrderView();
+                } else {
+                    console.error('Error:', responseData.message);
+                }
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+    }
 
     function printTheOrderDetail() {
         var printContents = document.getElementById('Modal-Detail').innerHTML;
@@ -433,6 +524,8 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
             cancelWay = 1;
         } else if (orderStatus == 1 && confirm("Are you sure you want to cancel this order?")) {
             cancelWay = 0;
+        } else {
+            return;
         }
         const url = "./assets/subphp/cancelOrder.php";
         const data = {
@@ -448,10 +541,8 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
             }).then(response => response.json())
             .then(responseData => {
                 if (responseData.status === 'success') {
-                    cancelButton = document.getElementById("cancelButton" + orderID);
-                    cancelButton.innerText = "Wait For approval";
-                    cancelButton.disabled = true;
-                    (cancelWay == 0) ? alert("Order has been canceled"): alert("Please wait for approval ");
+                    (cancelWay == 0) ? alert("Order has been canceled"): alert("Please wait for approval");
+                    refreshOrderView();
                 } else {
                     console.error('Error:', responseData.message);
                 }
@@ -459,7 +550,7 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                 console.error('Fetch error:', error);
             });
 
-        refreshOrderView();
+
     }
 </script>
 

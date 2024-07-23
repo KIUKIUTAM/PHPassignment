@@ -33,8 +33,6 @@ $managerID = $_SESSION['managerID']
         .text-center {
             text-align: center;
         }
-
-
         td.ColorGreen {
             color: #198754 !important;
         }

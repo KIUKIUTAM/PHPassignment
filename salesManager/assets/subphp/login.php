@@ -13,7 +13,7 @@ if (isset($_POST['userEmailForLogin'])) {
     }
 
     // Use prepared statements to prevent SQL injection
-    $stmt = $conn->prepare("SELECT salesManagerID,managerEmail,password FROM salesmanager WHERE managerEmail = ?");
+    $stmt = $conn->prepare("SELECT salesmanager.salesManagerID,salesmanager.managerEmail,salesmanager.password,managerhead.headPermission FROM salesmanager LEFT JOIN managerhead ON salesmanager.salesManagerID = managerhead.salesManagerID WHERE salesmanager.managerEmail = ?");
     $stmt->bind_param("s", $managerEmail);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -26,6 +26,9 @@ if (isset($_POST['userEmailForLogin'])) {
         if (password_verify($password, $row['password'])) {
             $_SESSION['managerEmail'] = $row['managerEmail'];
             $_SESSION['managerID'] = $row['salesManagerID'];
+            if($row['headPermission'] == 1){
+                $_SESSION['headPermission'] = true;
+            }
             echo "<script>location.replace('../../homepage.php');</script>";
             exit();
         } else {

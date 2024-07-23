@@ -15,8 +15,9 @@ $stmt->execute();
 
 $result = $stmt->get_result();
 
+$dataSet = [];
 if ($result->num_rows > 0) {
-    $dataSet = [];
+    
     while ($row = $result->fetch_assoc()) {
 
         $OrderStatus = "";
@@ -53,14 +54,13 @@ if ($result->num_rows > 0) {
             $row['orderDateTime'],
             $OrderStatus,
             $deliveryDate,
-            "<button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick='uploadOrderDetail(\"{$row['orderID']}\", \"{$row['orderDateTime']}\", \"{$row['orderStatus']}\", \"{$salesManagerName}\", \"{$salesManagerContact}\", \"{$row['deliveryAddress']}\", \"{$deliveryDate}\", \"{$row['orderPrice']}\")'>Details</button>",
-            "<button type='button' class='btn btn-outline-danger' id='cancelButton{$row['orderID']}' onclick='cancelOrder(\"{$row['orderID']}\", \"{$row['orderStatus']}\")'>Cancel</button>"
+            "<button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick='uploadOrderDetail(\"{$row['orderID']}\", \"{$row['orderDateTime']}\", \"{$row['orderStatus']}\", \"{$salesManagerName}\", \"{$salesManagerContact}\", \"{$row['deliveryAddress']}\", \"{$deliveryDate}\", \"{$row['orderPrice']}\")'>Details</button>"
         ];
     }
 
     echo json_encode(['status' => 'success', 'data' => $dataSet]);
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'No records found']);
+    echo json_encode(['status' => 'success', 'data' => $dataSet]);
 }
 
 // Close the statement and connection

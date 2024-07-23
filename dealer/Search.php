@@ -1,7 +1,7 @@
 <?php
 require_once('../db/connect.php');
 session_start();
-if(!isset($_SESSION['dealer'])){
+if (!isset($_SESSION['dealer'])) {
   header("Location: ../index.php");
   exit();
 }
@@ -132,9 +132,6 @@ if(!isset($_SESSION['dealer'])){
                 </div>
               </div>
             </div>
-
-
-
           </div>
         </div>
       </div>

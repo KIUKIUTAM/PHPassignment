@@ -476,6 +476,7 @@ if(!isset($_SESSION['dealer'])){
             if (item) {
                 item.remove();
             }
+            fetchCartCount();
         }
 
         function addToCart() {
@@ -507,27 +508,6 @@ if(!isset($_SESSION['dealer'])){
                 });
             fetchCartCount();
         }
-
-        function fetchCartCount() {
-            fetch("./assets/subphp/cart_count.php", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({})
-                })
-                .then(response => response.json())
-                .then(responseData => {
-                    if (responseData.cart_count !== undefined) {
-                        document.getElementById("shoppingCartCount1").innerText = responseData.cart_count;
-                        document.getElementById("shoppingCartCount2").innerText = responseData.cart_count;
-                    } else {
-                        console.error('Error:', responseData.message);
-                    }
-                })
-                .catch(error => console.error('Fetch error:', error));
-        }
-        setInterval(fetchCartCount, 5000);
     </script>
     <!--
     - custom js link

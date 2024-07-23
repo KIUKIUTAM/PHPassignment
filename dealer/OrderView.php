@@ -211,8 +211,6 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
 
 
 <script>
-
-
     function refreshOrderView() {
         const url = "./assets/subphp/orderViewDataRefresh.php";
         const data = {};
@@ -281,7 +279,9 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                                 statusCell.addClass('ColorRed');
                             }
                         },
-                        order: [[0, "desc"]]
+                        order: [
+                            [0, "desc"]
+                        ]
                     });
                     $("#minDate").datepicker({
                         dateFormat: 'yy-mm-dd'
@@ -314,6 +314,7 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                     // Populate the status filter dropdown
                     const statusFilter = $('#statusFilter');
                     const uniqueStatuses = [...new Set(orderData.map(item => item[2]))];
+                    statusFilter.empty();
                     uniqueStatuses.forEach(status => {
                         statusFilter.append(new Option(status, status));
                     });
@@ -374,6 +375,37 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                         // Destroy the existing DataTable
                         $('#DataTableForOrderDetail').DataTable().destroy();
                     }
+                    if (orderLine.length === 0) {
+                        // Initialize DataTable
+                        table = $('#OrderViewTable').DataTable({
+                            columns: [{
+                                    title: 'Order ID',
+                                    className: 'text-center'
+                                },
+                                {
+                                    title: 'Dealer ID',
+                                    className: 'text-center'
+                                },
+                                {
+                                    title: 'Order Date & Time',
+                                    className: 'text-center'
+                                },
+                                {
+                                    title: 'Order Status',
+                                    className: 'text-center'
+                                },
+                                {
+                                    title: 'Delivery Date & Time',
+                                    className: 'text-center'
+                                },
+                                {
+                                    title: 'Detail',
+                                    className: 'text-center'
+                                }
+                            ]
+                        });
+                        return;
+                    }
                     // Initialize DataTable
                     new DataTable('#DataTableForOrderDetail', {
                         columns: [{
@@ -419,6 +451,14 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
     }
 
     function cancelOrder(orderID, orderStatus) {
+        let datetime = new Date();
+        let deliveryDateStr = document.getElementById("OrderDetail-deliveryDate").placeholder;
+
+        // Parse the delivery date string into a Date object
+        let deliveryDate = new Date(deliveryDateStr);
+
+        // Add 2 days (172800000 milliseconds) to the current date
+        let twoDaysLater = new Date(datetime.getTime() + 172800000);
         cancelWay = 0; //0 for cancel, 1 for request cancel
         if (orderStatus == 5) {
             alert("This order has been canceled");
@@ -429,11 +469,14 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
         } else if (orderStatus == 3) {
             alert("This order has been devlivered, you can't cancel it");
             return;
+        } else if (orderStatus == 2 && deliveryDate > twoDaysLater) {
+            alert("This order has been over the cancel time, you can't cancel it");
+            return;
         } else if (orderStatus == 2 && confirm("Are you sure you want to cancel this order? Need to wait for approval")) {
             cancelWay = 1;
         } else if (orderStatus == 1 && confirm("Are you sure you want to cancel this order?")) {
             cancelWay = 0;
-        }else{
+        } else {
             return;
         }
         const url = "./assets/subphp/cancelOrder.php";

@@ -25,7 +25,7 @@ if ($result->num_rows > 0) {
     }
     echo json_encode(['status' => 'success', 'orderLine' => $orderLine]);
 } else {
-    echo json_encode(['status' => 'fail', 'message' => 'No orderline found']);
+    echo json_encode(['status' => 'success', 'orderLine' => $orderLine]);
 }
 $stmt->close();
 $conn->close();

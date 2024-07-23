@@ -1,6 +1,6 @@
 <?php
 require_once('../../../db/connect.php');
-
+// Check if the connection was successful
 if ($conn->connect_error) {
     die(json_encode(['status' => 'error', 'message' => 'Connection failed: ' . $conn->connect_error]));
 }
@@ -50,7 +50,7 @@ if ($currentDateTime < $nineAM) {
     // After 5:00 PM, set to 9:00 AM the next day
     $newTime = new DateTime('tomorrow 9:00 AM');
 }
-$newTime->modify('+1 day');
+$newTime->modify('+2 day');
 $newDeliveryDate = $newTime->format('Y-m-d H:i:s');
 // Begin transaction
 $conn->begin_transaction();
@@ -68,12 +68,12 @@ try {
             throw new Exception('Execute statement failed: ' . $stmt->error);
         }
     } else { // reject
-        $sql = "UPDATE `orders` SET `orderStatus` = 6, `salesManagerID` = ? WHERE `orderID` = ?"; // rejected
+        $sql = "UPDATE `orders` SET `orderStatus` = 6 WHERE `orderID` = ?"; // rejected
         $stmt = $conn->prepare($sql);
         if ($stmt === false) {
             throw new Exception('Prepare statement failed: ' . $conn->error);
         }
-        $stmt->bind_param("is", $salesManagerID, $orderID);
+        $stmt->bind_param("s", $orderID);
         if (!$stmt->execute()) {
             throw new Exception('Execute statement failed: ' . $stmt->error);
         }

@@ -33,16 +33,12 @@ $managerID = $_SESSION['managerID']
         .text-center {
             text-align: center;
         }
-
-
         td.ColorGreen {
             color: #198754 !important;
         }
-
         td.ColorLightRed {
             color: #986F4D !important;
         }
-
         td.ColorRed {
             color: #DC3545 !important;
         }
@@ -56,9 +52,11 @@ $managerID = $_SESSION['managerID']
     <!-- MAIN-->
     <main>
         <!-- PRODUCT-->
+         
         <div class="productDetail-container">
+            
             <div class="container" style=" margin-bottom: 30vh; width: 2000px;">
-                <h3>All Order:</h3>
+            <h3>Request Cancel List:</h3>
                 <table class="table table-striped table-hover" OrderItemList id="OrderViewTable">
                     <thead>
                         <tr>
@@ -92,6 +90,7 @@ $managerID = $_SESSION['managerID']
                                 </select>
                             </th>
                             <th><button type="button" class="btn btn-primary" onclick="clearFilter()">Clear</button></th>
+                      
                         </tr>
                     </tfoot>
 
@@ -143,14 +142,11 @@ $managerID = $_SESSION['managerID']
                                     </div>
                                     <div class="form-group row margin-bottom10" id="approveInput">
                                         <div class="col-sm-6">
+                                            <h6>Request Cancel:</h6>
                                             <div class="input-group ">
                                                 <button type="button" class="btn btn-success no-print" id="ApproveOrder">Approve</button>
                                                 <button type="button" class="btn btn-danger no-print" id="RejectOrder">Reject</button>
-                                                <select class="form-select" id="ApproveOrderAssign" aria-label="">
-                                                    <option selected>Choose...</option>
-                                                </select>
                                             </div>
-                                            <span id="approveVaildate" class="">Allow to approve</span>
                                         </div>
                                     </div>
 
@@ -208,49 +204,11 @@ $managerID = $_SESSION['managerID']
 
 <script>
     var validatequantity = false;
+    var orderLine = [];
     var orderIDForClick = 0;
-    var cancelWay = 0;
-    AssignManager();
-
-    function AssignManager() { //add manager to select option
-        const url = "./assets/subphp/assignManager.php";
-        const data = {};
-        fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
-                }
-                return response.json();
-            })
-            .then(responseData => {
-                if (responseData.status === 'success') {
-                    const managerData = responseData.data;
-                    let select = document.getElementById('ApproveOrderAssign');
-                    for (var i = 0; i < managerData.length; i++) {
-                        var opt = document.createElement('option');
-                        opt.value = managerData[i][0];
-                        opt.innerHTML = managerData[i][1];
-                        select.appendChild(opt);
-                    }
-                } else {
-                    console.error('Error:', responseData.message);
-                }
-            })
-            .catch(error => {
-                console.error('Fetch error:', error);
-            });
-    }
-
-
-
+    refreshOrderView();
     function refreshOrderView() {
-        const url = "./assets/subphp/orderViewDataRefresh.php";
+        const url = "./assets/subphp/orderViewDataRefreshForCancel.php";
         const data = {};
         fetch(url, {
                 method: 'POST',
@@ -270,12 +228,40 @@ $managerID = $_SESSION['managerID']
 
                     const orderData = responseData.data;
                     let table; // DataTable instance
-
                     if ($.fn.dataTable.isDataTable('#OrderViewTable')) {
                         // Destroy the existing DataTable
                         $('#OrderViewTable').DataTable().destroy();
                     }
-
+                    if (orderData.length === 0) {
+                       // Initialize DataTable
+                    table = $('#OrderViewTable').DataTable({
+                        columns: [{
+                                title: 'Order ID',
+                                className: 'text-center'
+                            },
+                            {
+                                title: 'Dealer ID',
+                                className: 'text-center'
+                            },
+                            {
+                                title: 'Order Date & Time',
+                                className: 'text-center'
+                            },
+                            {
+                                title: 'Order Status',
+                                className: 'text-center'
+                            },
+                            {
+                                title: 'Delivery Date & Time',
+                                className: 'text-center'
+                            },
+                            {
+                                title: 'Detail',
+                                className: 'text-center'
+                            }
+                        ],data:[]});
+                        return;
+                    }
                     // Initialize DataTable
                     table = $('#OrderViewTable').DataTable({
                         columns: [{
@@ -353,7 +339,6 @@ $managerID = $_SESSION['managerID']
                     // Populate the status filter dropdown
                     const statusFilter = $('#statusFilter');
                     const uniqueStatuses = [...new Set(orderData.map(item => item[3]))];
-                    statusFilter.empty();
                     uniqueStatuses.forEach(status => {
                         statusFilter.append(new Option(status, status));
                     });
@@ -386,7 +371,7 @@ $managerID = $_SESSION['managerID']
                 console.error('Fetch error:', error);
             });
     }
-    refreshOrderView();
+    
 
     function closeModal() {
         var modalElement = document.getElementById('Modal-Detail');
@@ -397,16 +382,16 @@ $managerID = $_SESSION['managerID']
     }
 
     function handleApproveClick() {
-        approveOrder(orderIDForClick, 1);
+        RequestCancel(orderIDForClick, 1);//1 for approve cancel
     }
 
     function handleRejectClick() {
-        approveOrder(orderIDForClick, 2);
+        RequestCancel(orderIDForClick, 2);//2 for reject cancel
     }
 
     function uploadOrderDetail(orderID, orderDateTime, orderStatus, managerName, managerContact, deliveryAddress, deliveryDate, orderPrice) {
         document.getElementById("OrderDetail-OrderID").placeholder = orderID.toString().padStart(6, '0');
-        if (orderStatus == 1) {
+        if (orderStatus == 4) {
             orderIDForClick = orderID;
             // Ensure the DOM is fully loaded before accessing the element
             let approveButton = document.getElementById('ApproveOrder');
@@ -421,7 +406,6 @@ $managerID = $_SESSION['managerID']
         } else {
             document.getElementById('approveInput').style.display = 'none';
         }
-
         document.getElementById("OrderDetail-orderDateTime").placeholder = orderDateTime;
         document.getElementById("OrderDetail-SalesManagerName").placeholder = managerName;
         document.getElementById("OrderDetail-SalesManagerContact").placeholder = managerContact;
@@ -448,40 +432,10 @@ $managerID = $_SESSION['managerID']
             .then(responseData => {
                 if (responseData.status === 'success') {
                     orderLine = responseData.orderLine;
-                    
-
+                    console.log(orderLine);
                     if ($.fn.dataTable.isDataTable('#DataTableForOrderDetail')) {
                         // Destroy the existing DataTable
                         $('#DataTableForOrderDetail').DataTable().destroy();
-                    }
-                    if(orderLine.length === 0){
-                        new DataTable('#DataTableForOrderDetail', {
-                        columns: [{
-                                title: '#'
-                            },
-                            {
-                                title: 'Spare Part number',
-                                className: 'text-center'
-                            },
-                            {
-                                title: 'Spare Part Name',
-                                className: 'text-center'
-                            },
-                            {
-                                title: 'inventory Quantity',
-                                className: 'text-center'
-                            },
-                            {
-                                title: 'Quantity',
-                                className: 'text-center'
-                            },
-                            {
-                                title: 'Price(USD)',
-                                className: 'text-center'
-                            }
-                        ],
-                        data: orderLine
-                    });
                     }
                     // Initialize DataTable
                     new DataTable('#DataTableForOrderDetail', {
@@ -511,7 +465,6 @@ $managerID = $_SESSION['managerID']
                         ],
                         data: orderLine
                     });
-                    validatequantity = validateData(orderLine);
                 } else {
                     console.error('Error:', responseData.message);
                 }
@@ -521,34 +474,13 @@ $managerID = $_SESSION['managerID']
             });
     }
 
-    function validateData(data) {
-        for (var i = 0; i < data.length; i++) {
-            var inventoryQuantity = data[i][3]; // Assuming the 4th column is Inventory Quantity
-            var quantity = data[i][4]; // Assuming the 5th column is Quantity
-            if (inventoryQuantity < quantity) {
-                document.getElementById('approveVaildate').innerText = "Order can't be approved";
-                return false;
-            }
-        }
-        document.getElementById('approveVaildate').innerText = "Order can be approved";
-        return true;
-    }
-
-    function approveOrder(orderID, approveOrReject) { //1 for approve, 2 for reject
-        if (!validatequantity) {
-            alert("Order can't be approved due to insufficient inventory quantity");
-            return;
-        }
-        if (approveOrReject == 1 && document.getElementById('ApproveOrderAssign').value == "Choose...") {
-            alert("Please assign a sales manager to approve the order");
-            return;
-        }
-        const url = "./assets/subphp/approveOrder.php";
+    function RequestCancel(orderID, status) {//1 for approve cancel, 2 for reject cancel
+        const url = "./assets/subphp/requestCancel.php";
+        console.log(orderLine);
         const data = {
             orderID: orderID,
-            approveOrReject: approveOrReject,
-            orderLine: orderLine,
-            salesManagerID: document.getElementById('ApproveOrderAssign').value
+            status: status,
+            orderline : orderLine
         };
         console.log(data);
         fetch(url, {
@@ -561,13 +493,9 @@ $managerID = $_SESSION['managerID']
             .then(response => response.json())
             .then(responseData => {
                 if (responseData.status === 'success') {
-                    if (approveOrReject == 1) {
-                        alert("Order has been approved");
-                    } else {
-                        alert("Order has been rejected");
-                    }
-                    closeModal();
+                    alert("Order has been " + ((status == 1) ? "approved" : "rejected"));
                     refreshOrderView();
+                    closeModal();
                 } else {
                     console.error('Error:', responseData.message);
                 }
@@ -587,49 +515,6 @@ $managerID = $_SESSION['managerID']
 
     }
 
-    function cancelOrder(orderID, orderStatus) {
-        cancelWay = 0; //0 for cancel, 1 for request cancel
-        if (orderStatus == 5) {
-            alert("This order has been canceled");
-            return;
-        } else if (orderStatus == 4) {
-            alert("This order has been requested to cancel, please wait for approval");
-            return;
-        } else if (orderStatus == 3) {
-            alert("This order has been devlivered, you can't cancel it");
-            return;
-        } else if (orderStatus == 2 && confirm("Are you sure you want to cancel this order? Need to wait for approval")) {
-            cancelWay = 1;
-        } else if (orderStatus == 1 && confirm("Are you sure you want to cancel this order?")) {
-            cancelWay = 0;
-        } else {
-            return;
-        }
-        const url = "./assets/subphp/cancelOrder.php";
-        const data = {
-            orderID: orderID,
-            cancelWay: cancelWay
-        };
-        fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }).then(response => response.json())
-            .then(responseData => {
-                if (responseData.status === 'success') {
-                    (cancelWay == 0) ? alert("Order has been canceled"): alert("Please wait for approval");
-                    refreshOrderView();
-                } else {
-                    console.error('Error:', responseData.message);
-                }
-            }).catch(error => {
-                console.error('Fetch error:', error);
-            });
-
-
-    }
 </script>
 
 </html>

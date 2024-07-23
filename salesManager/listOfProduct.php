@@ -4,7 +4,7 @@ $category = $_GET["Category"];
 //echo $category;
 session_start();
 if(!isset($_SESSION['managerEmail'])){
-  header("Location: ../login.php");
+  header("Location: ../ManagerLogin.php");
   exit();
 }
 ?>

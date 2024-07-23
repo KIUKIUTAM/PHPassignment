@@ -1,6 +1,6 @@
 <?php
 require_once('../../../db/connect.php');
-
+session_start();
 $data = file_get_contents('php://input');
 $arrayData = json_decode($data, true);
 if(!isset($arrayData['orderID']) || empty($arrayData['orderID'])){
@@ -27,9 +27,10 @@ if ($result->num_rows > 0) {
             "$".$row['price']
         ];
     }
+    $_SESSION['orderLine'] = $orderLine;
     echo json_encode(['status' => 'success', 'orderLine' => $orderLine]);
 } else {
-    echo json_encode(['status' => 'fail', 'message' => 'No orderline found']);
+    echo json_encode(['status' => 'success', 'orderLine' => $orderLine]);
 }
 $stmt->close();
 $conn->close();

@@ -3,17 +3,18 @@ require_once('../../../db/connect.php');
 session_start();
 ?>
 <style>
-#loginOut:hover {
-    color: #b23b3b;
+    #loginOut:hover {
+        color: #b23b3b;
 
-}
+    }
 </style>
 
-<span>Dealer Email: <?php if(isset($_SESSION['dealer'])){echo$_SESSION['dealer'];}?></span>
+<span>Dealer Email: <?php if (isset($_SESSION['dealer'])) {
+                        echo $_SESSION['dealer'];
+                    } ?></span>
 <div class="header-main">
     <div class="container">
-        <a href="./homepage.php" class="menu-title"><img src="../assets/img/catHead.jpg" width="70"
-                class="showcase-img" />
+        <a href="./homepage.php" class="menu-title"><img src="../assets/img/catHead.jpg" width="70" class="showcase-img" />
             <h4 style="font-size: 1.4em;">SLMS</h4>
         </a>
 
@@ -119,7 +120,7 @@ session_start();
     </button>
     <button class="action-btn">
         <a href="./OrderView.php">
-                    <ion-icon name="file-tray-full-outline"></ion-icon>
+            <ion-icon name="file-tray-full-outline"></ion-icon>
         </a>
     </button>
     <button class="action-btn" onclick="location.href='./shoppingCart.php'">
@@ -134,45 +135,47 @@ session_start();
     </button>
 </div>
 <script>
-function search() {
-    var search = document.querySelector('.search-field').value;
-    if (search == '') {
-        alert('Please enter a product name');
-    } else {
-        location.href = './search.php?search=' + search;
+    fetchCartCount();
+
+    function search() {
+        var search = document.querySelector('.search-field').value;
+        if (search == '') {
+            alert('Please enter a product name');
+        } else {
+            location.href = './search.php?search=' + search;
+        }
+    };
+
+    function fetchCartCount() {
+        fetch("./assets/subphp/cart_count.php", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.json())
+            .then(responseData => {
+                if (responseData.cart_count !== undefined) {
+                    document.getElementById("shoppingCartCount1").innerText = responseData.cart_count;
+                    document.getElementById("shoppingCartCount2").innerText = responseData.cart_count;
+                } else {
+                    console.error('Error:', responseData.message);
+                }
+            })
+            .catch(error => console.error('Fetch error:', error));
     }
-};
 
-function fetchCartCount() {
-    fetch("./assets/subphp/cart_count.php", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({})
-        })
-        .then(response => response.json())
-        .then(responseData => {
-            if (responseData.cart_count !== undefined) {
-                document.getElementById("shoppingCartCount1").innerText = responseData.cart_count;
-                document.getElementById("shoppingCartCount2").innerText = responseData.cart_count;
-            } else {
-                console.error('Error:', responseData.message);
-            }
-        })
-        .catch(error => console.error('Fetch error:', error));
-}
 
-fetchCartCount();
 
-function loginOut() {
-    fetch('./assets/subphp/logout.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                location.replace('../index.php');
-            }
-        })
-        .catch(error => console.error('Error:', error));
-}
+    function loginOut() {
+        fetch('./assets/subphp/logout.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    location.replace('../index.php');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
 </script>

@@ -5,7 +5,7 @@ session_start();
 
 <?php
 if (!isset($_SESSION['dealer'])) {
-    header("Location: ../login.php");
+    header("Location: ../index.php");
     exit();
 }
 if (isset($_SESSION['dealer'])) {
@@ -254,7 +254,7 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                                 className: 'text-center'
                             },
                             {
-                                title: 'Delivery Date',
+                                title: 'Delivery Date & Time',
                                 className: 'text-center'
                             },
                             {

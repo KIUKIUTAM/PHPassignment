@@ -674,6 +674,10 @@ if (!isset($_SESSION['managerEmail'])) {
                     className: 'text-center'
                   },
                   {
+                    title: 'Spare Part img',
+                    className: 'text-center'
+                  },
+                  {
                     title: 'inventory Quantity',
                     className: 'text-center'
                   },

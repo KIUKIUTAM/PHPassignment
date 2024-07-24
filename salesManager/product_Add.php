@@ -85,15 +85,15 @@ if (!isset($_SESSION['managerEmail'])) {
               </div>
               <div class="input-group mb-3 ">
                 <span class="input-group-text" id="basic-addon1">Weight</span>
-                <input type="number" class="form-control" name="weight" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+                <input type="number" step="0.01" class="form-control" name="weight" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
               </div>
               <div class="input-group mb-3 ">
                 <span class="input-group-text" id="basic-addon1">Price</span>
-                <input type="number" class="form-control" name="price" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+                <input type="number" step="0.01" class="form-control" name="price" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
               </div>
               <div class="input-group mb-3 ">
                 <span class="input-group-text" id="basic-addon1">Discount Price</span>
-                <input type="number" class="form-control" name="discountPrice" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                <input type="number" step="0.01"class="form-control" name="discountPrice" placeholder="" aria-label="" aria-describedby="basic-addon1">
               </div>
               <div class="input-group mb-3">
                 <label class="input-group-text" for="inputGroupFile01">Spare Part Image</label>

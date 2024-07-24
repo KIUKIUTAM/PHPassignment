@@ -51,7 +51,9 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
     <style>
         .text-center {
             text-align: center;
+
         }
+
 
 
         td.ColorGreen {
@@ -152,6 +154,8 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                                         <label for="inputDeliveryAddress" class="col-sm-3 col-form-label">Sales Manager:</label>
                                         <div class="col-sm-7">
                                             <div class="input-group ">
+                                                <span class="input-group-text">id</span>
+                                                <input type="text" aria-label="SalesManagerName" class="form-control" id="OrderDetail-SalesManagerId" placeholder="" disabled>
                                                 <span class="input-group-text">Name</span>
                                                 <input type="text" aria-label="SalesManagerName" class="form-control" id="OrderDetail-SalesManagerName" placeholder="" disabled>
                                                 <span class="input-group-text">Contact</span>
@@ -347,9 +351,10 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
 
 
 
-    function uploadOrderDetail(orderID, orderDateTime, managerName, managerContact, deliveryAddress, deliveryDate, orderPrice) {
+    function uploadOrderDetail(orderID, orderDateTime, managerId, managerName, managerContact, deliveryAddress, deliveryDate, orderPrice) {
         document.getElementById("OrderDetail-OrderID").placeholder = orderID.toString().padStart(6, '0');
         document.getElementById("OrderDetail-orderDateTime").placeholder = orderDateTime;
+        document.getElementById("OrderDetail-SalesManagerId").placeholder = managerId;
         document.getElementById("OrderDetail-SalesManagerName").placeholder = managerName;
         document.getElementById("OrderDetail-SalesManagerContact").placeholder = managerContact;
         document.getElementById("OrderDetail-deliveryAddress").placeholder = deliveryAddress;
@@ -426,6 +431,10 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                                 className: 'text-center'
                             },
                             {
+                                title: 'Img',
+                                className: 'text-center'
+                            },
+                            {
                                 title: 'Quantity',
                                 className: 'text-center'
                             },
@@ -434,7 +443,13 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                                 className: 'text-center'
                             }
                         ],
-                        data: orderLine
+                        data: orderLine,
+                        columnDefs: [{
+                            "targets": 3, // The index of the column containing the image paths
+                            "render": function(data, type, row, meta) {
+                                return '<img src="' + data + '" alt="Image" style="width:50px;height:auto;"/>';
+                            }
+                        }]
                     });
                 } else {
                     console.error('Error:', responseData.message);

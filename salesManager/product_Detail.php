@@ -28,14 +28,15 @@ if (!isset($_SESSION['managerEmail'])) {
 
 </head>
 <style>
+  a {
+    text-decoration: none !important;
+  }
 
-    a{
-      text-decoration: none !important;
-    }
-    del{
-      color: red;
-    }
-  </style>
+  del {
+    color: red;
+  }
+</style>
+
 <body>
   <header></header>
   <main>
@@ -65,25 +66,28 @@ if (!isset($_SESSION['managerEmail'])) {
         };
       ?>
         <div class="container">
-          <label class="switch">
-            <input type="checkbox" id="disableSwitch" <?php if ($row["disable"] != 1) {
-                                      echo "checked='checked'";
-                                    } ?>
-                                    onclick="disableSparePart(<?php echo $row['sparePartNum'] ?>)"
-                                    >
-            <div class="button">
-              <div class="light"></div>
-              <div class="dots"></div>
-              <div class="characters"></div>
-              <div class="shine"></div>
-              <div class="shadow"></div>
-            </div>
-          </label>
+
+
           <div class="product-box">
+          <label class="switch ">
+              <input type="checkbox" id="disableSwitch" <?php if ($row["disable"] != 1) {
+                                                          echo "checked='checked'";
+                                                        } ?> onclick="disableSparePart(<?php echo $row['sparePartNum'] ?>)">
+              <div class="button">
+                <div class="light"></div>
+                <div class="dots"></div>
+                <div class="characters"></div>
+                <div class="shine"></div>
+                <div class="shadow"></div>
+              </div>
+            </label>
             <div class="product">
+
               <a href="#" class="product-img-box">
                 <img src="<?php echo $row["sparePartImage"] ?>" alt="product-img-box" width="300" class="product-img" />
+
               </a>
+
               <?php
               if ($row["stockItemQty"] >= 100) {
                 $stockItemStatus = "In Stock";
@@ -118,12 +122,20 @@ if (!isset($_SESSION['managerEmail'])) {
                     <del>$ $delPrice</del>";
                   } ?>
                 </div>
-                <button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick="detailAddId()">Edit Item</button>
+              </div>
+              <button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick="detailAddId()">Edit Item</button>
+              <div class="delete">
+                <button class="noselect" onclick="DeleteItem()"><span class="text">Delete</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                      <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path>
+                    </svg></span></button>
 
               </div>
             </div>
+            
           </div>
+
         </div>
+
       <?php
       }
       ?>
@@ -158,13 +170,13 @@ if (!isset($_SESSION['managerEmail'])) {
               <div class="form-group row mb-3">
                 <label for="" class="col-sm-3 col-form-label">Price:</label>
                 <div class="col-sm-7">
-                  <input type="number" class="form-control" name="price" min="0">
+                  <input type="number" step="0.01" class="form-control" name="price" min="0">
                 </div>
               </div>
               <div class="form-group row mb-3">
                 <label for="" class="col-sm-3 col-form-label">Discount Price:</label>
                 <div class="col-sm-7">
-                  <input type="number" class="form-control" name="discountPrice" min="0">
+                  <input type="number" step="0.01" class="form-control" name="discountPrice" min="0">
                 </div>
               </div>
               <div class="form-group row mb-3">
@@ -231,7 +243,7 @@ if (!isset($_SESSION['managerEmail'])) {
     toastNotif({
       text: message,
       color: '#5bc83f',
-      timeout: 500,
+      timeout: 5000,
       icon: 'valid'
     });
   }
@@ -261,7 +273,40 @@ if (!isset($_SESSION['managerEmail'])) {
       .catch(error => {
         console.error('Error:', error);
       });
-}
+  }
+  function DeleteItem() {
+    if(!confirm("Are you sure you want to delete this item?")){
+      return;
+    };
+    let sparePartNum = document.getElementById('sparePartNumShow').innerText;
+    fetch('./assets/subphp/deleteItem.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          sparePartNum: sparePartNum
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          console.log('Operation successful:', data);
+          showToast('Item deleted successfully');
+          setTimeout(() => {
+            window.location.href = './listOfProduct?Category=ALL';
+          }, 1000);
+        }if(data.status ==="ItemUsing"){
+
+          showToast('Item is using in order');
+        } else {
+          console.log('Operation failed:', data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
 </script>
 
 </html>

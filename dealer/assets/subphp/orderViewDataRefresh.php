@@ -13,7 +13,7 @@ $sql = "
     FROM `orders` o
     JOIN `dealer` d ON o.dealerID = d.dealerID
     LEFT JOIN `salesmanager` s ON o.salesManagerID = s.salesManagerID
-    WHERE d.dealerEmail = '$dealerEmail';
+    WHERE d.dealerEmail = '$dealerEmail' AND o.orderStatus != 5;
 ";
 $stmt = $conn->prepare($sql);
 
@@ -52,7 +52,7 @@ if ($result->num_rows > 0) {
 
 
         $deliveryDate = $row['deliveryDate'] == null ? "Not yet delivered" : $row['deliveryDate'];
-
+        $salesManagerID = $row['salesManagerID'] == null ? "Not yet assigned" : $row['salesManagerID'];
         $salesManagerName = $row['managerName'] == null ? "Not yet assigned" : $row['managerName'];
         $salesManagerContact = $row['contactNumber'] == null ? "Not yet assigned" : $row['contactNumber'];
 
@@ -61,7 +61,7 @@ if ($result->num_rows > 0) {
             $row['orderDateTime'],
             $OrderStatus,
             $deliveryDate,
-            "<button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick='uploadOrderDetail(\"{$row['orderID']}\", \"{$row['orderDateTime']}\", \"{$salesManagerName}\", \"{$salesManagerContact}\", \"{$row['deliveryAddress']}\", \"{$deliveryDate}\", \"{$row['orderPrice']}\")'>Details</button>",
+            "<button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick='uploadOrderDetail(\"{$row['orderID']}\", \"{$row['orderDateTime']}\", \"{$salesManagerID}\", \"{$salesManagerName}\", \"{$salesManagerContact}\", \"{$row['deliveryAddress']}\", \"{$deliveryDate}\", \"{$row['orderPrice']}\")'>Details</button>",
             "<button type='button' class='btn btn-outline-danger' id='cancelButton{$row['orderID']}' onclick='cancelOrder(\"{$row['orderID']}\", \"{$row['orderStatus']}\")'>Cancel</button>"
         ];
     }

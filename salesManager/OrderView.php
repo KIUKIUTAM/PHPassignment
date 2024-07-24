@@ -510,7 +510,13 @@ $managerID = $_SESSION['managerID']
                                 className: 'text-center'
                             }
                         ],
-                        data: orderLine
+                        data: orderLine,
+                        columnDefs: [{
+                            "targets": 0, // The index of the column containing the image paths
+                            "render": function(data, type, row, meta) {
+                                return '<img src="' + data + '" alt="Image" style="width:50px;height:auto;"/>';
+                            }
+                        }]
                     });
                     validatequantity = validateData(orderLine);
                 } else {
@@ -587,8 +593,6 @@ $managerID = $_SESSION['managerID']
         window.location.reload();
 
     }
-
-    
 </script>
 
 </html>

@@ -24,11 +24,6 @@ session_start();
 
         <div class="header-user-actions">
             <button class="action-btn">
-                <a href="./information.php">
-                    <ion-icon name="person-outline"></ion-icon>
-                </a>
-            </button>
-            <button class="action-btn">
                 <a href="./OrderView.php">
                     <ion-icon name="file-tray-full-outline"></ion-icon>
                 </a>
@@ -89,11 +84,6 @@ session_start();
 <div class="mobile-bottom-navigation">
     <button class="action-btn" onclick="location.href='./homepage.php'">
         <ion-icon name="home-outline"></ion-icon>
-    </button>
-    <button class="action-btn">
-        <a href="./information.php">
-            <ion-icon name="person-outline"></ion-icon>
-        </a>
     </button>
     <button class="action-btn">
         <a href="./OrderView.php">

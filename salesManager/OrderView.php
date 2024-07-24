@@ -140,7 +140,7 @@ $managerID = $_SESSION['managerID']
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group row margin-bottom10" id="approveInput">
+                                    <div class="form-group row margin-bottom10 no-print" id="approveInput">
                                         <div class="col-sm-6">
                                             <div class="input-group ">
                                                 <button type="button" class="btn btn-success no-print" id="ApproveOrder">Approve</button>

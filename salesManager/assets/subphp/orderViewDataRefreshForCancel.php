@@ -2,9 +2,15 @@
 require_once('../../../db/connect.php');
 session_start();
 
-$orderStatus = "";
+// Check if the connection is valid
+if (!$conn) {
+    echo json_encode(['status' => 'error', 'message' => 'Database connection failed']);
+    exit();
+}
+
+// Prepare the SQL query to fetch orders with status "Request Cancel"
 $sql = "
-    SELECT * 
+    SELECT o.*, d.*, s.managerName, s.contactNumber 
     FROM `orders` o
     JOIN `dealer` d ON o.dealerID = d.dealerID
     LEFT JOIN `salesmanager` s ON o.salesManagerID = s.salesManagerID 
@@ -12,14 +18,19 @@ $sql = "
 ";
 $stmt = $conn->prepare($sql);
 
-$stmt->execute();
+if (!$stmt) {
+    echo json_encode(['status' => 'error', 'message' => 'Failed to prepare statement: ' . $conn->error]);
+    exit();
+}
 
+// Execute the statement
+$stmt->execute();
 $result = $stmt->get_result();
 
 $dataSet = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-
+        // Determine the order status
         $orderStatus = "";
         switch ($row['orderStatus']) {
             case 1:
@@ -42,10 +53,14 @@ if ($result->num_rows > 0) {
                 break;
         }
 
+        // Determine the delivery date
         $deliveryDate = $row['deliveryDate'] == null ? "Not yet delivered" : $row['deliveryDate'];
+
+        // Determine the sales manager details
         $salesManagerName = $row['managerName'] == null ? "Not yet assigned" : $row['managerName'];
         $salesManagerContact = $row['contactNumber'] == null ? "Not yet assigned" : $row['contactNumber'];
 
+        // Append the data to the dataset
         $dataSet[] = [
             sprintf('%06d', $row['orderID']),
             htmlspecialchars($row['dealerID']),
@@ -58,7 +73,7 @@ if ($result->num_rows > 0) {
 
     echo json_encode(['status' => 'success', 'data' => $dataSet]);
 } else {
-    echo json_encode(['status' => 'success', 'data' => $dataSet]);
+    echo json_encode(['status' => 'success', 'data' => []]);
 }
 
 // Close the statement and connection

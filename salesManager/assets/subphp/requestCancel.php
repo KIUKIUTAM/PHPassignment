@@ -1,6 +1,7 @@
 <?php
 require_once('../../../db/connect.php');
 session_start();
+
 // Check if the connection was successful
 if ($conn->connect_error) {
     die(json_encode(['status' => 'error', 'message' => 'Connection failed: ' . $conn->connect_error]));
@@ -16,19 +17,22 @@ $arrayData = json_decode($data, true);
 if (!isset($arrayData['orderID']) || empty($arrayData['orderID'])) {
     die(json_encode(['status' => 'error', 'message' => 'Invalid order ID']));
 }
-if (!isset($arrayData['status']) || empty($arrayData['status'])) {
+if (!isset($arrayData['status']) || !in_array($arrayData['status'], [2, 5])) {
     die(json_encode(['status' => 'error', 'message' => 'Invalid cancel status']));
 }
-$orderLines = $_SESSION['orderLine'];
-if (!is_array($orderLines) || empty($orderLines)) {
+if (!isset($_SESSION['orderLine']) || !is_array($_SESSION['orderLine']) || empty($_SESSION['orderLine'])) {
     die(json_encode(['status' => 'error', 'message' => 'Invalid order line']));
 }
+
+$orderLines = $_SESSION['orderLine'];
+
 try {
     // Begin a transaction
     $conn->begin_transaction();
 
     if ($arrayData['status'] == 2) {
-        $stmt = $conn->prepare("UPDATE orders SET orderStatus = 2 WHERE orderID = ?"); // reject cancel
+        // Reject cancel request
+        $stmt = $conn->prepare("UPDATE orders SET orderStatus = 2 WHERE orderID = ?");
         if ($stmt === false) {
             throw new Exception('Prepare statement failed: ' . $conn->error);
         }
@@ -40,7 +44,8 @@ try {
        
         echo json_encode(['status' => 'success', 'message' => 'Order cancel rejected successfully']);
     } else {
-        $stmt = $conn->prepare("UPDATE orders SET orderStatus = 5, deliveryDate = NULL WHERE orderID = ?"); // cancel order
+        // Cancel order
+        $stmt = $conn->prepare("UPDATE orders SET orderStatus = 5, deliveryDate = NULL WHERE orderID = ?");
         if ($stmt === false) {
             throw new Exception('Prepare statement failed: ' . $conn->error);
         }
@@ -65,7 +70,6 @@ try {
             $stmt->close();
         }
         echo json_encode(['status' => 'success', 'message' => 'Order cancelled successfully']);
-
     }
 
     // Commit the transaction
@@ -78,3 +82,4 @@ try {
 
 // Close the connection
 $conn->close();
+?>

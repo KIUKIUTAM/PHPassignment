@@ -66,6 +66,15 @@ if (!isset($_SESSION['dealer'])) {
   }
   ?>
 </head>
+<style>
+  #NameASC:hover {
+    color: var(--salmon-pink);
+  }
+
+  #NameDESC:hover {
+    color: var(--salmon-pink);
+  }
+</style>
 
 <body>
 
@@ -236,25 +245,32 @@ if (!isset($_SESSION['dealer'])) {
   <footer>
   </footer>
   <script>
+    // Function to redirect to product detail page with a specific spare part number
     function ProductDetail(sparePartNum) {
-      window.location.href = ("./product_Detail?sparePartNum=" + sparePartNum);
+      window.location.href = "./product_Detail?sparePartNum=" + sparePartNum;
     }
 
-    var currentUrl = window.location.href;
-    var urlForOrderBY = new URL(currentUrl);
 
+
+    // Function to set order by ascending or descending
     function orderBy(AorD) {
+      // Get the current URL
+      var currentUrl = window.location.href;
+      var urlForOrderBY = new URL(currentUrl);
       switch (AorD) {
         case 0:
+          // Set the order to ascending (ASC)
           urlForOrderBY.searchParams.set('orderByOrder', 'ASC');
+          // Update the href attribute of the NameASC element
           document.getElementById('NameASC').href = urlForOrderBY.toString();
           break;
         case 1:
+          // Set the order to descending (DESC)
           urlForOrderBY.searchParams.set('orderByOrder', 'DESC');
+          // Update the href attribute of the NameDESC element
           document.getElementById('NameDESC').href = urlForOrderBY.toString();
           break;
       }
-
     }
   </script>
   <script src="./assets/js/script.js"></script>

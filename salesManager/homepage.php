@@ -725,6 +725,15 @@ if (!isset($_SESSION['managerEmail'])) {
           console.error('Fetch error:', error);
         });
     }
+    function printTheOrderDetail() {
+        var printContents = document.getElementById('Modal-Detail').innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        window.location.reload();
+
+    }
   </script>
   <script>
     $(function() {

@@ -33,12 +33,15 @@ $managerID = $_SESSION['managerID']
         .text-center {
             text-align: center;
         }
+
         td.ColorGreen {
             color: #198754 !important;
         }
+
         td.ColorLightRed {
             color: #986F4D !important;
         }
+
         td.ColorRed {
             color: #DC3545 !important;
         }
@@ -52,11 +55,11 @@ $managerID = $_SESSION['managerID']
     <!-- MAIN-->
     <main>
         <!-- PRODUCT-->
-         
+
         <div class="productDetail-container">
-            
+
             <div class="container" style=" margin-bottom: 30vh; width: 2000px;">
-            <h3>Request Cancel List:</h3>
+                <h3>Request Cancel List:</h3>
                 <table class="table table-striped table-hover" OrderItemList id="OrderViewTable">
                     <thead>
                         <tr>
@@ -86,7 +89,7 @@ $managerID = $_SESSION['managerID']
                             <th>
                             </th>
                             <th><button type="button" class="btn btn-primary" onclick="clearFilter()">Clear</button></th>
-                      
+
                         </tr>
                     </tfoot>
 
@@ -203,6 +206,7 @@ $managerID = $_SESSION['managerID']
     var orderLine = [];
     var orderIDForClick = 0;
     refreshOrderView();
+
     function refreshOrderView() {
         const url = "./assets/subphp/orderViewDataRefreshForCancel.php";
         const data = {};
@@ -229,33 +233,35 @@ $managerID = $_SESSION['managerID']
                         $('#OrderViewTable').DataTable().destroy();
                     }
                     if (orderData.length === 0) {
-                       // Initialize DataTable
-                    table = $('#OrderViewTable').DataTable({
-                        columns: [{
-                                title: 'Order ID',
-                                className: 'text-center'
-                            },
-                            {
-                                title: 'Dealer ID',
-                                className: 'text-center'
-                            },
-                            {
-                                title: 'Order Date & Time',
-                                className: 'text-center'
-                            },
-                            {
-                                title: 'Order Status',
-                                className: 'text-center'
-                            },
-                            {
-                                title: 'Delivery Date & Time',
-                                className: 'text-center'
-                            },
-                            {
-                                title: 'Detail',
-                                className: 'text-center'
-                            }
-                        ],data:[]});
+                        // Initialize DataTable
+                        table = $('#OrderViewTable').DataTable({
+                            columns: [{
+                                    title: 'Order ID',
+                                    className: 'text-center'
+                                },
+                                {
+                                    title: 'Dealer ID',
+                                    className: 'text-center'
+                                },
+                                {
+                                    title: 'Order Date & Time',
+                                    className: 'text-center'
+                                },
+                                {
+                                    title: 'Order Status',
+                                    className: 'text-center'
+                                },
+                                {
+                                    title: 'Delivery Date & Time',
+                                    className: 'text-center'
+                                },
+                                {
+                                    title: 'Detail',
+                                    className: 'text-center'
+                                }
+                            ],
+                            data: []
+                        });
                         return;
                     }
                     // Initialize DataTable
@@ -354,7 +360,7 @@ $managerID = $_SESSION['managerID']
                 console.error('Fetch error:', error);
             });
     }
-    
+
 
     function closeModal() {
         var modalElement = document.getElementById('Modal-Detail');
@@ -365,23 +371,34 @@ $managerID = $_SESSION['managerID']
     }
 
     function handleApproveClick() {
-        RequestCancel(orderIDForClick, 1);//1 for approve cancel
+        RequestCancel(orderIDForClick, 1); //1 for approve cancel
     }
 
     function handleRejectClick() {
-        RequestCancel(orderIDForClick, 2);//2 for reject cancel
+        RequestCancel(orderIDForClick, 2); //2 for reject cancel
     }
 
     function uploadOrderDetail(orderID, orderDateTime, orderStatus, managerName, managerContact, deliveryAddress, deliveryDate, orderPrice) {
+        // Update placeholders with order details
         document.getElementById("OrderDetail-OrderID").placeholder = orderID.toString().padStart(6, '0');
-        if (orderStatus == 4) {
+        document.getElementById("OrderDetail-orderDateTime").placeholder = orderDateTime;
+        document.getElementById("OrderDetail-SalesManagerName").placeholder = managerName;
+        document.getElementById("OrderDetail-SalesManagerContact").placeholder = managerContact;
+        document.getElementById("OrderDetail-deliveryAddress").placeholder = deliveryAddress;
+        document.getElementById("OrderDetail-deliveryDate").placeholder = deliveryDate;
+        document.getElementById("Detail-totalPrice").innerText = orderPrice;
+
+        // Handle order approval/rejection buttons visibility and event listeners
+        if (orderStatus === 4) {
             orderIDForClick = orderID;
-            // Ensure the DOM is fully loaded before accessing the element
             let approveButton = document.getElementById('ApproveOrder');
             let rejectButton = document.getElementById('RejectOrder');
 
+            // Remove existing event listeners to avoid duplicates
             approveButton.removeEventListener('click', handleApproveClick);
             rejectButton.removeEventListener('click', handleRejectClick);
+
+            // Add new event listeners
             approveButton.addEventListener('click', handleApproveClick);
             rejectButton.addEventListener('click', handleRejectClick);
 
@@ -389,16 +406,13 @@ $managerID = $_SESSION['managerID']
         } else {
             document.getElementById('approveInput').style.display = 'none';
         }
-        document.getElementById("OrderDetail-orderDateTime").placeholder = orderDateTime;
-        document.getElementById("OrderDetail-SalesManagerName").placeholder = managerName;
-        document.getElementById("OrderDetail-SalesManagerContact").placeholder = managerContact;
-        document.getElementById("OrderDetail-deliveryAddress").placeholder = deliveryAddress;
-        document.getElementById("OrderDetail-deliveryDate").placeholder = deliveryDate;
-        document.getElementById("Detail-totalPrice").innerText = orderPrice;
+
+        // Fetch order line details from the server
         const url = "./assets/subphp/orderDetail.php";
         const data = {
             orderID: orderID
         };
+
         fetch(url, {
                 method: 'POST',
                 headers: {
@@ -414,19 +428,21 @@ $managerID = $_SESSION['managerID']
             })
             .then(responseData => {
                 if (responseData.status === 'success') {
-                    orderLine = responseData.orderLine;
+                    const orderLine = responseData.orderLine;
                     console.log(orderLine);
+
+                    // Check if DataTable already exists and destroy it if it does
                     if ($.fn.dataTable.isDataTable('#DataTableForOrderDetail')) {
-                        // Destroy the existing DataTable
                         $('#DataTableForOrderDetail').DataTable().destroy();
                     }
-                    // Initialize DataTable
+
+                    // Initialize DataTable with the new data
                     new DataTable('#DataTableForOrderDetail', {
                         columns: [{
                                 title: '#'
                             },
                             {
-                                title: 'Spare Part number',
+                                title: 'Spare Part Number',
                                 className: 'text-center'
                             },
                             {
@@ -434,7 +450,7 @@ $managerID = $_SESSION['managerID']
                                 className: 'text-center'
                             },
                             {
-                                title: 'inventory Quantity',
+                                title: 'Inventory Quantity',
                                 className: 'text-center'
                             },
                             {
@@ -442,7 +458,7 @@ $managerID = $_SESSION['managerID']
                                 className: 'text-center'
                             },
                             {
-                                title: 'Price(USD)',
+                                title: 'Price (USD)',
                                 className: 'text-center'
                             }
                         ],
@@ -457,36 +473,48 @@ $managerID = $_SESSION['managerID']
             });
     }
 
-    function RequestCancel(orderID, status) {//1 for approve cancel, 2 for reject cancel
-        const url = "./assets/subphp/requestCancel.php";
-        console.log(orderLine);
-        const data = {
-            orderID: orderID,
-            status: status,
-            orderline : orderLine
-        };
-        console.log(data);
-        fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(responseData => {
-                if (responseData.status === 'success') {
-                    alert("Order has been " + ((status == 1) ? "approved" : "rejected"));
-                    refreshOrderView();
-                    closeModal();
-                } else {
-                    console.error('Error:', responseData.message);
-                }
-            })
-            .catch(error => {
-                console.error('Fetch error:', error);
-            });
-    }
+    function RequestCancel(orderID, status) {
+    // Define the URL for the request
+    const url = "./assets/subphp/requestCancel.php";
+
+    // Prepare the data to be sent in the request
+    const data = {
+        orderID: orderID,
+        status: status,
+        orderLine: orderLine // Ensure `orderLine` is defined in the appropriate scope
+    };
+
+    console.log(data);
+
+    // Make the fetch request to the server
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        // Check if the response is ok
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(responseData => {
+        // Handle the response data
+        if (responseData.status === 'success') {
+            alert("Order has been " + (status === 1 ? "approved" : "rejected"));
+            refreshOrderView();
+            closeModal();
+        } else {
+            console.error('Error:', responseData.message);
+        }
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+    });
+}
 
     function printTheOrderDetail() {
         var printContents = document.getElementById('Modal-Detail').innerHTML;
@@ -497,7 +525,6 @@ $managerID = $_SESSION['managerID']
         window.location.reload();
 
     }
-
 </script>
 
 </html>

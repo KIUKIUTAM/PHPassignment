@@ -29,9 +29,7 @@ if (!isset($_SESSION['managerEmail'])) {
   <style>
     #addIcon {
       font-size: 50px;
-      /* Set the size of the icon */
     }
-
     #addPart {
       height: 101px;
     }
@@ -85,7 +83,6 @@ if (!isset($_SESSION['managerEmail'])) {
 <body>
   <header></header>
   <main>
-
     <div class="product-container">
       <div class="container">
 
@@ -224,14 +221,9 @@ if (!isset($_SESSION['managerEmail'])) {
           document.getElementById('NameDESC').href = urlForOrderBY.toString();
           break;
       }
-
     }
   </script>
-
-  <!--- custom js link-->
   <script src="./assets/js/script.js"></script>
-
-  <!--- ionicon link-->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -243,8 +235,4 @@ if (!isset($_SESSION['managerEmail'])) {
     });
   </script>
 </body>
-
 </html>
-
-';
-?>

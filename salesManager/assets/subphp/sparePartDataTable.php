@@ -1,6 +1,7 @@
 <?php
 require_once('../../../db/connect.php');
 
+// Prepare the SQL query
 $sql = "SELECT 
     sparepart.sparePartImage,
     sparepart.sparePartNum,
@@ -10,28 +11,33 @@ $sql = "SELECT
     sparepart.price,
     sparepart.discountPrice,
     disabledsparepart.disable
- FROM `sparepart` LEFT JOIN `disabledsparepart` ON sparepart.sparePartNum = disabledsparepart.sparePartNum;";
+ FROM `sparepart` LEFT JOIN `disabledsparepart` ON sparepart.sparePartNum = disabledsparepart.sparePartNum";
+
+// Prepare the statement
 $stmt = $conn->prepare($sql);
+if ($stmt === false) {
+    die(json_encode(['status' => 'error', 'message' => 'Prepare statement failed: ' . $conn->error]));
+}
 
-$stmt->execute();
+// Execute the statement
+if (!$stmt->execute()) {
+    die(json_encode(['status' => 'error', 'message' => 'Execute statement failed: ' . $stmt->error]));
+}
 
+// Get the result set
 $result = $stmt->get_result();
 
+// Initialize an empty array to hold the data
 $dataSet = [];
+
+// Check if there are any rows in the result set
 if ($result->num_rows > 0) {
-
+    // Fetch each row and format the data
     while ($row = $result->fetch_assoc()) {
+        $row['discountPrice'] = ($row['discountPrice'] == 0) ? "No Discount" : "$" . $row['discountPrice'];
+        $disable = ($row['disable'] == 1) ? "Disabled" : "Enabled";
 
-        if ($row['discountPrice'] == 0) {
-            $row['discountPrice'] = "No Discount";
-        } else {
-            $row['discountPrice'] = "$" . $row['discountPrice'];
-        }
-        if($row['disable']==1){
-            $disable = "Disabled";
-        }else{
-            $disable = "Enabled";
-        }
+        // Append the formatted row to the dataSet array
         $dataSet[] = [
             $row['sparePartImage'],
             $row['sparePartNum'],
@@ -43,12 +49,12 @@ if ($result->num_rows > 0) {
             $disable
         ];
     }
-
-    echo json_encode(['status' => 'success', 'data' => $dataSet]);
-} else {
-    echo json_encode(['status' => 'success', 'data' => $dataSet]);
 }
+
+// Return the data as a JSON response
+echo json_encode(['status' => 'success', 'data' => $dataSet]);
 
 // Close the statement and connection
 $stmt->close();
 $conn->close();
+?>

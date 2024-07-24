@@ -159,6 +159,7 @@ $managerID = $_SESSION['managerID']
                                     <table class="table display" id="DataTableForOrderDetail">
 
                                     </table>
+                                    <h5>Delivery Cost: $<span id="Detail-DeliveryCost">0</span></h5>
                                     <h5>Total Order Amount: $<span id="Detail-totalPrice">0</span></h5>
 
                                 </form>
@@ -404,7 +405,7 @@ $managerID = $_SESSION['managerID']
         approveOrder(orderIDForClick, 2);
     }
 
-    function uploadOrderDetail(orderID, orderDateTime, orderStatus, managerName, managerContact, deliveryAddress, deliveryDate, orderPrice) {
+    function uploadOrderDetail(orderID, orderDateTime, orderStatus, managerName, managerContact, deliveryAddress, deliveryDate,deliveryCost, orderPrice) {
         document.getElementById("OrderDetail-OrderID").placeholder = orderID.toString().padStart(6, '0');
         if (orderStatus == 1) {
             orderIDForClick = orderID;
@@ -427,6 +428,7 @@ $managerID = $_SESSION['managerID']
         document.getElementById("OrderDetail-SalesManagerContact").placeholder = managerContact;
         document.getElementById("OrderDetail-deliveryAddress").placeholder = deliveryAddress;
         document.getElementById("OrderDetail-deliveryDate").placeholder = deliveryDate;
+        document.getElementById("Detail-DeliveryCost").innerText = deliveryCost;
         document.getElementById("Detail-totalPrice").innerText = orderPrice;
         const url = "./assets/subphp/orderDetail.php";
         const data = {
@@ -510,13 +512,7 @@ $managerID = $_SESSION['managerID']
                                 className: 'text-center'
                             }
                         ],
-                        data: orderLine,
-                        columnDefs: [{
-                            "targets": 0, // The index of the column containing the image paths
-                            "render": function(data, type, row, meta) {
-                                return '<img src="' + data + '" alt="Image" style="width:50px;height:auto;"/>';
-                            }
-                        }]
+                        data: orderLine
                     });
                     validatequantity = validateData(orderLine);
                 } else {

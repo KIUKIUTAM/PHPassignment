@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2024 年 07 月 24 日 04:25
+-- 產生時間： 2024 年 07 月 24 日 13:22
 -- 伺服器版本： 8.0.37
 -- PHP 版本： 8.2.18
 
@@ -58,6 +58,32 @@ INSERT INTO `dealer` (`dealerID`, `dealerEmail`, `password`, `dealerName`, `cont
 -- --------------------------------------------------------
 
 --
+-- 資料表結構 `disabledsparepart`
+--
+
+DROP TABLE IF EXISTS `disabledsparepart`;
+CREATE TABLE IF NOT EXISTS `disabledsparepart` (
+  `sparePartNum` mediumint NOT NULL,
+  `disable` tinyint DEFAULT NULL,
+  PRIMARY KEY (`sparePartNum`),
+  KEY `sparepart` (`sparePartNum`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- 資料表新增資料前，先清除舊資料 `disabledsparepart`
+--
+
+TRUNCATE TABLE `disabledsparepart`;
+--
+-- 傾印資料表的資料 `disabledsparepart`
+--
+
+INSERT INTO `disabledsparepart` (`sparePartNum`, `disable`) VALUES
+(200003, 1);
+
+-- --------------------------------------------------------
+
+--
 -- 資料表結構 `managerhead`
 --
 
@@ -83,32 +109,6 @@ INSERT INTO `managerhead` (`salesManagerID`, `headPermission`) VALUES
 (2, 1);
 
 -- --------------------------------------------------------
---
--- 資料表結構 `disabledSparePart`
---
-
-DROP TABLE IF EXISTS `disabledSparePart`;
-CREATE TABLE IF NOT EXISTS `disabledSparePart` (
-  `sparePartNum` mediumint NOT NULL,
-  `disable` tinyint DEFAULT NULL,
-  PRIMARY KEY (`sparePartNum`),
-  KEY `sparepart` (`sparePartNum`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- 資料表新增資料前，先清除舊資料 `disabledSparePart`
---
-
-TRUNCATE TABLE `disabledSparePart`;
---
--- 傾印資料表的資料 `disabledSparePart`
---
-
-INSERT INTO `disabledSparePart` (`sparePartNum`, `disable`) VALUES
-(100002, 1),
-(100003, 1);
-
--- --------------------------------------------------------
 
 --
 -- 資料表結構 `orderline`
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `orderline` (
   PRIMARY KEY (`orderLineID`),
   KEY `orders` (`orderID`),
   KEY `sparePart` (`sparePartNum`)
-) ENGINE=InnoDB AUTO_INCREMENT=87 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- 資料表新增資料前，先清除舊資料 `orderline`
@@ -188,7 +188,11 @@ INSERT INTO `orderline` (`orderLineID`, `orderID`, `sparePartNum`, `orderQty`) V
 (83, 38, 400005, 1),
 (84, 39, 400004, 1),
 (85, 40, 400003, 1),
-(86, 41, 100004, 1);
+(86, 41, 100004, 1),
+(87, 44, 300004, 1),
+(88, 45, 300001, 1),
+(89, 45, 300006, 19),
+(90, 46, 400002, 2);
 
 -- --------------------------------------------------------
 
@@ -204,12 +208,13 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `deliveryAddress` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `orderDateTime` timestamp NOT NULL,
   `deliveryDate` timestamp NULL DEFAULT NULL,
+  `deliveryCost` float DEFAULT '0',
   `orderPrice` float DEFAULT '0',
   `salesManagerID` mediumint DEFAULT NULL,
   PRIMARY KEY (`orderID`),
   KEY `dealer` (`dealerID`),
   KEY `salesManager` (`salesManagerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- 資料表新增資料前，先清除舊資料 `orders`
@@ -221,7 +226,7 @@ TRUNCATE TABLE `orders`;
 --
 
 INSERT INTO `orders` (`orderID`, `dealerID`, `orderStatus`, `deliveryAddress`, `orderDateTime`, `deliveryDate`, `orderPrice`, `salesManagerID`) VALUES
-(15, 7, 2, 'aaa', '2024-07-20 20:56:13', '2024-07-23 08:00:00', 168820, 1),
+(15, 7, 3, 'aaa', '2024-07-20 20:56:13', '2024-07-23 08:00:00', 168820, 1),
 (16, 7, 1, 'aaa', '2024-07-20 20:56:24', NULL, 1915.99, 1),
 (17, 7, 1, 'aaa', '2024-07-20 20:56:18', NULL, 1450, 1),
 (18, 7, 1, 'aaa', '2024-07-20 20:56:27', NULL, 1450, 1),
@@ -235,21 +240,24 @@ INSERT INTO `orders` (`orderID`, `dealerID`, `orderStatus`, `deliveryAddress`, `
 (26, 7, 1, 'aaa', '2024-07-17 07:37:44', NULL, 312.99, 1),
 (27, 7, 1, 'aaa', '2024-07-17 07:37:46', NULL, 308.49, 1),
 (28, 7, 1, 'aaa', '2024-07-17 07:37:49', NULL, 315.99, 1),
-(29, 7, 1, 'aaa', '2024-07-20 08:25:36', NULL, 529, 1),
+(29, 7, 5, 'aaa', '2024-07-20 08:25:36', NULL, 529, 1),
 (30, 7, 1, 'aaa', '2024-07-17 07:38:12', NULL, 2049, NULL),
-(31, 7, 1, 'aaa', '2024-07-17 07:38:20', NULL, 14320, 1),
+(31, 7, 5, 'aaa', '2024-07-17 07:38:20', NULL, 14320, 1),
 (32, 7, 2, 'aaa', '2024-07-18 19:06:01', NULL, 7280, 1),
 (33, 7, 2, 'aaa', '2024-07-18 19:15:29', NULL, 1396, 1),
 (34, 7, 2, 'asdasd', '2024-07-18 23:57:45', NULL, 6573.84, 1),
 (35, 7, 2, 'aaa', '2024-07-20 08:25:33', NULL, 308.49, 1),
-(36, 7, 2, 'asdasd', '2024-07-20 21:47:23', '2024-07-23 01:00:00', 2352, 1),
-(37, 7, 2, 'asdasd', '2024-07-22 04:20:52', '2024-07-23 01:00:00', 11279.8, 1),
-(38, 7, 2, 'asdasd', '2024-07-22 05:09:10', '2024-07-23 17:00:00', 43775.4, 1),
+(36, 7, 3, 'asdasd', '2024-07-20 21:47:23', '2024-07-23 01:00:00', 2352, 1),
+(37, 7, 3, 'asdasd', '2024-07-22 04:20:52', '2024-07-23 01:00:00', 11279.8, 1),
+(38, 7, 3, 'asdasd', '2024-07-22 05:09:10', '2024-07-23 17:00:00', 43775.4, 1),
 (39, 7, 6, 'asdasd', '2024-07-22 05:39:12', NULL, 2183, 1),
 (40, 7, 2, 'asdasd', '2024-07-22 05:39:31', '2024-07-26 01:00:00', 2544, 2),
 (41, 7, 2, 'asdasd', '2024-07-22 05:44:23', NULL, 945.99, 1),
 (42, 7, 5, 'asdasd', '2024-07-23 05:36:11', NULL, 5657.99, NULL),
-(43, 7, 2, 'asdasd', '2024-07-23 05:45:11', '2024-07-25 06:00:00', 376.98, 1);
+(43, 7, 2, 'asdasd', '2024-07-23 05:45:11', '2024-07-25 06:00:00', 376.98, 1),
+(44, 7, 5, 'asdasd', '2024-07-24 05:24:45', NULL, 1579, NULL),
+(45, 7, 1, 'asdasd', '2024-07-24 05:42:53', NULL, 1642.99, NULL),
+(46, 7, 1, 'asdasd', '2024-07-24 09:40:29', NULL, 8606, NULL);
 
 -- --------------------------------------------------------
 
@@ -316,7 +324,6 @@ INSERT INTO `sparepart` (`sparePartNum`, `sparePartName`, `sparePartDescription`
 (100003, 'Aluminum Alloy Sheet', 'High-strength aluminum alloy sheet with excellent corrosion resistance.', 990, 11, 32.49, 30, '../assets/img/100003.jpg'),
 (100004, 'Cold Rolled Steel Sheet', 'Precision cold rolled steel sheet, ideal for precision components.', 994, 13, 45.99, 44, '../assets/img/100004.jpg'),
 (100005, 'Copper Sheet', 'Premium-grade copper sheet with high thermal and electrical conductivity.', 993, 13, 38.99, NULL, '../assets/img/100005.jpg'),
-(100006, 'asd', 'asd', 1, 1, 1, 0, '../assets/img/giphy.webp'),
 (200001, 'Gearbox Assembly', 'Robust gearbox assembly designed for high-torque applications.', 998, 12.5, 325.99, 200.4, '../assets/img/200001.jpg'),
 (200002, 'Hydraulic Pump Assembly', 'Efficient hydraulic pump assembly for fluid power systems.', 998, 8.2, 415.49, 399.2, '../assets/img/200002.jpg'),
 (200003, 'Engine Block Assembly 1', 'High-quality engine block assembly, providing exceptional performance.', 968, 14, 675.99, 499, '../assets/img/200003.jpg'),
@@ -328,14 +335,12 @@ INSERT INTO `sparepart` (`sparePartNum`, `sparePartName`, `sparePartDescription`
 (300004, 'Machined Brass Components 2', 'Precision-crafted brass components designed for durability and consistency.', 997, 22, 229, 228, '../assets/img/300004.jpg'),
 (300005, 'Machined Brass Components 3', 'High-grade machined brass components for demanding applications.', 998, 11, 1249, NULL, '../assets/img/300005.jpg'),
 (300006, 'Light Light', 'no light', 100, 9.9, 10, NULL, '../assets/img/pexels-cottonbro-7568428.jpg'),
-(300007, 'Light Light', 'no light', 100, 9.9, 10, NULL, '../assets/img/pexels-cottonbro-7568428.jpg'),
-(300008, 'Light Light', 'no light', 100, 9.9, 10, NULL, '../assets/img/pexels-cottonbro-7568428.jpg'),
-(300009, 'Light Light', 'no light', 100, 9.9, 10, NULL, '../assets/img/pexels-cottonbro-7568428.jpg'),
 (400001, 'Rubber Gaskets', 'Sealing rubber gaskets designed for leak-proof connections.', 998, 55, 33123, NULL, '../assets/img/400001.jpg'),
 (400002, 'Plastic Hoses', 'Flexible plastic hoses resistant to wear and varying temperatures.', 998, 44, 4123, NULL, '../assets/img/400002.jpg'),
 (400003, 'Adhesive Tapes 1', 'Strong adhesive tapes for secure bonding in various applications.', 959, 33, 644, NULL, '../assets/img/400003.jpg'),
 (400004, 'Adhesive Tapes 2', 'Durable adhesive tapes designed for heavy-duty adhesion.', 996, 32, 333, NULL, '../assets/img/400004.jpg'),
-(400005, 'Adhesive Tapes 3', 'Multipurpose adhesive tapes suitable for a range of industrial uses.', 998, 31, 22, NULL, '../assets/img/400005.jpg');
+(400005, 'Adhesive Tapes 3', 'Multipurpose adhesive tapes suitable for a range of industrial uses.', 998, 31, 22, NULL, '../assets/img/400005.jpg'),
+(400006, 'apple', 'no', 1, 10, 10, NULL, '../assets/img/giphy.webp');
 
 --
 -- 已傾印資料表的限制式
@@ -353,6 +358,17 @@ ALTER TABLE `orderline`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`dealerID`) REFERENCES `dealer` (`dealerID`);
+
+DELIMITER $$
+--
+-- 事件
+--
+DROP EVENT IF EXISTS `update_order_status`$$
+CREATE DEFINER=`root`@`localhost` EVENT `update_order_status` ON SCHEDULE EVERY 1 HOUR STARTS '2024-07-24 17:15:48' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE `orders`
+  SET `orderStatus` = 3
+  WHERE `deliveryDate` < NOW() AND `orderStatus` != 3$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

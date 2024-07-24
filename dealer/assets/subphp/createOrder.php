@@ -14,7 +14,6 @@ if (empty($dealerEmail)) {
     exit;
 }
 
-
 $stmt = $conn->prepare("SELECT dealerID, deliveryAddress FROM dealer WHERE dealerEmail = ?");
 $stmt->bind_param("s", $dealerEmail);
 $stmt->execute();
@@ -40,14 +39,15 @@ if (json_last_error() !== JSON_ERROR_NONE) {
 
 $spareIDArray = $arrayData['order'] ?? [];
 $TotalPrice = $arrayData['TotalPrice'] ?? 0;
+$deliveryCost = $arrayData['deliveryCost'] ?? 0;
 
-if (empty($spareIDArray) || $TotalPrice <= 0) {
+if (empty($spareIDArray) || $TotalPrice <= 0 || $deliveryCost <= 0) {
     echo json_encode(['status' => 'fail', 'message' => 'Invalid order data']);
     exit;
 }
 
-$stmt = $conn->prepare("INSERT INTO orders (dealerID, deliveryAddress,orderPrice, orderStatus, orderDateTime) VALUES (?, ?,?, 1, CURRENT_TIMESTAMP())");
-$stmt->bind_param("ssd", $dealerID, $deliveryAddress,$TotalPrice);
+$stmt = $conn->prepare("INSERT INTO orders (dealerID, deliveryAddress,deliveryCost,orderPrice, orderStatus, orderDateTime) VALUES (?, ?,?,?, 1, CURRENT_TIMESTAMP())");
+$stmt->bind_param("ssdd", $dealerID, $deliveryAddress,$deliveryCost,$TotalPrice);
 if ($stmt->execute()) {
     $orderID = $conn->insert_id;  
 
@@ -55,7 +55,7 @@ if ($stmt->execute()) {
     foreach ($spareIDArray as $arr) {
         $sparePartNum = $arr[0];
         $orderQty = $arr[1];
-        $orderLineStmt->bind_param("iii", $orderID, $sparePartNum, $orderQty);
+        $orderLineStmt->bind_param("iii", $orderID, $sparePartNum ,$orderQty);
         if (!$orderLineStmt->execute()) {
             echo json_encode(['status' => 'fail', 'message' => 'Orderline creation failed: ' . $orderLineStmt->error]);
             $orderLineStmt->close();

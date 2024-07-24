@@ -299,6 +299,7 @@ if(!isset($_SESSION['dealer'])){
         function CreateOrder() {
             let list = document.getElementById('showPrice');
             let TotalPrice = document.getElementById('TotalPrice').textContent;
+            let deliveryCost = document.getElementById('DeliveryCost').textContent;
             if (list) {
                 const childList = list.getElementsByTagName('li');
                 let arr = new Array(childList.length);
@@ -319,7 +320,8 @@ if(!isset($_SESSION['dealer'])){
                 }
                 const data = {
                     order: arr,
-                    TotalPrice: TotalPrice
+                    TotalPrice: TotalPrice,
+                    deliveryCost: deliveryCost
                 };
 
                 fetch("./assets/subphp/createOrder.php", {

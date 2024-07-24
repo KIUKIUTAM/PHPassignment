@@ -77,6 +77,7 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
         <!-- PRODUCT-->
         <div class="productDetail-container">
             <div class="container" style=" margin-bottom: 30vh; width: 2000px;">
+                <h3>All Order:</h3>
                 <table class="table table-striped table-hover" OrderItemList id="OrderViewTable">
                     <thead>
                         <tr>
@@ -124,32 +125,32 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                                     <div class="form-group row margin-bottom10">
                                         <label for="inputOrderID" class="col-sm-3 col-form-label ">Order
                                             ID:</label>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-7">
                                             <input type="text" class="form-control" id="OrderDetail-OrderID" placeholder="" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row margin-bottom10">
                                         <label for="inputOrderDate" class="col-sm-3 col-form-label">Order
                                             Date & Time:</label>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-7">
                                             <input type="datetime" class="form-control" id="OrderDetail-orderDateTime" placeholder="" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row margin-bottom10">
                                         <label for="inputDeliveryAddress" class="col-sm-3 col-form-label">Delivery Address:</label>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-7">
                                             <input type="datetime" class="form-control" id="OrderDetail-deliveryAddress" placeholder="" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row margin-bottom10">
                                         <label for="inputDeliveryAddress" class="col-sm-3 col-form-label">Delivery Date:</label>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-7">
                                             <input type="datetime" class="form-control" id="OrderDetail-deliveryDate" placeholder="" disabled>
                                         </div>
                                     </div>
                                     <div class="form-group row margin-bottom10">
                                         <label for="inputDeliveryAddress" class="col-sm-3 col-form-label">Sales Manager:</label>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-7">
                                             <div class="input-group ">
                                                 <span class="input-group-text">Name</span>
                                                 <input type="text" aria-label="SalesManagerName" class="form-control" id="OrderDetail-SalesManagerName" placeholder="" disabled>
@@ -170,8 +171,8 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
 
                             </div>
                             <div class="modal-footer no-print">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-success" onclick="printTheOrderDetail()">Print the Order</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
@@ -277,7 +278,10 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                                 statusCell.addClass('ColorLightRed');
                             } else if (data[2] === 'Cancelled') {
                                 statusCell.addClass('ColorRed');
+                            } else if (data[2] === 'Rejected') {
+                                statusCell.addClass('ColorRed');
                             }
+
                         },
                         order: [
                             [0, "desc"]
@@ -402,7 +406,8 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                                     title: 'Detail',
                                     className: 'text-center'
                                 }
-                            ]
+                            ],
+                            data: orderLine
                         });
                         return;
                     }

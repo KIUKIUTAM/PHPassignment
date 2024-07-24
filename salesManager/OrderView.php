@@ -33,6 +33,7 @@ $managerID = $_SESSION['managerID']
         .text-center {
             text-align: center;
         }
+
         td.ColorGreen {
             color: #198754 !important;
         }
@@ -446,40 +447,41 @@ $managerID = $_SESSION['managerID']
             .then(responseData => {
                 if (responseData.status === 'success') {
                     orderLine = responseData.orderLine;
-                    
+
 
                     if ($.fn.dataTable.isDataTable('#DataTableForOrderDetail')) {
                         // Destroy the existing DataTable
                         $('#DataTableForOrderDetail').DataTable().destroy();
                     }
-                    if(orderLine.length === 0){
+                    if (orderLine.length === 0) {
                         new DataTable('#DataTableForOrderDetail', {
-                        columns: [{
-                                title: '#'
-                            },
-                            {
-                                title: 'Spare Part number',
-                                className: 'text-center'
-                            },
-                            {
-                                title: 'Spare Part Name',
-                                className: 'text-center'
-                            },
-                            {
-                                title: 'inventory Quantity',
-                                className: 'text-center'
-                            },
-                            {
-                                title: 'Quantity',
-                                className: 'text-center'
-                            },
-                            {
-                                title: 'Price(USD)',
-                                className: 'text-center'
-                            }
-                        ],
-                        data: orderLine
-                    });
+                            columns: [{
+                                    title: '#'
+                                },
+                                {
+                                    title: 'Spare Part number',
+                                    className: 'text-center'
+                                },
+                                {
+                                    title: 'Spare Part Name',
+                                    className: 'text-center'
+                                },
+                                {
+                                    title: 'inventory Quantity',
+                                    className: 'text-center'
+                                },
+                                {
+                                    title: 'Quantity',
+                                    className: 'text-center'
+                                },
+                                {
+                                    title: 'Price(USD)',
+                                    className: 'text-center'
+                                }
+                            ],
+                            data: orderLine
+                        });
+                        return;
                     }
                     // Initialize DataTable
                     new DataTable('#DataTableForOrderDetail', {
@@ -585,49 +587,7 @@ $managerID = $_SESSION['managerID']
 
     }
 
-    function cancelOrder(orderID, orderStatus) {
-        cancelWay = 0; //0 for cancel, 1 for request cancel
-        if (orderStatus == 5) {
-            alert("This order has been canceled");
-            return;
-        } else if (orderStatus == 4) {
-            alert("This order has been requested to cancel, please wait for approval");
-            return;
-        } else if (orderStatus == 3) {
-            alert("This order has been devlivered, you can't cancel it");
-            return;
-        } else if (orderStatus == 2 && confirm("Are you sure you want to cancel this order? Need to wait for approval")) {
-            cancelWay = 1;
-        } else if (orderStatus == 1 && confirm("Are you sure you want to cancel this order?")) {
-            cancelWay = 0;
-        } else {
-            return;
-        }
-        const url = "./assets/subphp/cancelOrder.php";
-        const data = {
-            orderID: orderID,
-            cancelWay: cancelWay
-        };
-        fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }).then(response => response.json())
-            .then(responseData => {
-                if (responseData.status === 'success') {
-                    (cancelWay == 0) ? alert("Order has been canceled"): alert("Please wait for approval");
-                    refreshOrderView();
-                } else {
-                    console.error('Error:', responseData.message);
-                }
-            }).catch(error => {
-                console.error('Fetch error:', error);
-            });
-
-
-    }
+    
 </script>
 
 </html>

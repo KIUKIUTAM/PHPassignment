@@ -43,8 +43,6 @@ if (!isset($_SESSION['managerEmail'])) {
     .text-center {
       text-align: center;
     }
-
-
     td.ColorGreen {
       color: #198754 !important;
     }
@@ -56,23 +54,16 @@ if (!isset($_SESSION['managerEmail'])) {
     td.ColorRed {
       color: #DC3545 !important;
     }
+    a{
+      text-decoration: none !important;
+    }
   </style>
 </head>
 
 <body>
   <header>
   </header>
-
-  <!--
-    - MAIN
-  -->
-
   <main>
-    <!--
-      - PRODUCT
-    -->
-
-
     <div class="container">
       <div class="row">
         <div class="col-12 m-4">
@@ -87,11 +78,11 @@ if (!isset($_SESSION['managerEmail'])) {
               <p class="second-text" id="totalOrderNumber">-1</p>
             </div>
             <div class="card blue m-4">
-              <p class="tip">Total selled Spare Part</p>
+              <p class="tip">Total Order Amount</p>
               <p class="second-text" id="totalOrderPrice">$-1</p>
             </div>
             <div class="card green m-4">
-              <p class="tip">Today selled Spare Part</p>
+              <p class="tip">Today Order Amount</p>
               <p class="second-text" id="orderPriceCountToday">$-1</p>
             </div>
           </div>
@@ -103,7 +94,7 @@ if (!isset($_SESSION['managerEmail'])) {
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row mb-5">
           <div class="accordion justify-content-center " id="accordionPanelsStayOpenExample">
             <div class="accordion-item">
               <h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -111,7 +102,7 @@ if (!isset($_SESSION['managerEmail'])) {
                   Assigned Order:
                 </button>
               </h2>
-              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+              <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen">
                 <div class="accordion-body">
                   <table class="table table-striped table-hover" OrderItemList id="OrderViewTable">
                     <thead>
@@ -152,14 +143,13 @@ if (!isset($_SESSION['managerEmail'])) {
                 </div>
               </div>
             </div>
-
             <div class="accordion-item">
               <h2 class="accordion-header" id="panelsStayOpen-headingThree">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
                   Spare Part:
                 </button>
               </h2>
-              <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+              <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen">
                 <div class="accordion-body">
                   <table class="table table-striped table-hover" OrderItemList id="sparePartDataTable">
                     <thead>
@@ -182,7 +172,6 @@ if (!isset($_SESSION['managerEmail'])) {
           </div>
         </div>
       </div>
-
       <div class="modal fade" id="Modal-Detail" tabindex="-1" role="" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
           <div class="modal-content">
@@ -252,7 +241,8 @@ if (!isset($_SESSION['managerEmail'])) {
             </div>
           </div>
         </div>
-
+      </div>
+    </div>
 
   </main>
   <footer>
@@ -343,39 +333,35 @@ if (!isset($_SESSION['managerEmail'])) {
                   pointHoverBorderColor: "rgba(220,220,220,1)",
                   pointHoverBorderWidth: 4,
                   pointRadius: 1,
-                  borderWidth: 5,
-                  pointHitRadius: 16,
+                  borderWidth: 4,
+                  pointHitRadius: 15,
                 }]
               },
 
               // Configuration options go here
               options: {
                 tooltips: {
-                  backgroundColor: '#fff',
-                  displayColors: false,
-                  titleFontColor: '#000',
-                  bodyFontColor: '#000'
-
+                    backgroundColor: '#fff',
+                    displayColors: false,
+                    titleFontColor: '#000',
+                    bodyFontColor: '#000'
                 },
                 legend: {
-                  display: false
+                    display: false
                 },
                 scales: {
-                  xAxes: [{
-                    gridLines: {
-                      display: false
-                    }
-                  }],
-                  yAxes: [{
-                    ticks: {
-                      // Include a dollar sign in the ticks
-                      callback: function(value, index, values) {
-                        return value;
-                      }
-                    }
-                  }]
+                    xAxes: [{
+                        gridLines: {
+                            display: false
+                        }
+                    }],
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
                 }
-              }
+            }
             });
           } else {
             console.error('Error:', responseData.message);

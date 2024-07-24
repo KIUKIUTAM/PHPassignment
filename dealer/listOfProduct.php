@@ -3,7 +3,7 @@ require_once('../db/connect.php');
 $category = $_GET["Category"];
 //echo $category;
 session_start();
-if(!isset($_SESSION['dealer'])){
+if (!isset($_SESSION['dealer'])) {
   header("Location: ../index.php");
   exit();
 }
@@ -100,7 +100,7 @@ if(!isset($_SESSION['dealer'])){
         -->
         <nav class="sidebar">
         </nav>
-        
+
         <div class="product-box">
           <!--
             - PRODUCT MINIMAL
@@ -110,10 +110,10 @@ if(!isset($_SESSION['dealer'])){
             <div class="product-showcase">
               <?php
               echo '<h2 class="title">' . $categoryTitle . '</h2>';
-              if($categoryTitle == "All Products:"){
-                ?>
-                <a id="NameASC"  onclick="orderBy(0)" href="#" >Order By Product Name (ASC)</a>
-                <a id="NameDESC" onclick="orderBy(1)" href="#" >Order By Product Name (DESC)</a>
+              if ($categoryTitle == "All Products:") {
+              ?>
+                <a id="NameASC" onclick="orderBy(0)" href="#">Order By Product Name (ASC)</a>
+                <a id="NameDESC" onclick="orderBy(1)" href="#">Order By Product Name (DESC)</a>
               <?php
               }
               ?>
@@ -138,16 +138,45 @@ if(!isset($_SESSION['dealer'])){
                       $categoryID = 4;
                       break;
                   };
-                  if($categoryID == 0){
-                    $sql = "SELECT * FROM sparePart";
-                    if(isset($_GET['orderByOrder'])&&($_GET['orderByOrder']=="ASC"||$_GET['orderByOrder']=="DESC")){
-                      $orderByOrder = $_GET['orderByOrder'];
-                      $sql = "SELECT * FROM sparePart ORDER BY sparePartName ".$orderByOrder;
-                    }
-                  }else{
-                    $sql = "SELECT * FROM sparePart WHERE  sparePartNum like '" . $categoryID . "%'";
+                  if ($categoryID == 0) {
+                    $sql = "SELECT sparePart.sparePartNum,
+                                   sparePart.sparePartImage,
+                                   sparePart.stockItemQty,
+                                   sparePart.sparePartName,
+                                   sparePart.weight,
+                                   sparePart.sparePartDescription,
+                                   sparePart.price,
+                                   sparePart.discountPrice,
+                                   disabledsparepart.disable
+                            FROM sparePart
+                            LEFT JOIN disabledsparepart ON sparePart.sparePartNum = disabledsparepart.sparePartNum
+                            WHERE disabledsparepart.sparePartNum IS NULL";
+                  } else {
+                    $sql = "SELECT sparePart.sparePartNum,
+                                   sparePart.sparePartImage,
+                                   sparePart.stockItemQty,
+                                   sparePart.sparePartName,
+                                   sparePart.weight,
+                                   sparePart.sparePartDescription,
+                                   sparePart.price,
+                                   sparePart.discountPrice,
+                                   disabledsparepart.disable
+                            FROM sparePart
+                            LEFT JOIN disabledsparepart ON sparePart.sparePartNum = disabledsparepart.sparePartNum
+                            WHERE disabledsparepart.sparePartNum IS NULL
+                              AND sparePart.sparePartNum LIKE ?";
                   }
-                  $result = $conn->query($sql);
+                  if (isset($_GET['orderByOrder']) && ($_GET['orderByOrder'] == "ASC" || $_GET['orderByOrder'] == "DESC")) {
+                    $orderByOrder = $_GET['orderByOrder'];
+                    $sql .= "ORDER BY sparePart.sparePartName " . $orderByOrder;
+                  }
+                  $stmt = $conn->prepare($sql);
+                  if ($categoryID != 0) {
+                    $categoryIDParam = $categoryID . '%';
+                    $stmt->bind_param("s", $categoryIDParam);
+                  }
+                  $stmt->execute();
+                  $result = $stmt->get_result();
                   if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                       $category = "";
@@ -227,19 +256,20 @@ if(!isset($_SESSION['dealer'])){
 
     var currentUrl = window.location.href;
     var urlForOrderBY = new URL(currentUrl);
-    function orderBy(AorD) {
-            switch (AorD) {
-                case 0:
-                    urlForOrderBY.searchParams.set('orderByOrder', 'ASC');
-                    document.getElementById('NameASC').href = urlForOrderBY.toString();
-                    break;
-                case 1:
-                    urlForOrderBY.searchParams.set('orderByOrder', 'DESC');
-                    document.getElementById('NameDESC').href = urlForOrderBY.toString();
-                    break;
-            }
 
-          }
+    function orderBy(AorD) {
+      switch (AorD) {
+        case 0:
+          urlForOrderBY.searchParams.set('orderByOrder', 'ASC');
+          document.getElementById('NameASC').href = urlForOrderBY.toString();
+          break;
+        case 1:
+          urlForOrderBY.searchParams.set('orderByOrder', 'DESC');
+          document.getElementById('NameDESC').href = urlForOrderBY.toString();
+          break;
+      }
+
+    }
   </script>
 
   <!--- custom js link-->

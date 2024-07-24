@@ -1129,12 +1129,13 @@ footer {
   }
 }
 
-.container{
+.container {
   display: flex;
   flex-direction: column;
 }
+
 .carousel-item img {
   width: 100%;
-  height: auto; 
-  object-fit: cover; 
+  height: auto;
+  object-fit: cover;
 }

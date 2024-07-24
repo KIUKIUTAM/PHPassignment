@@ -32,7 +32,6 @@ if (isset($_SESSION['salesManager'])) {
             </div>
             <div class="remember-forgot">
                 <label><input type="checkbox" id="RememberMe"> Remember me</label>
-                <a class="forgot">Forgot password?</a>
             </div>
             <input type="submit" name="submit" class="login-btn" id="login-btn" value="Login" onclick="checkRemember()">
             <div class="SuperUser-link">

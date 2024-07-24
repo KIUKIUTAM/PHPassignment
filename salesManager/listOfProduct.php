@@ -3,7 +3,7 @@ require_once('../db/connect.php');
 $category = $_GET["Category"];
 //echo $category;
 session_start();
-if(!isset($_SESSION['managerEmail'])){
+if (!isset($_SESSION['managerEmail'])) {
   header("Location: ../ManagerLogin.php");
   exit();
 }
@@ -26,6 +26,16 @@ if(!isset($_SESSION['managerEmail'])){
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    #addIcon {
+      font-size: 50px;
+      /* Set the size of the icon */
+    }
+
+    #addPart {
+      height: 101px;
+    }
+  </style>
   <?php
 
   switch ($category) {
@@ -88,15 +98,20 @@ if(!isset($_SESSION['managerEmail'])){
             <div class="product-showcase">
               <?php
               echo '<h2 class="title">' . $categoryTitle . '</h2>';
-              if($categoryTitle == "All Products:"){
-                ?>
-                <a id="NameASC"  onclick="orderBy(0)" href="#" >Order By Product Name (ASC)</a>
-                <a id="NameDESC" onclick="orderBy(1)" href="#" >Order By Product Name (DESC)</a>
-              <?php
-              }
               ?>
               <div class="showcase-wrapper has-scrollbar">
                 <div class="showcase-container">
+
+                  <div class="showcase" onclick="productAdd()" id="addPart">
+                    <a href="#" class="showcase-img-box">
+                      <ion-icon name="add-outline" id="addIcon"></ion-icon>
+                    </a>
+                    <div class="showcase-content">
+                      <a href="#">
+                        <h4 class="showcase-title">Add new Spare Part</h4>
+                      </a>
+                    </div>
+                  </div>
                   <?php
                   $categoryID = 0;
                   switch ($category) {
@@ -116,13 +131,13 @@ if(!isset($_SESSION['managerEmail'])){
                       $categoryID = 4;
                       break;
                   };
-                  if($categoryID == 0){
+                  if ($categoryID == 0) {
                     $sql = "SELECT * FROM sparePart";
-                    if(isset($_GET['orderByOrder'])&&($_GET['orderByOrder']=="ASC"||$_GET['orderByOrder']=="DESC")){
+                    if (isset($_GET['orderByOrder']) && ($_GET['orderByOrder'] == "ASC" || $_GET['orderByOrder'] == "DESC")) {
                       $orderByOrder = $_GET['orderByOrder'];
-                      $sql = "SELECT * FROM sparePart ORDER BY sparePartName ".$orderByOrder;
+                      $sql = "SELECT * FROM sparePart ORDER BY sparePartName " . $orderByOrder;
                     }
-                  }else{
+                  } else {
                     $sql = "SELECT * FROM sparePart WHERE  sparePartNum like '" . $categoryID . "%'";
                   }
                   $result = $conn->query($sql);
@@ -192,22 +207,25 @@ if(!isset($_SESSION['managerEmail'])){
     function ProductDetail(sparePartNum) {
       window.location.href = ("./product_Detail?sparePartNum=" + sparePartNum);
     }
-
+    function productAdd() {
+      window.location.href = ("./product_Add");
+    }
     var currentUrl = window.location.href;
     var urlForOrderBY = new URL(currentUrl);
-    function orderBy(AorD) {
-            switch (AorD) {
-                case 0:
-                    urlForOrderBY.searchParams.set('orderByOrder', 'ASC');
-                    document.getElementById('NameASC').href = urlForOrderBY.toString();
-                    break;
-                case 1:
-                    urlForOrderBY.searchParams.set('orderByOrder', 'DESC');
-                    document.getElementById('NameDESC').href = urlForOrderBY.toString();
-                    break;
-            }
 
-          }
+    function orderBy(AorD) {
+      switch (AorD) {
+        case 0:
+          urlForOrderBY.searchParams.set('orderByOrder', 'ASC');
+          document.getElementById('NameASC').href = urlForOrderBY.toString();
+          break;
+        case 1:
+          urlForOrderBY.searchParams.set('orderByOrder', 'DESC');
+          document.getElementById('NameDESC').href = urlForOrderBY.toString();
+          break;
+      }
+
+    }
   </script>
 
   <!--- custom js link-->

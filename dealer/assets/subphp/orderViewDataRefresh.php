@@ -25,7 +25,7 @@ $result = $stmt->get_result();
 $dataSet = [];
 
 if ($result->num_rows > 0) {
-    
+
     while ($row = $result->fetch_assoc()) {
 
         $OrderStatus = "";
@@ -44,6 +44,9 @@ if ($result->num_rows > 0) {
                 break;
             case 5:
                 $OrderStatus = "Cancelled";
+                break;
+            case 6:
+                $OrderStatus = "Rejected";
                 break;
         }
 

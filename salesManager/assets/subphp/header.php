@@ -10,7 +10,7 @@ session_start();
 </style>
 
 <span>Manager Email: <?php if(isset($_SESSION['managerEmail'])){echo$_SESSION['managerEmail'];}?></span><br>
-<span>Header: <?php if(isset($_SESSION['headPermission'])){echo "header AC";}?></span>
+<span>Header: <?php if(isset($_SESSION['headPermission'])){echo "header AC";}else{echo "normal AC";}?></span>
 <div class="header-main">
     <div class="container">
         <a href="./homepage.php" class="menu-title"><img src="../assets/img/catHead2.jpg" width="70"
@@ -65,10 +65,7 @@ session_start();
                             <a href="./listOfProduct?Category=ALL">Show All</a>
                         </li>
                         <li class="panel-list-item">
-                            <a href="#">Add new</a>
-                        </li>
-                        <li class="panel-list-item">
-                            <a href="#">Edit spare</a>
+                            <a href="./product_Add">Add new</a>
                         </li>
                     </ul>
                     <ul class="dropdown-panel-list">

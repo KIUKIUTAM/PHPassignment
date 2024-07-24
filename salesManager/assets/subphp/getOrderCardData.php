@@ -23,7 +23,7 @@ if ($result->num_rows > 0) {
     $response['data']['orderCount'] = $row['orderCount'];
 } else {
     $response['status'] = 'fail';
-    $response['message'] = 'No orderCount found';
+    $response['message'] = 'No orderCount found'?? 0;
     echo json_encode($response);
     exit;
 }
@@ -31,7 +31,7 @@ if ($result->num_rows > 0) {
 $result = executeQuery($conn, "SELECT SUM(orderPrice) as orderPriceCount FROM orders");
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $response['data']['orderPriceCount'] = $row['orderPriceCount'];
+    $response['data']['orderPriceCount'] = $row['orderPriceCount']?? 0;
 } else {
     $response['status'] = 'fail';
     $response['message'] = 'No orderPrice found';
@@ -51,7 +51,7 @@ $endStr = $end->format('Y-m-d H:i:s');
 $result = executeQuery($conn, "SELECT SUM(orderPrice) as orderPriceCountToday FROM orders WHERE orderDateTime BETWEEN ? AND ?", ["ss", $startStr, $endStr]);
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    $response['data']['orderPriceCountToday'] = $row['orderPriceCountToday'];
+    $response['data']['orderPriceCountToday'] = $row['orderPriceCountToday']?? 0;
 } else {
     $response['status'] = 'fail';
     $response['message'] = 'No orderPrice found for today';

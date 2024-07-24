@@ -169,7 +169,7 @@ if (!isset($_SESSION['dealer'])) {
                     </ul>
 
                     <div class="checkbox-wrapper-16">
-                        <label class="checkbox-wrapper">
+                        <label class="checkbox-wrapper" style="margin-right: 30px;">
                             <input class="checkbox-input" type="radio" value="weight" name="deliveryMode" onchange="calDeliveryCost(this)">
                             <span class="checkbox-tile">
                                 <span class="checkbox-icon">
@@ -178,7 +178,7 @@ if (!isset($_SESSION['dealer'])) {
                                 <span class="checkbox-label">Weight Mode</span>
                             </span>
                         </label>
-                        <label class="checkbox-wrapper" style="margin-left: 30px;">
+                        <label class="checkbox-wrapper" >
                             <input class="checkbox-input" type="radio" value="quantity" name="deliveryMode" onchange="calDeliveryCost(this)">
                             <span class="checkbox-tile">
                                 <span class="checkbox-icon">

@@ -124,7 +124,7 @@ if (!isset($_SESSION['managerEmail'])) {
                 </div>
               </div>
               <button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick="detailAddId()">Edit Item</button>
-              <button type='button' class='btn btn-outline-danger' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick="DeleteItem()">Delete</button>
+              <button type='button' class='btn btn-outline-danger' onclick="DeleteItem()">Delete</button>
             </div>
           </div>
         </div>

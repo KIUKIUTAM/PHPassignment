@@ -114,13 +114,7 @@ if(!isset($_SESSION['dealer'])){
       ?>
     </div>
   </main>
-
-  <!--
-    - FOOTER
-  -->
-
   <footer>
-
   </footer>
   <script>
     function quantityDecrement() {
@@ -129,7 +123,6 @@ if(!isset($_SESSION['dealer'])){
         document.getElementById("quantityNumber").value = num - 1;
       }
     }
-
     function quantityIncrement() {
       let num = parseInt(document.getElementById("quantityNumber").value, 10);
       if (!isNaN(num)) {
@@ -140,39 +133,51 @@ if(!isset($_SESSION['dealer'])){
 
   <script>
     function addToCart() {
-      if (document.getElementById("stockItemStatus").innerText == "Out of Stock") {
-        alert("Out of Stock\nNot allow to add to cart");
+    // Check if the item is out of stock
+    if (document.getElementById("stockItemStatus").innerText == "Out of Stock") {
+        alert("Out of Stock\nNot allowed to add to cart");
         return;
-      }
-      const url = "./assets/subphp/addtocart.php";
-      const spareID = document.getElementById("sparePartNum").innerText;
-      const spareQty = document.getElementById("quantityNumber").value;
-      const spareName = document.getElementById("sparePartName").innerText;
-      const data = {
-        spareID: spareID,
-        spareQty: parseInt(spareQty, 10)
-
-      };
-
-      fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
-        }).then(response => response.json())
-        .then(responseData => {
-          if (responseData.status === 'success') {
-            showToast(`Added ${spareQty} of [${spareName}]`);
-          } else {
-            console.error('Error:', responseData.message);
-          }
-        }).catch(error => {
-          console.error('Error:', error);
-        });
-      fetchCartCount();
     }
 
+    // Define the URL for the add to cart request
+    const url = "./assets/subphp/addtocart.php";
+
+    // Retrieve the spare part ID, quantity, and name from the respective elements
+    const spareID = document.getElementById("sparePartNum").innerText;
+    const spareQty = document.getElementById("quantityNumber").value;
+    const spareName = document.getElementById("sparePartName").innerText;
+
+    // Create the data object to be sent in the request
+    const data = {
+        spareID: spareID,
+        spareQty: parseInt(spareQty, 10) // Convert the quantity to an integer
+    };
+
+    // Make a POST request to the server to add the item to the cart
+    fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(responseData => {
+            // Check the response status
+            if (responseData.status === 'success') {
+                // Show a toast notification indicating the item was added to the cart
+                showToast(`Added ${spareQty} of [${spareName}]`);
+            } else {
+                console.error('Error:', responseData.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+    // Update the cart count
+    fetchCartCount();
+}
     function showToast(message) {
       toastNotif({
         text: message,
@@ -182,14 +187,8 @@ if(!isset($_SESSION['dealer'])){
       });
     }
   </script>
-  <!--
-    - custom js link
-  -->
   <script src="./assets/js/script.js"></script>
   <script type="text/javascript" src="./assets/js/toast.js"></script>
-  <!--
-    - ionicon link
-  -->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -201,12 +200,7 @@ if(!isset($_SESSION['dealer'])){
     });
   </script>
 </body>
-
 </html>
-
-
 <?php
-
 $conn->close();
-
 ?>

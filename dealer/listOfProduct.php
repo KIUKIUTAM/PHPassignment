@@ -90,7 +90,10 @@ if (!isset($_SESSION['dealer'])) {
               <div class="showcase-wrapper has-scrollbar">
                 <div class="showcase-container">
                   <?php
+                  // Initialize categoryID to 0
                   $categoryID = 0;
+
+                  // Determine the categoryID based on the category string
                   switch ($category) {
                     case "ALL":
                       $categoryID = 0;
@@ -107,50 +110,69 @@ if (!isset($_SESSION['dealer'])) {
                     case "Accessories":
                       $categoryID = 4;
                       break;
-                  };
-                  if ($categoryID == 0) {
-                    $sql = "SELECT sparePart.sparePartNum,
-                                   sparePart.sparePartImage,
-                                   sparePart.stockItemQty,
-                                   sparePart.sparePartName,
-                                   sparePart.weight,
-                                   sparePart.sparePartDescription,
-                                   sparePart.price,
-                                   sparePart.discountPrice,
-                                   disabledsparepart.disable
-                            FROM sparePart
-                            LEFT JOIN disabledsparepart ON sparePart.sparePartNum = disabledsparepart.sparePartNum
-                            WHERE disabledsparepart.sparePartNum IS NULL";
-                  } else {
-                    $sql = "SELECT sparePart.sparePartNum,
-                                   sparePart.sparePartImage,
-                                   sparePart.stockItemQty,
-                                   sparePart.sparePartName,
-                                   sparePart.weight,
-                                   sparePart.sparePartDescription,
-                                   sparePart.price,
-                                   sparePart.discountPrice,
-                                   disabledsparepart.disable
-                            FROM sparePart
-                            LEFT JOIN disabledsparepart ON sparePart.sparePartNum = disabledsparepart.sparePartNum
-                            WHERE disabledsparepart.sparePartNum IS NULL
-                              AND sparePart.sparePartNum LIKE ?";
                   }
+
+                  // Build SQL query based on categoryID
+                  if ($categoryID == 0) {
+                    // Query for all categories
+                    $sql = "SELECT sparePart.sparePartNum,
+                   sparePart.sparePartImage,
+                   sparePart.stockItemQty,
+                   sparePart.sparePartName,
+                   sparePart.weight,
+                   sparePart.sparePartDescription,
+                   sparePart.price,
+                   sparePart.discountPrice,
+                   disabledsparepart.disable
+            FROM sparePart
+            LEFT JOIN disabledsparepart ON sparePart.sparePartNum = disabledsparepart.sparePartNum
+            WHERE disabledsparepart.sparePartNum IS NULL";
+                  } else {
+                    // Query for specific category
+                    $sql = "SELECT sparePart.sparePartNum,
+                   sparePart.sparePartImage,
+                   sparePart.stockItemQty,
+                   sparePart.sparePartName,
+                   sparePart.weight,
+                   sparePart.sparePartDescription,
+                   sparePart.price,
+                   sparePart.discountPrice,
+                   disabledsparepart.disable
+            FROM sparePart
+            LEFT JOIN disabledsparepart ON sparePart.sparePartNum = disabledsparepart.sparePartNum
+            WHERE disabledsparepart.sparePartNum IS NULL
+              AND sparePart.sparePartNum LIKE ?";
+                  }
+
+                  // Check if orderByOrder is set and valid, append to SQL query
                   if (isset($_GET['orderByOrder']) && ($_GET['orderByOrder'] == "ASC" || $_GET['orderByOrder'] == "DESC")) {
                     $orderByOrder = $_GET['orderByOrder'];
                     $sql .= " ORDER BY sparePart.sparePartName " . $orderByOrder;
                   }
+
+                  // Prepare the SQL statement
                   $stmt = $conn->prepare($sql);
+
+                  // Bind parameters if categoryID is not 0
                   if ($categoryID != 0) {
                     $categoryIDParam = $categoryID . '%';
                     $stmt->bind_param("s", $categoryIDParam);
                   }
+
+                  // Execute the statement
                   $stmt->execute();
+
+                  // Get the result set
                   $result = $stmt->get_result();
+
+                  // Check if any rows were returned
                   if ($result->num_rows > 0) {
+                    // Loop through each row in the result set
                     while ($row = $result->fetch_assoc()) {
                       $category = "";
                       $categoryName = "";
+
+                      // Determine category and category name based on sparePartNum prefix
                       switch (substr($row["sparePartNum"], 0, 1)) {
                         case "1":
                           $category = "./listOfProduct?Category=Sheet_Metal";
@@ -168,33 +190,34 @@ if (!isset($_SESSION['dealer'])) {
                           $category = "./listOfProduct?Category=Accessories";
                           $categoryName = "Accessories";
                           break;
-                      };?>
-                     <div class="showcase" onclick="ProductDetail(<?php echo $row['sparePartNum'] ?>)">
+                      }
+                  ?>
+                      <!-- Display the product showcase -->
+                      <div class="showcase" onclick="ProductDetail(<?php echo $row['sparePartNum'] ?>)">
                         <a href="#" class="showcase-img-box">
-                          <img
-                            src="<?php echo$row["sparePartImage"] ?>"
-                            width="70"
-                            class="showcase-img"
-                          />
+                          <img src="<?php echo $row["sparePartImage"] ?>" width="70" class="showcase-img" />
                         </a>
                         <div class="showcase-content">
-                          <a href="#"><h4 class="showcase-title"><?php echo $row["sparePartName"] ?></h4></a>
+                          <a href="#">
+                            <h4 class="showcase-title"><?php echo $row["sparePartName"] ?></h4>
+                          </a>
                           <a class="showcase-category"><?php echo $categoryName ?></a>
                           <?php
-                      if ($row["discountPrice"] == null) {
-                        $price = $row["price"];
-                        echo '<div class="price-box">
-                          <p class="price">$' . $price . '</p>
-                        </div>';
-                      } else {
-                        $price = $row["discountPrice"];
-                        $delPrice = $row["price"];
-                        echo '<div class="price-box">
-                          <p class="price">$' . $price . '</p>
-                          <del>$' . $delPrice . '</del>
-                        </div>';
-                      }
-                      ?>
+                          // Display price or discount price
+                          if ($row["discountPrice"] == null) {
+                            $price = $row["price"];
+                            echo '<div class="price-box">
+                        <p class="price">$' . $price . '</p>
+                    </div>';
+                          } else {
+                            $price = $row["discountPrice"];
+                            $delPrice = $row["price"];
+                            echo '<div class="price-box">
+                        <p class="price">$' . $price . '</p>
+                        <del>$' . $delPrice . '</del>
+                    </div>';
+                          }
+                          ?>
                         </div>
                       </div>
                   <?php
@@ -210,12 +233,7 @@ if (!isset($_SESSION['dealer'])) {
     </div>
   </main>
 
-  <!--
-    - FOOTER
-  -->
-
   <footer>
-
   </footer>
   <script>
     function ProductDetail(sparePartNum) {
@@ -239,11 +257,7 @@ if (!isset($_SESSION['dealer'])) {
 
     }
   </script>
-
-  <!--- custom js link-->
   <script src="./assets/js/script.js"></script>
-
-  <!--- ionicon link-->
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
   <script src="https://code.jquery.com/jquery-latest.js"></script>
@@ -257,6 +271,3 @@ if (!isset($_SESSION['dealer'])) {
 </body>
 
 </html>
-
-';
-?>

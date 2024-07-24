@@ -1,7 +1,7 @@
 <?php
 require_once('../db/connect.php');
 session_start();
-if(!isset($_SESSION['dealer'])){
+if (!isset($_SESSION['dealer'])) {
     header("Location: ../index.php");
     exit();
 }
@@ -253,15 +253,24 @@ if(!isset($_SESSION['dealer'])){
         function calDeliveryCost(radioButton) {
             let totalWeight = 0;
             let totalQuantity = 0;
-            if (radioButton == null||radioButton.checked == false) {
+
+            // Check if the radio button is null or unchecked
+            if (radioButton == null || radioButton.checked == false) {
                 return;
             }
+
+            // Get the item total price from the DOM
             ItemtotalPrice = document.getElementById('ItemtotalPrice').textContent;
+
+            // Get the list of items and initialize an array to store them
             let list = document.getElementById('showPrice');
             let arr = [];
 
+            // Reset the delivery cost and total price in the DOM
             document.getElementById('DeliveryCost').textContent = 0;
             document.getElementById('TotalPrice').textContent = 0;
+
+            // If the list exists, calculate the total weight and quantity
             if (list) {
                 const childList = list.getElementsByTagName('li');
                 for (let i = 0; i < childList.length; i++) {
@@ -271,6 +280,7 @@ if(!isset($_SESSION['dealer'])){
                 }
             }
 
+            // Determine the shipping method and value based on the selected radio button
             if (radioButton.value == "weight") {
                 var shippingMethod = 'weight';
                 var value = totalWeight;
@@ -279,16 +289,20 @@ if(!isset($_SESSION['dealer'])){
                 var value = totalQuantity;
             }
 
+            // Define the URL for the shipping cost API
             const url = `http://127.0.0.1:8080/ship_cost_api/${shippingMethod}/${value}`;
 
+            // Make a GET request to the shipping cost API
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
+                    // Check if the API response is accepted
                     if (data.result === 'accepted') {
+                        // Update the delivery cost and total price in the DOM
                         document.getElementById('DeliveryCost').textContent = data.cost;
-                        document.getElementById('TotalPrice').textContent = parseFloat(ItemtotalPrice) + parseFloat(data
-                            .cost);
+                        document.getElementById('TotalPrice').textContent = parseFloat(ItemtotalPrice) + parseFloat(data.cost);
                     } else {
+                        // Alert the user if the API response is not accepted and uncheck the radio button
                         alert(data.reason);
                         radioButton.checked = false;
                     }
@@ -297,33 +311,43 @@ if(!isset($_SESSION['dealer'])){
         }
 
         function CreateOrder() {
+            // Get the list of items, total price, and delivery cost from the DOM
             let list = document.getElementById('showPrice');
             let TotalPrice = document.getElementById('TotalPrice').textContent;
             let deliveryCost = document.getElementById('DeliveryCost').textContent;
+
+            // Check if the list exists
             if (list) {
                 const childList = list.getElementsByTagName('li');
                 let arr = new Array(childList.length);
 
+                // Iterate through the list items and populate the array with item IDs and quantities
                 for (let i = 0; i < childList.length; i++) {
                     arr[i] = new Array(2);
                     arr[i][0] = childList[i].querySelector('#spareID').textContent;
                     arr[i][1] = childList[i].querySelector('#spareQty').textContent.substring(5);
                 }
 
+                // Check if the array is empty and alert the user if no items are selected
                 if (arr.length == 0) {
                     alert("Please select the item to make order");
                     return;
                 }
+
+                // Check if the total price is zero and alert the user if no delivery mode is selected
                 if (TotalPrice == 0) {
                     alert("Please select the delivery mode to make order");
                     return;
                 }
+
+                // Create the data object to be sent in the POST request
                 const data = {
                     order: arr,
                     TotalPrice: TotalPrice,
                     deliveryCost: deliveryCost
                 };
 
+                // Make a POST request to create the order
                 fetch("./assets/subphp/createOrder.php", {
                         method: 'POST',
                         headers: {
@@ -332,57 +356,82 @@ if(!isset($_SESSION['dealer'])){
                         body: JSON.stringify(data)
                     })
                     .then(response => {
+                        // Check if the response is not OK and throw an error if so
                         if (!response.ok) {
                             throw new Error('Network response was not ok');
                         }
                         return response.json();
                     })
                     .then(responseData => {
+                        // Check if the order creation was successful
                         if (responseData.status === 'success') {
-                            alert('Order created successfully\nOrderID:' + responseData.orderID.toString().padStart(6,
-                                '0') + '\nTotal Price:' + TotalPrice);
+                            // Alert the user with the order details and reload the page
+                            alert('Order created successfully\nOrderID:' + responseData.orderID.toString().padStart(6, '0') + '\nTotal Price:' + TotalPrice);
                             location.reload();
                         } else {
+                            // Log an error message if the order creation failed
                             console.error('Error:', responseData.message);
                         }
                     })
                     .catch(error => {
+                        // Log any errors that occur during the fetch operation
                         console.error('Error:', error);
                     });
             } else {
+                // Log an error message if the element with ID "showPrice" is not found
                 console.error('Element with ID "showPrice" not found.');
             }
         }
 
         function quantityDecrement(index, sparePartNum) {
+            // Get the quantity input element based on the index
             var quantityInput = document.getElementById('quantityNumber' + index);
+
+            // Check if decrementing the quantity will result in zero
             if ((quantityInput.value - 1) == 0) {
-                if (confirm('Are you Delete the item from shoppingCart?')) {
+                // Confirm with the user if they want to delete the item from the shopping cart
+                if (confirm('Are you sure you want to delete the item from the shopping cart?')) {
+                    // Call the removeFromSession function to remove the item from the session
                     removeFromSession(sparePartNum);
                 } else {
+                    // If the user cancels the confirmation, do nothing and return
                     return;
                 }
             } else if (quantityInput.value > 0) {
+                // If the quantity is greater than zero, decrement the quantity by 1
                 quantityInput.value--;
             }
+
+            // Get the checkbox element based on the index (not used in this function)
             const checkbox = document.getElementById('SelectedItem' + index);
         }
 
         function quantityIncrement(index, max) {
+            // Get the quantity input element based on the index
             var quantityInput = document.getElementById('quantityNumber' + index);
+
+            // Check if the current quantity is less than the maximum allowed quantity
             if (quantityInput.value < max) {
+                // If true, increment the quantity by 1
                 quantityInput.value++;
             } else {
+                // If false, alert the user that the quantity exceeds the stock quantity
                 alert("The quantity is more than the stock quantity");
             }
+
+            // Get the checkbox element based on the index (not used in this function)
             const checkbox = document.getElementById('SelectedItem' + index);
         }
 
         function removeFromSession(sparePartNum) {
+            // Confirm with the user if they want to delete the item
             if (confirm('Are you sure you want to delete this item?')) {
+                // Prepare the data object with the spare part number
                 const data = {
                     spareID: sparePartNum
                 };
+
+                // Send a POST request to the server to remove the item from the session
                 fetch("./assets/subphp/removeFromSession.php", {
                         method: 'POST',
                         headers: {
@@ -390,135 +439,193 @@ if(!isset($_SESSION['dealer'])){
                         },
                         body: JSON.stringify(data)
                     })
-                    .then(response => response.json())
+                    .then(response => response.json()) // Parse the JSON response
                     .then(responseData => {
+                        // Check if the response status is 'success'
                         if (responseData.status === 'success') {
+                            // If successful, reload the page
                             location.reload();
                         } else {
+                            // If an error occurs, log the error message to the console
                             console.error('Error:', responseData.message);
                         }
                     })
-                    .catch(error => console.error('Fetch error:', error));
+                    .catch(error => console.error('Fetch error:', error)); // Handle any fetch errors
             } else {
+                // If the user cancels the confirmation, do nothing and return
                 return;
             }
-
         }
 
         function handleCheckboxChange(checkbox, spareName, spareID, spareWeight, numID, price) {
+            // Get the selected delivery mode radio button
             let radioButton = document.querySelector('input[name="deliveryMode"]:checked');
+
+            // Get the quantity of the spare part from the input field
             const spareQty = document.getElementById(numID).value;
+
+            // Get the current total price from the DOM
             let TotalPrice = document.getElementById('ItemtotalPrice').textContent;
+
+            // Find the closest '.showcase' element to the checkbox
             var showcase = checkbox.closest('.showcase');
+
+            // If the '.showcase' element is found
             if (showcase) {
+                // Find the quantity element within the '.showcase' element
                 var quantityElement = showcase.querySelector('#quantityForitemNum');
+
+                // If the quantity element is found
                 if (quantityElement) {
+                    // Get all button elements within the quantity element
                     var buttons = quantityElement.getElementsByTagName('button');
+
+                    // Disable or enable the buttons based on the checkbox state
                     Array.prototype.forEach.call(buttons, function(button) {
                         button.disabled = checkbox.checked;
                     });
                 }
             }
+
+            // If the checkbox is checked
             if (checkbox.checked) {
+                // Add the item to the cart
                 addItem(spareName, spareID, spareWeight, spareQty, price);
+
+                // Update the total price by adding the price of the selected item
                 TotalPrice = parseFloat(TotalPrice) + (price * spareQty);
             } else {
+                // Remove the item from the cart
                 removeItem(('item-' + spareName.replace(/\s+/g, '-').toLowerCase()));
+
+                // Update the total price by subtracting the price of the deselected item
                 TotalPrice = parseFloat(TotalPrice) - (price * spareQty);
             }
+
+            // Update the total price in the DOM
             document.getElementById('ItemtotalPrice').textContent = TotalPrice.toFixed(2);
+
+            // Recalculate the delivery cost based on the selected delivery mode
             calDeliveryCost(radioButton);
         }
 
         function addItem(spareName, spareID, spareWeight, spareQty, price) {
+            // Get the list element where the item will be appended
             const list = document.getElementById('showPrice');
 
+            // Create a new list item (li) element
             const li = document.createElement('li');
-            li.className = 'list-group-item d-none d-lg-block';
-            li.id = ('item-' + spareName.replace(/\s+/g, '-').toLowerCase());
+            li.className = 'list-group-item d-none d-lg-block'; // Assign classes to the list item
+            li.id = ('item-' + spareName.replace(/\s+/g, '-').toLowerCase()); // Set the id of the list item
 
+            // Create a span element to display the total price of the item
             const span = document.createElement('span');
-            span.className = 'text-body-secondary float-end';
-            span.textContent = '$' + (price * spareQty).toFixed(2);
+            span.className = 'text-body-secondary float-end'; // Assign classes to the span
+            span.textContent = '$' + (price * spareQty).toFixed(2); // Set the text content to the total price
 
+            // Create a div element to hold the item details
             const div = document.createElement('div');
 
+            // Create an h6 element to display the spare ID
             const h6_1 = document.createElement('h6');
-            h6_1.className = 'my-0';
-            h6_1.id = 'spareID';
-            h6_1.textContent = spareID;
+            h6_1.className = 'my-0'; // Assign classes to the h6
+            h6_1.id = 'spareID'; // Set the id of the h6
+            h6_1.textContent = spareID; // Set the text content to the spare ID
+
+            // Create another h6 element to display the spare name
             const h6_2 = document.createElement('h6');
-            h6_2.className = 'my-0';
-            h6_2.id = 'spareName';
-            h6_2.textContent = spareName;
+            h6_2.className = 'my-0'; // Assign classes to the h6
+            h6_2.id = 'spareName'; // Set the id of the h6
+            h6_2.textContent = spareName; // Set the text content to the spare name
 
+            // Create a small element to display the spare weight
             const weight = document.createElement('small');
-            weight.className = 'text-body-secondary';
-            weight.id = 'spareWeight';
-            weight.textContent = 'Weight(Kg): ' + spareWeight;
-            const dr = document.createElement('br');
-            const small = document.createElement('small');
-            small.className = 'text-body-secondary';
-            small.id = 'spareQty';
-            small.textContent = 'Qty: ' + spareQty;
+            weight.className = 'text-body-secondary'; // Assign classes to the small
+            weight.id = 'spareWeight'; // Set the id of the small
+            weight.textContent = 'Weight(Kg): ' + spareWeight; // Set the text content to the spare weight
 
+            // Create a break element
+            const dr = document.createElement('br');
+
+            // Create another small element to display the spare quantity
+            const small = document.createElement('small');
+            small.className = 'text-body-secondary'; // Assign classes to the small
+            small.id = 'spareQty'; // Set the id of the small
+            small.textContent = 'Qty: ' + spareQty; // Set the text content to the spare quantity
+
+            // Append the created elements to the div
             div.appendChild(h6_1);
             div.appendChild(h6_2);
             div.appendChild(weight);
             div.appendChild(dr);
             div.appendChild(small);
+
+            // Append the span and div to the list item (li)
             li.appendChild(span);
             li.appendChild(div);
-            list.appendChild(li);
 
+            // Append the list item (li) to the list
+            list.appendChild(li);
         }
 
         function removeItem(id) {
+            // Retrieve the item element by its ID
             const item = document.getElementById(id);
+
+            // Check if the item exists
             if (item) {
+                // Remove the item from the DOM
                 item.remove();
             }
+
+            // Update the cart count
             fetchCartCount();
         }
 
         function addToCart() {
+            // URL of the server-side script that handles adding items to the cart
             const url = "./assets/subphp/addtocart.php";
+
+            // Retrieve the spare part ID from the DOM
             const spareID = document.getElementById("sparePartNum").innerText;
+
+            // Retrieve the quantity from the input field
             const spareQty = document.getElementById("quantityNumber").value;
 
+            // Create an object to hold the data to be sent to the server
             const data = {
-                spareID: spareID,
-                spareQty: parseInt(spareQty, 10)
-
+                spareID: spareID, // The ID of the spare part
+                spareQty: parseInt(spareQty, 10) // The quantity of the spare part, converted to an integer
             };
 
+            // Use the Fetch API to send a POST request to the server
             fetch(url, {
-                    method: 'POST',
+                    method: 'POST', // HTTP method
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json' // Content type of the request
                     },
-                    body: JSON.stringify(data)
-                }).then(response => response.json())
+                    body: JSON.stringify(data) // Convert the data object to a JSON string
+                })
+                .then(response => response.json()) // Parse the JSON response from the server
                 .then(responseData => {
+                    // Check if the server responded with a success status
                     if (responseData.status === 'success') {
-
+                        // Handle successful addition to the cart (e.g., show a success message)
                     } else {
+                        // Log an error message if the server responded with an error
                         console.error('Error:', responseData.message);
                     }
-                }).catch(error => {
+                })
+                .catch(error => {
+                    // Log any errors that occurred during the fetch operation
                     console.error('Error:', error);
                 });
+
+            // Update the cart count
             fetchCartCount();
         }
     </script>
-    <!--
-    - custom js link
-  -->
     <script src="./assets/js/script.js"></script>
-
-    <!--
-    - ionicon link
-  -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
@@ -528,7 +635,6 @@ if(!isset($_SESSION['dealer'])){
         $(function() {
             $("header").load("./assets/subphp/header.php");
             $("footer").load("./assets/subphp/footer.php");
-
         });
     </script>
 </body>

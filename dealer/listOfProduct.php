@@ -8,7 +8,6 @@ if (!isset($_SESSION['dealer'])) {
   exit();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,19 +17,12 @@ if (!isset($_SESSION['dealer'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SLMS - eCommerce Website</title>
 
-  <!--- favicon-->
   <link rel="shortcut icon" href="../assets/img/catHead.jpg" type="image/x-icon" />
-
-  <!--- custom css link-->
-
   <link rel="stylesheet" href="./assets/css/style-prefix.css" />
-  <!--- google font link-->
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <?php
-
   switch ($category) {
     case "ALL":
       $categoryTitle = "All Products:";
@@ -77,35 +69,13 @@ if (!isset($_SESSION['dealer'])) {
 
 <body>
 
-
-  <!--
-    - HEADER
-  -->
-
   <header></header>
 
-  <!--
-    - MAIN
-  -->
-
   <main>
-    <!--
-      - PRODUCT
-    -->
-
     <div class="product-container">
       <div class="container">
-        <!--
-          - SIDEBAR
-        -->
-        <nav class="sidebar">
-        </nav>
-
+        <nav class="sidebar"></nav>
         <div class="product-box">
-          <!--
-            - PRODUCT MINIMAL
-          -->
-
           <div class="product-minimal">
             <div class="product-showcase">
               <?php
@@ -168,7 +138,7 @@ if (!isset($_SESSION['dealer'])) {
                   }
                   if (isset($_GET['orderByOrder']) && ($_GET['orderByOrder'] == "ASC" || $_GET['orderByOrder'] == "DESC")) {
                     $orderByOrder = $_GET['orderByOrder'];
-                    $sql .= "ORDER BY sparePart.sparePartName " . $orderByOrder;
+                    $sql .= " ORDER BY sparePart.sparePartName " . $orderByOrder;
                   }
                   $stmt = $conn->prepare($sql);
                   if ($categoryID != 0) {
@@ -198,18 +168,19 @@ if (!isset($_SESSION['dealer'])) {
                           $category = "./listOfProduct?Category=Accessories";
                           $categoryName = "Accessories";
                           break;
-                      };
-                      echo ' <div class="showcase" onclick="ProductDetail(' . $row["sparePartNum"] . ')">
+                      };?>
+                     <div class="showcase" onclick="ProductDetail(<?php echo $row['sparePartNum'] ?>)">
                         <a href="#" class="showcase-img-box">
                           <img
-                            src="' . $row["sparePartImage"] . '"
+                            src="<?php echo$row["sparePartImage"] ?>"
                             width="70"
                             class="showcase-img"
                           />
                         </a>
                         <div class="showcase-content">
-                          <a href="#"><h4 class="showcase-title">' . $row["sparePartName"] . '</h4></a>
-                          <a class="showcase-category">' . $categoryName . '</a>';
+                          <a href="#"><h4 class="showcase-title"><?php echo $row["sparePartName"] ?></h4></a>
+                          <a class="showcase-category"><?php echo $categoryName ?></a>
+                          <?php
                       if ($row["discountPrice"] == null) {
                         $price = $row["price"];
                         echo '<div class="price-box">
@@ -223,19 +194,16 @@ if (!isset($_SESSION['dealer'])) {
                           <del>$' . $delPrice . '</del>
                         </div>';
                       }
-                      echo '
+                      ?>
                         </div>
-                      </div>';
+                      </div>
+                  <?php
                     }
                   }
-
                   ?>
                 </div>
               </div>
             </div>
-
-
-
           </div>
         </div>
       </div>

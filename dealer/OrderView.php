@@ -319,6 +319,7 @@ if (isset($_GET['startDateTime']) && isset($_GET['endDateTime'])) {
                     const statusFilter = $('#statusFilter');
                     const uniqueStatuses = [...new Set(orderData.map(item => item[2]))];
                     statusFilter.empty();
+                    statusFilter.append(new Option("", ""));
                     uniqueStatuses.forEach(status => {
                         statusFilter.append(new Option(status, status));
                     });

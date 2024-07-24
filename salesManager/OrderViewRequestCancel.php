@@ -84,10 +84,6 @@ $managerID = $_SESSION['managerID']
                                 <input type="text" id="maxDate" placeholder="To Date">
                             </th>
                             <th>
-                                <span>Order Status:</span>
-                                <select id="statusFilter">
-                                    <option value="">All</option>
-                                </select>
                             </th>
                             <th><button type="button" class="btn btn-primary" onclick="clearFilter()">Clear</button></th>
                       
@@ -336,18 +332,6 @@ $managerID = $_SESSION['managerID']
                             return false;
                         }
                     );
-                    // Populate the status filter dropdown
-                    const statusFilter = $('#statusFilter');
-                    const uniqueStatuses = [...new Set(orderData.map(item => item[3]))];
-                    uniqueStatuses.forEach(status => {
-                        statusFilter.append(new Option(status, status));
-                    });
-
-                    // Add event listener for status filter
-                    statusFilter.on('change', function() {
-                        const selectedStatus = $(this).val();
-                        table.column(3).search(selectedStatus).draw();
-                    });
 
                     // Add event listener for dealer ID search
                     const dealerIDSearch = $('#DealerIDSearch');
@@ -360,7 +344,6 @@ $managerID = $_SESSION['managerID']
                     window.clearFilter = function() {
                         $('#minDate').val('');
                         $('#maxDate').val('');
-                        $('#statusFilter').val('');
                         table.search('').columns().search('').draw();
                     };
                 } else {

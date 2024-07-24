@@ -507,6 +507,7 @@ if (!isset($_SESSION['managerEmail'])) {
             const statusFilter = $('#statusFilter');
             const uniqueStatuses = [...new Set(orderData.map(item => item[3]))];
             statusFilter.empty();
+            statusFilter.append(new Option("", ""));
             uniqueStatuses.forEach(status => {
               statusFilter.append(new Option(status, status));
             });

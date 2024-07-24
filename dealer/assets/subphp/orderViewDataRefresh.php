@@ -58,14 +58,12 @@ if ($result->num_rows > 0) {
 
         // Add the processed data to the data set array
         $dataSet[] = [
-            sprintf('%06d', $row['orderID']), // Format the order ID as a six-digit number
-            $row['orderDateTime'], // Order date and time
-            $OrderStatus, // Order status
-            $deliveryDate, // Delivery date
-            // Button for viewing order details
-            "&lt;button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick='uploadOrderDetail(\"{$row['orderID']}\", \"{$row['orderDateTime']}\", \"{$salesManagerID}\", \"{$salesManagerName}\", \"{$salesManagerContact}\", \"{$row['deliveryAddress']}\", \"{$deliveryDate}\", \"{$row['orderPrice']}\")'&gt;Details&lt;/button&gt;",
-            // Button for cancelling the order
-            "&lt;button type='button' class='btn btn-outline-danger' id='cancelButton{$row['orderID']}' onclick='cancelOrder(\"{$row['orderID']}\", \"{$row['orderStatus']}\")'&gt;Cancel&lt;/button&gt;"
+            sprintf('%06d', $row['orderID']),
+            $row['orderDateTime'],
+            $OrderStatus,
+            $deliveryDate,
+            "<button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick='uploadOrderDetail(\"{$row['orderID']}\", \"{$row['orderDateTime']}\", \"{$salesManagerID}\", \"{$salesManagerName}\", \"{$salesManagerContact}\", \"{$row['deliveryAddress']}\", \"{$deliveryDate}\", \"{$row['orderPrice']}\")'>Details</button>",
+            "<button type='button' class='btn btn-outline-danger' id='cancelButton{$row['orderID']}' onclick='cancelOrder(\"{$row['orderID']}\", \"{$row['orderStatus']}\", \"{$deliveryDate}\")'>Cancel</button>"
         ];
     }
 

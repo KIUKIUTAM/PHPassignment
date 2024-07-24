@@ -97,7 +97,7 @@ if(!isset($_SESSION['dealer'])){
                       <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M20 12L4 12"></path>
                     </svg>
                   </button>
-                  <input id="quantityNumber" type="number" value="1" min="0" />
+                  <input id="quantityNumber" type="number" value="1" min="0" readonly/>
                   <button onclick="quantityIncrement()">
                     <svg fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
                       <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b" d="M12 4V20M20 12H4"></path>
@@ -147,6 +147,10 @@ if(!isset($_SESSION['dealer'])){
     const spareQty = document.getElementById("quantityNumber").value;
     const spareName = document.getElementById("sparePartName").innerText;
 
+    if(spareQty == 0){
+      alert("Please enter quantity");
+      return;
+    }
     // Create the data object to be sent in the request
     const data = {
         spareID: spareID,

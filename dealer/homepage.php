@@ -6,9 +6,6 @@ if (!isset($_SESSION['dealer'])) {
   exit();
 }
 ?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,43 +15,23 @@ if (!isset($_SESSION['dealer'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SLMS - eCommerce Website</title>
 
-  <!--
-    - favicon
-  -->
   <link rel="shortcut icon" href="../assets/img/catHead.jpg" type="image/x-icon" />
-
   <link rel="stylesheet" href="./assets/css/style-prefix.css" />
-
-  <!--
-    - custom css link
-  -->
-
-  <!--
-    - google font link
-  -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 </head>
 
 <body>
+
   <header>
   </header>
 
-  <!--
-    - MAIN
-  -->
-
   <main>
-    <!--
-      - PRODUCT
-    -->
     <div class="product-container">
       <div class="container">
-        <!--- SIDEBAR-->
         <nav class="sidebar"></nav>
         <div class="product-box">
-          <!--- PRODUCT MINIMAL-->
           <div class="product-minimal">
             <div class="product-showcase">
               <h2 class="title">New Arrivals</h2>
@@ -85,10 +62,11 @@ if (!isset($_SESSION['dealer'])) {
                           $categoryName = "Accessories";
                           break;
                       };
-                      echo ' <div class="showcase" onclick="ProductDetail(' . $row["sparePartNum"] . ')">
+                      ?>
+                      <div class="showcase" onclick="ProductDetail( <?php echo $row['sparePartNum'] ?> )">
                         <a href="#" class="showcase-img-box">
                           <img
-                            src="' . $row["sparePartImage"] . '"
+                            src="<?php echo $row["sparePartImage"]?>"
                             width="70"
                             class="showcase-img"
                           />
@@ -96,15 +74,16 @@ if (!isset($_SESSION['dealer'])) {
                         
                         <div class="showcase-content">
                           <a href="#">
-                            <h4 class="showcase-title">' . $row["sparePartName"] . '</h4>
+                            <h4 class="showcase-title"><?php echo $row["sparePartName"] ?></h4>
                           </a>
   
-                          <a href=' . $category . ' class="showcase-category">' . $categoryName . '</a>
-                        ';
+                          <a href="<?php echo $category ?>" class="showcase-category"><?php echo  $categoryName ?></a>
+                    <?php
                       if ($row["discountPrice"] == null) {
                         $price = $row["price"];
                         echo '<div class="price-box">
                           <p class="price">$' . $price . '</p>
+                          </div>
                         ';
                       } else {
                         $price = $row["discountPrice"];
@@ -112,15 +91,16 @@ if (!isset($_SESSION['dealer'])) {
                         echo '<div class="price-box">
                           <p class="price">$' . $price . '</p>
                           <del>$' . $delPrice . '</del>
+                          </div>
                         ';
                       }
-                      echo '</div>
+                  ?>
                         </div>
-                      </div>';
+                      </div>
+                  <?php
                     }
                   }
-
-                  echo '
+                  ?>
                   </div>
                 </div>
               </div>
@@ -129,7 +109,8 @@ if (!isset($_SESSION['dealer'])) {
                 <h2 class="title">Popular</h2>
 
                 <div class="showcase-wrapper has-scrollbar">
-                  <div class="showcase-container">';
+                  <div class="showcase-container">
+                    <?php
                   $sql = "SELECT * FROM sparePart ORDER BY RAND() LIMIT 4";
                   $result = $conn->query($sql);
                   if ($result->num_rows > 0) {
@@ -154,26 +135,26 @@ if (!isset($_SESSION['dealer'])) {
                           $categoryName = "Accessories";
                           break;
                       };
-                      echo ' <div class="showcase" onclick="ProductDetail(' . $row["sparePartNum"] . ')">
+                      ?>
+                      <div class="showcase" onclick="ProductDetail(<?php echo $row['sparePartNum']?>)">
                         <a href="" class="showcase-img-box">
                           <img
-                            src="' . $row["sparePartImage"] . '"
+                            src="<?php echo $row['sparePartImage']?>"
                             width="70"
-                            class="showcase-img"
-                          />
+                            class="showcase-img"/>
                         </a>
-  
                         <div class="showcase-content">
                           <a href="#">
-                            <h4 class="showcase-title">' . $row["sparePartName"] . '</h4>
+                            <h4 class="showcase-title"><?php echo $row["sparePartName"] ?></h4>
                           </a>
-  
-                          <a href=' . $category . ' class="showcase-category">' . $categoryName . '</a>
-                        ';
+                          <a href="<?php echo $category?>" class="showcase-category"><?php echo $categoryName?></a>
+                      
+                    <?php
                       if ($row["discountPrice"] == null) {
                         $price = $row["price"];
                         echo '<div class="price-box">
                           <p class="price">$' . $price . '</p>
+                          </div>
                         ';
                       } else {
                         $price = $row["discountPrice"];
@@ -181,15 +162,16 @@ if (!isset($_SESSION['dealer'])) {
                         echo '<div class="price-box">
                           <p class="price">$' . $price . '</p>
                           <del>$' . $delPrice . '</del>
+                          </div>
                         ';
                       }
-                      echo '</div>
+                     ?>
                         </div>
-                      </div>';
+                      </div>
+                  <?php
                     }
                   }
-
-                  echo '
+                  ?>
                   </div>
                 </div>
               </div>
@@ -199,18 +181,13 @@ if (!isset($_SESSION['dealer'])) {
       </div>
     </main>
     <footer>
-      
-    </footer>';
-
-   ?>
+    </footer>
    <script>
      function ProductDetail(sparePartNum) {
        window.location.href = ("./product_Detail?sparePartNum=" + sparePartNum);
      }
    </script>
-   <!--- custom js link-->
    <script src="./assets/js/script.js"></script>
-   <!--- ionicon link-->
    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js">
    </script>

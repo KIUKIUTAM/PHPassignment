@@ -11,7 +11,6 @@ if (isset($_POST['userEmailForLogin'])) {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
     // Use prepared statements to prevent SQL injection
     $stmt = $conn->prepare("SELECT dealerEmail,password,dealerName,deliveryAddress FROM dealer WHERE dealerEmail = ?");
     $stmt->bind_param("s", $dealerEmail);

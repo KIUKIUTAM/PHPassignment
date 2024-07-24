@@ -5,27 +5,21 @@ session_start();
 <style>
     #loginOut:hover {
         color: #b23b3b;
-
     }
 </style>
 
-<span>Dealer Email: <?php if (isset($_SESSION['dealer'])) {
-                        echo $_SESSION['dealer'];
-                    } ?></span>
+<span>Dealer Email: <?php if (isset($_SESSION['dealer'])) {echo $_SESSION['dealer'];} ?></span>
 <div class="header-main">
     <div class="container">
         <a href="./homepage.php" class="menu-title"><img src="../assets/img/catHead.jpg" width="70" class="showcase-img" />
             <h4 style="font-size: 1.4em;">SLMS</h4>
         </a>
-
         <div class="header-search-container">
             <input type="search" name="search" class="search-field" placeholder="Enter your product name..." />
-
             <button class="search-btn" onclick="search()">
                 <ion-icon name="search-outline"></ion-icon>
             </button>
         </div>
-
         <div class="header-user-actions">
             <button class="action-btn">
                 <a href="./information.php">
@@ -37,8 +31,6 @@ session_start();
                     <ion-icon name="file-tray-full-outline"></ion-icon>
                 </a>
             </button>
-
-
             <button class="action-btn">
                 <a href="./shoppingCart.php">
                     <ion-icon name="bag-handle-outline"></ion-icon>
@@ -60,16 +52,13 @@ session_start();
             <li class="menu-category">
                 <a href="./homepage.php" class="menu-title">Home</a>
             </li>
-
             <li class="menu-category">
                 <a href="#" class="menu-title">Categories</a>
-
                 <div class="dropdown-panel">
                     <ul class="dropdown-panel-list">
                         <li class="menu-title">
                             <a href="#">Sheet Metal</a>
                         </li>
-
                         <li class="panel-list-item">
                             <a href="./listOfProduct?Category=Sheet_Metal">All</a>
                         </li>
@@ -79,17 +68,14 @@ session_start();
                         <li class="menu-title">
                             <a href="#">Major Asssemblies</a>
                         </li>
-
                         <li class="panel-list-item">
                             <a href="./listOfProduct?Category=Major_Assemblies">All</a>
                         </li>
                     </ul>
-
                     <ul class="dropdown-panel-list">
                         <li class="menu-title">
                             <a href="#">Light Components</a>
                         </li>
-
                         <li class="panel-list-item">
                             <a href="./listOfProduct?Category=Light_Components">All</a>
                         </li>
@@ -127,9 +113,6 @@ session_start();
         <ion-icon name="bag-handle-outline"></ion-icon>
         <span class="count" id="shoppingCartCount2">0</span>
     </button>
-
-
-
     <button class="action-btn" data-mobile-menu-open-btn onclick="loginOut()" id="loginOut">
         <ion-icon name="log-in-outline"></ion-icon>
     </button>

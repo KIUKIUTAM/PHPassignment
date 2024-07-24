@@ -152,19 +152,6 @@ if (!isset($_SESSION['managerEmail'])) {
               <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen">
                 <div class="accordion-body">
                   <table class="table table-striped table-hover" OrderItemList id="sparePartDataTable">
-                    <thead>
-                      <tr>
-                        <th>Img</th>
-                        <th>sparePart Number</th>
-                        <th>sparePart Name</th>
-                        <th>stock Item Qty</th>
-                        <th>weight</th>
-                        <th>price</th>
-                        <th>discountPrice</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
                   </table>
                 </div>
               </div>
@@ -595,6 +582,10 @@ if (!isset($_SESSION['managerEmail'])) {
                 {
                   title: 'discountPrice',
                   className: 'text-center'
+                },
+                {
+                  title: 'Disabled',
+                  className: 'text-center'
                 }
               ],
               data: orderData,
@@ -606,7 +597,13 @@ if (!isset($_SESSION['managerEmail'])) {
                 "render": function(data, type, row, meta) {
                   return '<img src="' + data + '" alt="Image" style="width:50px;height:auto;"/>';
                 }
-              }]
+              }],
+              createdRow: function(row, data, dataIndex) {
+                var statusCell = $('td', row).eq(7);
+                if (data[7] === 'Disabled') {
+                  statusCell.addClass('ColorRed');
+                }
+              }
             });
 
 
@@ -627,7 +624,6 @@ if (!isset($_SESSION['managerEmail'])) {
       } else {
         document.getElementById('approveInput').style.display = 'none';
       }
-
       document.getElementById("OrderDetail-orderDateTime").placeholder = orderDateTime;
       document.getElementById("OrderDetail-SalesManagerName").placeholder = managerName;
       document.getElementById("OrderDetail-SalesManagerContact").placeholder = managerContact;

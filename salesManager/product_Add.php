@@ -35,7 +35,6 @@ if (!isset($_SESSION['managerEmail'])) {
         <h1>Add Item:</h1>
         <div class="product-box">
           <div class="product">
-
             <a href="#" class="product-img-box">
               <img src="../assets/img/noimg.jpg" alt="product-img-box" width="300" class="product-img" />
             </a>
@@ -49,17 +48,14 @@ if (!isset($_SESSION['managerEmail'])) {
               <p class="product-description">
                 null
               </p>
-
               <div class="price-box">
                 <label id="bold">discount Price: </label><span class='price' id='price'>null</span><br>
                 <label id="bold">Price: </label><del>null</del><br>
-
               </div>
-
             </div>
             <form id="addItmeForm" METHOD="POST" ACTION="./assets/subphp/addItem.php" enctype="multipart/form-data">
               <div class="input-group mb-3 mt-5">
-                <span class="input-group-text" id="basic-addon1">Category</span>
+                <span class="input-group-text" >Category</span>
                 <select class="form-select" name="Category" id="CategorySelect" required>
                   <option value="" selected>Choose...</option>
                   <option value="1">Sheet Metal</option>
@@ -71,33 +67,33 @@ if (!isset($_SESSION['managerEmail'])) {
               <div class="invalid-feedback" id="selectError" style="display: none;">
                 Please select a valid category.
               </div>
-              <div class="input-group mb-3 ">
-                <span class="input-group-text" id="basic-addon1">Spare Part Name</span>
-                <input type="text" class="form-control" name="sparePartName" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Spare Part Name</span>
+                <input type="text" class="form-control" name="sparePartName"  required>
               </div>
-              <div class="input-group mb-3 ">
-                <span class="input-group-text" id="basic-addon1">SparePart Description</span>
-                <textarea class="form-control" name="sparePartDescription" aria-label="With textarea" required></textarea>
+              <div class="input-group mb-3">
+                <span class="input-group-text">SparePart Description</span>
+                <textarea class="form-control" name="sparePartDescription" required></textarea>
               </div>
-              <div class="input-group mb-3 ">
-                <span class="input-group-text" id="basic-addon1">Stock Item Qty</span>
-                <input type="number" class="form-control" name="stockItemQty" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Stock Item Qty</span>
+                <input type="number" class="form-control" name="stockItemQty" min="0" required>
               </div>
-              <div class="input-group mb-3 ">
-                <span class="input-group-text" id="basic-addon1">Weight</span>
-                <input type="number" step="0.01" class="form-control" name="weight" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Weight</span>
+                <input type="number" step="0.01" class="form-control" name="weight" min="0" required>
               </div>
-              <div class="input-group mb-3 ">
-                <span class="input-group-text" id="basic-addon1">Price</span>
-                <input type="number" step="0.01" class="form-control" name="price" placeholder="" aria-label="" aria-describedby="basic-addon1" required>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Price</span>
+                <input type="number" step="0.01" class="form-control" name="price" min="0" required>
               </div>
-              <div class="input-group mb-3 ">
-                <span class="input-group-text" id="basic-addon1">Discount Price</span>
-                <input type="number" step="0.01"class="form-control" name="discountPrice" placeholder="" aria-label="" aria-describedby="basic-addon1">
+              <div class="input-group mb-3">
+                <span class="input-group-text">Discount Price</span>
+                <input type="number" step="0.01"class="form-control" name="discountPrice" placeholder="**Optional">
               </div>
               <div class="input-group mb-3">
                 <label class="input-group-text" for="inputGroupFile01">Spare Part Image</label>
-                <input type="file" class="form-control" name="sparePartImage" id="inputGroupFile01">
+                <input type="file" class="form-control" name="sparePartImage" accept="image/*">
               </div>
               <button type="submit" class="btn btn-primary">Add Item</button>
             </form>

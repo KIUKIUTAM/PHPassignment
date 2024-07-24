@@ -124,18 +124,10 @@ if (!isset($_SESSION['managerEmail'])) {
                 </div>
               </div>
               <button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick="detailAddId()">Edit Item</button>
-              <div class="delete">
-                <button class="noselect" onclick="DeleteItem()"><span class="text">Delete</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                      <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path>
-                    </svg></span></button>
-
-              </div>
+              <button type='button' class='btn btn-outline-danger' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick="DeleteItem()">Delete</button>
             </div>
-            
           </div>
-
         </div>
-
       <?php
       }
       ?>
@@ -183,7 +175,7 @@ if (!isset($_SESSION['managerEmail'])) {
                 <div class="input-group mb-3">
                   <label for="" class="col-sm-3 col-form-label">Spare Part Image:</label>
                   <div class="col-sm-7">
-                    <input type="file" class="form-control" name="sparePartImage">
+                    <input type="file" class="form-control" name="sparePartImage" accept="image/*">
                   </div>
                 </div>
               </div>

@@ -314,9 +314,6 @@ if(isset($_SESSION['informationCompleted'])&&!$_SESSION['informationCompleted'])
         }
 
         function CreateOrder() {
-            if(isset($_SESSION['informationCompleted'])&&!$_SESSION['informationCompleted']){
-                alert('Please complete your profile first'); location.replace('../../information.php');
-            }
             // Get the list of items, total price, and delivery cost from the DOM
             let list = document.getElementById('showPrice');
             let TotalPrice = document.getElementById('TotalPrice').textContent;

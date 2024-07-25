@@ -1,0 +1,24 @@
+dealer:
+root@vtc.com
+Aa12345678
+Vincent@gmail.com
+Aa12345678
+
+manager:
+header:
+john.doe@lmc.com
+Aa12345678
+
+normal:
+ken.lau@lmc.com
+Aa12345678
+
+
+Order status:
+1 -> "Wait for approval"
+2 -> "Wait for delivery"
+3 -> "Delivered"
+4 -> "Request Cancel"
+5 -> "Cancelled"
+6 -> "Rejected"
+

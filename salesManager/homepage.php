@@ -595,7 +595,7 @@ if (!isset($_SESSION['managerEmail'])) {
               columnDefs: [{
                 "targets": 0, // The index of the column containing the image paths
                 "render": function(data, type, row, meta) {
-                  return '<img src="' + data + '" alt="Image" style="width:50px;height:auto;"/>';
+                  return '<img src="' + data + '" alt="Image" style="width:50px;height:50px;"/>';
                 }
               }],
               createdRow: function(row, data, dataIndex) {

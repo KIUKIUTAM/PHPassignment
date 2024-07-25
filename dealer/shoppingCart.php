@@ -5,6 +5,9 @@ if (!isset($_SESSION['dealer'])) {
     header("Location: ../index.php");
     exit();
 }
+if(isset($_SESSION['informationCompleted'])&&!$_SESSION['informationCompleted']){
+    echo "<script>alert('Please complete your profile first'); location.replace('./information.php');</script>";
+}
 ?>
 
 
@@ -311,6 +314,9 @@ if (!isset($_SESSION['dealer'])) {
         }
 
         function CreateOrder() {
+            if(isset($_SESSION['informationCompleted'])&&!$_SESSION['informationCompleted']){
+                alert('Please complete your profile first'); location.replace('../../information.php');
+            }
             // Get the list of items, total price, and delivery cost from the DOM
             let list = document.getElementById('showPrice');
             let TotalPrice = document.getElementById('TotalPrice').textContent;

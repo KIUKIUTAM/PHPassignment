@@ -19,7 +19,7 @@ $result = $stmt->get_result(); // Get the result set
 // Check if any rows are returned, indicating the email already exists
 if ($result->num_rows > 0) {
     // If email exists, alert the user and redirect to the index page
-    echo "&lt;script&gt;alert('Email already exists');location.replace('../../../index.php');&lt;/script&gt;";
+    echo "<script>alert('Email already exists');location.replace('../../../index.php');</script>";
 } else {
     // If email does not exist, hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -31,10 +31,10 @@ if ($result->num_rows > 0) {
     // Execute the insert statement and check if it was successful
     if ($stmt->execute()) {
         // If insert is successful, alert the user and redirect to the index page
-        echo "&lt;script&gt;alert('Register successfully'); location.replace('../../../index.php');&lt;/script&gt;";
+        echo "<script>alert('Register successfully'); location.replace('../../../index.php');</script>";
     } else {
         // If there is an error inserting the email, alert the user with the error message and redirect to the index page
-        echo "&lt;script&gt;alert('Error inserting email: " . $stmt->error . "'); location.replace('../../../index.php');&lt;/script&gt;";
+        echo "<script>alert('Error inserting email: " . $stmt->error . "'); location.replace('../../../index.php');</script>";
     }
 }
 

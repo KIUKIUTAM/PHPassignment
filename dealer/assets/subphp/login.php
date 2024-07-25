@@ -26,6 +26,7 @@ if (isset($_POST['userEmailForLogin'])) {
             $_SESSION['dealer'] = $row['dealerEmail'];
             if (empty($row['dealerName']) || empty($row['deliveryAddress'])) {
                 echo "<script>alert('Please complete your profile first'); location.replace('../../information.php');</script>";
+                $_SESSION['informationCompleted'] = false;
             } else {
                 echo "<script>location.replace('../../homepage.php');</script>";
                 exit();

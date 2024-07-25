@@ -210,11 +210,14 @@ $managerID = $_SESSION['managerID']
     var validatequantity = false;
     var orderIDForClick = 0;
     var cancelWay = 0;
-    AssignManager();
 
-    function AssignManager() { //add manager to select option
+
+    function AssignManager() {
+        // URL to fetch manager data
         const url = "./assets/subphp/assignManager.php";
+        // Data to send with the request
         const data = {};
+
         fetch(url, {
                 method: 'POST',
                 headers: {
@@ -224,20 +227,27 @@ $managerID = $_SESSION['managerID']
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Network response was not ok ' + response.statusText);
+                    throw new Error('Network response was not ok: ' + response.statusText);
                 }
                 return response.json();
             })
             .then(responseData => {
                 if (responseData.status === 'success') {
                     const managerData = responseData.data;
-                    let select = document.getElementById('ApproveOrderAssign');
-                    for (var i = 0; i < managerData.length; i++) {
-                        var opt = document.createElement('option');
-                        opt.value = managerData[i][0];
-                        opt.innerHTML = managerData[i][1];
-                        select.appendChild(opt);
+                    const select = document.getElementById('ApproveOrderAssign');
+
+                    // Clear existing options (if needed)
+                    while (select.firstChild) {
+                        select.removeChild(select.firstChild);
                     }
+
+                    // Add new options
+                    managerData.forEach(manager => {
+                        const opt = document.createElement('option');
+                        opt.value = manager.salesManagerID;
+                        opt.textContent = manager.managerName;
+                        select.appendChild(opt);
+                    });
                 } else {
                     console.error('Error:', responseData.message);
                 }
@@ -246,7 +256,7 @@ $managerID = $_SESSION['managerID']
                 console.error('Fetch error:', error);
             });
     }
-
+    AssignManager();
 
 
     function refreshOrderView() {
@@ -405,7 +415,7 @@ $managerID = $_SESSION['managerID']
         approveOrder(orderIDForClick, 2);
     }
 
-    function uploadOrderDetail(orderID, orderDateTime, orderStatus, managerName, managerContact, deliveryAddress, deliveryDate,deliveryCost, orderPrice) {
+    function uploadOrderDetail(orderID, orderDateTime, orderStatus, managerName, managerContact, deliveryAddress, deliveryDate, deliveryCost, orderPrice) {
         document.getElementById("OrderDetail-OrderID").placeholder = orderID.toString().padStart(6, '0');
         if (orderStatus == 1) {
             orderIDForClick = orderID;
@@ -538,6 +548,10 @@ $managerID = $_SESSION['managerID']
     }
 
     function approveOrder(orderID, approveOrReject) { //1 for approve, 2 for reject
+        if (<?php echo isset($_SESSION['headPermission']) ? 'false' : 'true'; ?>) {
+            alert("You don't have permission to approve or reject the order");
+            return;
+        }
         if (!validatequantity) {
             alert("Order can't be approved due to insufficient inventory quantity");
             return;

@@ -32,10 +32,10 @@ if (isset($_POST['userEmailForLogin'])) {
             echo "<script>location.replace('../../homepage.php');</script>";
             exit();
         } else {
-            echo "<script>alert('Invalid LoginEmail or password'); location.replace('../../../index.php');</script>";
+            echo "<script>alert('Invalid LoginEmail or password'); location.replace('../../../ManagerLogin.php');</script>";
         }
     } else {
-        echo "<script>alert('Invalid LoginEmail or password'); location.replace('../../../index.php');</script>";
+        echo "<script>alert('Invalid LoginEmail or password'); location.replace('../../../ManagerLogin.php');</script>";
     }
 
     // Close the statement and connection

@@ -1,21 +1,4 @@
 
-//swap between the login page and register page
-let btn1 = document.querySelector("#close-btn");
-let btn2 = document.querySelector("#loginSwap-btn");
-let sidebar1 = document.querySelector(".wrapper-login");
-let sidebar2 = document.querySelector(".wrapper-register");
-
-console.log(btn2);
-btn1.onclick = function () {
-    sidebar1.classList.toggle('active');
-    sidebar2.classList.toggle('active');
-};
-btn2.onclick = function () {
-    sidebar1.classList.toggle('active');
-    sidebar2.classList.toggle('active');
-};
-
-
 
 //keyup and Verify if the registered password matches the requested password.
 let timer, timeoutVal = 1000; // time it takes to wait for user to stop typing in ms

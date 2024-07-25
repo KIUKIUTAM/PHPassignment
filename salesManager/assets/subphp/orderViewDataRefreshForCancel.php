@@ -67,7 +67,7 @@ if ($result->num_rows > 0) {
             htmlspecialchars($row['orderDateTime']),
             htmlspecialchars($orderStatus),
             htmlspecialchars($deliveryDate),
-            "<button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick='uploadOrderDetail(\"" . htmlspecialchars($row['orderID']) . "\", \"" . htmlspecialchars($row['orderDateTime']) . "\", \"" . htmlspecialchars($row['orderStatus']) . "\", \"" . htmlspecialchars($salesManagerName) . "\", \"" . htmlspecialchars($salesManagerContact) . "\", \"" . htmlspecialchars($row['deliveryAddress']) . "\", \"" . htmlspecialchars($deliveryDate) . "\", \"" . htmlspecialchars($row['orderPrice']) . "\")'>Details</button>"
+            "<button type='button' class='btn btn-outline-success' data-bs-toggle='modal' data-bs-target='#Modal-Detail' onclick='uploadOrderDetail(\"" . $row['orderID'] . "\", \"" . $row['orderDateTime'] . "\", " . $row['orderStatus'] . ", \"" . $salesManagerName . "\", \"" . $salesManagerContact . "\", \"" . $row['deliveryAddress'] . "\", \"" . $deliveryDate . "\", \"" . $row['orderPrice'] . "\")'>Details</button>"
         ];
     }
 

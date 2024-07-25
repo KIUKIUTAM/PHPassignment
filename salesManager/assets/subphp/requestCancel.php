@@ -17,7 +17,7 @@ $arrayData = json_decode($data, true);
 if (!isset($arrayData['orderID']) || empty($arrayData['orderID'])) {
     die(json_encode(['status' => 'error', 'message' => 'Invalid order ID']));
 }
-if (!isset($arrayData['status']) || !in_array($arrayData['status'], [2, 5])) {
+if (!isset($arrayData['status']) || empty($arrayData['status'])) {
     die(json_encode(['status' => 'error', 'message' => 'Invalid cancel status']));
 }
 if (!isset($_SESSION['orderLine']) || !is_array($_SESSION['orderLine']) || empty($_SESSION['orderLine'])) {

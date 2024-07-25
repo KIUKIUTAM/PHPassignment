@@ -142,7 +142,7 @@ $managerID = $_SESSION['managerID']
                                     <div class="form-group row margin-bottom10" id="approveInput">
                                         <div class="col-sm-6">
                                             <h6>Request Cancel:</h6>
-                                            <div class="input-group ">
+                                            <div class="input-group">
                                                 <button type="button" class="btn btn-success no-print" id="ApproveOrder">Approve</button>
                                                 <button type="button" class="btn btn-danger no-print" id="RejectOrder">Reject</button>
                                             </div>
@@ -173,19 +173,11 @@ $managerID = $_SESSION['managerID']
         </div>
     </main>
 
-    <!--
-    - FOOTER
-  -->
-
     <footer>
     </footer>
 
 </body>
-<script src="./assets/js/script.js"></script>
-
-<!--
-- ionicon link
--->
+<script src="./assets/js/script.js"></script>                                                                             
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
 </script>
@@ -397,11 +389,9 @@ $managerID = $_SESSION['managerID']
             // Remove existing event listeners to avoid duplicates
             approveButton.removeEventListener('click', handleApproveClick);
             rejectButton.removeEventListener('click', handleRejectClick);
-
             // Add new event listeners
             approveButton.addEventListener('click', handleApproveClick);
             rejectButton.addEventListener('click', handleRejectClick);
-
             document.getElementById('approveInput').style.display = 'inline';
         } else {
             document.getElementById('approveInput').style.display = 'none';

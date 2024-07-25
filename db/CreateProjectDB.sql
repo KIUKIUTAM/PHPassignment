@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1:3306
--- 產生時間： 2024 年 07 月 24 日 13:42
+-- 產生時間： 2024 年 07 月 25 日 03:14
 -- 伺服器版本： 8.0.37
 -- PHP 版本： 8.2.18
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `dealer` (
   `faxNumber` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `deliveryAddress` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`dealerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- 資料表新增資料前，先清除舊資料 `dealer`
@@ -53,7 +53,10 @@ TRUNCATE TABLE `dealer`;
 INSERT INTO `dealer` (`dealerID`, `dealerEmail`, `password`, `dealerName`, `contactNumber`, `faxNumber`, `deliveryAddress`) VALUES
 (1, 'abcmotors@gmail.com', 'Aa1234567', 'ABC_Motors', '22345678', NULL, '123 Main Street, Hong Kong'),
 (4, '230501558V2@vtc.com', '$2y$10$wIeevM3gG3lZ6hVYeJz/YexBl9fQ4.sttn9y/O0IHSMLh6F9vu2Jm', NULL, NULL, NULL, NULL),
-(7, 'root@vtc.com', '$2y$10$Uail/0i.ux1VzT336jPqfuEwa7gRqUByH4pF6hkYxLYy74y/w/i.O', 'Vincent', '86-12312123123123', '86-12312312312', 'asdasd');
+(7, 'root@vtc.com', '$2y$10$Uail/0i.ux1VzT336jPqfuEwa7gRqUByH4pF6hkYxLYy74y/w/i.O', 'Vincent', '86-12312123123123', '86-12312312312', 'asdasd'),
+(8, 'Vincent@gmail.com', '$2y$10$UlPdWtv6MtneR14wLgoxF.O6i70V4xgJsy9h3fhrYYITHFGkLhAQq', NULL, NULL, NULL, NULL),
+(9, 'Vincent1@gmail.com', '$2y$10$YHGTezSSVsk6cLOEMMpb2ul3e9US8qCNLZ1Ldg7guF1A05uXzFiDK', 'Vincent', '852-12345678', '852-12345678', 'ABC'),
+(10, 'Vincent2@gmail.com', '$2y$10$5P6LZKwhPQsGmkaefYqqCObGewfU0.8iB0Qk8yer0R6Hpxt2dz/1G', 'V', '86-12345678', '886-12345678', 'ACC');
 
 -- --------------------------------------------------------
 
@@ -123,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `orderline` (
   PRIMARY KEY (`orderLineID`),
   KEY `orders` (`orderID`),
   KEY `sparePart` (`sparePartNum`)
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- 資料表新增資料前，先清除舊資料 `orderline`
@@ -194,7 +197,12 @@ INSERT INTO `orderline` (`orderLineID`, `orderID`, `sparePartNum`, `orderQty`) V
 (89, 45, 300006, 19),
 (90, 46, 400002, 2),
 (91, 47, 400005, 1),
-(92, 48, 200004, 1);
+(92, 48, 200004, 1),
+(93, 49, 300001, 10),
+(94, 49, 300003, 5),
+(95, 50, 300005, 3),
+(96, 51, 300005, 6),
+(97, 52, 300003, 1);
 
 -- --------------------------------------------------------
 
@@ -216,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`orderID`),
   KEY `dealer` (`dealerID`),
   KEY `salesManager` (`salesManagerID`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- 資料表新增資料前，先清除舊資料 `orders`
@@ -229,7 +237,7 @@ TRUNCATE TABLE `orders`;
 
 INSERT INTO `orders` (`orderID`, `dealerID`, `orderStatus`, `deliveryAddress`, `orderDateTime`, `deliveryDate`, `deliveryCost`, `orderPrice`, `salesManagerID`) VALUES
 (15, 7, 3, 'aaa', '2024-07-20 20:56:13', '2024-07-23 08:00:00', 0, 168820, 1),
-(16, 7, 1, 'aaa', '2024-07-20 20:56:24', NULL, 0, 1915.99, 1),
+(16, 7, 4, 'aaa', '2024-07-20 20:56:24', '2024-07-27 01:00:00', 0, 1915.99, 3),
 (17, 7, 1, 'aaa', '2024-07-20 20:56:18', NULL, 0, 1450, 1),
 (18, 7, 1, 'aaa', '2024-07-20 20:56:27', NULL, 0, 1450, 1),
 (19, 7, 1, 'aaa', '2024-07-20 20:56:30', NULL, 0, 1450, 1),
@@ -241,27 +249,31 @@ INSERT INTO `orders` (`orderID`, `dealerID`, `orderStatus`, `deliveryAddress`, `
 (25, 7, 1, 'aaa', '2024-07-17 07:37:41', NULL, 0, 975.99, NULL),
 (26, 7, 1, 'aaa', '2024-07-17 07:37:44', NULL, 0, 312.99, 1),
 (27, 7, 1, 'aaa', '2024-07-17 07:37:46', NULL, 0, 308.49, 1),
-(28, 7, 1, 'aaa', '2024-07-17 07:37:49', NULL, 0, 315.99, 1),
+(28, 7, 2, 'aaa', '2024-07-24 21:02:48', '2024-07-26 19:00:00', 0, 315.99, 3),
 (29, 7, 5, 'aaa', '2024-07-20 08:25:36', NULL, 0, 529, 1),
-(30, 7, 1, 'aaa', '2024-07-17 07:38:12', NULL, 0, 2049, NULL),
+(30, 7, 4, 'aaa', '2024-07-24 20:56:18', '2024-07-26 18:00:00', 0, 2049, 3),
 (31, 7, 5, 'aaa', '2024-07-17 07:38:20', NULL, 0, 14320, 1),
 (32, 7, 2, 'aaa', '2024-07-18 19:06:01', NULL, 0, 7280, 1),
-(33, 7, 2, 'aaa', '2024-07-18 19:15:29', NULL, 0, 1396, 1),
-(34, 7, 2, 'asdasd', '2024-07-18 23:57:45', NULL, 0, 6573.84, 1),
+(33, 7, 4, 'aaa', '2024-07-18 19:15:29', '2024-07-27 01:00:00', 0, 1396, 1),
+(34, 7, 4, 'asdasd', '2024-07-18 23:57:45', '2024-07-27 01:00:00', 0, 6573.84, 1),
 (35, 7, 2, 'aaa', '2024-07-20 08:25:33', NULL, 0, 308.49, 1),
 (36, 7, 3, 'asdasd', '2024-07-20 21:47:23', '2024-07-23 01:00:00', 0, 2352, 1),
 (37, 7, 3, 'asdasd', '2024-07-22 04:20:52', '2024-07-23 01:00:00', 0, 11279.8, 1),
 (38, 7, 3, 'asdasd', '2024-07-22 05:09:10', '2024-07-23 17:00:00', 0, 43775.4, 1),
 (39, 7, 6, 'asdasd', '2024-07-22 05:39:12', NULL, 0, 2183, 1),
-(40, 7, 2, 'asdasd', '2024-07-22 05:39:31', '2024-07-26 01:00:00', 0, 2544, 2),
-(41, 7, 2, 'asdasd', '2024-07-22 05:44:23', NULL, 0, 945.99, 1),
+(40, 7, 5, 'asdasd', '2024-07-22 05:39:31', NULL, 0, 2544, 2),
+(41, 7, 5, 'asdasd', '2024-07-22 05:44:23', NULL, 0, 945.99, 1),
 (42, 7, 5, 'asdasd', '2024-07-23 05:36:11', NULL, 0, 5657.99, NULL),
 (43, 7, 2, 'asdasd', '2024-07-23 05:45:11', '2024-07-25 06:00:00', 0, 376.98, 1),
 (44, 7, 5, 'asdasd', '2024-07-24 05:24:45', NULL, 0, 1579, NULL),
-(45, 7, 1, 'asdasd', '2024-07-24 05:42:53', NULL, 0, 1642.99, NULL),
-(46, 7, 1, 'asdasd', '2024-07-24 09:40:29', NULL, 0, 8606, NULL),
-(47, 7, 1, 'asdasd', '2024-07-24 13:26:27', NULL, 1800, 1822, NULL),
-(48, 7, 1, 'asdasd', '2024-07-24 13:27:14', NULL, 300, 600, NULL);
+(45, 7, 5, 'asdasd', '2024-07-24 05:42:53', NULL, 0, 1642.99, 3),
+(46, 7, 5, 'asdasd', '2024-07-24 09:40:29', NULL, 0, 8606, 1),
+(47, 7, 2, 'asdasd', '2024-07-24 20:42:53', '2024-07-26 19:00:00', 1800, 1822, 2),
+(48, 7, 6, 'asdasd', '2024-07-24 13:27:14', NULL, 300, 600, NULL),
+(49, 7, 5, 'asdasd', '2024-07-24 20:34:41', NULL, 1140, 1349.85, NULL),
+(50, 9, 5, 'ABC', '2024-07-25 02:19:19', NULL, 1900, 5647, NULL),
+(51, 9, 1, 'ABC', '2024-07-25 02:19:41', NULL, 600, 8094, NULL),
+(52, 10, 5, 'ACC', '2024-07-25 02:36:06', NULL, 1900, 1915.99, NULL);
 
 -- --------------------------------------------------------
 
@@ -326,7 +338,7 @@ TRUNCATE TABLE `sparepart`;
 INSERT INTO `sparepart` (`sparePartNum`, `sparePartName`, `sparePartDescription`, `stockItemQty`, `weight`, `price`, `discountPrice`, `sparePartImage`) VALUES
 (100002, 'Galvanized Steel Sheet', '1', 1, 10, 1, 1, '../assets/img/istockphoto-488844774-612x612.jpg'),
 (100003, 'Aluminum Alloy Sheet', 'High-strength aluminum alloy sheet with excellent corrosion resistance.', 990, 11, 32.49, 30, '../assets/img/100003.jpg'),
-(100004, 'Cold Rolled Steel Sheet', 'Precision cold rolled steel sheet, ideal for precision components.', 994, 13, 45.99, 44, '../assets/img/100004.jpg'),
+(100004, 'Cold Rolled Steel Sheet', 'Precision cold rolled steel sheet, ideal for precision components.', 995, 13, 45.99, 44, '../assets/img/100004.jpg'),
 (100005, 'Copper Sheet', 'Premium-grade copper sheet with high thermal and electrical conductivity.', 993, 13, 38.99, NULL, '../assets/img/100005.jpg'),
 (200001, 'Gearbox Assembly', 'Robust gearbox assembly designed for high-torque applications.', 998, 12.5, 325.99, 200.4, '../assets/img/200001.jpg'),
 (200002, 'Hydraulic Pump Assembly', 'Efficient hydraulic pump assembly for fluid power systems.', 998, 8.2, 415.49, 399.2, '../assets/img/200002.jpg'),
@@ -335,16 +347,15 @@ INSERT INTO `sparepart` (`sparePartNum`, `sparePartName`, `sparePartDescription`
 (200005, 'Engine Block Assembly 3', 'Precision-engineered engine block assembly for high-performance vehicles.', 991, 16, 400, NULL, '../assets/img/200005.jpg'),
 (300001, 'Aluminum Castings', 'Versatile aluminum castings known for their lightweight and strength.', 996, 55, 12.99, NULL, '../assets/img/300001.jpg'),
 (300002, 'Plastic Injection Moldings', 'High-precision plastic injection moldings for complex shapes and designs.', 995, 44, 8.49, NULL, '../assets/img/300002.jpg'),
-(300003, 'Machined Brass Components 1', 'Custom machined brass components for specialized industrial use.', 998, 33, 15.99, 15.98, '../assets/img/300003.jpg'),
+(300003, 'Machined Brass Components 1', 'Custom machined brass components for specialized industrial use.', 996, 33, 15.99, 15.98, '../assets/img/300003.jpg'),
 (300004, 'Machined Brass Components 2', 'Precision-crafted brass components designed for durability and consistency.', 997, 22, 229, 228, '../assets/img/300004.jpg'),
-(300005, 'Machined Brass Components 3', 'High-grade machined brass components for demanding applications.', 998, 11, 1249, NULL, '../assets/img/300005.jpg'),
+(300005, 'Machined Brass Components 3', 'High-grade machined brass components for demanding applications.', 997, 11, 1249, NULL, '../assets/img/300005.jpg'),
 (300006, 'Light Light', 'no light', 100, 9.9, 10, NULL, '../assets/img/pexels-cottonbro-7568428.jpg'),
 (400001, 'Rubber Gaskets', 'Sealing rubber gaskets designed for leak-proof connections.', 998, 55, 33123, NULL, '../assets/img/400001.jpg'),
 (400002, 'Plastic Hoses', 'Flexible plastic hoses resistant to wear and varying temperatures.', 998, 44, 4123, NULL, '../assets/img/400002.jpg'),
-(400003, 'Adhesive Tapes 1', 'Strong adhesive tapes for secure bonding in various applications.', 959, 33, 644, NULL, '../assets/img/400003.jpg'),
+(400003, 'Adhesive Tapes 1', 'Strong adhesive tapes for secure bonding in various applications.', 960, 33, 644, NULL, '../assets/img/400003.jpg'),
 (400004, 'Adhesive Tapes 2', 'Durable adhesive tapes designed for heavy-duty adhesion.', 996, 32, 333, NULL, '../assets/img/400004.jpg'),
-(400005, 'Adhesive Tapes 3', 'Multipurpose adhesive tapes suitable for a range of industrial uses.', 998, 31, 22, NULL, '../assets/img/400005.jpg'),
-(400006, 'apple', 'no', 1, 10, 10, NULL, '../assets/img/giphy.webp');
+(400005, 'Adhesive Tapes 3', 'Multipurpose adhesive tapes suitable for a range of industrial uses.', 997, 31, 22, NULL, '../assets/img/400005.jpg');
 
 --
 -- 已傾印資料表的限制式

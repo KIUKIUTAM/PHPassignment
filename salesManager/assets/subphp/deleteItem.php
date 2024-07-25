@@ -19,8 +19,8 @@ if (isset($arrayData['sparePartNum'])) {
     $sql = "
         SELECT sparepart.sparePartNum 
         FROM sparepart 
-        INNER JOIN orderline ON sparepart.sparePartNum = orderline.sparePartNum 
-        WHERE sparepart.sparePartNum = ? 
+        INNER JOIN orderline ON sparepart.sparePartNum = orderline.sparePartNum  INNER JOIN orders ON orderline.orderID = orders.orderID
+        WHERE sparepart.sparePartNum = ? AND orders.orderStatus <= 2 
         GROUP BY sparepart.sparePartNum
     ";
     $stmt = $conn->prepare($sql);

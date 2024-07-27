@@ -605,8 +605,6 @@ if (!isset($_SESSION['managerEmail'])) {
                 }
               }
             });
-
-
           } else {
             console.error('Error:', responseData.message);
           }
